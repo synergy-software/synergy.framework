@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Synergy.Core</id>
+    <version>$version$</version>
+    <title>Synergy.Core - layered application architecture support using Windsor Castle</title>
+    <authors>Synergy Marcin Celej</authors>
+    <owners>Synergy Marcin Celej</owners>
+    <licenseUrl>https://github.com/synergy-software/synergy.core/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/synergy-software/synergy.core</projectUrl>
+    <iconUrl>https://github.com/synergy-software/synergy.core/blob/master/synergy.png?raw=true</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Layered application architecture support using Windsor Castle</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright © Synergy Marcin Celej 2016</copyright>
+    <tags>Windsor Castle Component</tags>
+    <dependencies>
+      <dependency id="Synergy.Contracts" version="$version$"  />
+    </dependencies>
+  </metadata>
+</package>
