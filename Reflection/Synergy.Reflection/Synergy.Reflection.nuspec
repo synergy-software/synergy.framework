@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Synergy.Reflection</id>
+    <version>$version$</version>
+    <title>Synergy.Reflection - make it easy</title>
+    <authors>Synergy Marcin Celej</authors>
+    <owners>Synergy Marcin Celej</owners>
+    <licenseUrl>https://github.com/synergy-software/synergy.reflection/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/synergy-software/synergy.reflection</projectUrl>
+    <iconUrl>https://github.com/synergy-software/synergy.reflection/blob/master/synergy.png?raw=true</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Reflection metadata reading made easier</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright © Synergy Marcin Celej 2016</copyright>
+    <tags>Reflection Assembly Enum Class</tags>
+    <dependencies>
+      <dependency id="Synergy.Contracts" version="$version$"  />
+    </dependencies>
+  </metadata>
+</package>
