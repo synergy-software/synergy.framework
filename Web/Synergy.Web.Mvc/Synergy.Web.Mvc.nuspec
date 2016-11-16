@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Synergy.Web.Mvc</id>
+    <version>$version$</version>
+    <title>Synergy.Web.Mvc - MVC support for Synergy layered application architecture</title>
+    <authors>Synergy Marcin Celej</authors>
+    <owners>Synergy Marcin Celej</owners>
+    <licenseUrl>https://github.com/synergy-software/synergy.nhibernate/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/synergy-software/synergy.nhibernate</projectUrl>
+    <iconUrl>https://github.com/synergy-software/synergy.nhibernate/blob/master/synergy.png?raw=true</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>MVC support for Synergy layered application architecture</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright © Synergy Marcin Celej 2016</copyright>
+    <tags>MVC</tags>
+    <dependencies>
+      <dependency id="Synergy.Contracts" version="$version$"  />
+      <dependency id="Synergy.Core" version="$version$"  />
+    </dependencies>
+  </metadata>
+</package>
