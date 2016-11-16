@@ -3,8 +3,39 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{146E5D84-D923-4731-BAB4-8D46E30A1433}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.Contracts", "Contracts\Synergy.Contracts\Synergy.Contracts.csproj", "{653FF172-0DC5-4D81-91AE-3CE09D8CF7C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.Contracts.Samples", "Contracts\Synergy.Contracts.Samples\Synergy.Contracts.Samples.csproj", "{B585BA9B-E3CC-4CE0-AE48-035C13C08B7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.Contracts.Test", "Contracts\Synergy.Contracts.Test\Synergy.Contracts.Test.csproj", "{6FFB403F-FFDE-44A5-B3DA-C16F008CA8FE}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{653FF172-0DC5-4D81-91AE-3CE09D8CF7C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{653FF172-0DC5-4D81-91AE-3CE09D8CF7C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{653FF172-0DC5-4D81-91AE-3CE09D8CF7C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{653FF172-0DC5-4D81-91AE-3CE09D8CF7C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B585BA9B-E3CC-4CE0-AE48-035C13C08B7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B585BA9B-E3CC-4CE0-AE48-035C13C08B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B585BA9B-E3CC-4CE0-AE48-035C13C08B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B585BA9B-E3CC-4CE0-AE48-035C13C08B7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FFB403F-FFDE-44A5-B3DA-C16F008CA8FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FFB403F-FFDE-44A5-B3DA-C16F008CA8FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FFB403F-FFDE-44A5-B3DA-C16F008CA8FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FFB403F-FFDE-44A5-B3DA-C16F008CA8FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{653FF172-0DC5-4D81-91AE-3CE09D8CF7C1} = {146E5D84-D923-4731-BAB4-8D46E30A1433}
+		{B585BA9B-E3CC-4CE0-AE48-035C13C08B7E} = {146E5D84-D923-4731-BAB4-8D46E30A1433}
+		{6FFB403F-FFDE-44A5-B3DA-C16F008CA8FE} = {146E5D84-D923-4731-BAB4-8D46E30A1433}
 	EndGlobalSection
 EndGlobal
