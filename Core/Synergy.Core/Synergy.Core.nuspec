@@ -3,17 +3,17 @@
   <metadata>
     <id>Synergy.Core</id>
     <version>$version$</version>
-    <title>Synergy.Core - layered application architecture support using Windsor Castle</title>
-    <authors>Synergy Marcin Celej</authors>
-    <owners>Synergy Marcin Celej</owners>
-    <licenseUrl>https://github.com/synergy-software/synergy.core/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/synergy-software/synergy.core</projectUrl>
-    <iconUrl>https://github.com/synergy-software/synergy.core/blob/master/synergy.png?raw=true</iconUrl>
+    <title>Synergy.Core - Synergy Layered Application Architecture (SLARCH) support using Windsor Castle</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/synergy-software/synergy.framework/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/synergy-software/synergy.framework/wiki/Core</projectUrl>
+    <iconUrl>https://github.com/synergy-software/synergy.framework/blob/master/synergy.png?raw=true</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Layered application architecture support using Windsor Castle</description>
+    <description>$description$</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright © Synergy Marcin Celej 2016</copyright>
-    <tags>Windsor Castle Component</tags>
+    <copyright>$copyright$</copyright>
+    <tags>Windsor Castle Component SLARCH</tags>
     <dependencies>
       <dependency id="Synergy.Contracts" version="$version$"  />
     </dependencies>

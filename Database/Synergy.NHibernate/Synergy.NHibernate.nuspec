@@ -3,17 +3,17 @@
   <metadata>
     <id>Synergy.NHibernate</id>
     <version>$version$</version>
-    <title>Synergy.NHibernate - database support for Synergy layered application architecture</title>
-    <authors>Synergy Marcin Celej</authors>
-    <owners>Synergy Marcin Celej</owners>
-    <licenseUrl>https://github.com/synergy-software/synergy.nhibernate/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/synergy-software/synergy.nhibernate</projectUrl>
-    <iconUrl>https://github.com/synergy-software/synergy.nhibernate/blob/master/synergy.png?raw=true</iconUrl>
+    <title>Synergy.NHibernate - database support for Synergy Layered Application Architecture (SLARCH)</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/synergy-software/synergy.framework/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/synergy-software/synergy.framework/wiki/Database</projectUrl>
+    <iconUrl>https://github.com/synergy-software/synergy.framework/blob/master/synergy.png?raw=true</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Database support for Synergy layered application architecture</description>
+    <description>$description$</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright © Synergy Marcin Celej 2016</copyright>
-    <tags>NHibernate</tags>
+    <copyright>$copyright$</copyright>
+    <tags>NHibernate SLARCH</tags>
     <dependencies>
       <dependency id="Synergy.Contracts" version="$version$"  />
       <dependency id="Synergy.Core" version="$version$"  />

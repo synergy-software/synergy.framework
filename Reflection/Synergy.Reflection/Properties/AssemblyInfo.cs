@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
 [assembly: AssemblyTitle("Synergy.Reflection")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Reflection metadata reading made easier")]
 
 // Version information for an assembly consists of the following four values:
 //

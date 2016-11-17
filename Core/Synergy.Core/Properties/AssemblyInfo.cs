@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
 [assembly: AssemblyTitle("Synergy.Core")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Synergy Layered Application Architecture (SLARCH) support using Windsor Castle")]
 
 // Version information for an assembly consists of the following four values:
 //

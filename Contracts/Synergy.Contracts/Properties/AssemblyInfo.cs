@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
 [assembly: AssemblyTitle("Synergy.Contracts")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Design by contract programming support")]
 
 // Version information for an assembly consists of the following four values:
 //

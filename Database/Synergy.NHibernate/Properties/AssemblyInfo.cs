@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
 [assembly: AssemblyTitle("Synergy.NHibernate")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Database support for Synergy Layered Application Architecture (SLARCH)")]
 
 // Version information for an assembly consists of the following four values:
 //

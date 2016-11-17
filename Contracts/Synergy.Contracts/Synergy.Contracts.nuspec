@@ -4,15 +4,15 @@
     <id>Synergy.Contracts</id>
     <version>$version$</version>
     <title>Synergy.Contracts - design by contract programming support</title>
-    <authors>Synergy Marcin Celej</authors>
-    <owners>Synergy Marcin Celej</owners>
-    <licenseUrl>https://github.com/synergy-software/synergy.contracts/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/synergy-software/synergy.contracts</projectUrl>
-    <iconUrl>https://github.com/synergy-software/synergy.contracts/blob/master/synergy.png?raw=true</iconUrl>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/synergy-software/synergy.framework/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/synergy-software/synergy.framework/wiki/Contracts</projectUrl>
+    <iconUrl>https://github.com/synergy-software/synergy.framework/blob/master/synergy.png?raw=true</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Design by contract programming support</description>
+    <description>$description$</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright © Synergy Marcin Celej 2016</copyright>
-    <tags>DbC Design-By-Contract Precondition Postcondition Contract Code-Contract Resharper Annotations R# jetbrains.annotations design contract programming</tags>
+    <copyright>$copyright$</copyright>
+    <tags>DbC Design-By-Contract Precondition Postcondition Contract Code-Contract Resharper Annotations R# jetbrains.annotations design contract programming SLARCH</tags>
   </metadata>
 </package>
