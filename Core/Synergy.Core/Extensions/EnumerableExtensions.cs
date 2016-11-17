@@ -7,6 +7,8 @@ using Synergy.Contracts;
 // ReSharper disable once CheckNamespace
 namespace Synergy.Extensions
 {
+    // ReSharper disable PossibleMultipleEnumeration
+
     /// <summary>
     /// Extension methods for <see cref="IEnumerable{T}"/>.
     /// </summary>
@@ -51,8 +53,8 @@ namespace Synergy.Extensions
         [Pure]
         public static bool In<T>([NotNull] this T t, [NotNull] IEnumerable<T> collection)
         {
-            Fail.IfArgumentNull(t, "t");
-            Fail.IfArgumentNull(collection, "collection");
+            Fail.IfArgumentNull(t, nameof(t));
+            Fail.IfArgumentNull(collection, nameof(collection));
 
             return collection.Contains(t);
         }
@@ -63,8 +65,8 @@ namespace Synergy.Extensions
         [Pure]
         public static bool In<T>([NotNull] this T t, [NotNull] params T[] collection)
         {
-            Fail.IfArgumentNull(t, "t");
-            Fail.IfArgumentNull(collection, "collection");
+            Fail.IfArgumentNull(t, nameof(t));
+            Fail.IfArgumentNull(collection, nameof(collection));
 
             return collection.Contains(t);
         }
@@ -75,8 +77,8 @@ namespace Synergy.Extensions
         [Pure]
         public static bool NotIn<T>([NotNull] this T t, [NotNull] IEnumerable<T> collection)
         {
-            Fail.IfArgumentNull(t, "t");
-            Fail.IfArgumentNull(collection, "collection");
+            Fail.IfArgumentNull(t, nameof(t));
+            Fail.IfArgumentNull(collection, nameof(collection));
 
             return t.In(collection) == false;
         }
@@ -87,8 +89,8 @@ namespace Synergy.Extensions
         [Pure]
         public static bool NotIn<T>([NotNull] this T t, [NotNull] params T[] collection)
         {
-            Fail.IfArgumentNull(t, "t");
-            Fail.IfArgumentNull(collection, "collection");
+            Fail.IfArgumentNull(t, nameof(t));
+            Fail.IfArgumentNull(collection, nameof(collection));
 
             return t.In(collection) == false;
         }

@@ -150,6 +150,9 @@ namespace Synergy.Core
             };
         }
 
+        /// <summary>
+        /// Gets an object allowing to extend Widnsor component registration for each Library in the system.
+        /// </summary>
         [NotNull]
         [ItemNotNull]
         [Pure]

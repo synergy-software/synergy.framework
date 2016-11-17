@@ -18,6 +18,7 @@
       <dependency id="Synergy.Contracts" version="$version$"  />
       <dependency id="Synergy.Core" version="$version$"  />
       <dependency id="Synergy.Reflection" version="$version$"  />
+      <dependency id="NHibernate" version="4.0.4.4000" />
     </dependencies>
   </metadata>
 </package>
