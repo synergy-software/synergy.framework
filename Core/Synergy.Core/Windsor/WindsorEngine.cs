@@ -8,6 +8,7 @@ using Synergy.Core.Libraries;
 
 namespace Synergy.Core.Windsor
 {
+    /// <inheritdoc />
     public class WindsorEngine : IWindsorEngine
     {
         [CanBeNull]
@@ -27,6 +28,8 @@ namespace Synergy.Core.Windsor
 
             this.container.Kernel.Resolver.AddSubResolver(new ComponentCollectionResolver(this.container.Kernel));
 
+            this.container.Register(Component.For<IWindsorContainer>()
+                                             .Instance(this.container));
             this.container.Register(Component.For<IWindsorEngine>()
                                              .Instance(this));
             this.container.Register(Component.For<ILibrarian>()
@@ -153,6 +156,9 @@ namespace Synergy.Core.Windsor
         }
     }
 
+    /// <summary>
+    /// Inversion of control engine providing system components instantiation and resolving dependencies between them.
+    /// </summary>
     public interface IWindsorEngine : IDisposable
     {
         /// <summary>
@@ -161,6 +167,9 @@ namespace Synergy.Core.Windsor
         /// </summary>
         void Start([NotNull] Library rootLibrary);
 
+        /// <summary>
+        /// Stops the engine and releases all components instantiated within the container.
+        /// </summary>
         void Stop();
 
         [NotNull]
@@ -186,10 +195,11 @@ namespace Synergy.Core.Windsor
 
         void ReleaseComponent([NotNull] object component);
 
+        /// <summary>
+        /// Gets all components valid for provided type.
+        /// </summary>
         [NotNull]
         [Pure]
         T[] GetComponents<T>();
-
-        
     }
 }

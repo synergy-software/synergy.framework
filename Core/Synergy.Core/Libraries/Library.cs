@@ -123,8 +123,7 @@ namespace Synergy.Core
 
             if (this.PopulateComponentsAutomatically)
             {
-                var componentInstaller = new ComponentInstaller();
-                componentInstaller.Init(this);
+                var componentInstaller = new ComponentInstaller(this);
                 compositeInstaller.Add(componentInstaller);
             }
 

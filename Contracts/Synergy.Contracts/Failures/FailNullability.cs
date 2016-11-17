@@ -217,6 +217,7 @@ namespace Synergy.Contracts
         [AssertionMethod]
         public static void IfNotNull<T>([CanBeNull] T value, [NotNull] string message, [NotNull] params object[] args)
         {
+            // TODO:mace (from:mace on:17-11-2016) This method should be splitted to 5 generic methods to prevent unnecesesary memory allocation 
             Fail.RequiresMessage(message, args);
 
             if (value != null)

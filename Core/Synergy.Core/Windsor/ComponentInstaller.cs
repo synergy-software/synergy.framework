@@ -23,6 +23,31 @@ namespace Synergy.Core.Windsor
         [CanBeNull]
         private Type[] excludeInterfaces;
 
+        /// <summary>
+        /// Initilazes the installer with <see cref="Library" /> that will be searched for components.
+        /// </summary>
+        public ComponentInstaller([NotNull] Library library)
+        {
+            this.Init(library);
+        }
+
+        private void Init([NotNull] Library library)
+        {
+            Fail.IfArgumentNull(library, nameof(library));
+
+            this.assembly = library
+                .GetAssembly()
+                .FailIfNull("{0}.{1}() returned null", library, nameof(Library.GetAssembly));
+
+            this.excludeInterfaces = library
+                .IgnoreInterfaces()
+                .FailIfNull("{0}.{1}() returned null", library, nameof(Library.IgnoreInterfaces))
+                .ToArray();
+        }
+
+        /// <summary>
+        /// Installs any component with any interface in a <see cref="Library" /> and registers the component under all interfaces it implements.
+        /// </summary>
         public void Install([NotNull] IWindsorContainer container, [NotNull] IConfigurationStore store)
         {
             Fail.IfArgumentNull(container, nameof(container));
@@ -37,20 +62,6 @@ namespace Synergy.Core.Windsor
                 ;
 
             container.Register(allClassesWithAnyInterface);
-        }
-
-        public void Init([NotNull] Library library)
-        {
-            Fail.IfArgumentNull(library, nameof(library));
-
-            this.assembly = library
-                .GetAssembly()
-                .FailIfNull("{0}.{1}() returned null", library, nameof(Library.GetAssembly));
-
-            this.excludeInterfaces = library
-                .IgnoreInterfaces()
-                .FailIfNull("{0}.{1}() returned null", library, nameof(Library.IgnoreInterfaces))
-                .ToArray();
         }
 
         [Pure]
