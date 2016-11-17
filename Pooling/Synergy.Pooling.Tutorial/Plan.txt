@@ -1,0 +1,28 @@
+﻿Przykład Fail.IfNull(object, message, params object[] args) - boxing oraz alokacja tablicy
+- dlaczego HAV pokazuje boxing oraz alokacje pamięci?
+
+Jak działa zarządzanie pamięcią
+ - Stack - ulotny, zawiera tylko typy proste (value type) i tymczasowe
+ - Heap - zawiera obiekty
+GC w uproszczeniu
+ - posiada pointer gdzie zaczyna się wolna pamięć
+ - usunięcie obiektu z Heap powoduje fragmentacje
+ - String.Format() jest często wołane i ono alokuje pamięć 'niepotrzebnie' powodując fragmentację
+ - generacje pamięci na Heap (umowne jedynie, generacje nie są oddzielnymi miejscami w pamieci - potrzebne byłoby kopiowanie)
+ - GC jak działa, freeze wątków, poszukiwanie powiązań G1, usuwanie obiektów, ... G2, G3 (najrzadziej)
+ - jest jeszcze LOH, ale o tym nie mówimy teraz
+ - następnie jest kompaktowanie pamięci
+
+Jeśli zatem często alokujesz ulotne obiekty to będziesz miał poszatkowaną pamięć
+- zejść w głąb aż do String.Format, itd.
+
+Przykład jak na Fail.IfNull rozwiązać:
+ - boxing - poprzez dodanie generycznych przeciążeń
+ - alokacje tablic poprzez object pooling
+  - przykład podstawowy
+  - przykład synergy pool'a
+
+Kiedy używać object poolingu
+- na pewno w metodach wołanych często
+- gdy alokujemy tablice - np. przy strumieniowaniu danych
+- memory vs. wydajność
