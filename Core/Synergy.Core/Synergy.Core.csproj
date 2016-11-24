@@ -69,6 +69,7 @@
     <Compile Include="Web\HttpContextSession.cs" />
     <Compile Include="Windsor\ComponentCollectionResolver.cs" />
     <Compile Include="Windsor\ComponentInstaller.cs" />
+    <Compile Include="Windsor\ComponentLocator.cs" />
     <Compile Include="Windsor\IWindsorEngineExtension.cs" />
     <Compile Include="Windsor\WindsorEngine.cs" />
   </ItemGroup>

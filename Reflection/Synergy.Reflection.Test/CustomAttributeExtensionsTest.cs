@@ -26,7 +26,7 @@ namespace Synergy.Reflection.Test
             [My("attribute on an overriden class method")]
             public void Method(bool overriden)
             {
-                throw new NotImplementedException();
+                throw new InvalidOperationException();
             }
 
             [My("attribute on a class property")]

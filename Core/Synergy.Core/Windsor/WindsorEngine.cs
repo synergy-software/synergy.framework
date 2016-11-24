@@ -47,66 +47,6 @@ namespace Synergy.Core.Windsor
         }
 
         /// <inheritdoc />
-        public object GetComponent(Type type)
-        {
-            Fail.IfArgumentNull(type, nameof(type));
-
-            return this.GetContainerOrFail()
-                       .Resolve(type);
-        }
-
-        /// <inheritdoc />
-        public T GetComponent<T>(string name)
-        {
-            Fail.IfArgumentWhiteSpace(name, nameof(name));
-
-            return this.GetContainerOrFail()
-                       .Kernel
-                       .Resolve<T>(name);
-        }
-
-        /// <inheritdoc />
-        public bool HasComponent<T>()
-        {
-            return this.HasComponent(typeof(T));
-        }
-
-        /// <inheritdoc />
-        public bool HasComponent(Type type)
-        {
-            Fail.IfArgumentNull(type, nameof(type));
-
-            return this.GetContainerOrFail()
-                       .Kernel
-                       .HasComponent(type);
-        }
-
-        /// <inheritdoc />
-        public bool HasComponent(string name)
-        {
-            Fail.IfArgumentWhiteSpace(name, nameof(name));
-
-            return this.GetContainerOrFail()
-                       .Kernel
-                       .HasComponent(name);
-        }
-
-        /// <inheritdoc />
-        public void ReleaseComponent(object component)
-        {
-            Fail.IfArgumentNull(component, nameof(component));
-
-            this.GetContainerOrFail().Release(component);
-        }
-
-        /// <inheritdoc />
-        public T[] GetComponents<T>()
-        {
-            return this.GetContainerOrFail()
-                       .ResolveAll<T>();
-        }
-
-        /// <inheritdoc />
         public void Stop()
         {
             this.GetContainerOrFail();
@@ -175,33 +115,5 @@ namespace Synergy.Core.Windsor
         [NotNull]
         [Pure]
         T GetComponent<T>();
-
-        // TODO:mace (from:mace on:19-11-2016) move all those fancy GetComponent methods to IComponentLocator
-
-        [NotNull]
-        [Pure]
-        object GetComponent([NotNull] Type type);
-
-        [NotNull]
-        [Pure]
-        T GetComponent<T>([NotNull] string name);
-
-        [Pure]
-        bool HasComponent<T>();
-
-        [Pure]
-        bool HasComponent([NotNull] Type type);
-
-        [Pure]
-        bool HasComponent([NotNull] string name);
-
-        void ReleaseComponent([NotNull] object component);
-
-        /// <summary>
-        /// Gets all components valid for provided type.
-        /// </summary>
-        [NotNull]
-        [Pure]
-        T[] GetComponents<T>();
     }
 }

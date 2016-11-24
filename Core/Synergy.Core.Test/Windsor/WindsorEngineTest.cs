@@ -31,9 +31,10 @@ namespace Synergy.Core.Test.Windsor
         {
             // ARRANGE
             IWindsorEngine windsorEngine = ApplicationServer.Start();
+            var componentLocator = windsorEngine.GetComponent<IComponentLocator>();
 
             // ACT
-            IUserRepository[] components = windsorEngine.GetComponents<IUserRepository>();
+            IUserRepository[] components = componentLocator.GetComponents<IUserRepository>();
 
             // ASSERT
             Assert.NotNull(components);

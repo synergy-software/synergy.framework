@@ -5,17 +5,17 @@ using System.Web.Routing;
 using System.Web.SessionState;
 using JetBrains.Annotations;
 using Synergy.Contracts;
-using Synergy.Core.Windsor;
+using Synergy.Core;
 
 namespace Synergy.Web.Mvc.Windsor
 {
     public class WindsorControllerFactory : IControllerFactory
     {
-        private readonly IWindsorEngine windsorEngine;
+        private readonly IComponentLocator componentLocator;
 
-        public WindsorControllerFactory(IWindsorEngine windsorEngine)
+        public WindsorControllerFactory(IComponentLocator componentLocator)
         {
-            this.windsorEngine = windsorEngine;
+            this.componentLocator = componentLocator;
         }
 
         /// <inheritdoc />
@@ -26,9 +26,9 @@ namespace Synergy.Web.Mvc.Windsor
             Fail.IfArgumentNull(controllerPrefix, nameof(controllerPrefix));
 
             var controllerName = String.Concat(controllerPrefix, "Controller");
-            if (this.windsorEngine.HasComponent(controllerName))
+            if (this.componentLocator.HasComponent(controllerName))
             {
-                var controller = this.windsorEngine.GetComponent<IController>(controllerName);
+                var controller = this.componentLocator.GetComponent<IController>(controllerName);
 
                 //var requestArea = requestContext.RouteData.GetAreaName() ?? "";
                 //var controllerArea = ExtensionHelper.GetAreaName(controller) ?? "";
@@ -51,7 +51,7 @@ namespace Synergy.Web.Mvc.Windsor
         {
             Fail.IfArgumentNull(controller, "controller");
 
-            this.windsorEngine.ReleaseComponent(controller);
+            this.componentLocator.ReleaseComponent(controller);
         }
     }
 }
