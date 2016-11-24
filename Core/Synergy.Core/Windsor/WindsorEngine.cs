@@ -176,6 +176,8 @@ namespace Synergy.Core.Windsor
         [Pure]
         T GetComponent<T>();
 
+        // TODO:mace (from:mace on:19-11-2016) move all those fancy GetComponent methods to IComponentLocator
+
         [NotNull]
         [Pure]
         object GetComponent([NotNull] Type type);

@@ -4,8 +4,14 @@ using Synergy.Core;
 
 namespace Synergy.NHibernate
 {
+    /// <summary>
+    /// Library with database support using NHibernate ORM.
+    /// </summary>
     public class SynergyNHibernateLibrary : Library
     {
+        /// <summary>
+        /// Library with database support using NHibernate ORM.
+        /// </summary>
         public SynergyNHibernateLibrary() : base(new SynergyCoreLibrary())
         {
         }
