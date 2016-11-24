@@ -29,7 +29,7 @@ namespace Synergy.Web
         protected HttpContext GetContext()
         {
             HttpContext context = HttpContext.Current;
-            Fail.IfNull(context, "HttpContext.Current is not available");
+            Fail.IfNull(context, nameof(HttpContext) + "." + nameof(HttpContext.Current) + " is not available");
             return context;
         }
 

@@ -36,7 +36,8 @@ namespace Synergy.NHibernate.Sample.Domain
             return new[]
             {
                 typeof(User),
-                typeof(WordGroup)
+                typeof(WordGroup),
+                typeof(Word)
             };
         }
     }

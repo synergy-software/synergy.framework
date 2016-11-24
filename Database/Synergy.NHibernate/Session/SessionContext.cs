@@ -11,6 +11,7 @@ namespace Synergy.NHibernate.Session
     public class SessionContext : ISessionContext
     {
         private readonly IThreadStaticContextSorage<SessionsContainer> threadStaticContextSorage;
+        private readonly IStaticContextStorage<SessionsContainer> staticContextStorage;
         private readonly IWebContextSorage<SessionsContainer> webContextSorage;
         private readonly IWcfContextSorage<SessionsContainer> wcfContextSorage;
 
@@ -20,11 +21,13 @@ namespace Synergy.NHibernate.Session
         public SessionContext(
             IWebContextSorage<SessionsContainer> webContextSorage,
             IWcfContextSorage<SessionsContainer> wcfContextSorage,
-            IThreadStaticContextSorage<SessionsContainer> threadStaticContextSorage)
+            IThreadStaticContextSorage<SessionsContainer> threadStaticContextSorage,
+            IStaticContextStorage<SessionsContainer> staticContextStorage)
         {
             this.webContextSorage = webContextSorage;
             this.wcfContextSorage = wcfContextSorage;
             this.threadStaticContextSorage = threadStaticContextSorage;
+            this.staticContextStorage = staticContextStorage;
         }
 
         /// <inheritdoc />
@@ -36,6 +39,7 @@ namespace Synergy.NHibernate.Session
             return container.GetSession(database);
         }
 
+        /// <inheritdoc />
         public void StoreSession(IDatabase database, ISession session)
         {
             Fail.IfArgumentNull(database, nameof(database));
@@ -45,9 +49,13 @@ namespace Synergy.NHibernate.Session
             container.Store(database, session);
         }
 
+        /// <inheritdoc />
         public ISession[] RemoveSessions()
         {
-            SessionsContainer container = this.GetSessionsContainer();
+            SessionsContainer container = this.GetContextStorage().Clear();
+            if (container == null)
+                return new ISession[0];
+
             return container.RemoveSessions();
         }
 
@@ -67,8 +75,6 @@ namespace Synergy.NHibernate.Session
 
         private IContextSorage<SessionsContainer> GetContextStorage()
         {
-            // TODO:mace (from:mace on:31-10-2016) check if this context works in asynchronous Task started from mvc action
-
             if (this.webContextSorage.IsAvailable())
                 return this.webContextSorage;
 
@@ -78,10 +84,18 @@ namespace Synergy.NHibernate.Session
             if (this.threadStaticContextSorage.IsAvailable())
                 return this.threadStaticContextSorage;
 
+            if (this.staticContextStorage.IsAvailable())
+                return this.staticContextStorage;
+
             throw Fail.Because("There is no context storage available");
         }
     }
 
+    /// <summary>
+    /// Component responsible for storing and retrieval of NHibernate sessions. It can store sessions in:
+    /// web context, wcf context, thread static field or static field - the strategy (context storage) is chosen
+    /// depending on the application that uses it.
+    /// </summary>
     public interface ISessionContext
     {
         [CanBeNull]

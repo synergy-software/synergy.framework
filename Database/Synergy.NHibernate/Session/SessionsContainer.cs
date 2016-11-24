@@ -13,6 +13,9 @@ namespace Synergy.NHibernate.Session
 
         public void Store([NotNull] IDatabase database, [NotNull] ISession session)
         {
+            Fail.IfArgumentNull(database, nameof(database));
+            Fail.IfArgumentNull(session, nameof(session));
+
             var key = database.GetKey();
             this.sessions.Add(key, session);
         }
@@ -20,6 +23,8 @@ namespace Synergy.NHibernate.Session
         [CanBeNull]
         public ISession GetSession([NotNull] IDatabase database)
         {
+            Fail.IfArgumentNull(database, nameof(database));
+
             var key = database.GetKey();
             ISession session;
             this.sessions.TryGetValue(key, out session);

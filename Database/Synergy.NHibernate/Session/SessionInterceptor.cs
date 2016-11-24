@@ -16,6 +16,9 @@ namespace Synergy.NHibernate.Session
         private readonly ISessionContext sessionContext;
         private readonly ITransactionCoordinator transactionCoordinator;
 
+        /// <summary>
+        /// WARN: Component constructor called by Windsor container. DO NOT USE IT DIRECTLY.
+        /// </summary>
         public SessionInterceptor(ISessionContext sessionContext, ITransactionCoordinator transactionCoordinator)
         {
             this.sessionContext = sessionContext;
@@ -28,14 +31,11 @@ namespace Synergy.NHibernate.Session
 
             // TODO:mace (from:mace on:27-10-2016) maybe you should create sessions for all databases here? remember - opening session is inexpesive
             
-
             try
             {
                 using (var transactions = this.StartTransactions(invocation))
-
                 {
                     invocation.Proceed();
-
                     transactions.Commit();
                 }
             }

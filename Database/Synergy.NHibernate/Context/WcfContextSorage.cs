@@ -4,33 +4,48 @@ using Synergy.Contracts;
 
 namespace Synergy.NHibernate.Context
 {
+    /// <summary>
+    /// Contextual storage that stores object in a WCF context.
+    /// </summary>
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
     public class WcfContextSorage<T> : IWcfContextSorage<T>
     {
+        /// <inheritdoc />
         public bool IsAvailable()
         {
             return OperationContext.Current != null;
         }
 
+        /// <inheritdoc />
         public void Store(T value)
         {
             this.GetWcfStorageExtension().Stored = value;
         }
 
+        /// <inheritdoc />
         public T Get()
         {
             return this.GetWcfStorageExtension().Stored;
         }
 
-        public void Clear()
+        /// <inheritdoc />
+        public T Clear()
         {
-            this.GetWcfStorageExtension().Stored = default(T);
+            try
+            {
+                return this.Get();
+            }
+            finally
+            {
+                this.GetWcfStorageExtension()
+                    .Stored = default(T);
+            }
         }
 
         [NotNull]
         private WcfOperationContextStorageExtension<T> GetWcfStorageExtension()
         {
-            Fail.IfNull(OperationContext.Current, "There is no WCF OperationtionContext available");
+            Fail.IfNull(OperationContext.Current, "There is no WCF " + nameof(OperationContext) + " available");
 
             IExtensionCollection<OperationContext> extensions = OperationContext.Current.Extensions;
             var instance = extensions.Find<WcfOperationContextStorageExtension<T>>();
@@ -59,6 +74,9 @@ namespace Synergy.NHibernate.Context
         }
     }
 
+    /// <summary>
+    /// Contextual storage that stores object in a WCF context.
+    /// </summary>
     public interface IWcfContextSorage<T> : IContextSorage<T>
     {
     }

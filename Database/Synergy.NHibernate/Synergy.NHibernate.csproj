@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="Configurations\NHibernateConfigurationParameter.cs" />
     <Compile Include="Context\IContextSorage.cs" />
+    <Compile Include="Context\StaticContextStorage.cs" />
     <Compile Include="Context\ThreadStaticContextSorage.cs" />
     <Compile Include="Context\WcfContextSorage.cs" />
     <Compile Include="Context\WebContextSorage.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Session\SessionContext.cs" />
     <Compile Include="Session\SessionInterceptor.cs" />
     <Compile Include="Session\SessionsContainer.cs" />
+    <Compile Include="Session\SessionThreadStaticScope.cs" />
     <Compile Include="Transactions\AutoTransactionAttribute.cs" />
     <Compile Include="Conventions\PrimaryKeyConvention.cs" />
     <Compile Include="Domain\Entity.cs" />

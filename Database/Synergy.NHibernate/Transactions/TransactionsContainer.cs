@@ -16,19 +16,32 @@ namespace Synergy.NHibernate.Transactions
     {
         private readonly List<ITransaction> transactions = new List<ITransaction>(1);
 
-        public void Add(IDatabase database, ISession session, [NotNull] ITransaction transaction)
+        /// <summary>
+        /// Adds a transaction to this container.
+        /// </summary>
+        public void Add([NotNull] IDatabase database, [NotNull] ISession session, [NotNull] ITransaction transaction)
         {
+            Fail.IfArgumentNull(database, nameof(database));
+            Fail.IfArgumentNull(session, nameof(session));
             Fail.IfArgumentNull(transaction, nameof(transaction));
 
             this.transactions.Add(transaction);
         }
 
+        /// <summary>
+        /// Commits all the transactions in this container.
+        /// </summary>
         public void Commit()
         {
             foreach (ITransaction transaction in this.transactions)
                 transaction.Commit();
         }
 
+        /// <summary>
+        /// Disposes all transaction in this container.
+        /// If the transactions were committed via <see cref="Commit"/> method then the disposal does nothing interesting.
+        /// If the transactions were not committed, disposing this container will automatically rollback them.
+        /// </summary>
         public void Dispose()
         {
             foreach (ITransaction transaction in this.transactions)

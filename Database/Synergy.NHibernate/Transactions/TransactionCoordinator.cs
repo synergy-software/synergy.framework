@@ -15,11 +15,15 @@ namespace Synergy.NHibernate.Transactions
     {
         private readonly IDatabaseProvider databaseProvider;
 
+        /// <summary>
+        /// WARN: Component constructor called by Windsor container. DO NOT USE IT DIRECTLY.
+        /// </summary>
         public TransactionCoordinator(IDatabaseProvider databaseProvider)
         {
             this.databaseProvider = databaseProvider;
         }
 
+        /// <inheritdoc />
         public TransactionsContainer StartTransactionsFor(MethodInfo method)
         {
             Fail.IfArgumentNull(method, nameof(method));
@@ -77,7 +81,7 @@ namespace Synergy.NHibernate.Transactions
 
             IDatabase database = this.databaseProvider.Get(databaseType);
             Fail.IfNull(database,
-                "Could not find database used in {0}. Did you point {1} in the '{2}' argument attribute?",
+                "Could not find database used in {0}. Did you point {1} in the '{2}' argument?",
                 transactionalAttribute,
                 nameof(IDatabase),
                 nameof(AutoTransactionAttribute.On));

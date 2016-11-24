@@ -36,5 +36,12 @@ namespace Synergy.NHibernate.Sample.Controllers.Home
 
             return this.View("Index");
         }
+
+        public ActionResult InvokeAction()
+        {
+            this.homeService.InvokeAnotherSession();
+
+            return this.View("Index");
+        }
     }
 }

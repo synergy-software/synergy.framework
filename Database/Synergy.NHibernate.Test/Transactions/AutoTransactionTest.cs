@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Synergy.Core.Windsor;
+using Synergy.NHibernate.Session;
 
 namespace Synergy.NHibernate.Test.Transactions
 {
@@ -9,16 +10,19 @@ namespace Synergy.NHibernate.Test.Transactions
         [Test]
         public void automatic_transaction_can_be_disabled()
         {
-            //ARRANGE
-            IWindsorEngine windsorEngine = ApplicationServer.Start();
-            var myService = windsorEngine.GetComponent<IMyTransactionalService>();
+            using (new SessionThreadStaticScope())
+            {
+                //ARRANGE
+                IWindsorEngine windsorEngine = ApplicationServer.Start();
+                var myService = windsorEngine.GetComponent<IMyTransactionalService>();
 
-            //ACT
-            bool transactionStarted = myService.MethodWithDisabledAutoTransaction();
+                //ACT
+                bool transactionStarted = myService.MethodWithDisabledAutoTransaction();
 
-            //ASSERT
-            Assert.IsFalse(transactionStarted, "Transaction was started but it shouldn't be");
-            windsorEngine.Dispose();
+                //ASSERT
+                Assert.IsFalse(transactionStarted, "Transaction was started but it shouldn't be");
+                windsorEngine.Dispose();
+            }
         }
 
         [Test]
