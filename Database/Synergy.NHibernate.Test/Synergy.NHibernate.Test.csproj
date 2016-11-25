@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="!Init\ApplicationServer.cs" />
+    <Compile Include="!Init\DatabaseTestAttribute.cs" />
     <Compile Include="!Init\SynergyNHibernateTestLibrary.cs" />
     <Compile Include="..\..\SynergyAssemblyInfo.cs">
       <Link>Properties\SynergyAssemblyInfo.cs</Link>
@@ -84,6 +85,7 @@
     <Compile Include="My\MyDatabase.cs" />
     <Compile Include="My\MyEntity.cs" />
     <Compile Include="My\MyRepository.cs" />
+    <Compile Include="Session\SessionInterceptorTest.cs" />
     <Compile Include="Transactions\MyTransactionalService.cs" />
     <Compile Include="Transactions\AutoTransactionTest.cs" />
   </ItemGroup>

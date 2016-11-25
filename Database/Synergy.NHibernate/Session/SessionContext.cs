@@ -84,16 +84,20 @@ namespace Synergy.NHibernate.Session
             if (this.threadStaticContextSorage.IsAvailable())
                 return this.threadStaticContextSorage;
 
-            if (this.staticContextStorage.IsAvailable())
-                return this.staticContextStorage;
+            //
+            // WARN: The static context should not be enabled here - it will not work properly in multithreaded apps - e.g. web apps
+            //
+            //if (this.staticContextStorage.IsAvailable())
+            //    return this.staticContextStorage;
 
-            throw Fail.Because("There is no context storage available");
+            throw Fail.Because("There is no context storage available - are you missing declaration: using(new " + nameof(SessionThreadStaticScope) +
+                               "()) {{ DATABASE ACCESS CODE; }}");
         }
     }
 
     /// <summary>
     /// Component responsible for storing and retrieval of NHibernate sessions. It can store sessions in:
-    /// web context, wcf context, thread static field or static field - the strategy (context storage) is chosen
+    /// web context, wcf context or thread static field - the strategy (context storage) is chosen
     /// depending on the application that uses it.
     /// </summary>
     public interface ISessionContext

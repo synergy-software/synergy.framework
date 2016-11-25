@@ -1,17 +1,15 @@
 ﻿using NUnit.Framework;
 using Synergy.Core.Windsor;
-using Synergy.NHibernate.Session;
 
 namespace Synergy.NHibernate.Test.Transactions
 {
     [TestFixture]
+    [DatabaseTest]
     public class AutoTransactionTest
     {
         [Test]
         public void automatic_transaction_can_be_disabled()
         {
-            using (new SessionThreadStaticScope())
-            {
                 //ARRANGE
                 IWindsorEngine windsorEngine = ApplicationServer.Start();
                 var myService = windsorEngine.GetComponent<IMyTransactionalService>();
@@ -22,7 +20,6 @@ namespace Synergy.NHibernate.Test.Transactions
                 //ASSERT
                 Assert.IsFalse(transactionStarted, "Transaction was started but it shouldn't be");
                 windsorEngine.Dispose();
-            }
         }
 
         [Test]
@@ -52,6 +49,20 @@ namespace Synergy.NHibernate.Test.Transactions
 
             //ASSERT
             Assert.AreEqual(0, count);
+            windsorEngine.Dispose();
+        }
+
+        [Test]
+        public void can_have_multiple_transactions_to_the_same_database()
+        {
+            //ARRANGE
+            IWindsorEngine windsorEngine = ApplicationServer.Start();
+            var myService = windsorEngine.GetComponent<IMyTransactionalService>();
+
+            //ACT
+            myService.InvokeAnotherSession();
+
+            //ASSERT
             windsorEngine.Dispose();
         }
     }

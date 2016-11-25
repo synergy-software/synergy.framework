@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Threading.Tasks;
 using Castle.Core;
 using JetBrains.Annotations;
 using Synergy.Contracts;
@@ -42,6 +43,23 @@ namespace Synergy.NHibernate.Test.Transactions
         {
             return this.myDatabase.CurrentSession.Transaction.IsActive;
         }
+
+        public void InvokeAnotherSession()
+        {
+            Fail.IfFalse(this.myDatabase.CurrentSession.Transaction.IsActive, "Transaction not started");
+
+            var task = new Task(session =>
+                {
+                    using (new SessionThreadStaticScope())
+                    {
+                        var currentSession = this.myDatabase.CurrentSession;
+                        Fail.IfEqual(session, currentSession, "session should differ");
+                    }
+                },
+                this.myDatabase.CurrentSession);
+            task.Start();
+            task.Wait();
+        }
     }
 
     [AutoTransaction(On = typeof(IMyDatabase), IsolationLevel = IsolationLevel.Serializable)]
@@ -56,5 +74,7 @@ namespace Synergy.NHibernate.Test.Transactions
 
         [Pure]
         bool MethodWithDisabledAutoTransaction();
+
+        void InvokeAnotherSession();
     }
 }

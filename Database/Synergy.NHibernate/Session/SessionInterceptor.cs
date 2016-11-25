@@ -29,8 +29,6 @@ namespace Synergy.NHibernate.Session
         {
             Fail.IfArgumentNull(invocation, nameof(invocation));
 
-            // TODO:mace (from:mace on:27-10-2016) maybe you should create sessions for all databases here? remember - opening session is inexpesive
-            
             try
             {
                 using (var transactions = this.StartTransactions(invocation))

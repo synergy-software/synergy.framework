@@ -16,8 +16,11 @@ namespace Synergy.NHibernate.Conventions
             Fail.IfArgumentNull(instance.Class, nameof(instance.Class));
             Fail.IfArgumentNull(instance.Property, nameof(instance.Property));
 
-            string fk = "FK_" + instance.EntityType.Name + "_" + instance.Class.Name + "_" + instance.Property.Name;
-            string ix = "IX_" + instance.EntityType.Name + "_" + instance.Property.Name;
+            var columnName = ForeignKeyColumnNameConvention.GetColumnName(instance.Property);
+            var tableWithColumnName = $"{instance.EntityType.Name}_{columnName}";
+
+            string fk = $"FK_{tableWithColumnName}_{instance.Class.Name}";
+            string ix = $"IX_{tableWithColumnName}";
 
             instance.ForeignKey(fk);
             instance.Index(ix);
