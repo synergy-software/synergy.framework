@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace Synergy.NHibernate.Context
+namespace Synergy.NHibernate.Contexts
 {
     /// <summary>
     /// Base interface of all contextual storages.

@@ -2,7 +2,7 @@
 using Synergy.Contracts;
 using Synergy.Web;
 
-namespace Synergy.NHibernate.Context
+namespace Synergy.NHibernate.Contexts
 {
     /// <summary>
     /// Contextual storage that stores object in a web context.

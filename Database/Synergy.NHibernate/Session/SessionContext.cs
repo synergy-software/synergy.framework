@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations;
 using NHibernate;
 using Synergy.Contracts;
-using Synergy.NHibernate.Context;
+using Synergy.NHibernate.Contexts;
 using Synergy.NHibernate.Engine;
 
 namespace Synergy.NHibernate.Session

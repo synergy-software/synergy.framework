@@ -72,11 +72,11 @@
       <Link>Properties\SynergyAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Configurations\NHibernateConfigurationParameter.cs" />
-    <Compile Include="Context\IContextSorage.cs" />
-    <Compile Include="Context\StaticContextStorage.cs" />
-    <Compile Include="Context\ThreadStaticContextSorage.cs" />
-    <Compile Include="Context\WcfContextSorage.cs" />
-    <Compile Include="Context\WebContextSorage.cs" />
+    <Compile Include="Contexts\IContextSorage.cs" />
+    <Compile Include="Contexts\StaticContextStorage.cs" />
+    <Compile Include="Contexts\ThreadStaticContextSorage.cs" />
+    <Compile Include="Contexts\WcfContextSorage.cs" />
+    <Compile Include="Contexts\WebContextSorage.cs" />
     <Compile Include="Conventions\ClassConvention.cs" />
     <Compile Include="Conventions\EmptyStringLengthConvention.cs" />
     <Compile Include="Conventions\ForeignKeyColumnNameConvention.cs" />

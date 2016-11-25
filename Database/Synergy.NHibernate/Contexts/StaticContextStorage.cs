@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations;
 using Synergy.Contracts;
 
-namespace Synergy.NHibernate.Context
+namespace Synergy.NHibernate.Contexts
 {
     /// <summary>
     /// Contextual storage that stores object in a static field.
