@@ -1,4 +1,5 @@
 ﻿using JetBrains.Annotations;
+using Synergy.Contracts;
 using Synergy.Web;
 
 namespace Synergy.NHibernate.Context
@@ -35,6 +36,8 @@ namespace Synergy.NHibernate.Context
         /// <inheritdoc />
         public void Store(T value)
         {
+            Fail.IfArgumentNull(value, nameof(value));
+
             string key = this.GetKey();
             this.httpContextItems.Set(key, value);
         }

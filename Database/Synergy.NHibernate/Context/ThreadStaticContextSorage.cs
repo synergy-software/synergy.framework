@@ -1,35 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
 using JetBrains.Annotations;
+using Synergy.Contracts;
 
 namespace Synergy.NHibernate.Context
 {
     /// <summary>
-    /// Contextual storage that stores object in a [ThreadStatic] field.
+    ///     Contextual storage that stores object in a [ThreadStatic] field.
     /// </summary>
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
     public class ThreadStaticContextSorage<T> : IThreadStaticContextSorage<T>
     {
-        // TODO:mace (from:mace on:24-11-2016) refactor this class
-
         /// <inheritdoc />
         public bool IsAvailable()
         {
-            return ThreadStaticContextScope<T>.Data != null;
+            return ThreadStaticContextScope<T>.Sack != null;
         }
 
         /// <inheritdoc />
         public T Get()
         {
-            T value;
-            ThreadStaticContextScope<T>.Data.TryGetValue(typeof(T).FullName, out value);
-            return value;
+            this.FailIfThreadStaticContextScopeNotAvailable();
+
+            return ThreadStaticContextScope<T>.Sack.Value;
         }
 
         /// <inheritdoc />
         public void Store(T value)
         {
-            ThreadStaticContextScope<T>.Data.Add(typeof(T).FullName, value);
+            Fail.IfArgumentNull(value, nameof(value));
+            this.FailIfThreadStaticContextScopeNotAvailable();
+
+            ThreadStaticContextScope<T>.Sack.Value = value;
         }
 
         /// <inheritdoc />
@@ -41,37 +42,47 @@ namespace Synergy.NHibernate.Context
             }
             finally
             {
-                ThreadStaticContextScope<T>.Data.Clear();
+                ThreadStaticContextScope<T>.Sack.Value = default(T);
             }
+        }
+
+        private void FailIfThreadStaticContextScopeNotAvailable()
+        {
+            Fail.IfFalse(this.IsAvailable(), nameof(ThreadStaticContextScope<T>) + " is not available");
         }
     }
 
     /// <summary>
-    /// Contextual storage that stores object in a [ThreadStatic] field.
+    ///     Contextual storage that stores object in a [ThreadStatic] field.
     /// </summary>
     public interface IThreadStaticContextSorage<T> : IContextSorage<T>
     {
     }
 
-    public class ThreadStaticContextScope<T> : IDisposable
+    public abstract class ThreadStaticContextScope<T> : IDisposable
     {
         [ThreadStatic]
-        internal static Dictionary<string, T> Data;
+        internal static SackOf<T> Sack;
 
-        public ThreadStaticContextScope()
+        protected ThreadStaticContextScope()
         {
-            ThreadStaticContextScope<T>.Data = new Dictionary<string, T>(1);
+            Fail.IfNotNull(ThreadStaticContextScope<T>.Sack, nameof(ThreadStaticContextScope<T>) + " was not cleared properly");
+
+            ThreadStaticContextScope<T>.Sack = new SackOf<T>();
         }
 
         /// <inheritdoc />
         public void Dispose()
         {
-            foreach (object value in ThreadStaticContextScope<T>.Data.Values)
-            {
-                (value as IDisposable)?.Dispose();
-            }
-            ThreadStaticContextScope<T>.Data.Clear();
-            ThreadStaticContextScope<T>.Data = null;
+            Fail.IfNull(ThreadStaticContextScope<T>.Sack, nameof(ThreadStaticContextScope<T>.Sack) + " is null");
+            ThreadStaticContextScope<T>.Sack.Value = default(T);
+            ThreadStaticContextScope<T>.Sack = null;
+        }
+
+        internal class SackOf<T>
+        {
+            [CanBeNull]
+            public T Value { get; set; }
         }
     }
 }

@@ -19,6 +19,8 @@ namespace Synergy.NHibernate.Context
         /// <inheritdoc />
         public void Store(T value)
         {
+            Fail.IfArgumentNull(value, nameof(value));
+
             this.GetWcfStorageExtension().Stored = value;
         }
 

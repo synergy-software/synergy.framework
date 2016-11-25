@@ -28,17 +28,17 @@ namespace Synergy.NHibernate.Engine
             return this.databases.SingleOrDefault(db => databaseType.IsInstanceOfType(db));
         }
 
-        /// <inheritdoc />
-        public IDatabase GetDatabaseForEntity(Type entityType)
-        {
-            Fail.IfArgumentNull(entityType, nameof(entityType));
+        ///// <inheritdoc />
+        //public IDatabase GetDatabaseForEntity(Type entityType)
+        //{
+        //    Fail.IfArgumentNull(entityType, nameof(entityType));
 
-            return this.databases.SingleOrDefault(db => db.ContainsEntity(entityType));
-        }
+        //    return this.databases.SingleOrDefault(db => db.ContainsEntity(entityType));
+        //}
     }
 
     /// <summary>
-    /// Component serving database for specific conditions - e.g. it provides a database containing specified entity. 
+    /// Component serving database for specific conditions. 
     /// </summary>
     public interface IDatabaseProvider
     {
@@ -48,7 +48,7 @@ namespace Synergy.NHibernate.Engine
         [CanBeNull, Pure]
         IDatabase Get([NotNull] Type databaseType);
 
-        [CanBeNull, Pure]
-        IDatabase GetDatabaseForEntity([NotNull] Type entityType);
+        //[CanBeNull, Pure]
+        //IDatabase GetDatabaseForEntity([NotNull] Type entityType);
     }
 }

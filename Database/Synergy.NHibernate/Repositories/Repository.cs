@@ -7,13 +7,15 @@ namespace Synergy.NHibernate.Repositories
 {
     // TODO:mace (from:mace on:08-11-2016) add ReadoOnlyRepository with StatelesSession
 
-    public class Repository<TDatabse> : IRepository
+    public abstract class Repository<TDatabse> : IRepository
         where TDatabse : IDatabase
     {
         /// <summary>
         ///     WARN: This property is public as it is injected by Windsor container. DO NOT ASSIGN IT.
         /// </summary>
         [UsedImplicitly]
+        [NotNull] 
+        // ReSharper disable once NotNullMemberIsNotInitialized
         public TDatabse Database { get; set; }
 
         [NotNull]
