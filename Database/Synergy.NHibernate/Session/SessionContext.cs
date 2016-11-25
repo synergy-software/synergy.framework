@@ -46,7 +46,7 @@ namespace Synergy.NHibernate.Session
             Fail.IfArgumentNull(session, nameof(session));
 
             SessionsContainer container = this.GetSessionsContainer();
-            container.Store(database, session);
+            container.StoreSession(database, session);
         }
 
         /// <inheritdoc />

@@ -10,7 +10,7 @@ namespace Synergy.NHibernate.Contexts
     public interface IContextSorage<T>
     {
         /// <summary>
-        /// Informs whethee this particular storage is available at the moment.
+        /// Informs whether this particular storage is available at the moment.
         /// </summary>
         [Pure]
         bool IsAvailable();

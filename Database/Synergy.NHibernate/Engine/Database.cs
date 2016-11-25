@@ -16,16 +16,16 @@ using Synergy.NHibernate.Session;
 
 namespace Synergy.NHibernate.Engine
 {
+    /// <summary>
+    /// Base implementation of component for accessing database.
+    /// </summary>
     public abstract class Database : IDatabase
     {
         [CanBeNull] 
         private Configuration configuration;
 
-        [CanBeNull] 
-        private ISessionFactory factory;
-
-        [NotNull] 
-        private readonly object syncRoot = new object();
+        [CanBeNull]  
+        private Lazy<ISessionFactory> factory;
 
         /// <summary>
         /// WARN: This property is public as it is injected by Windsor container. DO NOT ASSIGN IT.
@@ -45,39 +45,54 @@ namespace Synergy.NHibernate.Engine
         [UsedImplicitly]
         public ISessionContext SessionContext { get; set; }
 
+        /// <summary>
+        /// WARN: Component constructor called by Windsor container. DO NOT USE IT DIRECTLY.
+        /// </summary>
+        protected Database()
+        {
+            this.factory = new Lazy<ISessionFactory>(this.CreateSessionFactory);
+        }
+
+        /// <summary>
+        /// When overriden in a derived class returns the initial NHibernate configuration pointing to a database.
+        /// You MUST override it to point it.
+        /// </summary>
         [NotNull, Pure]
         protected abstract Configuration GetConfiguration();
 
+        /// <summary>
+        /// When overriden in a derived class returns the entities that belong to the database.
+        /// You MUST override it.
+        /// </summary>
         [NotNull, ItemNotNull, Pure]
         protected abstract IEnumerable<Type> GetEntities();
 
+        /// <summary>
+        /// Returns a set of FluentNHibernate conventions used in entity to database mapping.
+        /// Override this method to change the conventions.
+        /// </summary>
         [NotNull, ItemNotNull, Pure]
+        // ReSharper disable once VirtualMemberNeverOverridden.Global
         protected virtual IConvention[] GetConventions()
         {
             return this.Conventions;
         }
 
+        /// <inheritdoc />
         public ISessionFactory Open()
         {
-            if (this.factory == null)
-            {
-                lock (this.syncRoot)
-                {
-                    if (this.factory == null)
-                    {
-                        this.factory = this.CreateSessionFactory();
-                    }
-                }
-            }
+            Fail.IfNull(this.factory, "You cannot reopen a database when it was disposed");
 
-            return this.factory.OrFail(nameof(this.factory));
+            return this.factory.Value;
         }
 
         [NotNull]
         private ISessionFactory CreateSessionFactory()
         {
-            FluentConfiguration fluentConfiguration = Fluently
-                    .Configure(this.GetConfiguration())
+            Configuration initialConfiguration = this.GetConfiguration()
+                                                     .OrFail(nameof(this.GetConfiguration) + "()");
+
+            FluentConfiguration fluentConfiguration = Fluently.Configure(initialConfiguration)
                 //.CurrentSessionContext<CurrentSessionContext>()
                 //.Mappings(
                 //    m => m.FluentMappings
@@ -86,19 +101,21 @@ namespace Synergy.NHibernate.Engine
                 //)
                 ;
 
-            Type[] entities = this.GetEntities()
-                                  .ToArray();
-
             Library[] libraries = this.Librarian.OrFail(nameof(this.Librarian))
                                       .GetLibraries();
 
             IConvention[] conventions = this.GetConventions()
                                             .OrFail(nameof(this.Conventions));
 
+            Type[] entities = this.GetEntities()
+                                  .ToArray();
+
+            var automappingConfiguration = new AutomappingConfiguration(entities);
+
             foreach (Library library in libraries)
             {
                 Assembly assembly = library.GetAssembly();
-                AutoPersistenceModel assemblyMappings = AutoMap.Assembly(assembly, new AutomappingConfiguration(entities));
+                AutoPersistenceModel assemblyMappings = AutoMap.Assembly(assembly, automappingConfiguration);
                 assemblyMappings.Conventions.Add(conventions);
                 assemblyMappings.UseOverridesFromAssembly(assembly);
                 assemblyMappings.IgnoreBase<Entity>();
@@ -110,17 +127,19 @@ namespace Synergy.NHibernate.Engine
             return fluentConfiguration.BuildSessionFactory();
         }
 
-        
+        /// <inheritdoc />
         public virtual ISession OpenSession()
         {
             ISession session = this.Open()
                                    .OpenSession();
             
+            // WARN: By default the session will be never flushed automatically - developer MUST do it explicitly
             session.FlushMode = FlushMode.Never;
 
             return session;
         }
 
+        /// <inheritdoc />
         public ISession CurrentSession
         {
             get
@@ -151,14 +170,14 @@ namespace Synergy.NHibernate.Engine
                        .FullName;
         }
 
-        /// <inheritdoc />
-        public bool ContainsEntity(Type entityType)
-        {
-            Fail.IfArgumentNull(entityType, nameof(entityType));
+        ///// <inheritdoc />
+        //public bool ContainsEntity(Type entityType)
+        //{
+        //    Fail.IfArgumentNull(entityType, nameof(entityType));
 
-            return this.GetEntities()
-                       .Contains(entityType);
-        }
+        //    return this.GetEntities()
+        //               .Contains(entityType);
+        //}
 
         private class AutomappingConfiguration : DefaultAutomappingConfiguration
         {
@@ -195,21 +214,33 @@ namespace Synergy.NHibernate.Engine
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Disposes the database and its session factory.
+        /// </summary>
+        // ReSharper disable once VirtualMemberNeverOverridden.Global
         protected virtual void Dispose(bool disposing)
         {
             if (disposing == false)
                 return;
-
-            if (this.factory == null)
+            
+            if (this.factory == null || this.factory.IsValueCreated == false)
                 return;
 
-            this.factory.Dispose();
+            this.factory.Value.Dispose();
             this.factory = null;
+            this.configuration = null;
         }
     }
 
+    /// <summary>
+    /// Component for accessing particular database.
+    /// </summary>
     public interface IDatabase : IDisposable
     {
+        /// <summary>
+        /// Opens the database. Internally it creates a NHibernate factory (if not created yet) and returns it.
+        /// The operation may be very expensive.
+        /// </summary>
         [NotNull]
         ISessionFactory Open();
 
@@ -217,20 +248,31 @@ namespace Synergy.NHibernate.Engine
         /// Openes a new session and returns it. If the database is not opened it will also open it (see <see cref="Open"/> method).
         /// The session by default is configured to be never flushed automatically. If you want to change the behaviour ovwerwrite the method.
         /// </summary>
-        /// <returns></returns>
         [NotNull, Pure]
         ISession OpenSession();
 
+        /// <summary>
+        /// Returns the current session to this database - current means that depending on context in which you request the session
+        /// it will be stored in different place. It is stored to make sure that all subsequent calls for current session will receive the same one.
+        /// <para>E.g. two web requests will receive completely different current sessions both stored in requests web context.</para>
+        /// <para>If there is no session in the current context it will be created and stored</para>
+        /// </summary>
         [NotNull]
         ISession CurrentSession { get; }
 
+        /// <summary>
+        /// Returns the final NHibernate configuration that was used to build a session factory.
+        /// </summary>
         [NotNull, Pure]
         Configuration GetNHibernateConfiguration();
 
+        /// <summary>
+        /// Gets an unique key of the database. Each database stores its sessions separately under this key.
+        /// </summary>
         [NotNull, Pure]
         string GetKey();
 
-        [Pure]
-        bool ContainsEntity([NotNull] Type entityType);
+        //[Pure]
+        //bool ContainsEntity([NotNull] Type entityType);
     }
 }

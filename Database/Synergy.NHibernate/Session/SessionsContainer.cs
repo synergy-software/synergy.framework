@@ -9,15 +9,15 @@ namespace Synergy.NHibernate.Session
 {
     public class SessionsContainer
     {
-        private readonly Dictionary<string, ISession> sessions = new Dictionary<string, ISession>();
+        private readonly Dictionary<string, Couple> sessions = new Dictionary<string, Couple>();
 
-        public void Store([NotNull] IDatabase database, [NotNull] ISession session)
+        public void StoreSession([NotNull] IDatabase database, [NotNull] ISession session)
         {
             Fail.IfArgumentNull(database, nameof(database));
             Fail.IfArgumentNull(session, nameof(session));
 
-            var key = database.GetKey();
-            this.sessions.Add(key, session);
+            string key = database.GetKey();
+            this.sessions.Add(key, new Couple(database, session));
         }
 
         [CanBeNull]
@@ -25,19 +25,36 @@ namespace Synergy.NHibernate.Session
         {
             Fail.IfArgumentNull(database, nameof(database));
 
-            var key = database.GetKey();
-            ISession session;
-            this.sessions.TryGetValue(key, out session);
-            return session;
+            string key = database.GetKey();
+            Couple couple;
+            this.sessions.TryGetValue(key, out couple);
+            return couple?.Session;
         }
 
-        [NotNull, ItemNotNull]
+        [NotNull]
+        [ItemNotNull]
         public ISession[] RemoveSessions()
         {
-            var toRemove = this.sessions.Values.ToArray();
-            Fail.IfCollectionContainsNull(toRemove, nameof(toRemove));
+            var sessionsToRemove = this.sessions
+                                       .Values
+                                       .Select(c => c.Session)
+                                       .ToArray();
+            Fail.IfCollectionContainsNull(sessionsToRemove, nameof(sessionsToRemove));
+
             this.sessions.Clear();
-            return toRemove;
+            return sessionsToRemove;
+        }
+
+        private class Couple
+        {
+            public readonly IDatabase Database;
+            public readonly ISession Session;
+
+            public Couple(IDatabase database, ISession session)
+            {
+                this.Database = database;
+                this.Session = session;
+            }
         }
     }
 }
