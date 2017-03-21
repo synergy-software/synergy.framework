@@ -2,6 +2,7 @@
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
 using JetBrains.Annotations;
+using Synergy.Contracts;
 using Synergy.NHibernate.Domain;
 using Synergy.NHibernate.Extensions;
 using Synergy.NHibernate.Sample.Domain.Users;
@@ -31,6 +32,10 @@ namespace Synergy.NHibernate.Sample.Domain.Words
 
             public void Override([NotNull] AutoMapping<WordGroup> mapping)
             {
+                Fail.IfArgumentNull(mapping, nameof(mapping));
+
+                mapping.Schema(SampleDatabase.SchemaName);
+
                 mapping.Map(u => u.Name)
                        .Length(Map.NameLength);
 

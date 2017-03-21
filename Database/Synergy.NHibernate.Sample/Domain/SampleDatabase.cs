@@ -15,6 +15,8 @@ namespace Synergy.NHibernate.Sample.Domain
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
     public class SampleDatabase : Database, ISampleDatabase
     {
+        public const string SchemaName = "words";
+
         private readonly IHttpContextServer httpContextServer;
 
         public SampleDatabase(IHttpContextServer httpContextServer)

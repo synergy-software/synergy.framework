@@ -29,13 +29,19 @@ namespace Synergy.NHibernate.Sample.Domain.Schema
                 database.CurrentSession
                         .CreateSQLQuery(
                             @"
-if exists (select * from dbo.sysobjects where id = object_id(N'[Word]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
-  DROP TABLE Word
-if exists (select * from dbo.sysobjects where id = object_id(N'[WordGroup]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
-  DROP TABLE WordGroup
-if exists (select * from dbo.sysobjects where id = object_id(N'[User]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
-  DROP TABLE [User]")
+DROP TABLE [words].[Word]
+DROP TABLE [words].[WordGroup]
+DROP TABLE [words].[User]
+")
                         .ExecuteUpdate();
+
+                //database.CurrentSession
+                //        .CreateSQLQuery($"DROP SCHEMA {SampleDatabase.SchemaName}")
+                //        .ExecuteUpdate();
+
+                //database.CurrentSession
+                //        .CreateSQLQuery($"CREATE SCHEMA {SampleDatabase.SchemaName}")
+                //        .ExecuteUpdate();
             }
 
             database.CurrentSession

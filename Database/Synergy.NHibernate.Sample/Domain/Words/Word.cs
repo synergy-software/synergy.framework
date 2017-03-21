@@ -25,6 +25,8 @@ namespace Synergy.NHibernate.Sample.Domain.Words
             {
                 Fail.IfArgumentNull(mapping, nameof(mapping));
 
+                mapping.Schema(SampleDatabase.SchemaName);
+
                 mapping.Map(w => w.Polish)
                        .Length(Map.PolishLength);
 

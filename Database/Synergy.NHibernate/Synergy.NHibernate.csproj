@@ -80,6 +80,7 @@
     <Compile Include="Conventions\ClassConvention.cs" />
     <Compile Include="Conventions\EmptyStringLengthConvention.cs" />
     <Compile Include="Conventions\ForeignKeyColumnNameConvention.cs" />
+    <Compile Include="Conventions\IndexNamingConvention.cs" />
     <Compile Include="Conventions\ReferenceConvention.cs" />
     <Compile Include="Engine\DatabaseProvider.cs" />
     <Compile Include="Extensions\MappingExtensions.cs" />

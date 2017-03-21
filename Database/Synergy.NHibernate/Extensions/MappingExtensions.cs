@@ -40,5 +40,24 @@ namespace Synergy.NHibernate.Extensions
                 .Inverse()
                 .KeyColumn(parentReferenceColumnName);
         }
+
+        //public static PropertyPart Index<T>([NotNull] this AutoMapping<T> mapping, [NotNull] Expression<Func<T, object>> property, bool isUnique = false)
+        //{
+        //    Fail.IfArgumentNull(mapping, nameof(mapping));
+        //    Fail.IfArgumentNull(property, nameof(property));
+            
+        //    var indexName = IndexNamingConvention.GetIndexName(property);
+
+        //    PropertyPart map = mapping
+        //        .Map(property)
+        //        .Index(indexName);
+
+        //    if (isUnique)
+        //    {
+        //        map.Unique();
+        //    }
+
+        //    return map;
+        //}
     }
 }

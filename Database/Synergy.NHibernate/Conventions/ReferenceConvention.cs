@@ -20,6 +20,7 @@ namespace Synergy.NHibernate.Conventions
             var tableWithColumnName = $"{instance.EntityType.Name}_{columnName}";
 
             string fk = $"FK_{tableWithColumnName}_{instance.Class.Name}";
+            // TODO:mace (from:mace on:26-11-2016) call IndexNamingConvention below
             string ix = $"IX_{tableWithColumnName}";
 
             instance.ForeignKey(fk);

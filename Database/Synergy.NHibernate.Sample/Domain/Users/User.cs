@@ -2,6 +2,8 @@
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
 using JetBrains.Annotations;
+using Synergy.Contracts;
+using Synergy.NHibernate.Conventions;
 using Synergy.NHibernate.Domain;
 using Synergy.NHibernate.Extensions;
 using Synergy.NHibernate.Sample.Domain.Words;
@@ -26,18 +28,14 @@ namespace Synergy.NHibernate.Sample.Domain.Users
 
             public void Override([NotNull] AutoMapping<User> mapping)
             {
-                
-                mapping.Map(u => u.Email)
-                       .Length(Map.EmailLength);
+                Fail.IfArgumentNull(mapping, nameof(mapping));
 
-                //mapping
-                //.HasMany(u=>u.Groups)
-                ////.Cascade
-                ////.AllDeleteOrphan()
-                //.Inverse()
-                ////.ReferencedBy(parentReference)
-                //.KeyColumn("OwnerId")
-                //;
+                mapping.Schema(SampleDatabase.SchemaName);
+
+                mapping.Map(u => u.Email)
+                       .Length(Map.EmailLength)
+                       .Index(IndexNamingConvention.GetIndexName<User>(u => u.Email))
+                       .UniqueKey("UQ_Email");
 
                 mapping.HasManyBidirectional(user => user.Groups, group => group.Owner);
             }
