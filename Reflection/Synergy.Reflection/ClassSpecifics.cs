@@ -32,6 +32,12 @@ namespace Synergy.Reflection
         }
 
         [CanBeNull, Pure]
+        public string GetClassName()
+        {
+            return this.type.Name;
+        }
+
+        [CanBeNull, Pure]
         public FieldInfo GetFieldInfo([NotNull] string name)
         {
             FieldInfo field = type.GetField(name,

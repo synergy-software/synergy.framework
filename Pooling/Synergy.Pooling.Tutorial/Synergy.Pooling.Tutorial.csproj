@@ -30,14 +30,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=10.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\JetBrains.Annotations.10.2.1\lib\net\JetBrains.Annotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Step1\Fail.cs" />
+    <Compile Include="Step1\FailUsage.cs" />
+    <Compile Include="Step2\Fail.cs" />
+    <Compile Include="Step2\FailUsage.cs" />
+    <Compile Include="Step3\Fail.cs" />
+    <Compile Include="Step3\FailUsage.cs" />
+    <Compile Include="Step3\Pool.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Plan.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Step4\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

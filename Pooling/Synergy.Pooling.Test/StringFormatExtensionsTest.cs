@@ -21,31 +21,31 @@ namespace Synergy.Extensions.Test
         {
             //ACT
             // ReSharper disable once HeapView.BoxingAllocation
-            string formatted = "{0}ce".Format(1);
+            string formatted = "{0}ce".Formatted(1);
 
             //ASSERT
             Assert.That(formatted, Is.EqualTo("1ce"));
         }
 
-        //[Test]
-        //public void FormatWith1ArgumentPassingString()
-        //{
-        //    //ACT
+        [Test]
+        public void FormatWith1ArgumentPassingString()
+        {
+            //ACT
 
 
-        //    // ReSharper disable once HeapView.BoxingAllocation
-        //    string formatted = "{0}ce".Format("1");
+            // ReSharper disable once HeapView.BoxingAllocation
+            string formatted = "{0}ce".Formatted("1");
 
-        //    //ASSERT
-        //    Assert.That(formatted, Is.EqualTo("1ce"));
-        //}
+            //ASSERT
+            Assert.That(formatted, Is.EqualTo("1ce"));
+        }
 
         [Test]
         public void FormatWith2Argument()
         {
             //ACT
             // ReSharper disable once HeapView.BoxingAllocation
-            string formatted = "{0}ce {1}".Format(1, "upon");
+            string formatted = "{0}ce {1}".Formatted(1, "upon");
 
             //ASSERT
             Assert.That(formatted, Is.EqualTo("1ce upon"));
@@ -56,7 +56,7 @@ namespace Synergy.Extensions.Test
         {
             //ACT
             // ReSharper disable once HeapView.BoxingAllocation
-            string formatted = "{0}ce {1} a {2}".Format(1, "upon", "time");
+            string formatted = "{0}ce {1} a {2}".Formatted(1, "upon", "time");
 
             //ASSERT
             Assert.That(formatted, Is.EqualTo("1ce upon a time"));
@@ -67,7 +67,7 @@ namespace Synergy.Extensions.Test
         {
             //ACT
             // ReSharper disable once HeapView.BoxingAllocation
-            string formatted = "{0}ce {1} a {2} {3}".Format(1, "upon", "time", "there was");
+            string formatted = "{0}ce {1} a {2} {3}".Formatted(1, "upon", "time", "there was");
 
             //ASSERT
             Assert.That(formatted, Is.EqualTo("1ce upon a time there was"));
@@ -78,7 +78,7 @@ namespace Synergy.Extensions.Test
         {
             //ACT
             // ReSharper disable once HeapView.BoxingAllocation
-            string formatted = "{0}ce {1} a {2} {3} {4}".Format(1, "upon", "time", "there was", "a nasty robot");
+            string formatted = "{0}ce {1} a {2} {3} {4}".Formatted(1, "upon", "time", "there was", "a nasty robot");
 
             //ASSERT
             Assert.That(formatted, Is.EqualTo("1ce upon a time there was a nasty robot"));
@@ -89,7 +89,7 @@ namespace Synergy.Extensions.Test
         {
             //ACT
             // ReSharper disable once HeapView.BoxingAllocation
-            string formatted = "{0}ce {1} a {2} {3} {4} {5}".Format(1, "upon", "time", "there was", "a nasty robot", "living");
+            string formatted = "{0}ce {1} a {2} {3} {4} {5}".Formatted(1, "upon", "time", "there was", "a nasty robot", "living");
 
             //ASSERT
             Assert.That(formatted, Is.EqualTo("1ce upon a time there was a nasty robot living"));
@@ -100,7 +100,7 @@ namespace Synergy.Extensions.Test
         {
             //ACT
             // ReSharper disable once HeapView.BoxingAllocation
-            string formatted = "{0}ce {1} a {2} {3} {4} {5} {6}".Format(1, "upon", "time", "there was", "a nasty robot", "living", "in the neighbourhood");
+            string formatted = "{0}ce {1} a {2} {3} {4} {5} {6}".Formatted(1, "upon", "time", "there was", "a nasty robot", "living", "in the neighbourhood");
 
             //ASSERT
             Assert.That(formatted, Is.EqualTo("1ce upon a time there was a nasty robot living in the neighbourhood"));
@@ -133,7 +133,7 @@ namespace Synergy.Extensions.Test
                     i =>
                     {
                         // ReSharper disable once UnusedVariable
-                        string formatted = "{0}{1}{2}{3}".Format(i + 1, i + 2, i + 3, i + 4);
+                        string formatted = "{0}{1}{2}{3}".Formatted(i + 1, i + 2, i + 3, i + 4);
                     });
             }
             else
@@ -141,7 +141,7 @@ namespace Synergy.Extensions.Test
                 for (var i = 0; i < samplesNo; i++)
                 {
                     // ReSharper disable once UnusedVariable
-                    string formatted = StringFormatExtensions.Format(s, "i + 1", "i + 2", "i + 3", "i + 4");
+                    string formatted = StringFormatExtensions.Formatted(s, "i + 1", "i + 2", "i + 3", "i + 4");
 
                     //if (i % 10000 == 0)
                     //    Console.WriteLine("      -- MEMORY DIFF: {0}", GC.GetTotalMemory(false) - memory0);
@@ -163,11 +163,11 @@ namespace Synergy.Extensions.Test
             // });
 
             // ReSharper disable once HeapView.BoxingAllocation
-            Console.WriteLine("{0}variable.Format()      : {1}ms    MEMORY-ALLOCATION: {2}  DEAD: {3}b",
+            Console.WriteLine("{0}variable.Formatted()      : {1}ms    MEMORY-ALLOCATION: {2}  DEAD: {3}b",
                 parallel ? "PARALLEL " : "",
                 pooled.ElapsedMilliseconds.ToString(),
                 (memory1 - memory0).ToString(),
-                ""//dead1.ToString()
+                "?"//dead1.ToString()
                 );
 
             //var m2 = dotMemory.Check();
@@ -217,8 +217,34 @@ namespace Synergy.Extensions.Test
                 parallel ? "PARALLEL " : "",
                 ordinary.ElapsedMilliseconds,
                 memory2 - memory1,
-                ""//dead2
+                "?"//dead2
                 );
+        }
+
+        [Test]
+        public void memory_usage()
+        {
+            // Measure starting point memory use
+            GC.Collect();
+            var start = GC.GetTotalMemory(true);
+
+            // Allocate a new byte array of 20000 elements (about 20000 bytes)
+#pragma warning disable 219
+            int no = 123;
+#pragma warning restore 219
+            object array = new object[] {123};
+
+            // Obtain measurements after creating the new byte[]
+            GC.Collect();
+            var stop = GC.GetTotalMemory(true);
+
+            // Ensure that the Array stays in memory and doesn't get optimized away
+            GC.KeepAlive(array);
+
+            Console.WriteLine("int no = 123;");
+            Console.WriteLine("object array = new object[] { 123 };");
+            Console.WriteLine();
+            Console.WriteLine("usage: {0} bytes", stop-start);
         }
     }
 }

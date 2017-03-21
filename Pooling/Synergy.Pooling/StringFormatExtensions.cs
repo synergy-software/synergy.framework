@@ -49,7 +49,7 @@ namespace Synergy.Extensions
         /// </summary>
         [NotNull]
         [StringFormatMethod("format")]
-        public static string Format(
+        public static string Formatted(
             [NotNull] this string format,
             [CanBeNull] object arg1)
         {
@@ -65,7 +65,7 @@ namespace Synergy.Extensions
         /// </summary>
         [NotNull]
         [StringFormatMethod("format")]
-        public static string Format(
+        public static string Formatted(
             [NotNull] this string format,
             [CanBeNull] object arg1,
             [CanBeNull] object arg2)
@@ -83,7 +83,7 @@ namespace Synergy.Extensions
         /// </summary>
         [NotNull]
         [StringFormatMethod("format")]
-        public static string Format(
+        public static string Formatted(
             [NotNull] this string format,
             [CanBeNull] object arg1,
             [CanBeNull] object arg2,
@@ -104,7 +104,7 @@ namespace Synergy.Extensions
         [NotNull]
         [StringFormatMethod("format")]
 
-        public static string Format(
+        public static string Formatted(
             [NotNull] this string format,
             [CanBeNull] object arg1,
             [CanBeNull] object arg2,
@@ -126,7 +126,7 @@ namespace Synergy.Extensions
         /// </summary>
         [NotNull]
         [StringFormatMethod("format")]
-        public static string Format(
+        public static string Formatted(
             [NotNull] this string format,
             [NotNull] params object[] args)
         {
