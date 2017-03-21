@@ -73,7 +73,7 @@ namespace Synergy.Contracts
         [Pure]
         public static DesignByContractViolationException Because<T1>([NotNull] string message, T1 arg1)
         {
-            return Fail.Because(message.Format(arg1));
+            return Fail.Because(message.Formatted(arg1));
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Synergy.Contracts
         [Pure]
         public static DesignByContractViolationException Because<T1, T2>([NotNull] string message, T1 arg1, T2 arg2)
         {
-            return Fail.Because(message.Format(arg1, arg2));
+            return Fail.Because(message.Formatted(arg1, arg2));
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Synergy.Contracts
         [Pure]
         public static DesignByContractViolationException Because<T1, T2, T3>([NotNull] string message, T1 arg1, T2 arg2, T3 arg3)
         {
-            return Fail.Because(message.Format(arg1, arg2, arg3));
+            return Fail.Because(message.Formatted(arg1, arg2, arg3));
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Synergy.Contracts
         [Pure]
         public static DesignByContractViolationException Because([NotNull] string message, [NotNull] params object[] args)
         {
-            return Fail.Because(message.Format(args));
+            return Fail.Because(message.Formatted(args));
         }
 
         [ExcludeFromCodeCoverage]

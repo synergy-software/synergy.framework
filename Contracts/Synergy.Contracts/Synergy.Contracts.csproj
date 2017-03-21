@@ -43,10 +43,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Pooling\Synergy.Pooling\StringFormatExtensions.cs">
+      <Link>Extensions\StringFormatExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\..\SynergyAssemblyInfo.cs">
       <Link>Properties\SynergyAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Extensions\StringFormatExtensions.cs" />
     <Compile Include="Failures\DesignByContractViolationException.cs" />
     <Compile Include="Failures\Fail.cs" />
     <Compile Include="Failures\FailEnum.cs" />
