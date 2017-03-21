@@ -115,6 +115,32 @@ namespace Synergy.Contracts.Test.Failures
 
         #endregion
 
+        #region variable.OrFail()
+
+        [Test]
+        [TestCaseSource(nameof(FailNullabilityTest.GetMixOfNullsAndNotNulls))]
+        public void CanBeNull(object value)
+        {
+            // ACT
+            var result = value.CanBeNull();
+
+            // ASSERT
+            Assert.That(value, Is.EqualTo(result));
+        }
+
+        [ItemCanBeNull]
+        private static IEnumerable<object> GetMixOfNullsAndNotNulls()
+        {
+            // ReSharper disable HeapView.BoxingAllocation
+            yield return 123;
+            yield return (long?)456;
+            yield return new object();
+            yield return null;
+            // ReSharper restore HeapView.BoxingAllocation
+        }
+
+        #endregion
+
         #region Fail.IfArgumentNull
 
         [Test]

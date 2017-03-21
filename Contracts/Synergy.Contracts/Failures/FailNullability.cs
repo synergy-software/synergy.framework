@@ -47,7 +47,7 @@ namespace Synergy.Contracts
         /// <typeparam name="T">Type of the value to check against nullability.</typeparam>
         /// <param name="value">Value to check against nullability.</param>
         /// <param name="name">Name of the checked argument / parameter to check the nullability of.</param>
-        /// <returns></returns>
+        /// <returns>Exactly the same value as provided to this method.</returns>
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         [AssertionMethod]
         [NotNull]
@@ -60,6 +60,21 @@ namespace Synergy.Contracts
             if (value == null)
                 throw Fail.Because("'{0}' is null and it shouldn't be", name);
 
+            return value;
+        }
+
+        /// <summary>
+        /// Returns EXACTLY the same object as method argument.
+        /// It is usefull when you have [NotNull] variable that you want to check against nullability as this method is marked with [CanBeNull].
+        /// </summary>
+        /// <typeparam name="T">Type of the value.</typeparam>
+        /// <param name="value">Value to change its contract from [NotNull] to [CanBeNull].</param>
+        /// <returns>Exactly the same value as provided to this method.</returns>
+        [ContractAnnotation("value: null => null; value: notnull => notnull")]
+        [AssertionMethod]
+        [CanBeNull] 
+        public static T CanBeNull<T>([CanBeNull] this T value)
+        {
             return value;
         }
 
