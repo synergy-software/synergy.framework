@@ -89,7 +89,7 @@ namespace Synergy.NHibernate.Domain
         /// <exception cref="T:System.NullReferenceException">The <paramref name="obj" /> parameter is null.</exception>
         /// <filterpriority>2</filterpriority>
         [Pure]
-        public override bool Equals(object obj)
+        public override bool Equals([CanBeNull] object obj)
         {
             if (object.ReferenceEquals(null, obj))
                 return false;
