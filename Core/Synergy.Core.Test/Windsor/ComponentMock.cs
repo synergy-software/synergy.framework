@@ -45,4 +45,13 @@ namespace Synergy.Core.Test.Windsor
     public interface ITransientComponentMock
     {
     }
+
+    [Singleton]
+    public class SingletonComponentMock : ISingletonComponentMock
+    {
+    }
+
+    public interface ISingletonComponentMock
+    {
+    }
 }

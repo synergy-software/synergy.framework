@@ -54,7 +54,7 @@ namespace Synergy.Core
 
         [NotNull]
         [ExcludeFromCodeCoverage]
-        private string DebuggerDisplay => $"{this} -> {this.GetAssembly() .GetName() .Name}.dll";
+        private string DebuggerDisplay => $"{this} -> {this.GetAssembly().GetName().Name}.dll";
 
         /// <inheritdoc />
         public bool Equals(Library other)

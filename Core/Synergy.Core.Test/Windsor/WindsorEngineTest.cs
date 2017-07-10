@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Castle.Windsor;
 using NUnit.Framework;
 using Synergy.Core.Sample.Users;
 using Synergy.Core.Test.Users;
@@ -58,6 +59,21 @@ namespace Synergy.Core.Test.Windsor
         }
 
         [Test]
+        public void windsor_container_is_available_as_component()
+        {
+            // ARRANGE
+            IWindsorEngine windsorEngine = ApplicationServer.Start();
+
+            // ACT
+            var containerTakenFromWindsor = windsorEngine.GetComponent<IWindsorContainer>();
+
+            // ASSERT
+            Assert.NotNull(containerTakenFromWindsor);
+            windsorEngine.Stop();
+        }
+
+
+        [Test]
         public void can_insert_dependent_collection_of_components()
         {
             // ARRANGE
@@ -83,6 +99,22 @@ namespace Synergy.Core.Test.Windsor
             // ACT
             var component1 = windsorEngine.GetComponent<IComponentMock>();
             var component2 = windsorEngine.GetComponent<IComponentMock>();
+
+            // ASSERT
+            Assert.That(component1, Is.Not.Null);
+            Assert.That(component1, Is.EqualTo(component2));
+            windsorEngine.Stop();
+        }
+
+        [Test]
+        public void component_marked_as_singleton_singletons__is_really_so()
+        {
+            // ARRANGE
+            IWindsorEngine windsorEngine = ApplicationServer.Start();
+
+            // ACT
+            var component1 = windsorEngine.GetComponent<ISingletonComponentMock>();
+            var component2 = windsorEngine.GetComponent<ISingletonComponentMock>();
 
             // ASSERT
             Assert.That(component1, Is.Not.Null);

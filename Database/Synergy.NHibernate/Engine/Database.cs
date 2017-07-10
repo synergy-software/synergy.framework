@@ -245,14 +245,14 @@ namespace Synergy.NHibernate.Engine
         ISessionFactory Open();
 
         /// <summary>
-        /// Openes a new session and returns it. If the database is not opened it will also open it (see <see cref="Open"/> method).
-        /// The session by default is configured to be never flushed automatically. If you want to change the behaviour ovwerwrite the method.
+        /// Opens a new session and returns it. If the database is not opened it will also open it (see <see cref="Open"/> method).
+        /// <para>WARN: The session by default is configured to be never flushed automatically. If you want to change the behaviour ovwerwrite the method.</para>
         /// </summary>
         [NotNull, Pure]
         ISession OpenSession();
 
         /// <summary>
-        /// Returns the current session to this database - current means that depending on context in which you request the session
+        /// Returns the current session to this database - current means that, depending on context in which you request the session,
         /// it will be stored in different place. It is stored to make sure that all subsequent calls for current session will receive the same one.
         /// <para>E.g. two web requests will receive completely different current sessions both stored in requests web context.</para>
         /// <para>If there is no session in the current context it will be created and stored</para>

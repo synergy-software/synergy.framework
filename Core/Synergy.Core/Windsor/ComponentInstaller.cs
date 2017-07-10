@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using Castle.Core;
+using Castle.Core.Internal;
 using Castle.DynamicProxy.Internal;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
@@ -59,9 +61,18 @@ namespace Synergy.Core.Windsor
                     .Pick()
                     .If(this.ShouldRegisterComponent)
                     .WithService.Select(this.GetComponentInterfaces())
+                    .Configure(this.ConfigureComponent)
                 ;
 
             container.Register(allClassesWithAnyInterface);
+        }
+
+        private void ConfigureComponent([NotNull] ComponentRegistration obj)
+        {
+            if (obj.Implementation.HasAttribute<SingletonAttribute>())
+                obj.LifestyleSingleton();
+
+            //obj.LifestyleTransient();
         }
 
         [Pure]

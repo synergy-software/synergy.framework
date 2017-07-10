@@ -1,4 +1,5 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using Castle.Core;
+using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using JetBrains.Annotations;
@@ -36,6 +37,7 @@ namespace Synergy.Core.Test.Windsor
     }
 
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
+    [Singleton]
     public class ContainerForComponentCreatedViaFactory : IContainerForComponentCreatedViaFactory
     {
         private readonly IComponentCreatedViaFactory componentCreatedViaFactory;
