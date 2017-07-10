@@ -49,7 +49,6 @@ namespace Synergy.Core.Windsor
         /// <inheritdoc />
         public void Stop()
         {
-            this.GetContainerOrFail();
             this.Dispose(true);
         }
 
@@ -75,6 +74,7 @@ namespace Synergy.Core.Windsor
             }
         }
 
+        [NotNull, Pure]
         private WindsorContainer GetContainerOrFail()
         {
             Fail.IfNull(this.container, $"{nameof(WindsorEngine)} is not started");

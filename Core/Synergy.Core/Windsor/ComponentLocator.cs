@@ -16,6 +16,13 @@ namespace Synergy.Core
         {
             this.windsorContainer = windsorContainer;
         }
+
+        /// <inheritdoc />
+        public T GetComponent<T>()
+        {
+            return this.windsorContainer.Resolve<T>();
+        }
+
         /// <inheritdoc />
         public object GetComponent(Type type)
         {
@@ -78,6 +85,10 @@ namespace Synergy.Core
 
     public interface IComponentLocator
     {
+        [NotNull]
+        [Pure]
+        T GetComponent<T>();
+
         [NotNull]
         [Pure]
         object GetComponent([NotNull] Type type);
