@@ -81,20 +81,27 @@ namespace Synergy.Core
             return this.windsorContainer
                        .ResolveAll<T>();
         }
+
+        /// <inheritdoc />
+        public object[] GetComponents(Type type)
+        {
+            return (object[]) this.windsorContainer
+                                  .ResolveAll(type);
+        }
     }
 
     public interface IComponentLocator
     {
-        [NotNull]
-        [Pure]
+        /// <summary>
+        ///     Gets component valid for provided type.
+        /// </summary>
+        [NotNull, Pure]
         T GetComponent<T>();
 
-        [NotNull]
-        [Pure]
+        [NotNull, Pure]
         object GetComponent([NotNull] Type type);
 
-        [NotNull]
-        [Pure]
+        [NotNull, Pure]
         T GetComponent<T>([NotNull] string name);
 
         [Pure]
@@ -109,10 +116,15 @@ namespace Synergy.Core
         void ReleaseComponent([NotNull] object component);
 
         /// <summary>
-        /// Gets all components valid for provided type.
+        ///     Gets all components valid for provided type.
         /// </summary>
-        [NotNull]
-        [Pure]
+        [NotNull, Pure]
         T[] GetComponents<T>();
+
+        /// <summary>
+        ///     Gets all components valid for provided type.
+        /// </summary>
+        [NotNull, Pure]
+        object[] GetComponents([NotNull] Type type);
     }
 }
