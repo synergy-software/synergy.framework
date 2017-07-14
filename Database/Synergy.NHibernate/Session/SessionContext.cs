@@ -73,6 +73,7 @@ namespace Synergy.NHibernate.Session
             return container;
         }
 
+        [NotNull, Pure]
         private IContextSorage<SessionsContainer> GetContextStorage()
         {
             if (this.webContextSorage.IsAvailable())
