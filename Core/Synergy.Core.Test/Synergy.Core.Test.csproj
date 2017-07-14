@@ -54,6 +54,7 @@
     <Compile Include="..\..\SynergyAssemblyInfo.cs">
       <Link>Properties\SynergyAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Extensions\StringExtensionsTest.cs" />
     <Compile Include="Interceptors\ComponentInterceptor.cs" />
     <Compile Include="Interceptors\InterceptedComponent.cs" />
     <Compile Include="Interceptors\InterceptorTest.cs" />
@@ -78,9 +79,7 @@
       <Name>Synergy.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

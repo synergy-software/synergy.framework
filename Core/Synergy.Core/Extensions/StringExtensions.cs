@@ -36,8 +36,8 @@ namespace Synergy.Core.Extensions
         [ContractAnnotation("text:null=>null")]
         public static string TrimOrNull([CanBeNull] this string text)
         {
-            if (String.IsNullOrEmpty(text))
-                return text;
+            if (String.IsNullOrWhiteSpace(text))
+                return null;
 
             return text.Trim();
         }
