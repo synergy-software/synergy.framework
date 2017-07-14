@@ -53,6 +53,7 @@
     <Compile Include="..\..\SynergyAssemblyInfo.cs">
       <Link>Properties\SynergyAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\StringFormatExtensions.cs" />
     <Compile Include="Libraries\Librarian.cs" />
     <Compile Include="Libraries\Library.cs" />
