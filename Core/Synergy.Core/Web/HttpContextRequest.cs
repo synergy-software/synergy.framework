@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using JetBrains.Annotations;
 using Synergy.Contracts;
 
@@ -27,6 +28,29 @@ namespace Synergy.Web
         {
             return this.GetRequest()
                        .Cookies[cookieName];
+        }
+
+        /// <inheritdoc />
+        public string GetRequestId()
+        {
+            if (this.IsAvailable())
+                return null;
+
+            const string currentRequestIdentifierContextItemId = "requestId-FC7406C5-91CB-420E-A819-B1694F40522A";
+            var items = this.GetContext().Items;
+
+            if (items.Contains(currentRequestIdentifierContextItemId) == false)
+            {
+                items.Add(currentRequestIdentifierContextItemId, this.GenerateRequestId());
+            }
+
+            return items[currentRequestIdentifierContextItemId].AsOrFail<string>();
+        }
+
+        [NotNull, Pure]
+        private string GenerateRequestId()
+        {
+            return Guid.NewGuid().ToString();
         }
 
         [NotNull]
@@ -75,5 +99,12 @@ namespace Synergy.Web
         [CanBeNull]
         [Pure]
         HttpCookie GetCookie([NotNull] string cookieName);
+
+        /// <summary>
+        /// Returns id of current request or null if there is no web request now.
+        /// The id is a guid. This method checks if there is already id assigned to the request and creates new one if there is no such id.
+        /// </summary>
+        [CanBeNull, Pure]
+        string GetRequestId();
     }
 }
