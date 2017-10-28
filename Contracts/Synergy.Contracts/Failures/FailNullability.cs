@@ -16,7 +16,7 @@ namespace Synergy.Contracts
         [NotNull]
         [AssertionMethod]
         public static T FailIfNull<T>(
-            [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] this T value,
+            [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration] this T value,
             [NotNull] string message, 
             [NotNull] params object[] args)
         {
@@ -52,7 +52,7 @@ namespace Synergy.Contracts
         [AssertionMethod]
         [NotNull]
         public static T OrFail<T>(
-            [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] this T value,
+            [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration] this T value,
             [NotNull] string name)
         {
             Fail.RequiresArgumentName(name);
@@ -73,7 +73,7 @@ namespace Synergy.Contracts
         [ContractAnnotation("value: null => null; value: notnull => notnull")]
         [AssertionMethod]
         [CanBeNull] 
-        public static T CanBeNull<T>([CanBeNull] this T value)
+        public static T CanBeNull<T>([CanBeNull] [NoEnumeration] this T value)
         {
             return value;
         }
@@ -88,7 +88,7 @@ namespace Synergy.Contracts
         [ContractAnnotation("argumentValue: null => halt")]
         [AssertionMethod]
         public static void IfArgumentNull<T>(
-            [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] T argumentValue,
+            [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration] T argumentValue,
             [NotNull] string argumentName)
         {
             Fail.RequiresArgumentName(argumentName);
@@ -106,7 +106,7 @@ namespace Synergy.Contracts
         [SourceTemplate]
         [UsedImplicitly]
         // ReSharper disable once InconsistentNaming
-        public static void fian([CanBeNull] this object argumentValue)
+        public static void fian([CanBeNull] [NoEnumeration] this object argumentValue)
         {
             Fail.IfArgumentNull(argumentValue, nameof(argumentValue));
         }
@@ -230,7 +230,7 @@ namespace Synergy.Contracts
         [StringFormatMethod("message")]
         [ContractAnnotation("value: notnull => halt")]
         [AssertionMethod]
-        public static void IfNotNull<T>([CanBeNull] T value, [NotNull] string message, [NotNull] params object[] args)
+        public static void IfNotNull<T>([CanBeNull] [NoEnumeration] T value, [NotNull] string message, [NotNull] params object[] args)
         {
             // TODO:mace (from:mace on:17-11-2016) This method should be splitted to 5 generic methods to prevent unnecesesary memory allocation 
             Fail.RequiresMessage(message, args);

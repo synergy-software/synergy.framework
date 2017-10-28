@@ -22,7 +22,7 @@ namespace Synergy.Contracts
         [ContractAnnotation("value: null => null; value: notnull => notnull")]
         [CanBeNull]
         [AssertionMethod]
-        public static T AsOrFail<T>([CanBeNull] this object value, [CanBeNull] string name = null)
+        public static T AsOrFail<T>([CanBeNull] [NoEnumeration] this object value, [CanBeNull] string name = null)
         {
             Fail.IfNotCastable<T>(value, Fail.notCastableMessageWithName, name ?? "object", typeof(T), value);
 
@@ -42,7 +42,7 @@ namespace Synergy.Contracts
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         [NotNull]
         [AssertionMethod]
-        public static T CastOrFail<T>([CanBeNull] this object value, [CanBeNull] string name = null)
+        public static T CastOrFail<T>([CanBeNull] [NoEnumeration] this object value, [CanBeNull] string name = null)
         {
             Fail.IfNull(value, Fail.notCastableMessageWithName, name ?? "object", typeof(T), "null");
             Fail.IfNotCastable<T>(value, Fail.notCastableMessageWithName, name ?? "object", typeof(T), value);
@@ -59,7 +59,7 @@ namespace Synergy.Contracts
         /// <param name="args">Arguments that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
         [StringFormatMethod("message")]
         [AssertionMethod]
-        public static void IfNotCastable([CanBeNull] object value, [NotNull] Type expectedType, [NotNull] string message, [NotNull] params object[] args)
+        public static void IfNotCastable([CanBeNull] [NoEnumeration] object value, [NotNull] Type expectedType, [NotNull] string message, [NotNull] params object[] args)
         {
             Fail.RequiresType(expectedType);
             Fail.RequiresMessage(message, args);
@@ -81,7 +81,7 @@ namespace Synergy.Contracts
         /// <param name="args">Arguments that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
         [StringFormatMethod("message")]
         [AssertionMethod]
-        public static void IfNotCastable<T>([CanBeNull] object value, [NotNull] string message, [NotNull] params object[] args)
+        public static void IfNotCastable<T>([CanBeNull] [NoEnumeration] object value, [NotNull] string message, [NotNull] params object[] args)
         {
             Fail.IfNotCastable(value, typeof(T), message, args);
         }
@@ -94,7 +94,7 @@ namespace Synergy.Contracts
         /// <param name="value">Value to check if it can be casted to specified type.</param>
         [ContractAnnotation("value: null => halt")]
         [AssertionMethod]
-        public static void IfNullOrNotCastable<T>([CanBeNull] object value)
+        public static void IfNullOrNotCastable<T>([CanBeNull] [NoEnumeration] object value)
         {
             Fail.IfNull(value, Fail.notCastableMessage, typeof(T), "<null>");
             Fail.IfNotCastable<T>(value, Fail.notCastableMessage, typeof(T), value);
@@ -112,7 +112,7 @@ namespace Synergy.Contracts
         [StringFormatMethod("message")]
         [AssertionMethod]
         public static void IfNullOrNotCastable<T>(
-            [CanBeNull] object value,
+            [CanBeNull] [NoEnumeration] object value,
             [NotNull] string message,
             [NotNull] params object[] args)
         {
