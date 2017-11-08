@@ -44,8 +44,16 @@ namespace Synergy.Contracts
         [AssertionMethod]
         public static T CastOrFail<T>([CanBeNull] [NoEnumeration] this object value, [CanBeNull] string name = null)
         {
-            Fail.IfNull(value, Fail.notCastableMessageWithName, name ?? "object", typeof(T), "null");
-            Fail.IfNotCastable<T>(value, Fail.notCastableMessageWithName, name ?? "object", typeof(T), value);
+            Type castedType = typeof(T);
+            Fail.IfNull(value, Fail.notCastableMessageWithName, name ?? "object", castedType, "null");
+
+            if (castedType.IsEnum)
+            {
+                Fail.IfEnumNotDefined<T>(value);
+                return (T) Enum.ToObject(castedType, value);
+            }
+
+            Fail.IfNotCastable<T>(value, Fail.notCastableMessageWithName, name ?? "object", castedType, value);
             return (T) value;
         }
 

@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
 
 namespace Synergy.Contracts
 {
@@ -32,9 +33,28 @@ namespace Synergy.Contracts
         {
             //Fail.RequiresEnumValue(value);
 
+            return Fail.CreateEnumException<T>(value);
+        }
+
+        [NotNull, Pure]
+        private static DesignByContractViolationException CreateEnumException<T>([NotNull] object value)
+        {
             string enumType = typeof(T).Name;
             string enumName = value.ToString();
             return new DesignByContractViolationException($"Unsupported {enumType} value: {enumName}");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        public static void IfEnumNotDefined<T>([NotNull] object value)
+        {
+            if (Enum.IsDefined(typeof(T), value) == false)
+            {
+                throw CreateEnumException<T>(value);
+            }
         }
 
         //[ExcludeFromCodeCoverage]
