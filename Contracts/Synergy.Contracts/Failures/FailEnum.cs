@@ -45,10 +45,10 @@ namespace Synergy.Contracts
         }
 
         /// <summary>
-        /// 
+        /// Checks whether specified value can be used as (casted to) an enum value.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="value"></param>
+        /// <typeparam name="T">Type of enum to check</typeparam>
+        /// <param name="value">Value of enum to chceck</param>
         public static void IfEnumNotDefined<T>([NotNull] object value)
         {
             if (Enum.IsDefined(typeof(T), value) == false)

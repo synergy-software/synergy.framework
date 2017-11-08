@@ -18,7 +18,7 @@ namespace Synergy.Contracts.Test.Failures
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
                 () => Fail.IfNotMidnight(notMidnight, "date should have no hour nor second")
-                );
+            );
 
             // ASSERT
             Assert.That(exception.Message, Is.EqualTo("date should have no hour nor second"));
@@ -43,7 +43,7 @@ namespace Synergy.Contracts.Test.Failures
         {
             // ARRANGE
             IContractorRepository contractorRepository = new ContractorRepository();
-            var ratherNotMidnight = DateTime.Now;
+            DateTime ratherNotMidnight = DateTime.Now;
 
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
@@ -53,6 +53,32 @@ namespace Synergy.Contracts.Test.Failures
             // ASSERT
             Assert.That(exception, Is.Not.Null);
             Assert.That(exception.Message, Is.EqualTo("minDate must be a midnight"));
+        }
+
+        #endregion
+
+        #region Fail.IfDateEmpty
+
+        [Test]
+        public void IfDateEmpty()
+        {
+            // ARRANGE
+            DateTime minDate = DateTime.MinValue;
+
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfEmpty(minDate, nameof(minDate))
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("'minDate' is empty = 0001-01-01 00:00:00"));
+        }
+
+        [Test]
+        public void IfDateEmptySuccess()
+        {
+            // ACT
+            Fail.IfEmpty(DateTime.Today, nameof(DateTime.Today));
         }
 
         #endregion
