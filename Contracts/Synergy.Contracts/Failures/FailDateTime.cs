@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using JetBrains.Annotations;
 
 namespace Synergy.Contracts
@@ -59,7 +60,7 @@ namespace Synergy.Contracts
         public static void IfEmpty(DateTime value, [NotNull] string name)
         {
             if (value == DateTime.MinValue)
-                throw Fail.Because("'{0}' is empty = {1}", name, value);
+                throw Fail.Because("'{0}' is empty = {1}", name, value.ToString(CultureInfo.InvariantCulture));
         }
     }
 }

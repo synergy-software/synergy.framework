@@ -71,7 +71,7 @@ namespace Synergy.Contracts.Test.Failures
             );
 
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("'minDate' is empty = 0001-01-01 00:00:00"));
+            Assert.That(exception.Message, Is.EqualTo("'minDate' is empty = 01/01/0001 00:00:00"));
         }
 
         [Test]
