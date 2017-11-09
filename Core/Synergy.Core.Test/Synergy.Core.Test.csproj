@@ -60,6 +60,7 @@
     <Compile Include="Libraries\LibrarianTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Users\UserRepositoryMock.cs" />
+    <Compile Include="Windsor\ComponentLocatorTest.cs" />
     <Compile Include="Windsor\ComponentMock.cs" />
     <Compile Include="Windsor\WindsorEngineTest.cs" />
     <Compile Include="Windsor\WindsorInstallerMock.cs" />

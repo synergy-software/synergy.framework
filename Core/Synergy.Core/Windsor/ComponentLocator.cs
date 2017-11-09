@@ -23,6 +23,11 @@ namespace Synergy.Core
             return this.windsorContainer.Resolve<T>();
         }
 
+        public T GetComponent<T>(object argumentsAsAnonymousType)
+        {
+            return this.windsorContainer.Resolve<T>(argumentsAsAnonymousType);
+        }
+
         /// <inheritdoc />
         public object GetComponent(Type type)
         {
@@ -97,6 +102,9 @@ namespace Synergy.Core
         /// </summary>
         [NotNull, Pure]
         T GetComponent<T>();
+
+        [NotNull, Pure]
+        T GetComponent<T>(object argumentsAsAnonymousType);
 
         [NotNull, Pure]
         object GetComponent([NotNull] Type type);

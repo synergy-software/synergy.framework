@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Castle.Core;
 using JetBrains.Annotations;
+using Synergy.Extensions;
 
 namespace Synergy.Core.Test.Windsor
 {
@@ -53,5 +54,35 @@ namespace Synergy.Core.Test.Windsor
 
     public interface ISingletonComponentMock
     {
+    }
+
+    [Transient]
+    public class StatefulComponent : IStatefulComponent
+    {
+        private readonly State state;
+        public ISingletonComponentMock Dependency { get; }
+        public string Id => this.state.Id;
+
+        public StatefulComponent(State state, ISingletonComponentMock dependency)
+        {
+            this.state = state;
+            this.Dependency = dependency;
+        }
+    }
+
+    public interface IStatefulComponent
+    {
+        string Id { get; }
+        ISingletonComponentMock Dependency { get; }
+    }
+
+    public class State
+    {
+        public readonly string Id;
+
+        public State(string id)
+        {
+            this.Id = id;
+        }
     }
 }
