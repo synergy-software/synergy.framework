@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Castle.Core;
 using JetBrains.Annotations;
-using Synergy.Extensions;
 
 namespace Synergy.Core.Test.Windsor
 {

@@ -62,5 +62,17 @@ namespace Synergy.Contracts
             if (value == DateTime.MinValue)
                 throw Fail.Because("'{0}' is empty = {1}", name, value.ToString(CultureInfo.InvariantCulture));
         }
+
+        /// <summary>
+        /// Checks whether specified DateTime is empty - is equal to DateTime.MinValue.
+        /// If it is - contract violation exception is thrown.
+        /// </summary>
+        /// <param name="value">DateTime to check</param>
+        /// <param name="name">Name of the checked argument / parameter.</param>
+        [AssertionMethod]
+        public static void FailIfEmpty(this DateTime value, [NotNull] string name)
+        {
+            Fail.IfEmpty(value, name);
+        }
     }
 }
