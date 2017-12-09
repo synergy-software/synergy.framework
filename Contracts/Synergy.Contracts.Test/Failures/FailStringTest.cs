@@ -99,5 +99,31 @@ namespace Synergy.Contracts.Test.Failures
 
             Fail.IfWhitespace("aa", "message");
         }
+
+        [Test]
+        public void IfTooLong()
+        {
+            var veryLong = "very long";
+            Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfToLong(veryLong, 3, nameof(veryLong))
+            );
+
+            Fail.IfToLong(null, 300, "null");
+            Fail.IfToLong("aa", 300, "aa");
+            Fail.IfToLong("aa", 2, "aa");
+        }
+
+        [Test]
+        public void FailIfTooLong()
+        {
+            var veryLong = "very long";
+            Assert.Throws<DesignByContractViolationException>(
+                () => veryLong.FailIfToLong(3, nameof(veryLong))
+            );
+
+            ((string)null).FailIfToLong(300, "null");
+            "aa".FailIfToLong(300, "aa");
+            "aa".FailIfToLong(2, "aa");
+        }
     }
 }

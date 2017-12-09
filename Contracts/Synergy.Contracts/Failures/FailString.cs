@@ -123,5 +123,45 @@ namespace Synergy.Contracts
             if (string.IsNullOrWhiteSpace(argumentName))
                 throw new ArgumentNullException(nameof(argumentName));
         }
+
+        /// <summary>
+        /// Throws exception if the specified string length exceeds provided maximum.
+        /// </summary>
+        /// <param name="value">Value to check</param>
+        /// <param name="maxLength">Maximum length of the string.</param>
+        /// <param name="name">Name of the checked argument / parameter.</param>
+        [AssertionMethod]
+        public static void IfToLong(
+            [CanBeNull] string value,
+            int maxLength,
+            [NotNull] string name)
+        {
+            Fail.RequiresArgumentName(name);
+
+            if (value == null)
+                return;
+
+            int currentLength = value.Length;
+            if (currentLength > maxLength)
+                throw Fail.Because("{0} is to long - {1} (max: {2}", name, currentLength, maxLength);
+        }
+
+        /// <summary>
+        /// Throws exception if the specified string length exceeds provided maximum.
+        /// </summary>
+        /// <param name="value">Value to check</param>
+        /// <param name="maxLength">Maximum length of the string.</param>
+        /// <param name="name">Name of the checked argument / parameter.</param>
+        [CanBeNull]
+        [AssertionMethod]
+        [ContractAnnotation("value: null => null")]
+        public static string FailIfToLong(
+            [CanBeNull] this string value,
+            int maxLength,
+            [NotNull] string name)
+        {
+            Fail.IfToLong(value, maxLength, name);
+            return value;
+        }
     }
 }
