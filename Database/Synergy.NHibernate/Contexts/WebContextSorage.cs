@@ -59,7 +59,7 @@ namespace Synergy.NHibernate.Contexts
         [NotNull]
         private string GetKey()
         {
-            return typeof(T).FullName;
+            return typeof(T).FullName.FailIfNull("FullName is null for {0}", typeof(T));
         }
     }
 

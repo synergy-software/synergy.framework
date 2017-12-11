@@ -4,7 +4,7 @@ using Synergy.Contracts;
 // ReSharper disable once CheckNamespace
 namespace Synergy.Web
 {
-    /// <inheritdoc />
+    /// <inheritdoc cref="IHttpContextServer" />
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
     public class HttpContextServer : HttpContextBase, IHttpContextServer
     {

@@ -87,6 +87,7 @@ namespace Synergy.Reflection.Test
         {
             //ARRANGE
             var property = typeof(A).GetProperty(nameof(IA.Property));
+            Assert.NotNull(property);
 
             //ACT
             CategoryAttribute[] attributes = property.GetCustomAttributesBasedOn<CategoryAttribute>();
