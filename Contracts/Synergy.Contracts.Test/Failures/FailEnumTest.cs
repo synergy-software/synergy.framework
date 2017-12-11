@@ -18,7 +18,7 @@ namespace Synergy.Contracts.Test.Failures
             var exception = Fail.BecauseEnumOutOfRange(unsupportedEnumValue);
 
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("Unsupported ContractorType value: 0"));
+            Assert.That(exception.Message, Is.EqualTo("Unsupported enum value: 0 (ContractorType)"));
         }
 
         [Test]
@@ -38,7 +38,7 @@ namespace Synergy.Contracts.Test.Failures
 
             // ASSERT
             Assert.That(exception, Is.Not.Null);
-            Assert.That(exception.Message, Is.EqualTo("Unsupported ContractorType value: 0"));
+            Assert.That(exception.Message, Is.EqualTo("Unsupported enum value: 0 (ContractorType)"));
         }
 
         #endregion
@@ -56,12 +56,12 @@ namespace Synergy.Contracts.Test.Failures
 
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfEnumNotDefined<ContractorType>(contractor.Type)
+                () => Fail.IfEnumNotDefined(contractor.Type)
             );
 
             // ASSERT
             Assert.That(exception, Is.Not.Null);
-            Assert.That(exception.Message, Is.EqualTo("Unsupported ContractorType value: 0"));
+            Assert.That(exception.Message, Is.EqualTo("Unsupported enum value: 0 (ContractorType)"));
         }
 
         [Test]
@@ -94,7 +94,7 @@ namespace Synergy.Contracts.Test.Failures
 
             // ASSERT
             Assert.That(exception, Is.Not.Null);
-            Assert.That(exception.Message, Is.EqualTo("Unsupported ContractorType value: 0"));
+            Assert.That(exception.Message, Is.EqualTo("Unsupported enum value: 0 (ContractorType)"));
 
             //Assert.That(enumValue, Is.EqualTo(ContractorType.Company));
         }
@@ -110,6 +110,25 @@ namespace Synergy.Contracts.Test.Failures
 
             // ASSERT
             Assert.That(enumValue, Is.EqualTo(ContractorType.Person));
+        }
+
+
+        [Test]
+        public void CastEnumOrFail2()
+        {
+            // ARRANGE
+            ContractorType enumValue = 0;
+            
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => enumValue.CastEnumOrFail<ContractorType>(nameof(enumValue))
+            );
+
+            // ASSERT
+            Assert.That(exception, Is.Not.Null);
+            Assert.That(exception.Message, Is.EqualTo("Unsupported enumValue value: 0 (ContractorType)"));
+
+            //Assert.That(enumValue, Is.EqualTo(ContractorType.Company));
         }
 
         #endregion
