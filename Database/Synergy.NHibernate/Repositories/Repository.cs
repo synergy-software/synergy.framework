@@ -7,6 +7,9 @@ namespace Synergy.NHibernate.Repositories
 {
     // TODO:mace (from:mace on:08-11-2016) add ReadoOnlyRepository with StatelesSession
 
+
+    // TODO:mace (from:mace on:06-12-2017) rename Repository<T> na DatabaseRepository<T>
+
     public abstract class Repository<TDatabse> : IRepository
         where TDatabse : IDatabase
     {
@@ -19,7 +22,7 @@ namespace Synergy.NHibernate.Repositories
         public TDatabse Database { get; set; }
 
         [NotNull]
-        protected ISession CurreSession => this.Database.OrFail(nameof(this.Database))
+        protected ISession CurrentSession => this.Database.OrFail(nameof(this.Database))
                                                .CurrentSession;
     }
 

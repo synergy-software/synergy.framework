@@ -10,7 +10,7 @@ namespace Synergy.NHibernate.Test.My
     {
         public MyEntity[] GetAll()
         {
-            return this.CurreSession
+            return this.CurrentSession
                        .Query<MyEntity>()
                        .ToArray();
         }
