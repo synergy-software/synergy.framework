@@ -26,8 +26,11 @@ namespace Synergy.NHibernate.Conventions
         {
             Fail.IfArgumentNull(instance, nameof(instance));
 
-            string maxLo = this.MaxLo.ToString(CultureInfo.InvariantCulture);
-            instance.GeneratedBy.HiLo(maxLo);
+            if (instance.Type == typeof(long) || instance.Type == typeof(int))
+            {
+                string maxLo = this.MaxLo.ToString(CultureInfo.InvariantCulture);
+                instance.GeneratedBy.HiLo(maxLo);
+            }
         }
     }
 }
