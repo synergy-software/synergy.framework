@@ -10,16 +10,16 @@ namespace Synergy.NHibernate.Test.Transactions
         [Test]
         public void automatic_transaction_can_be_disabled()
         {
-                //ARRANGE
-                IWindsorEngine windsorEngine = ApplicationServer.Start();
-                var myService = windsorEngine.GetComponent<IMyTransactionalService>();
+            //ARRANGE
+            IWindsorEngine windsorEngine = ApplicationServer.Start();
+            var myService = windsorEngine.GetComponent<IMyTransactionalService>();
 
-                //ACT
-                bool transactionStarted = myService.MethodWithDisabledAutoTransaction();
+            //ACT
+            bool transactionStarted = myService.MethodWithDisabledAutoTransaction();
 
-                //ASSERT
-                Assert.IsFalse(transactionStarted, "Transaction was started but it shouldn't be");
-                windsorEngine.Dispose();
+            //ASSERT
+            Assert.IsFalse(transactionStarted, "Transaction was started but it shouldn't be");
+            windsorEngine.Dispose();
         }
 
         [Test]
@@ -34,6 +34,24 @@ namespace Synergy.NHibernate.Test.Transactions
 
             //ASSERT
             Assert.AreEqual(0, count);
+            windsorEngine.Dispose();
+        }
+
+        [Test]
+        public void automatic_transaction_should_be_started_many_times()
+        {
+            //ARRANGE
+            IWindsorEngine windsorEngine = ApplicationServer.Start();
+            var myService = windsorEngine.GetComponent<IMyTransactionalService>();
+
+            //ACT
+            int count1 = myService.GetMyEntitiesCount();
+            int count2 = myService.GetMyEntitiesCount();
+
+            //ASSERT
+            Assert.AreEqual(0, count1);
+            Assert.AreEqual(0, count2);
+
             windsorEngine.Dispose();
         }
 

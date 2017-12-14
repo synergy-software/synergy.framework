@@ -36,7 +36,14 @@ namespace Synergy.NHibernate.Session
             Fail.IfArgumentNull(database, nameof(database));
 
             SessionsContainer container = this.GetSessionsContainer();
-            return container.GetSession(database);
+            ISession session = container.GetSession(database);
+            if (session != null && session.IsOpen == false)
+            {
+                // Session is closed so lets remove it and return null
+                container.RemoveSession(session);
+                session = null;
+            }
+            return session;
         }
 
         /// <inheritdoc />
@@ -49,17 +56,17 @@ namespace Synergy.NHibernate.Session
             container.StoreSession(database, session);
         }
 
-        /// <inheritdoc />
-        public ISession[] RemoveSessions()
-        {
-            SessionsContainer container = this.GetContextStorage().Clear();
-            if (container == null)
-                return new ISession[0];
+        ///// <inheritdoc />
+        //public ISession[] RemoveSessions()
+        //{
+        //    SessionsContainer container = this.GetContextStorage().Clear();
+        //    if (container == null)
+        //        return new ISession[0];
 
-            return container.RemoveSessions();
-        }
+        //    return container.RemoveSessions();
+        //}
 
-        [NotNull]
+        [NotNull, MustUseReturnValue]
         private SessionsContainer GetSessionsContainer()
         {
             IContextSorage<SessionsContainer> storage = this.GetContextStorage();
@@ -104,13 +111,9 @@ namespace Synergy.NHibernate.Session
     public interface ISessionContext
     {
         [CanBeNull]
-        [Pure]
+        [MustUseReturnValue]
         ISession GetSession([NotNull] IDatabase database);
 
         void StoreSession([NotNull] IDatabase database, [NotNull] ISession session);
-
-        [NotNull]
-        [ItemNotNull]
-        ISession[] RemoveSessions();
     }
 }

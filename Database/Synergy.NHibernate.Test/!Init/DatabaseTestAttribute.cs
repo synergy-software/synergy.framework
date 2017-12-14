@@ -10,6 +10,8 @@ namespace Synergy.NHibernate.Test
     {
         private SessionThreadStaticScope scope;
 
+        public override ActionTargets Targets => ActionTargets.Test;
+
         /// <inheritdoc />
         public override void BeforeTest(ITest test)
         {

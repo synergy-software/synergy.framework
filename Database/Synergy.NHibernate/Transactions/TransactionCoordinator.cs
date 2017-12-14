@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using JetBrains.Annotations;
@@ -46,8 +47,8 @@ namespace Synergy.NHibernate.Transactions
             foreach (AutoTransactionAttribute disabledTransaction in disabledTransactions)
             {
                 IDatabase database = this.GetDatabaseForAutoTransaction(disabledTransaction);
-                ISession session = database.CurrentSession;
-                Fail.IfTrue(session.Transaction.IsActive,
+                ISession session = database.GetSession();
+                Fail.IfTrue(session != null && session.Transaction.IsActive,
                     "Transaction is started to database {0} and it shouldn't be due to attribute {1}",
                     database,
                     disabledTransaction);
@@ -63,9 +64,9 @@ namespace Synergy.NHibernate.Transactions
             foreach (AutoTransactionAttribute transactionalAttribute in enabledTransactions)
             {
                 IDatabase database = this.GetDatabaseForAutoTransaction(transactionalAttribute);
-                ISession session = database.CurrentSession;
-                ITransaction transaction = session.BeginTransaction(transactionalAttribute.IsolationLevel);
-                container.Add(database, session, transaction);
+                IsolationLevel isolationLevel = transactionalAttribute.IsolationLevel;
+
+                container.StartTransaction(database, isolationLevel);
             }
 
             return container;

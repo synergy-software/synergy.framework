@@ -41,7 +41,10 @@ namespace Synergy.NHibernate.Test.Transactions
         [AutoTransaction(On = typeof(IMyDatabase), Disabled = true)]
         public bool MethodWithDisabledAutoTransaction()
         {
-            return this.myDatabase.CurrentSession.Transaction.IsActive;
+            //using (this.myDatabase.OpenSession())
+            {
+                return this.myDatabase.CurrentSession.Transaction.IsActive;
+            }
         }
 
         public void InvokeAnotherSession()
@@ -52,8 +55,11 @@ namespace Synergy.NHibernate.Test.Transactions
                 {
                     using (new SessionThreadStaticScope())
                     {
-                        var currentSession = this.myDatabase.CurrentSession;
-                        Fail.IfEqual(session, currentSession, "session should differ");
+                        using (this.myDatabase.OpenSession())
+                        {
+                            var currentSession = this.myDatabase.CurrentSession;
+                            Fail.IfEqual(session, currentSession, "session should differ");
+                        }
                     }
                 },
                 this.myDatabase.CurrentSession);

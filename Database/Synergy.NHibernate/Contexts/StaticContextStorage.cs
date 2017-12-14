@@ -10,7 +10,7 @@ namespace Synergy.NHibernate.Contexts
     public class StaticContextStorage<T> : IStaticContextStorage<T>
     {
         [CanBeNull] 
-        private static T value;
+        private static T storedValue;
 
         /// <inheritdoc />
         public bool IsAvailable()
@@ -21,7 +21,7 @@ namespace Synergy.NHibernate.Contexts
         /// <inheritdoc />
         public T Get()
         {
-            return StaticContextStorage<T>.value;
+            return StaticContextStorage<T>.storedValue;
         }
 
         /// <inheritdoc />
@@ -29,7 +29,7 @@ namespace Synergy.NHibernate.Contexts
         {
             Fail.IfArgumentNull(value, nameof(value));
 
-            StaticContextStorage<T>.value = value;
+            StaticContextStorage<T>.storedValue = value;
         }
 
         /// <inheritdoc />
@@ -41,7 +41,7 @@ namespace Synergy.NHibernate.Contexts
             }
             finally
             {
-                StaticContextStorage<T>.value = default(T);
+                StaticContextStorage<T>.storedValue = default(T);
             }
         }
     }

@@ -13,10 +13,16 @@ namespace Synergy.NHibernate.Test
             var rootLibrary = new SynergyNHibernateTestLibrary();
             IWindsorEngine windsorEngine = new WindsorEngine();
             windsorEngine.Start(rootLibrary);
+
             var db = windsorEngine.GetComponent<IMyDatabase>();
             db.Open();
-            var schema = windsorEngine.GetComponent<IDatabaseSchema>();
-            schema.CreateFor(db);
+            //using (db.OpenSession())
+            {
+                db.OpenSession();
+                var schema = windsorEngine.GetComponent<IDatabaseSchema>();
+                schema.CreateFor(db);
+            }
+
 
             return windsorEngine;
         }

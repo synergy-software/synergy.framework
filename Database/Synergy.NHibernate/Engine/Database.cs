@@ -55,7 +55,7 @@ namespace Synergy.NHibernate.Engine
 
         /// <summary>
         /// When overriden in a derived class returns the initial NHibernate configuration pointing to a database.
-        /// You MUST override it to point it.
+        /// You MUST override it to point the database.
         /// </summary>
         [NotNull, Pure]
         protected abstract Configuration GetConfiguration();
@@ -72,7 +72,6 @@ namespace Synergy.NHibernate.Engine
         /// Override this method to change the conventions.
         /// </summary>
         [NotNull, ItemNotNull, Pure]
-        // ReSharper disable once VirtualMemberNeverOverridden.Global
         protected virtual IConvention[] GetConventions()
         {
             return this.Conventions;
@@ -120,21 +119,28 @@ namespace Synergy.NHibernate.Engine
                 assemblyMappings.UseOverridesFromAssembly(assembly);
                 assemblyMappings.IgnoreBase<Entity>();
 
-                fluentConfiguration.Mappings(m => m.AutoMappings.Add(assemblyMappings));
+                fluentConfiguration.Mappings(m =>
+                {
+                    m.FluentMappings.Conventions.Add(conventions);
+                    m.AutoMappings.Add(assemblyMappings);
+                });
             }
 
             this.configuration = fluentConfiguration.BuildConfiguration();
             return fluentConfiguration.BuildSessionFactory();
         }
 
+        protected virtual FlushMode DefaultSessionFlushMode => FlushMode.Never;
+
         /// <inheritdoc />
         public virtual ISession OpenSession()
         {
             ISession session = this.Open()
                                    .OpenSession();
-            
+
             // WARN: By default the session will be never flushed automatically - developer MUST do it explicitly
-            session.FlushMode = FlushMode.Never;
+            session.FlushMode = this.DefaultSessionFlushMode;
+            this.SessionContext.StoreSession(this, session);
 
             return session;
         }
@@ -144,15 +150,25 @@ namespace Synergy.NHibernate.Engine
         {
             get
             {
+                // TODO:mace (from:mace on:08-12-2017) Dodaj AllowOutOfTransactionConnections -> exception
                 var session = this.SessionContext.GetSession(this);
                 if (session == null)
                 {
+                    if (this.AllowAdHocConnections == false)
+                        throw Fail.Because("You cannot start new session so easilly. Use " + nameof(ISessionInterceptor) + " or enable ad hoc transactions.");
+
                     session = this.OpenSession();
-                    this.SessionContext.StoreSession(this, session);
                 }
 
                 return session;
             }
+        }
+
+        protected virtual bool AllowAdHocConnections => false;
+
+        public ISession GetSession()
+        {
+            return this.SessionContext.GetSession(this);
         }
 
         /// <inheritdoc />
@@ -167,7 +183,7 @@ namespace Synergy.NHibernate.Engine
         public string GetKey()
         {
             return this.GetType()
-                       .FullName;
+                       .FullName.FailIfNull("FullName is null for {0}", this.GetType());
         }
 
         ///// <inheritdoc />
@@ -248,7 +264,7 @@ namespace Synergy.NHibernate.Engine
         /// Opens a new session and returns it. If the database is not opened it will also open it (see <see cref="Open"/> method).
         /// <para>WARN: The session by default is configured to be never flushed automatically. If you want to change the behaviour ovwerwrite the method.</para>
         /// </summary>
-        [NotNull, Pure]
+        [NotNull]
         ISession OpenSession();
 
         /// <summary>
@@ -261,6 +277,12 @@ namespace Synergy.NHibernate.Engine
         ISession CurrentSession { get; }
 
         /// <summary>
+        /// Returns the <see cref="CurrentSession"/> or null if there is none.
+        /// </summary>
+        [CanBeNull, Pure]
+        ISession GetSession();
+
+        /// <summary>
         /// Returns the final NHibernate configuration that was used to build a session factory.
         /// </summary>
         [NotNull, Pure]
@@ -271,8 +293,5 @@ namespace Synergy.NHibernate.Engine
         /// </summary>
         [NotNull, Pure]
         string GetKey();
-
-        //[Pure]
-        //bool ContainsEntity([NotNull] Type entityType);
     }
 }

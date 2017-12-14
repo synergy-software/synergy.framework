@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using JetBrains.Annotations;
 using NHibernate;
 using NHibernate.Cfg;
@@ -23,7 +22,7 @@ namespace Synergy.NHibernate.Sample.Domain.Schema
 
             string script = scriptLines.ToString();
 
-            Console.WriteLine(script);
+            //Console.WriteLine(script);
 
             if (database is ISampleDatabase)
             {

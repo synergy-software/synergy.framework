@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using Castle.Core;
-using Castle.Core.Internal;
 using Castle.DynamicProxy;
 using JetBrains.Annotations;
 using Synergy.Contracts;
@@ -9,6 +8,7 @@ using IInterceptor = Castle.DynamicProxy.IInterceptor;
 
 namespace Synergy.NHibernate.Session
 {
+    // TODO:mace (from:mace on:07-12-2017) ten interceptor powinien zawsze łączyć się do jakiejś DB - [ConnectTo(typeof(Idatabase), AutoTransaction = true, IsoLevel=)]
     [Transient]
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
     public class SessionInterceptor : ISessionInterceptor
@@ -25,22 +25,15 @@ namespace Synergy.NHibernate.Session
             this.transactionCoordinator = transactionCoordinator;
         }
 
+        /// <inheritdoc />
         public void Intercept([NotNull] IInvocation invocation)
         {
             Fail.IfArgumentNull(invocation, nameof(invocation));
 
-            try
+            using (var transactions = this.StartTransactions(invocation))
             {
-                using (var transactions = this.StartTransactions(invocation))
-                {
-                    invocation.Proceed();
-                    transactions.Commit();
-                }
-            }
-            finally
-            {
-                var sessions = this.sessionContext.RemoveSessions();
-                sessions.ForEach(s => s.Dispose());
+                invocation.Proceed();
+                transactions.Commit();
             }
         }
 

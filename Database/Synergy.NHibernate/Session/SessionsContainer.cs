@@ -45,6 +45,15 @@ namespace Synergy.NHibernate.Session
             return sessionsToRemove;
         }
 
+        public void RemoveSession(ISession session)
+        {
+            foreach (KeyValuePair<string, Couple> pair in this.sessions.ToList())
+            {
+                if (pair.Value.Session == session)
+                    this.sessions.Remove(pair.Key);
+            }
+        }
+
         private class Couple
         {
             public readonly IDatabase Database;
@@ -56,5 +65,7 @@ namespace Synergy.NHibernate.Session
                 this.Session = session;
             }
         }
+
+
     }
 }

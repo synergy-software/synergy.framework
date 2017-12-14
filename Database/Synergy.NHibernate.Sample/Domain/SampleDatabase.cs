@@ -31,7 +31,7 @@ namespace Synergy.NHibernate.Sample.Domain
             
             // TODO:mace (from:mace on:27-10-2016) add here some components to manipulate NH properties / connection string
             Configuration configure = new Configuration().Configure(currentAssembly, "Synergy.NHibernate.Sample.NHibernate.config");
-            string sampleDbPath = this.httpContextServer.MapPath("~/App_Data/SampleDatabase.sqlite");
+            string sampleDbPath = this.httpContextServer.MapPath("~/App_Data/db/SampleDatabase.sqlite");
             string connectionString = configure.GetProperty(NHibernateConfigurationParameter.ConnectionString)
                                                .OrFail(NHibernateConfigurationParameter.ConnectionString);
             string fixedConnectionString = connectionString.Replace("SampleDatabase.sqlite", sampleDbPath);

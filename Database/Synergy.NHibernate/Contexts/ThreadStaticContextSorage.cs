@@ -73,7 +73,7 @@ namespace Synergy.NHibernate.Contexts
         }
 
         /// <inheritdoc />
-        public void Dispose()
+        public virtual void Dispose()
         {
             Fail.IfNull(ThreadStaticContextScope<T>.Sack, nameof(ThreadStaticContextScope<T>.Sack) + " is null");
             ThreadStaticContextScope<T>.Sack.Value = default(T);
