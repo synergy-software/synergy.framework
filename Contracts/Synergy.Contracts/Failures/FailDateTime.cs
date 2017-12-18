@@ -70,9 +70,10 @@ namespace Synergy.Contracts
         /// <param name="value">DateTime to check</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
         [AssertionMethod]
-        public static void FailIfEmpty(this DateTime value, [NotNull] string name)
+        public static DateTime FailIfEmpty(this DateTime value, [NotNull] string name)
         {
             Fail.IfEmpty(value, name);
+            return value;
         }
     }
 }

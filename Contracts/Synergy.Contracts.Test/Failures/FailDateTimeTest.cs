@@ -104,7 +104,8 @@ namespace Synergy.Contracts.Test.Failures
         public void FailIfDateEmptySuccess()
         {
             // ACT
-            DateTime.Today.FailIfEmpty(nameof(DateTime.Today));
+            // ReSharper disable once UnusedVariable
+            var date = DateTime.Today.FailIfEmpty(nameof(DateTime.Today));
         }
 
         #endregion
