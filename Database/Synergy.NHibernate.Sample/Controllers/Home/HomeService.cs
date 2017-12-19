@@ -45,7 +45,7 @@ namespace Synergy.NHibernate.Sample.Controllers.Home
         }
     }
 
-    [AutoTransaction(On = typeof(ISampleDatabase), IsolationLevel = IsolationLevel.Serializable)]
+    [ConnectTo(typeof(ISampleDatabase), Transactional = true, IsolationLevel = IsolationLevel.Serializable)]
     public interface IHomeService
     {
         void CreateDatabaseSchema();

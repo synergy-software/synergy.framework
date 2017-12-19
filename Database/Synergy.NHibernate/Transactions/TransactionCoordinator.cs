@@ -29,26 +29,28 @@ namespace Synergy.NHibernate.Transactions
         {
             Fail.IfArgumentNull(method, nameof(method));
 
-            List<AutoTransactionAttribute> transactionAttributes = TransactionCoordinator.GetAutoTransactionAttributesFor(method);
+            List<ConnectToAttribute> transactionAttributes = TransactionCoordinator.GetAutoTransactionAttributesFor(method);
 
             // Remove all the attributes with disabled transaction
-            var enabledTransactions =  transactionAttributes.Where(t => t.Disabled == false).ToArray();
-            var disabledTransactions = transactionAttributes.Where(t => t.Disabled).ToArray();
+            var enabledTransactions =  transactionAttributes.Where(t => t.Transactional).ToArray();
+            TransactionsContainer transactionsContainer = this.AutostartTransactions(enabledTransactions);
 
-            this.FailIfTransactionStartedDespiteDisablingIt(disabledTransactions);
+            var disabledTransactions = transactionAttributes.Where(t => t.Transactional = false).ToArray();
+            this.FailIfTransactionStartedDespiteDisablingIt(transactionsContainer, disabledTransactions);
 
-            return this.AutostartTransactions(enabledTransactions);
+            return transactionsContainer;
         }
 
-        private void FailIfTransactionStartedDespiteDisablingIt([NotNull] AutoTransactionAttribute[] disabledTransactions)
+        private void FailIfTransactionStartedDespiteDisablingIt(TransactionsContainer transactionsContainer, [NotNull] ConnectToAttribute[] disabledTransactions)
         {
             Fail.IfArgumentNull(disabledTransactions, nameof(disabledTransactions));
 
-            foreach (AutoTransactionAttribute disabledTransaction in disabledTransactions)
+            foreach (ConnectToAttribute disabledTransaction in disabledTransactions)
             {
                 IDatabase database = this.GetDatabaseForAutoTransaction(disabledTransaction);
-                ISession session = database.GetSession();
-                Fail.IfTrue(session != null && session.Transaction.IsActive,
+                ISession session = transactionsContainer.StartSession(database);
+                Fail.IfTrue(
+                    session.Transaction.IsActive,
                     "Transaction is started to database {0} and it shouldn't be due to attribute {1}",
                     database,
                     disabledTransaction);
@@ -56,12 +58,12 @@ namespace Synergy.NHibernate.Transactions
         }
 
         [NotNull]
-        private TransactionsContainer AutostartTransactions([NotNull] AutoTransactionAttribute[] enabledTransactions)
+        private TransactionsContainer AutostartTransactions([NotNull] ConnectToAttribute[] enabledTransactions)
         {
             Fail.IfArgumentNull(enabledTransactions, nameof(enabledTransactions));
 
             var container = new TransactionsContainer();
-            foreach (AutoTransactionAttribute transactionalAttribute in enabledTransactions)
+            foreach (ConnectToAttribute transactionalAttribute in enabledTransactions)
             {
                 IDatabase database = this.GetDatabaseForAutoTransaction(transactionalAttribute);
                 IsolationLevel isolationLevel = transactionalAttribute.IsolationLevel;
@@ -73,11 +75,11 @@ namespace Synergy.NHibernate.Transactions
         }
 
         [NotNull] 
-        private IDatabase GetDatabaseForAutoTransaction([NotNull] AutoTransactionAttribute transactionalAttribute)
+        private IDatabase GetDatabaseForAutoTransaction([NotNull] ConnectToAttribute transactionalAttribute)
         {
             Fail.IfArgumentNull(transactionalAttribute, nameof(transactionalAttribute));
 
-            Type databaseType = transactionalAttribute.On;
+            Type databaseType = transactionalAttribute.Database;
             Fail.IfNull(databaseType, "There is no database pointed in {0}", transactionalAttribute);
 
             IDatabase database = this.databaseProvider.Get(databaseType);
@@ -85,23 +87,23 @@ namespace Synergy.NHibernate.Transactions
                 "Could not find database used in {0}. Did you point {1} in the '{2}' argument?",
                 transactionalAttribute,
                 nameof(IDatabase),
-                nameof(AutoTransactionAttribute.On));
+                nameof(ConnectToAttribute.Database));
 
             return database;
         }
 
         [NotNull]
-        private static List<AutoTransactionAttribute> GetAutoTransactionAttributesFor([NotNull] MethodInfo method)
+        private static List<ConnectToAttribute> GetAutoTransactionAttributesFor([NotNull] MethodInfo method)
         {
             Fail.IfArgumentNull(method, nameof(method));
 
-            AutoTransactionAttribute[] transactionsOnMethod = method.GetCustomAttributesBasedOn<AutoTransactionAttribute>();
-            AutoTransactionAttribute[] transactionsOnClass = method.DeclaringType.OrFail(nameof(MemberInfo.DeclaringType))
-                                                                   .GetCustomAttributesBasedOn<AutoTransactionAttribute>();
+            ConnectToAttribute[] transactionsOnMethod = method.GetCustomAttributesBasedOn<ConnectToAttribute>();
+            ConnectToAttribute[] transactionsOnClass = method.DeclaringType.OrFail(nameof(MemberInfo.DeclaringType))
+                                                                   .GetCustomAttributesBasedOn<ConnectToAttribute>();
 
-            List<AutoTransactionAttribute> transactionAttributes = transactionsOnMethod.ToList();
-            foreach (AutoTransactionAttribute transactionalAttribute in transactionsOnClass)
-                if (transactionAttributes.Any(attr => attr.On == transactionalAttribute.On) == false)
+            List<ConnectToAttribute> transactionAttributes = transactionsOnMethod.ToList();
+            foreach (ConnectToAttribute transactionalAttribute in transactionsOnClass)
+                if (transactionAttributes.Any(attr => attr.Database == transactionalAttribute.Database) == false)
                     transactionAttributes.Add(transactionalAttribute);
 
             return transactionAttributes;

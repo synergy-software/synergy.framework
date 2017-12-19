@@ -18,10 +18,33 @@ namespace Synergy.NHibernate.Transactions
     {
         private readonly List<SingleTransacion> transactions = new List<SingleTransacion>(1);
 
+        [NotNull, Pure]
+        public ISession StartSession([NotNull] IDatabase database)
+        {
+            Fail.IfArgumentNull(database, nameof(database));
+
+            return this.GetSession(database)
+                       .Session;
+        }
+
         public void StartTransaction([NotNull] IDatabase database, IsolationLevel isolationLevel)
         {
             Fail.IfArgumentNull(database, nameof(database));
 
+            var container = this.GetSession(database);
+
+            ISession session = container.Session;
+            ITransaction transaction = session.Transaction;
+            if (transaction.IsActive == false)
+            {
+                container.Transaction = session.BeginTransaction(isolationLevel);
+                container.TransactionJustStarted = true;
+            }
+        }
+
+        [NotNull, Pure]
+        private SingleTransacion GetSession([NotNull] IDatabase database)
+        {
             ISession session = database.GetSession();
             bool sessionJustCreated = false;
             if (session == null)
@@ -30,47 +53,45 @@ namespace Synergy.NHibernate.Transactions
                 sessionJustCreated = true;
             }
 
-            ITransaction transaction = session.Transaction;
-            bool transactionJustStarted = false;
-            if (session.Transaction.IsActive == false)
-            {
-                transaction = session.BeginTransaction(isolationLevel);
-                transactionJustStarted = true;
-            }
-
-            this.Add(database, session, transaction, sessionJustCreated, transactionJustStarted);
+            return this.Add(database, session, sessionJustCreated);
         }
 
         /// <summary>
         /// Adds a transaction to this container.
         /// </summary>
-        private void Add([NotNull] IDatabase database,
-            [NotNull] ISession session,
-            [NotNull] ITransaction transaction,
-            bool sessionJustCreated,
-            bool transactionJustStarted)
+        [NotNull, Pure]
+        private SingleTransacion Add(
+            [NotNull] IDatabase database, 
+            [NotNull] ISession session, 
+            bool sessionJustCreated, 
+            [CanBeNull] ITransaction transaction = null, 
+            bool transactionJustStarted = false)
         {
-            this.transactions.Add(new SingleTransacion
+            var singleTransacion = new SingleTransacion(database, session)
             {
-                Database = database,
-                Session = session,
                 SessionJustCreated = sessionJustCreated,
                 Transaction = transaction,
                 TransactionJustStarted = transactionJustStarted
-            });
+            };
+
+            this.transactions.Add(singleTransacion);
+
+            return singleTransacion;
         }
 
         [NotNull, ItemNotNull, Pure]
         private IEnumerable<ITransaction> JustStartedTransactions()
         {
-            return this.transactions.Where(t => t.TransactionJustStarted)
+            return this.transactions
+                       .Where(t => t.TransactionJustStarted)
                        .Select(t => t.Transaction);
         }
 
         [NotNull, ItemNotNull, Pure]
         private ISession[] JustStartedSessions()
         {
-            return this.transactions.Where(t => t.SessionJustCreated)
+            return this.transactions
+                       .Where(t => t.SessionJustCreated)
                        .Select(t => t.Session)
                        .ToArray();
         }
@@ -102,11 +123,27 @@ namespace Synergy.NHibernate.Transactions
 
         private class SingleTransacion
         {
-            public IDatabase Database;
-            public ISession Session;
+            [NotNull]
+            private IDatabase Database { get; }
+
+            [NotNull] 
+            public ISession Session { get; }
+
+            public SingleTransacion([NotNull] IDatabase database, [NotNull] ISession session)
+            {
+                Fail.IfArgumentNull(database, nameof(database));
+                Fail.IfArgumentNull(session, nameof(session));
+
+                this.Database = database;
+                this.Session = session;
+            }
+
             public bool SessionJustCreated;
+
+            [CanBeNull] 
             public ITransaction Transaction;
             public bool TransactionJustStarted;
         }
+
     }
 }

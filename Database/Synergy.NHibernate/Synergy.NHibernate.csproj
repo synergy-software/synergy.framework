@@ -87,7 +87,7 @@
     <Compile Include="Session\SessionInterceptor.cs" />
     <Compile Include="Session\SessionsContainer.cs" />
     <Compile Include="Session\SessionThreadStaticScope.cs" />
-    <Compile Include="Transactions\AutoTransactionAttribute.cs" />
+    <Compile Include="ConnectToAttribute.cs" />
     <Compile Include="Conventions\PrimaryKeyConvention.cs" />
     <Compile Include="Domain\Entity.cs" />
     <Compile Include="Engine\Database.cs" />

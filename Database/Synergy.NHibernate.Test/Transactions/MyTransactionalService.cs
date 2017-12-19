@@ -38,7 +38,7 @@ namespace Synergy.NHibernate.Test.Transactions
                        .Length;
         }
 
-        [AutoTransaction(On = typeof(IMyDatabase), Disabled = true)]
+        [ConnectTo(typeof(IMyDatabase), Transactional = false)]
         public bool MethodWithDisabledAutoTransaction()
         {
             //using (this.myDatabase.OpenSession())
@@ -68,14 +68,14 @@ namespace Synergy.NHibernate.Test.Transactions
         }
     }
 
-    [AutoTransaction(On = typeof(IMyDatabase), IsolationLevel = IsolationLevel.Serializable)]
+    [ConnectTo(typeof(IMyDatabase), Transactional = true, IsolationLevel = IsolationLevel.Serializable)]
     public interface IMyTransactionalService
     {
         [Pure]
         int StartTransactionBecauseThereIsAttributeOnInterface();
 
         [Pure]
-        [AutoTransaction(On = typeof(IMyDatabase), IsolationLevel = IsolationLevel.ReadCommitted)]
+        [ConnectTo(typeof(IMyDatabase), Transactional = true, IsolationLevel = IsolationLevel.ReadCommitted)]
         int GetMyEntitiesCount();
 
         [Pure]

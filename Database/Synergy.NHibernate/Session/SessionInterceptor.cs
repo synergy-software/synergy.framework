@@ -13,15 +13,13 @@ namespace Synergy.NHibernate.Session
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
     public class SessionInterceptor : ISessionInterceptor
     {
-        private readonly ISessionContext sessionContext;
         private readonly ITransactionCoordinator transactionCoordinator;
 
         /// <summary>
         /// WARN: Component constructor called by Windsor container. DO NOT USE IT DIRECTLY.
         /// </summary>
-        public SessionInterceptor(ISessionContext sessionContext, ITransactionCoordinator transactionCoordinator)
+        public SessionInterceptor(ITransactionCoordinator transactionCoordinator)
         {
-            this.sessionContext = sessionContext;
             this.transactionCoordinator = transactionCoordinator;
         }
 
