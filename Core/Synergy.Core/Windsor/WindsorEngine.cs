@@ -14,6 +14,9 @@ namespace Synergy.Core.Windsor
         [CanBeNull]
         private WindsorContainer container;
 
+        [NotNull]
+        public WindsorContainer Container => this.GetContainerOrFail();
+
         /// <inheritdoc />
         public void Start(Library rootLibrary)
         {
