@@ -2,13 +2,13 @@ using System;
 using System.Linq;
 using System.Reflection;
 using Castle.Core;
-using Castle.Core.Internal;
 using Castle.DynamicProxy.Internal;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using JetBrains.Annotations;
 using Synergy.Contracts;
+using Synergy.Core.Extensions;
 using Synergy.Extensions;
 
 namespace Synergy.Core.Windsor
@@ -69,7 +69,7 @@ namespace Synergy.Core.Windsor
 
         private void ConfigureComponent([NotNull] ComponentRegistration obj)
         {
-            if (obj.Implementation.HasAttribute<SingletonAttribute>())
+            if (obj.Implementation.HasCustomAttribute<SingletonAttribute>())
                 obj.LifestyleSingleton();
 
             //obj.LifestyleTransient();
