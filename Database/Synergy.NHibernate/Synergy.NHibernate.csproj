@@ -83,6 +83,7 @@
     <Compile Include="Conventions\ReferenceConvention.cs" />
     <Compile Include="Engine\DatabaseProvider.cs" />
     <Compile Include="Extensions\MappingExtensions.cs" />
+    <Compile Include="Session\ICustomSessionStorage.cs" />
     <Compile Include="Session\SessionContext.cs" />
     <Compile Include="Session\SessionInterceptor.cs" />
     <Compile Include="Session\SessionsContainer.cs" />

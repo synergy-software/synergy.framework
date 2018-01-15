@@ -12,6 +12,7 @@ namespace Synergy.NHibernate.Session
     {
         private readonly IThreadStaticContextSorage<SessionsContainer> threadStaticContextSorage;
         private readonly IStaticContextStorage<SessionsContainer> staticContextStorage;
+        private readonly ICustomSessionStorage[] customSessionStorages;
         private readonly IWebContextSorage<SessionsContainer> webContextSorage;
         private readonly IWcfContextSorage<SessionsContainer> wcfContextSorage;
 
@@ -19,11 +20,13 @@ namespace Synergy.NHibernate.Session
         /// WARN: Component constructor called by Windsor container. DO NOT USE IT DIRECTLY.
         /// </summary>
         public SessionContext(
+            ICustomSessionStorage[] customSessionStorages,
             IWebContextSorage<SessionsContainer> webContextSorage,
             IWcfContextSorage<SessionsContainer> wcfContextSorage,
             IThreadStaticContextSorage<SessionsContainer> threadStaticContextSorage,
             IStaticContextStorage<SessionsContainer> staticContextStorage)
         {
+            this.customSessionStorages = customSessionStorages;
             this.webContextSorage = webContextSorage;
             this.wcfContextSorage = wcfContextSorage;
             this.threadStaticContextSorage = threadStaticContextSorage;
@@ -83,6 +86,12 @@ namespace Synergy.NHibernate.Session
         [NotNull, Pure]
         private IContextSorage<SessionsContainer> GetContextStorage()
         {
+            foreach (ICustomSessionStorage customSessionStorage in this.customSessionStorages)
+            {
+                if (customSessionStorage.IsAvailable())
+                    return customSessionStorage;
+            }
+
             if (this.webContextSorage.IsAvailable())
                 return this.webContextSorage;
 
