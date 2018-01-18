@@ -151,7 +151,7 @@ namespace Synergy.NHibernate.Engine
             get
             {
                 // TODO:mace (from:mace on:08-12-2017) Dodaj AllowOutOfTransactionConnections -> exception
-                var session = this.SessionContext.GetSession(this);
+                var session = this.GetSession();
                 if (session == null)
                 {
                     if (this.AllowAdHocConnections == false)
@@ -166,7 +166,8 @@ namespace Synergy.NHibernate.Engine
 
         protected virtual bool AllowAdHocConnections => false;
 
-        public ISession GetSession()
+        /// <inheritdoc />
+        public virtual ISession GetSession()
         {
             return this.SessionContext.GetSession(this);
         }
