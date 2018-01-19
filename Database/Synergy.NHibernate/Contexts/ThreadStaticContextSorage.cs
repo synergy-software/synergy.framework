@@ -62,6 +62,7 @@ namespace Synergy.NHibernate.Contexts
     public abstract class ThreadStaticContextScope<T> : IDisposable
     {
         [ThreadStatic]
+        [CanBeNull] 
         internal static SackOf<T> Sack;
 
         protected ThreadStaticContextScope()
