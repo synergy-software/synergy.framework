@@ -37,7 +37,8 @@ namespace Synergy.NHibernate.Session
             Fail.IfArgumentNull(database, nameof(database));
 
             string key = database.GetKey();
-            this.sessions.TryGetValue(key, out var session);
+            ISession session;
+            this.sessions.TryGetValue(key, out session);
             if (session != null && session.IsOpen == false)
             {
                 // Session is closed (disposed probably) so lets remove it and return null
@@ -54,7 +55,8 @@ namespace Synergy.NHibernate.Session
             Fail.IfArgumentNull(database, nameof(database));
 
             string key = database.GetKey();
-            this.statelesSessions.TryGetValue(key, out var session);
+            IStatelessSession session;
+            this.statelesSessions.TryGetValue(key, out session);
             if (session != null && session.IsOpen == false)
             {
                 // Session is closed (disposed probably) so lets remove it and return null

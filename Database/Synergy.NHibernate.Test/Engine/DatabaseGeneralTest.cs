@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using NHibernate;
+﻿using NHibernate;
 using NUnit.Framework;
 using Synergy.Core.Windsor;
 using Synergy.NHibernate.Session;
