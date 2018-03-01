@@ -45,8 +45,6 @@ namespace Synergy.NHibernate.Test.Engine
                 var session = db.OpenStatelessSession();
 
                 // ASSERT
-                var ents = session.Query<MyEntity>()
-                                  .ToList();
                 session.Dispose();
                 windsorEngine.Dispose();
             }
