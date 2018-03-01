@@ -18,7 +18,7 @@ namespace Synergy.NHibernate.Test.My
             return new Configuration().Configure(currentAssembly, "Synergy.NHibernate.Test.NHibernate.config");
         }
 
-        protected override IEnumerable<Type> GetEntities()
+        public override IEnumerable<Type> GetEntities()
         {
             return new[] {typeof(MyEntity)};
         }

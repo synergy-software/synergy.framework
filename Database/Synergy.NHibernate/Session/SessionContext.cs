@@ -34,22 +34,6 @@ namespace Synergy.NHibernate.Session
         }
 
         /// <inheritdoc />
-        public ISession GetSession(IDatabase database)
-        {
-            Fail.IfArgumentNull(database, nameof(database));
-
-            SessionsContainer container = this.GetSessionsContainer();
-            ISession session = container.GetSession(database);
-            if (session != null && session.IsOpen == false)
-            {
-                // Session is closed so lets remove it and return null
-                container.RemoveSession(session);
-                session = null;
-            }
-            return session;
-        }
-
-        /// <inheritdoc />
         public void StoreSession(IDatabase database, ISession session)
         {
             Fail.IfArgumentNull(database, nameof(database));
@@ -59,15 +43,35 @@ namespace Synergy.NHibernate.Session
             container.StoreSession(database, session);
         }
 
-        ///// <inheritdoc />
-        //public ISession[] RemoveSessions()
-        //{
-        //    SessionsContainer container = this.GetContextStorage().Clear();
-        //    if (container == null)
-        //        return new ISession[0];
+        /// <inheritdoc />
+        public void StoreSession(IDatabase database, IStatelessSession session)
+        {
+            Fail.IfArgumentNull(database, nameof(database));
+            Fail.IfArgumentNull(session, nameof(session));
 
-        //    return container.RemoveSessions();
-        //}
+            SessionsContainer container = this.GetSessionsContainer();
+            container.StoreSession(database, session);
+        }
+
+        /// <inheritdoc />
+        public ISession GetSession(IDatabase database)
+        {
+            Fail.IfArgumentNull(database, nameof(database));
+
+            SessionsContainer container = this.GetSessionsContainer();
+            ISession session = container.GetSession(database);
+            return session;
+        }
+
+        /// <inheritdoc />
+        public IStatelessSession GetStatelessSession(IDatabase database)
+        {
+            Fail.IfArgumentNull(database, nameof(database));
+
+            SessionsContainer container = this.GetSessionsContainer();
+            var session = container.GetStatelessSession(database);
+            return session;
+        }
 
         [NotNull, MustUseReturnValue]
         private SessionsContainer GetSessionsContainer()
@@ -119,10 +123,13 @@ namespace Synergy.NHibernate.Session
     /// </summary>
     public interface ISessionContext
     {
-        [CanBeNull]
-        [MustUseReturnValue]
+        void StoreSession([NotNull] IDatabase database, [NotNull] ISession session);
+        void StoreSession([NotNull] IDatabase database, [NotNull] IStatelessSession session);
+
+        [CanBeNull, MustUseReturnValue]
         ISession GetSession([NotNull] IDatabase database);
 
-        void StoreSession([NotNull] IDatabase database, [NotNull] ISession session);
+        [CanBeNull, MustUseReturnValue]
+        IStatelessSession GetStatelessSession([NotNull] IDatabase database);
     }
 }

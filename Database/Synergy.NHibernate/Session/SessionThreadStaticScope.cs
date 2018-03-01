@@ -1,5 +1,4 @@
-﻿using NHibernate;
-using Synergy.Contracts;
+﻿using Synergy.Contracts;
 using Synergy.NHibernate.Contexts;
 
 namespace Synergy.NHibernate.Session
@@ -20,14 +19,7 @@ namespace Synergy.NHibernate.Session
             SessionsContainer sessionsContainer = Sack.Value;
 
             // Sack may be empty - when no session was started
-            if (sessionsContainer == null)
-                return;
-            
-            ISession[] sessions = sessionsContainer.RemoveSessions();
-            foreach (ISession session in sessions)
-            {
-                session.Dispose();
-            }
+            sessionsContainer?.Dispose();
         }
     }
 }

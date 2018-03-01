@@ -1,4 +1,5 @@
-﻿using NHibernate;
+﻿using System.Linq;
+using NHibernate;
 using NUnit.Framework;
 using Synergy.Core.Windsor;
 using Synergy.NHibernate.Session;
@@ -24,6 +25,28 @@ namespace Synergy.NHibernate.Test.Engine
                 ISession session = db.OpenSession();
 
                 // ASSERT
+                session.Dispose();
+                windsorEngine.Dispose();
+            }
+        }
+
+        [Test]
+        public void stateless_session_can_be_opened()
+        {
+            using (new SessionThreadStaticScope())
+            {
+                // ARRANGE
+                var rootLibrary = new SynergyNHibernateTestLibrary();
+                IWindsorEngine windsorEngine = new WindsorEngine();
+                windsorEngine.Start(rootLibrary);
+                var db = windsorEngine.GetComponent<IMyDatabase>();
+
+                // ACT
+                var session = db.OpenStatelessSession();
+
+                // ASSERT
+                var ents = session.Query<MyEntity>()
+                                  .ToList();
                 session.Dispose();
                 windsorEngine.Dispose();
             }

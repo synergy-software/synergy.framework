@@ -64,8 +64,8 @@ namespace Synergy.NHibernate.Engine
         /// When overriden in a derived class returns the entities that belong to the database.
         /// You MUST override it.
         /// </summary>
-        [NotNull, ItemNotNull, Pure]
-        protected abstract IEnumerable<Type> GetEntities();
+        [NotNull, ItemNotNull, Pure, PublicAPI]
+        public abstract IEnumerable<Type> GetEntities();
 
         /// <summary>
         /// Returns a set of FluentNHibernate conventions used in entity to database mapping.
@@ -132,6 +132,8 @@ namespace Synergy.NHibernate.Engine
 
         protected virtual FlushMode DefaultSessionFlushMode => FlushMode.Never;
 
+        protected virtual bool AllowAdHocConnections => false;
+
         /// <inheritdoc />
         public virtual ISession OpenSession()
         {
@@ -146,30 +148,59 @@ namespace Synergy.NHibernate.Engine
         }
 
         /// <inheritdoc />
+        public virtual ISession GetSession()
+        {
+            return this.SessionContext.GetSession(this);
+        }
+
+        /// <inheritdoc />
         public ISession CurrentSession
         {
             get
             {
                 // TODO:mace (from:mace on:08-12-2017) Dodaj AllowOutOfTransactionConnections -> exception
                 var session = this.GetSession();
-                if (session == null)
-                {
-                    if (this.AllowAdHocConnections == false)
-                        throw Fail.Because("You cannot start new session so easilly. Use " + nameof(ISessionInterceptor) + " or enable ad hoc transactions.");
+                if (session != null)
+                    return session;
 
-                    session = this.OpenSession();
-                }
+                if (this.AllowAdHocConnections == false)
+                    throw Fail.Because("You cannot start new session so easilly. Use " + nameof(ISessionInterceptor) + " or enable ad hoc transactions.");
 
-                return session;
+                return this.OpenSession();
             }
         }
 
-        protected virtual bool AllowAdHocConnections => false;
+        public virtual IStatelessSession OpenStatelessSession()
+        {
+            var session = this.Open()
+                              .OpenStatelessSession();
+
+            this.SessionContext.StoreSession(this, session);
+
+            return session;
+        }
 
         /// <inheritdoc />
-        public virtual ISession GetSession()
+        public virtual IStatelessSession GetStatelessSession()
         {
-            return this.SessionContext.GetSession(this);
+            return this.SessionContext.GetStatelessSession(this);
+        }
+
+        /// <inheritdoc />
+        public IStatelessSession CurrentStatelessSession
+        {
+            get
+            {
+                // TODO:mace (from:mace on:08-12-2017) Dodaj AllowOutOfTransactionConnections -> exception
+                var session = this.GetStatelessSession();
+                if (session != null)
+                    return session;
+
+                if (this.AllowAdHocConnections == false)
+                    throw Fail.Because("You cannot start new session so easilly. Use " + nameof(ISessionInterceptor) + " or enable ad hoc transactions.");
+
+                return this.OpenStatelessSession();
+            }
         }
 
         /// <inheritdoc />
@@ -269,6 +300,12 @@ namespace Synergy.NHibernate.Engine
         ISession OpenSession();
 
         /// <summary>
+        /// Returns the <see cref="CurrentSession"/> or null if there is none.
+        /// </summary>
+        [CanBeNull, Pure]
+        ISession GetSession();
+
+        /// <summary>
         /// Returns the current session to this database - current means that, depending on context in which you request the session,
         /// it will be stored in different place. It is stored to make sure that all subsequent calls for current session will receive the same one.
         /// <para>E.g. two web requests will receive completely different current sessions both stored in requests web context.</para>
@@ -277,11 +314,14 @@ namespace Synergy.NHibernate.Engine
         [NotNull]
         ISession CurrentSession { get; }
 
-        /// <summary>
-        /// Returns the <see cref="CurrentSession"/> or null if there is none.
-        /// </summary>
+        [NotNull]
+        IStatelessSession OpenStatelessSession();
+
         [CanBeNull, Pure]
-        ISession GetSession();
+        IStatelessSession GetStatelessSession();
+
+        [NotNull]
+        IStatelessSession CurrentStatelessSession { get; }
 
         /// <summary>
         /// Returns the final NHibernate configuration that was used to build a session factory.

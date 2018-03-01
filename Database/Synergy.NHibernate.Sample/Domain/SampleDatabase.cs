@@ -40,7 +40,7 @@ namespace Synergy.NHibernate.Sample.Domain
             return configure;
         }
 
-        protected override IEnumerable<Type> GetEntities()
+        public override IEnumerable<Type> GetEntities()
         {
             return new[]
             {
