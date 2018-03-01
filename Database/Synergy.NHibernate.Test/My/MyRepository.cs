@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using JetBrains.Annotations;
-using NHibernate.Linq;
 using Synergy.NHibernate.Repositories;
 
 namespace Synergy.NHibernate.Test.My
