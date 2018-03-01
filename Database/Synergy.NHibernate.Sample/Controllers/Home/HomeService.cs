@@ -6,7 +6,6 @@ using Synergy.Contracts;
 using Synergy.NHibernate.Sample.Domain;
 using Synergy.NHibernate.Sample.Domain.Schema;
 using Synergy.NHibernate.Session;
-using Synergy.NHibernate.Transactions;
 
 namespace Synergy.NHibernate.Sample.Controllers.Home
 {

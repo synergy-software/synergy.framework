@@ -5,7 +5,6 @@ using JetBrains.Annotations;
 using Synergy.Contracts;
 using Synergy.NHibernate.Session;
 using Synergy.NHibernate.Test.My;
-using Synergy.NHibernate.Transactions;
 
 namespace Synergy.NHibernate.Test.Transactions
 {

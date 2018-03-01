@@ -163,5 +163,7 @@ namespace Synergy.Contracts
             Fail.IfToLong(value, maxLength, name);
             return value;
         }
+
+        // TODO:mace (from:mace on:05-01-2018) dodaj FailIfWhiteSpace(name)
     }
 }

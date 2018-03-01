@@ -1,4 +1,5 @@
-﻿using FluentNHibernate.Conventions;
+﻿using System;
+using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.AcceptanceCriteria;
 using FluentNHibernate.Conventions.Inspections;
 using FluentNHibernate.Conventions.Instances;
@@ -11,7 +12,19 @@ namespace Synergy.NHibernate.Conventions
     {
         public void Accept([NotNull] IAcceptanceCriteria<IPropertyInspector> criteria)
         {
-            criteria.Expect(e => e.Property.PropertyType.IsEnum);
+            criteria.Expect(e => this.IsItEnum(e.Property.PropertyType));
+        }
+
+        private bool IsItEnum([NotNull] Type type)
+        {
+            if (type.IsEnum)
+                return true;
+
+            var underlyingType = Nullable.GetUnderlyingType(type);
+            if (underlyingType != null && underlyingType.IsEnum)
+                return true;
+
+            return false;
         }
 
         public void Apply([NotNull] IPropertyInstance instance)
