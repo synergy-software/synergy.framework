@@ -80,6 +80,26 @@ namespace Synergy.Contracts
         }
 
         /// <summary>
+        /// Throws exception when provided value is <see langword="null"/> or white space.
+        /// </summary>
+        /// <param name="value">Value to check against nullability and white space.</param>
+        /// <param name="name">Name of the checked argument / parameter to check.</param>
+        /// <returns>Exactly the same value as provided to this method.</returns>
+        [ContractAnnotation("value: null => halt; value: notnull => notnull")]
+        [AssertionMethod]
+        [NotNull]
+        public static string OrFailIfWhiteSpace(
+            [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration] this string value,
+            [NotNull] string name)
+        {
+            Fail.RequiresArgumentName(name);
+
+            IfArgumentWhiteSpace(value, name);
+
+            return value;
+        }
+
+        /// <summary>
         /// Template for expanding <c>Fail.IfArgumentWhiteSpace(argument, nameof(argument));</c>
         /// Type <c>argument.fiaw</c> and press TAB and let Resharper complete the template.
         /// </summary>
@@ -155,7 +175,7 @@ namespace Synergy.Contracts
         [CanBeNull]
         [AssertionMethod]
         [ContractAnnotation("value: null => null")]
-        public static string FailIfToLong(
+        public static string OrFailIfToLong(
             [CanBeNull] this string value,
             int maxLength,
             [NotNull] string name)
@@ -163,7 +183,5 @@ namespace Synergy.Contracts
             Fail.IfToLong(value, maxLength, name);
             return value;
         }
-
-        // TODO:mace (from:mace on:05-01-2018) dodaj FailIfWhiteSpace(name)
     }
 }

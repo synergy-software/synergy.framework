@@ -83,6 +83,24 @@ namespace Synergy.Contracts.Test.Failures
         }
 
         [Test]
+        public void OrFailIfWhiteSpace()
+        {
+            Assert.Throws<DesignByContractViolationException>(
+                () => ((string)null).OrFailIfWhiteSpace("null")
+            );
+
+            Assert.Throws<DesignByContractViolationException>(
+                () => "".OrFailIfWhiteSpace("empty")
+            );
+
+            Assert.Throws<DesignByContractViolationException>(
+                () => "   ".OrFailIfWhiteSpace("bia³e-znaki")
+            );
+
+            "nie pusty".OrFailIfWhiteSpace("nie-pusty");
+        }
+
+        [Test]
         public void IfWhitespace()
         {
             Assert.Throws<DesignByContractViolationException>(
@@ -114,16 +132,16 @@ namespace Synergy.Contracts.Test.Failures
         }
 
         [Test]
-        public void FailIfTooLong()
+        public void OrFailIfToLong()
         {
             var veryLong = "very long";
             Assert.Throws<DesignByContractViolationException>(
-                () => veryLong.FailIfToLong(3, nameof(veryLong))
+                () => veryLong.OrFailIfToLong(3, nameof(veryLong))
             );
 
-            ((string)null).FailIfToLong(300, "null");
-            "aa".FailIfToLong(300, "aa");
-            "aa".FailIfToLong(2, "aa");
+            ((string)null).OrFailIfToLong(300, "null");
+            "aa".OrFailIfToLong(300, "aa");
+            "aa".OrFailIfToLong(2, "aa");
         }
     }
 }
