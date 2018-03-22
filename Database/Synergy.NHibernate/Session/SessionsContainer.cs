@@ -18,6 +18,8 @@ namespace Synergy.NHibernate.Session
             Fail.IfArgumentNull(database, nameof(database));
             Fail.IfArgumentNull(session, nameof(session));
 
+            this.CleanUpClosedSessions();
+
             string key = database.GetKey();
             this.sessions.Add(key, session);
         }
@@ -26,6 +28,8 @@ namespace Synergy.NHibernate.Session
         {
             Fail.IfArgumentNull(database, nameof(database));
             Fail.IfArgumentNull(session, nameof(session));
+
+            this.CleanUpClosedStatelesSessions();
 
             string key = database.GetKey();
             this.statelesSessions.Add(key, session);
@@ -36,16 +40,11 @@ namespace Synergy.NHibernate.Session
         {
             Fail.IfArgumentNull(database, nameof(database));
 
+            this.CleanUpClosedSessions();
+
             string key = database.GetKey();
             ISession session;
             this.sessions.TryGetValue(key, out session);
-            if (session != null && session.IsOpen == false)
-            {
-                // Session is closed (disposed probably) so lets remove it and return null
-                this.RemoveSession(session);
-                session = null;
-            }
-
             return session;
         }
 
@@ -54,33 +53,28 @@ namespace Synergy.NHibernate.Session
         {
             Fail.IfArgumentNull(database, nameof(database));
 
+            this.CleanUpClosedStatelesSessions();
+
             string key = database.GetKey();
             IStatelessSession session;
             this.statelesSessions.TryGetValue(key, out session);
-            if (session != null && session.IsOpen == false)
-            {
-                // Session is closed (disposed probably) so lets remove it and return null
-                this.RemoveSession(session);
-                session = null;
-            }
-
             return session;
         }
 
-        private void RemoveSession(ISession session)
+        private void CleanUpClosedSessions()
         {
             foreach (var pair in this.sessions.ToList())
             {
-                if (pair.Value == session)
+                if (pair.Value.IsOpen == false)
                     this.sessions.Remove(pair.Key);
             }
         }
 
-        private void RemoveSession(IStatelessSession session)
+        private void CleanUpClosedStatelesSessions()
         {
             foreach (var pair in this.statelesSessions.ToList())
             {
-                if (pair.Value == session)
+                if (pair.Value.IsOpen == false)
                     this.sessions.Remove(pair.Key);
             }
         }
