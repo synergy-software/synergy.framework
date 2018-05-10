@@ -151,7 +151,7 @@ namespace Synergy.Contracts
         /// <param name="maxLength">Maximum length of the string.</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
         [AssertionMethod]
-        public static void IfToLong(
+        public static void IfTooLong(
             [CanBeNull] string value,
             int maxLength,
             [NotNull] string name)
@@ -175,12 +175,12 @@ namespace Synergy.Contracts
         [CanBeNull]
         [AssertionMethod]
         [ContractAnnotation("value: null => null")]
-        public static string OrFailIfToLong(
+        public static string OrFailIfTooLong(
             [CanBeNull] this string value,
             int maxLength,
             [NotNull] string name)
         {
-            Fail.IfToLong(value, maxLength, name);
+            Fail.IfTooLong(value, maxLength, name);
             return value;
         }
     }

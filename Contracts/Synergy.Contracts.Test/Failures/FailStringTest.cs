@@ -123,25 +123,25 @@ namespace Synergy.Contracts.Test.Failures
         {
             var veryLong = "very long";
             Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfToLong(veryLong, 3, nameof(veryLong))
+                () => Fail.IfTooLong(veryLong, 3, nameof(veryLong))
             );
 
-            Fail.IfToLong(null, 300, "null");
-            Fail.IfToLong("aa", 300, "aa");
-            Fail.IfToLong("aa", 2, "aa");
+            Fail.IfTooLong(null, 300, "null");
+            Fail.IfTooLong("aa", 300, "aa");
+            Fail.IfTooLong("aa", 2, "aa");
         }
 
         [Test]
-        public void OrFailIfToLong()
+        public void OrFailIfTooLong()
         {
             var veryLong = "very long";
             Assert.Throws<DesignByContractViolationException>(
-                () => veryLong.OrFailIfToLong(3, nameof(veryLong))
+                () => veryLong.OrFailIfTooLong(3, nameof(veryLong))
             );
 
-            ((string)null).OrFailIfToLong(300, "null");
-            "aa".OrFailIfToLong(300, "aa");
-            "aa".OrFailIfToLong(2, "aa");
+            ((string)null).OrFailIfTooLong(300, "null");
+            "aa".OrFailIfTooLong(300, "aa");
+            "aa".OrFailIfTooLong(2, "aa");
         }
     }
 }
