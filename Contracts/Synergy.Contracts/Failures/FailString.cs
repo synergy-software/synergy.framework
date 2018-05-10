@@ -146,6 +146,7 @@ namespace Synergy.Contracts
 
         /// <summary>
         /// Throws exception if the specified string length exceeds provided maximum.
+        /// It doesn't check the null-ness of the value (null does NOT exceed any length).
         /// </summary>
         /// <param name="value">Value to check</param>
         /// <param name="maxLength">Maximum length of the string.</param>
@@ -168,6 +169,7 @@ namespace Synergy.Contracts
 
         /// <summary>
         /// Throws exception if the specified string length exceeds provided maximum.
+        /// It doesn't check the null-ness of the value (null does NOT exceed any length).
         /// </summary>
         /// <param name="value">Value to check</param>
         /// <param name="maxLength">Maximum length of the string.</param>
@@ -182,6 +184,22 @@ namespace Synergy.Contracts
         {
             Fail.IfTooLong(value, maxLength, name);
             return value;
+        }
+
+        /// <summary>
+        /// Throws exception if the specified string length exceeds provided maximum or it is a whitespace.
+        /// </summary>
+        /// <param name="value">Value to check</param>
+        /// <param name="maxLength">Maximum length of the string.</param>
+        /// <param name="name">Name of the checked argument / parameter.</param>
+        [AssertionMethod]
+        public static void IfTooLongOrWhitespace(
+            [CanBeNull] string value,
+            int maxLength,
+            [NotNull] string name)
+        {
+            Fail.IfArgumentWhiteSpace(value, name);
+            Fail.IfTooLong(value, maxLength, name);
         }
     }
 }
