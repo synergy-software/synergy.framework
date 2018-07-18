@@ -35,6 +35,28 @@ namespace Synergy.Reflection
             return attributes;
         }
 
+        [NotNull]
+        [Pure]
+        [ItemNotNull]
+        public static TAttribute[] GetCustomAttributesBasedOn<TAttribute>([NotNull] this ParameterInfo parameter) where TAttribute : Attribute
+        {
+            Fail.IfArgumentNull(parameter, nameof(parameter));
+            //Fail.IfArgumentNull(parameter.DeclaringType, nameof(parameter.DeclaringType));
+
+            object[] memberAttributes = parameter.GetCustomAttributes(inherit: true);
+            MemberInfo[] interfaceMembers = CustomAttributeExtensions.GetInterfaceMembersImplementedBy(parameter.Member);
+            object[] interfaceAttributes = interfaceMembers.SelectMany(m => m.CastOrFail<MethodInfo>()
+                                                                             .GetParameters()
+                                                                             .First(p => p.Name == parameter.Name)
+                                                                             .GetCustomAttributes(inherit: true))
+                                                           .ToArray();
+
+            IEnumerable<object> allAttributes = memberAttributes.Union(interfaceAttributes);
+            TAttribute[] attributes = CustomAttributeExtensions.GetInheritedAttributes<TAttribute>(allAttributes, parameter.Name);
+
+            return attributes;
+        }
+
         [NotNull, Pure]
         private static MemberInfo[] GetInterfaceMembersImplementedBy([NotNull] MemberInfo member)
         {
@@ -52,6 +74,9 @@ namespace Synergy.Reflection
                                  .Cast<MemberInfo>()
                                  .ToArray();
             }
+
+            if (elementType.IsInterface)
+                return new MemberInfo[0];
 
             var method = member.CastOrFail<MethodInfo>();
             var interfaceMethods = new List<MethodInfo>();

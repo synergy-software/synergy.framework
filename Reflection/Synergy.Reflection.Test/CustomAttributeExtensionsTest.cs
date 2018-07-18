@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using JetBrains.Annotations;
 using NUnit.Framework;
 
 namespace Synergy.Reflection.Test
@@ -7,7 +9,8 @@ namespace Synergy.Reflection.Test
     [TestFixture]
     public class CustomAttributeExtensionsTest
     {
-        [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = true)]
+        [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Interface | AttributeTargets.Property,
+            AllowMultiple = true)]
         private class MyAttribute : CategoryAttribute
         {
             public MyAttribute(string name) : base(name)
@@ -29,18 +32,31 @@ namespace Synergy.Reflection.Test
                 throw new InvalidOperationException();
             }
 
+            public void NotOverridenMethod(object argument)
+            {
+                throw new NotImplementedException();
+            }
+
             [My("attribute on a class property")]
             public string Property { get; set; }
         }
 
+        private interface IABase
+        {
+
+        }
+
         [My("attribute on an interface")]
-        private interface IA
+        private interface IA : IABase
         {
             [My("attribute on an interface method")]
             void Method();
 
             [My("attribute on an overriden interface method")]
             void Method(bool overriden);
+
+            [My("attribute on a not overriden interface method")]
+            void NotOverridenMethod([Display] object argument);
 
             [My("attribute on an interface property")]
             string Property { get; set; }
@@ -97,6 +113,58 @@ namespace Synergy.Reflection.Test
             CollectionAssert.AllItemsAreInstancesOfType(attributes, typeof(MyAttribute));
             Assert.IsTrue(attributes.Any(a => a.Name == "attribute on a class property"));
             Assert.IsTrue(attributes.Any(a => a.Name == "attribute on an interface property"));
+        }
+
+        [Test]
+        public void InheritedAttributeCanBeTakenDirectlyFromInterfaceMethod()
+        {
+            //ARRANGE
+            var method = typeof(IA).GetMethod(nameof(IA.NotOverridenMethod));
+            Assert.NotNull(method);
+
+            //ACT
+            CategoryAttribute[] attributes = method.GetCustomAttributesBasedOn<CategoryAttribute>();
+
+            // ASSERT
+            Assert.NotNull(attributes);
+            CollectionAssert.AllItemsAreInstancesOfType(attributes, typeof(MyAttribute));
+            Assert.IsTrue(attributes.Any(a => a.Name == "attribute on a not overriden interface method"));
+        }
+
+        [Test]
+        public void InheritedAttributeCanBeTakenFromMethodArgumentPlacedOnAnInterface()
+        {
+            //ARRANGE
+            var method = typeof(IA).GetMethod(nameof(IA.NotOverridenMethod));
+            Assert.NotNull(method);
+            var argument = method.GetParameters()
+                                 .First();
+
+            //ACT
+            var attributes = argument.GetCustomAttributesBasedOn<DisplayAttribute>();
+
+            // ASSERT
+            Assert.NotNull(attributes);
+            CollectionAssert.AllItemsAreInstancesOfType(attributes, typeof(DisplayAttribute));
+            CollectionAssert.IsNotEmpty(attributes);
+        }
+
+        [Test]
+        public void InheritedAttributeCanBeTakenForClassFromMethodArgumentPlacedOnAnInterface()
+        {
+            //ARRANGE
+            var method = typeof(A).GetMethod(nameof(A.NotOverridenMethod));
+            Assert.NotNull(method);
+            var argument = method.GetParameters()
+                                 .First();
+
+            //ACT
+            var attributes = argument.GetCustomAttributesBasedOn<DisplayAttribute>();
+
+            // ASSERT
+            Assert.NotNull(attributes);
+            CollectionAssert.AllItemsAreInstancesOfType(attributes, typeof(DisplayAttribute));
+            CollectionAssert.IsNotEmpty(attributes);
         }
     }
 }
