@@ -45,9 +45,12 @@ namespace Synergy.Reflection
 
             object[] memberAttributes = parameter.GetCustomAttributes(inherit: true);
             MemberInfo[] interfaceMembers = CustomAttributeExtensions.GetInterfaceMembersImplementedBy(parameter.Member);
+
+            ParameterInfo[] methodArguments = parameter.Member.CastOrFail<MethodInfo>().GetParameters();
+            var parameterIndex = Array.IndexOf(methodArguments, parameter);
             object[] interfaceAttributes = interfaceMembers.SelectMany(m => m.CastOrFail<MethodInfo>()
-                                                                             .GetParameters()
-                                                                             .First(p => p.Name == parameter.Name)
+                                                                             .GetParameters()[parameterIndex]
+                                                                             //.FailIfNull("Method {0}.{1}() should have argument {2}", m.DeclaringType, m.Name, parameter.Name)
                                                                              .GetCustomAttributes(inherit: true))
                                                            .ToArray();
 

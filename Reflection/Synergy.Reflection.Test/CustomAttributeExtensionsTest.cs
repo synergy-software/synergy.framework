@@ -62,6 +62,21 @@ namespace Synergy.Reflection.Test
             string Property { get; set; }
         }
 
+        private interface IQueryDispatcher
+        {
+            [NotNull, Pure]
+            TResult Query<TQuery, TResult>([Display] TQuery command) where TQuery : IA;
+        }
+
+        private class QueryDispatcher:IQueryDispatcher
+        {
+            public TResult Query<TQuery, TResult>(TQuery query)
+                where TQuery : IA
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         [Test]
         public void InheritedAttributeCanBeTakenFromClassOrInterface()
         {
@@ -154,6 +169,24 @@ namespace Synergy.Reflection.Test
         {
             //ARRANGE
             var method = typeof(A).GetMethod(nameof(A.NotOverridenMethod));
+            Assert.NotNull(method);
+            var argument = method.GetParameters()
+                                 .First();
+
+            //ACT
+            var attributes = argument.GetCustomAttributesBasedOn<DisplayAttribute>();
+
+            // ASSERT
+            Assert.NotNull(attributes);
+            CollectionAssert.AllItemsAreInstancesOfType(attributes, typeof(DisplayAttribute));
+            CollectionAssert.IsNotEmpty(attributes);
+        }
+
+        [Test]
+        public void TakeInheritedAttributeForMethodArgumentFromInterfaceWithDifferentParameterName()
+        {
+            //ARRANGE
+            var method = typeof(QueryDispatcher).GetMethod(nameof(QueryDispatcher.Query));
             Assert.NotNull(method);
             var argument = method.GetParameters()
                                  .First();
