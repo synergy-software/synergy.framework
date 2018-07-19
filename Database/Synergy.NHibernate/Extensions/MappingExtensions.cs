@@ -13,6 +13,7 @@ namespace Synergy.NHibernate.Extensions
 {
     public static class MappingExtensions
     {
+        [NotNull] 
         public static OneToManyPart<TChild> HasManyBidirectional<TParent, TChild>(
             [NotNull] this AutoMapping<TParent> mapping,
             [NotNull] Expression<Func<TParent, IEnumerable<TChild>>> childCollection,

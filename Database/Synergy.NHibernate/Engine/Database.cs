@@ -37,6 +37,7 @@ namespace Synergy.NHibernate.Engine
         /// WARN: This property is public as it is injected by Windsor container. DO NOT ASSIGN IT.
         /// </summary>
         [UsedImplicitly]
+        [NotNull, ItemNotNull] 
         public IConvention[] Conventions { get; set; }
 
         /// <summary>
@@ -74,7 +75,7 @@ namespace Synergy.NHibernate.Engine
         [NotNull, ItemNotNull, Pure]
         protected virtual IConvention[] GetConventions()
         {
-            return this.Conventions;
+            return this.Conventions.OrFail(nameof(this.Conventions));
         }
 
         /// <inheritdoc />

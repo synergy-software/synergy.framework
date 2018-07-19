@@ -104,7 +104,7 @@ namespace Synergy.Core
         T GetComponent<T>();
 
         [NotNull, Pure]
-        T GetComponent<T>(object argumentsAsAnonymousType);
+        T GetComponent<T>([CanBeNull] object argumentsAsAnonymousType);
 
         [NotNull, Pure]
         object GetComponent([NotNull] Type type);
@@ -134,5 +134,8 @@ namespace Synergy.Core
         /// </summary>
         [NotNull, Pure]
         object[] GetComponents([NotNull] Type type);
+
+        // TODO: dodaj dedykowaną metodę componentLocator.CreateAndForget<InvestmentWizard>() - only transient and not disposable components
+
     }
 }

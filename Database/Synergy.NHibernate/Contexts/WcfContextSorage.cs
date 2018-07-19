@@ -66,11 +66,11 @@ namespace Synergy.NHibernate.Contexts
             [CanBeNull]
             public TStored Stored { get; set; }
 
-            public void Attach(OperationContext owner)
+            public void Attach([CanBeNull] OperationContext owner)
             {
             }
 
-            public void Detach(OperationContext owner)
+            public void Detach([CanBeNull] OperationContext owner)
             {
             }
         }
