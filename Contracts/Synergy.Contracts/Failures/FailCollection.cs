@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -29,7 +30,34 @@ namespace Synergy.Contracts
                 throw Fail.Because("Collection '{0}' should not be empty but it is.", collectionName);
         }
 
-        // TODO:mace (from:mace @ 22-10-2016): collection.FailIfEmpty(nameof(collection))
+        /// <summary>
+        /// Throws exception when the collection is <see langword="null" /> or empty.
+        /// </summary>
+        /// <typeparam name="T">Type of the collection</typeparam>
+        /// <param name="collection">Collection to be checked against emtiness</param>
+        /// <param name="collectionName">Collection name</param>
+        /// <returns>The same collection as provided</returns>
+        [ContractAnnotation("collection: null => halt")]
+        [AssertionMethod]
+        [NotNull] 
+        public static T OrFaifIfCollectionEmpty<T>(
+            [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
+            this T collection,
+            [NotNull] string collectionName) where T : IEnumerable
+        {
+            if (collection == null)
+                throw Fail.Because("Collection '{0}' should not be null but it is.", collectionName);
+
+            if (collection.IsEmpty())
+                throw Fail.Because("Collection '{0}' should not be empty but it is.", collectionName);
+
+            return collection;
+        }
+
+        private static bool IsEmpty([NotNull] this IEnumerable source)
+        {
+            return source.GetEnumerator().MoveNext() == false;
+        }
 
         /// <summary>
         /// Throws exception when the collection contains null.

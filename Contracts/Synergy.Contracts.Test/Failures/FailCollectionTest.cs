@@ -61,6 +61,25 @@ namespace Synergy.Contracts.Test.Failures
             Fail.IfCollectionEmpty(pełna, "collection");
         }
 
+        [Test]
+        public void OrFailIfEmpty()
+        {
+            IEnumerable<object> pusta = Enumerable.Empty<object>();
+            IEnumerable<object> nullowata = null;
+            IEnumerable<string> pełna = Enumerable.Repeat("element", 2);
+
+            Assert.Throws<DesignByContractViolationException>(
+                () => pusta.OrFaifIfCollectionEmpty("collection")
+            );
+
+            Assert.Throws<DesignByContractViolationException>(
+                // ReSharper disable once ExpressionIsAlwaysNull
+                () => nullowata.OrFaifIfCollectionEmpty("collection")
+            );
+
+            pełna.OrFaifIfCollectionEmpty("collection");
+        }
+
         #endregion
 
         #region Fail.IfCollectionsAreNotEquivalent()
