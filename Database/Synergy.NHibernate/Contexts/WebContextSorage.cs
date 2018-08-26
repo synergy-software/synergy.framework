@@ -1,21 +1,23 @@
-﻿using JetBrains.Annotations;
-using Synergy.Contracts;
-using Synergy.Web;
+﻿
+
 
 namespace Synergy.NHibernate.Contexts
 {
+    using JetBrains.Annotations;
+    using Synergy.Contracts;
+    using Synergy.Web;
     /// <summary>
     /// Contextual storage that stores object in a web context.
     /// </summary>
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
-    public class WebContextSorage<T> : IWebContextSorage<T>
+    public class WebContextStorage<T> : IWebContextStorage<T>
     {
         private readonly IHttpContextItems httpContextItems;
 
         /// <summary>
         /// WARN: Component constructor called by Windsor container. DO NOT USE IT DIRECTLY.
         /// </summary>
-        public WebContextSorage(IHttpContextItems httpContextItems)
+        public WebContextStorage(IHttpContextItems httpContextItems)
         {
             this.httpContextItems = httpContextItems;
         }
@@ -66,7 +68,7 @@ namespace Synergy.NHibernate.Contexts
     /// <summary>
     /// Contextual storage that stores object in a web context.
     /// </summary>
-    public interface IWebContextSorage<T> : IContextSorage<T>
+    public interface IWebContextStorage<T> : IContextSorage<T>
     {
     }
 }

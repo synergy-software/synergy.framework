@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
@@ -22,6 +22,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
+    <ProjectReference Include="..\..\Core\Synergy.Core.Web\Synergy.Core.Web.csproj" />
     <ProjectReference Include="..\..\Core\Synergy.Core\Synergy.Core.csproj" />
     <ProjectReference Include="..\..\Reflection\Synergy.Reflection\Synergy.Reflection.csproj" />
   </ItemGroup>
