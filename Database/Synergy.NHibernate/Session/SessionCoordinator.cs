@@ -20,6 +20,7 @@ namespace Synergy.NHibernate.Session
         {
             foreach (IDatabase database in this.databases)
             {
+                // ReSharper disable once UnusedVariable
                 var currentSession = database.CurrentSession;
             }
         }

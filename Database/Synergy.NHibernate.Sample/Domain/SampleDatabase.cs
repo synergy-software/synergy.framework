@@ -13,7 +13,7 @@ using Synergy.Web;
 namespace Synergy.NHibernate.Sample.Domain
 {
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
-    public class SampleDatabase : Database, ISampleDatabase
+    public class SampleDatabase : Synergy.NHibernate.Engine.Database, ISampleDatabase
     {
         public const string SchemaName = "words";
 

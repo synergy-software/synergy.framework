@@ -138,9 +138,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\SynergyAssemblyInfo.cs">
-      <Link>Properties\SynergyAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\SynergyNHibernateSampleLibrary.cs" />

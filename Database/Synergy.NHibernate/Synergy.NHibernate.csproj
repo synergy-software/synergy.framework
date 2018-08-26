@@ -1,136 +1,52 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{87E9EBE3-2794-4E41-A304-8A8E510FFDC9}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Synergy.NHibernate</RootNamespace>
-    <AssemblyName>Synergy.NHibernate</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
+    <TargetFramework>net462</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
     <DefineConstants>TRACE;DEBUG;JETBRAINS_ANNOTATIONS;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\Synergy.NHibernate.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
     <DefineConstants>TRACE;JETBRAINS_ANNOTATIONS;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Synergy.NHibernate.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <ProjectGuid>{87E9EBE3-2794-4E41-A304-8A8E510FFDC9}</ProjectGuid>
+    <RootNamespace>Synergy.NHibernate</RootNamespace>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Castle.Windsor.4.1.0\lib\net45\Castle.Windsor.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentNHibernate, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\FluentNHibernate.2.1.2\lib\net461\FluentNHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="JetBrains.Annotations, Version=2018.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\JetBrains.Annotations.2018.2.1\lib\net20\JetBrains.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate, Version=5.1.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NHibernate.5.1.3\lib\net461\NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="Remotion.Linq.EagerFetching, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Remotion.Linq.EagerFetching.2.1.0\lib\net45\Remotion.Linq.EagerFetching.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
+    <ProjectReference Include="..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
+    <ProjectReference Include="..\..\Core\Synergy.Core\Synergy.Core.csproj" />
+    <ProjectReference Include="..\..\Reflection\Synergy.Reflection\Synergy.Reflection.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Antlr3.Runtime" Version="3.5.1" />
+    <PackageReference Include="Castle.Core" Version="4.2.1" />
+    <PackageReference Include="Castle.Windsor" Version="4.1.0" />
+    <PackageReference Include="FluentNHibernate" Version="2.1.2" />
+    <PackageReference Include="Iesi.Collections" Version="4.0.4" />
+    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
+    <PackageReference Include="NHibernate" Version="5.1.3" />
+    <PackageReference Include="Remotion.Linq" Version="2.2.0" />
+    <PackageReference Include="Remotion.Linq.EagerFetching" Version="2.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\SynergyAssemblyInfo.cs" Link="Properties\SynergyAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="!Init\SynergyNHibernateLibrary.cs" />
-    <Compile Include="..\..\SynergyAssemblyInfo.cs">
-      <Link>Properties\SynergyAssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="Configurations\NHibernateConfigurationParameter.cs" />
-    <Compile Include="Contexts\IContextSorage.cs" />
-    <Compile Include="Contexts\StaticContextStorage.cs" />
-    <Compile Include="Contexts\ThreadStaticContextSorage.cs" />
-    <Compile Include="Contexts\WcfContextSorage.cs" />
-    <Compile Include="Contexts\WebContextSorage.cs" />
-    <Compile Include="Conventions\ClassConvention.cs" />
-    <Compile Include="Conventions\EmptyStringLengthConvention.cs" />
-    <Compile Include="Conventions\EnumConvention.cs" />
-    <Compile Include="Conventions\ForeignKeyColumnNameConvention.cs" />
-    <Compile Include="Conventions\IndexNamingConvention.cs" />
-    <Compile Include="Conventions\ReferenceConvention.cs" />
-    <Compile Include="Engine\DatabaseProvider.cs" />
-    <Compile Include="Extensions\MappingExtensions.cs" />
-    <Compile Include="Session\ICustomSessionStorage.cs" />
-    <Compile Include="Session\SessionContext.cs" />
-    <Compile Include="Session\SessionInterceptor.cs" />
-    <Compile Include="Session\SessionsContainer.cs" />
-    <Compile Include="Session\SessionThreadStaticScope.cs" />
-    <Compile Include="ConnectToAttribute.cs" />
-    <Compile Include="Conventions\PrimaryKeyConvention.cs" />
-    <Compile Include="Domain\Entity.cs" />
-    <Compile Include="Engine\Database.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Repository.cs" />
-    <Compile Include="Transactions\TransactionCoordinator.cs" />
-    <Compile Include="Transactions\TransactionsContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
-    <None Include="Synergy.NHibernate.nuspec" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj">
-      <Project>{653ff172-0dc5-4d81-91ae-3ce09d8cf7c1}</Project>
-      <Name>Synergy.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core\Synergy.Core\Synergy.Core.csproj">
-      <Project>{67dff55d-89f0-49f6-a05d-8892b6522471}</Project>
-      <Name>Synergy.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Reflection\Synergy.Reflection\Synergy.Reflection.csproj">
-      <Project>{21915551-5cf0-4a79-a313-2022fba1c8d4}</Project>
-      <Name>Synergy.Reflection</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

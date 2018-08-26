@@ -1,8 +1,9 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 
 [assembly: AssemblyTitle("Synergy.Core")]
 [assembly: AssemblyDescription("Synergy Layered Application Architecture (SLARCH) support using Windsor Castle")]
-
+[assembly:InternalsVisibleTo("Synergy.Core.Test")]
 // Version information for an assembly consists of the following four values:
 //
 //      Major Version
