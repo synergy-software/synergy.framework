@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor.Installer;
@@ -141,8 +140,10 @@ namespace Synergy.Core
         {
             return new[]
             {
-                typeof(_Attribute),
-                typeof(_Exception),
+#if !NETSTANDARD2_0
+                typeof(System.Runtime.InteropServices._Attribute),
+                typeof(System.Runtime.InteropServices._Exception),
+#endif
                 typeof(ISerializable),
                 typeof(IWindsorInstaller),
                 typeof(IDisposable)

@@ -224,17 +224,21 @@
       <Project>{653ff172-0dc5-4d81-91ae-3ce09d8cf7c1}</Project>
       <Name>Synergy.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Core\Synergy.Core.Web\Synergy.Core.Web.csproj">
+      <Project>{af5c4dd7-6365-46e6-9517-059faa12d212}</Project>
+      <Name>Synergy.Core.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\Synergy.Core\Synergy.Core.csproj">
       <Project>{67dff55d-89f0-49f6-a05d-8892b6522471}</Project>
       <Name>Synergy.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Synergy.NHibernate\Synergy.NHibernate.csproj">
-      <Project>{87e9ebe3-2794-4e41-a304-8a8e510ffdc9}</Project>
-      <Name>Synergy.NHibernate</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Web\Synergy.Web.Mvc\Synergy.Web.Mvc.csproj">
       <Project>{d28dc806-e42b-4cbf-9c82-8b132c945b84}</Project>
       <Name>Synergy.Web.Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Synergy.NHibernate\Synergy.NHibernate.csproj">
+      <Project>{87e9ebe3-2794-4e41-a304-8a8e510ffdc9}</Project>
+      <Name>Synergy.NHibernate</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -13,7 +13,7 @@ namespace Synergy.NHibernate.Session
         private readonly IThreadStaticContextSorage<SessionsContainer> threadStaticContextSorage;
         private readonly IStaticContextStorage<SessionsContainer> staticContextStorage;
         private readonly ICustomSessionStorage[] customSessionStorages;
-        private readonly IWebContextSorage<SessionsContainer> webContextSorage;
+        private readonly IWebContextStorage<SessionsContainer> webContextStorage;
         private readonly IWcfContextSorage<SessionsContainer> wcfContextSorage;
 
         /// <summary>
@@ -21,13 +21,13 @@ namespace Synergy.NHibernate.Session
         /// </summary>
         public SessionContext(
             ICustomSessionStorage[] customSessionStorages,
-            IWebContextSorage<SessionsContainer> webContextSorage,
+            IWebContextStorage<SessionsContainer> webContextStorage,
             IWcfContextSorage<SessionsContainer> wcfContextSorage,
             IThreadStaticContextSorage<SessionsContainer> threadStaticContextSorage,
             IStaticContextStorage<SessionsContainer> staticContextStorage)
         {
             this.customSessionStorages = customSessionStorages;
-            this.webContextSorage = webContextSorage;
+            this.webContextStorage = webContextStorage;
             this.wcfContextSorage = wcfContextSorage;
             this.threadStaticContextSorage = threadStaticContextSorage;
             this.staticContextStorage = staticContextStorage;
@@ -96,8 +96,8 @@ namespace Synergy.NHibernate.Session
                     return customSessionStorage;
             }
 
-            if (this.webContextSorage.IsAvailable())
-                return this.webContextSorage;
+            if (this.webContextStorage.IsAvailable())
+                return this.webContextStorage;
 
             if (this.wcfContextSorage.IsAvailable())
                 return this.wcfContextSorage;

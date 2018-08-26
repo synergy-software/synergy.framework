@@ -8,7 +8,7 @@ using Synergy.NHibernate.Engine;
 namespace Synergy.NHibernate.Test.My
 {
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
-    public class MyDatabase : Database, IMyDatabase
+    public class MyDatabase : NHibernate.Engine.Database, IMyDatabase
     {
         protected override Configuration GetConfiguration()
         {
