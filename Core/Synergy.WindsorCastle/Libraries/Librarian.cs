@@ -3,6 +3,7 @@ using System.Linq;
 using JetBrains.Annotations;
 using Synergy.Contracts;
 using Synergy.Extensions;
+using Synergy.WindsorCastle;
 
 namespace Synergy.Core.Libraries
 {
@@ -43,9 +44,9 @@ namespace Synergy.Core.Libraries
         private Library[] GetAllDependencies(Library rootLibrary)
         {
             List<Library> allLibraries = this.GetSortedLibraries(rootLibrary);
-            var coreLibrary = new SynergyCoreLibrary();
+            var coreLibrary = new SynergyWindsorCastleLibrary();
 
-            if (allLibraries.Contains(l => l.Equals(coreLibrary)) == false)
+            if (allLibraries.Any(l => l.Equals(coreLibrary)) == false)
                 allLibraries.Add(coreLibrary);
 
             return allLibraries.ToArray();

@@ -232,6 +232,10 @@
       <Project>{67dff55d-89f0-49f6-a05d-8892b6522471}</Project>
       <Name>Synergy.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Core\Synergy.WindsorCastle\Synergy.WindsorCastle.csproj">
+      <Project>{0d0ada1e-3d79-4a0f-a67d-590a94994a40}</Project>
+      <Name>Synergy.WindsorCastle</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Web\Synergy.Web.Mvc\Synergy.Web.Mvc.csproj">
       <Project>{d28dc806-e42b-4cbf-9c82-8b132c945b84}</Project>
       <Name>Synergy.Web.Mvc</Name>

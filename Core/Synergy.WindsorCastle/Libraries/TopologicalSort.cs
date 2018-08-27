@@ -38,7 +38,7 @@ namespace Synergy.Extensions
     /// <summary>
     /// Class for sorting items topologically.
     /// </summary>
-    public sealed class TopologicalSort<T> where T : IEquatable<T>
+    internal sealed class TopologicalSort<T> where T : IEquatable<T>
     {
         private readonly Dictionary<T, NodeInfo> nodes = new Dictionary<T, NodeInfo>();
 
