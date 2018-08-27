@@ -21,6 +21,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
+    <ProjectReference Include="..\Synergy.WindsorCastle\Synergy.WindsorCastle.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SynergyAssemblyInfo.cs" Link="Properties\SynergyAssemblyInfo.cs" />

@@ -9,7 +9,6 @@ using Castle.Windsor;
 using JetBrains.Annotations;
 using Synergy.Contracts;
 using Synergy.Core.Extensions;
-using Synergy.Extensions;
 
 namespace Synergy.Core.Windsor
 {
@@ -87,7 +86,7 @@ namespace Synergy.Core.Windsor
                 .Except(interfacesToExclude)
                 .ToArray();
 
-            return interfaces.IsNotEmpty();
+            return interfaces.Any();
         }
 
         [NotNull]
