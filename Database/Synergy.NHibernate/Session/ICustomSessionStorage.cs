@@ -2,7 +2,7 @@
 
 namespace Synergy.NHibernate.Session
 {
-    public interface ICustomSessionStorage : IContextSorage<SessionsContainer>
+    public interface ICustomSessionStorage : IContextStorage<SessionsContainer>
     {
         
     }

@@ -49,7 +49,7 @@ namespace Synergy.NHibernate.Contexts
     /// <summary>
     /// Contextual storage that stores object in a static field.
     /// </summary>
-    public interface IStaticContextStorage<T> : IContextSorage<T>
+    public interface IStaticContextStorage<T> : IContextStorage<T>
     {
     }
 }

@@ -7,7 +7,7 @@ namespace Synergy.NHibernate.Contexts
     /// Contextual storage allows you to store and retrieve objects from a specific place 
     /// (e.g. web context, web session, static field, etc.)
     /// </summary>
-    public interface IContextSorage<T>
+    public interface IContextStorage<T>
     {
         /// <summary>
         /// Informs whether this particular storage is available at the moment.

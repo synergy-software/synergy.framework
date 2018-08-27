@@ -1,4 +1,6 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using System.Linq;
+using JetBrains.Annotations;
 using NHibernate;
 using Synergy.Contracts;
 using Synergy.NHibernate.Contexts;
@@ -10,27 +12,14 @@ namespace Synergy.NHibernate.Session
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
     public class SessionContext : ISessionContext
     {
-        private readonly IThreadStaticContextSorage<SessionsContainer> threadStaticContextSorage;
-        private readonly IStaticContextStorage<SessionsContainer> staticContextStorage;
-        private readonly ICustomSessionStorage[] customSessionStorages;
-        private readonly IWebContextStorage<SessionsContainer> webContextStorage;
-        private readonly IWcfContextSorage<SessionsContainer> wcfContextSorage;
+        private readonly IContextStorage<SessionsContainer>[] sessionStorages;
 
         /// <summary>
         /// WARN: Component constructor called by Windsor container. DO NOT USE IT DIRECTLY.
         /// </summary>
-        public SessionContext(
-            ICustomSessionStorage[] customSessionStorages,
-            IWebContextStorage<SessionsContainer> webContextStorage,
-            IWcfContextSorage<SessionsContainer> wcfContextSorage,
-            IThreadStaticContextSorage<SessionsContainer> threadStaticContextSorage,
-            IStaticContextStorage<SessionsContainer> staticContextStorage)
+        public SessionContext(IContextStorage<SessionsContainer>[] sessionStorages)
         {
-            this.customSessionStorages = customSessionStorages;
-            this.webContextStorage = webContextStorage;
-            this.wcfContextSorage = wcfContextSorage;
-            this.threadStaticContextSorage = threadStaticContextSorage;
-            this.staticContextStorage = staticContextStorage;
+            this.sessionStorages = sessionStorages;
         }
 
         /// <inheritdoc />
@@ -76,7 +65,7 @@ namespace Synergy.NHibernate.Session
         [NotNull, MustUseReturnValue]
         private SessionsContainer GetSessionsContainer()
         {
-            IContextSorage<SessionsContainer> storage = this.GetContextStorage();
+            IContextStorage<SessionsContainer> storage = this.GetContextStorage();
             SessionsContainer container = storage.Get();
             if (container == null)
             {
@@ -87,30 +76,36 @@ namespace Synergy.NHibernate.Session
             return container;
         }
 
-        [NotNull, Pure]
-        private IContextSorage<SessionsContainer> GetContextStorage()
+        private static Type[] preferredContextStorages = new []
         {
-            foreach (ICustomSessionStorage customSessionStorage in this.customSessionStorages)
+            typeof(ICustomSessionStorage),
+            typeof(IWebContextStorage<SessionsContainer>),
+            typeof(IWcfContextStorage<SessionsContainer>),
+            typeof(IThreadStaticContextStorage<SessionsContainer>)
+        };
+
+        public static void ConfigureContextStorages([NotNull] Action<ContextStorageConfigurator> configure)
+        {
+            Fail.IfArgumentNull(configure, nameof(configure));
+            var configurator = new ContextStorageConfigurator();
+            configure(configurator);
+            preferredContextStorages = configurator.GetStorageTypes();
+        }
+        
+
+        [NotNull, Pure]
+        private IContextStorage<SessionsContainer> GetContextStorage()
+        {
+
+            foreach (var storageType in preferredContextStorages)
             {
-                if (customSessionStorage.IsAvailable())
-                    return customSessionStorage;
+                var storageCandidates = this.sessionStorages.Where(s => storageType.IsInstanceOfType(s));
+                var firstAvailable = storageCandidates.FirstOrDefault(x => x.IsAvailable());
+                if (firstAvailable != null)
+                {
+                    return firstAvailable;
+                }
             }
-
-            if (this.webContextStorage.IsAvailable())
-                return this.webContextStorage;
-
-            if (this.wcfContextSorage.IsAvailable())
-                return this.wcfContextSorage;
-
-            if (this.threadStaticContextSorage.IsAvailable())
-                return this.threadStaticContextSorage;
-
-            //
-            // WARN: The static context should not be enabled here - it will not work properly in multithreaded apps - e.g. web apps
-            //
-            //if (this.staticContextStorage.IsAvailable())
-            //    return this.staticContextStorage;
-
             throw Fail.Because("There is no context storage available - are you missing declaration: using(new " + nameof(SessionThreadStaticScope) +
                                "()) {{ DATABASE ACCESS CODE; }}");
         }

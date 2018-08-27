@@ -8,7 +8,6 @@
     <DebugType>full</DebugType>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;JETBRAINS_ANNOTATIONS;INTERNAL_POOL</DefineConstants>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DocumentationFile>bin\Debug\Synergy.Contracts.XML</DocumentationFile>
   </PropertyGroup>
