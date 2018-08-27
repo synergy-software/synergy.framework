@@ -22,7 +22,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
-    <ProjectReference Include="..\..\Core\Synergy.Core.Web\Synergy.Core.Web.csproj" />
     <ProjectReference Include="..\..\Core\Synergy.Core\Synergy.Core.csproj" />
     <ProjectReference Include="..\..\Reflection\Synergy.Reflection\Synergy.Reflection.csproj" />
   </ItemGroup>
@@ -39,13 +38,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SynergyAssemblyInfo.cs" Link="Properties\SynergyAssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Runtime.Remoting" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

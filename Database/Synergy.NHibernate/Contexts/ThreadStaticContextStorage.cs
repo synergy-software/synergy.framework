@@ -8,7 +8,7 @@ namespace Synergy.NHibernate.Contexts
     ///     Contextual storage that stores object in a [ThreadStatic] field.
     /// </summary>
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
-    public class ThreadStaticContextSorage<T> : IThreadStaticContextSorage<T>
+    public class ThreadStaticContextStorage<T> : IThreadStaticContextStorage<T>
     {
         /// <inheritdoc />
         public bool IsAvailable()
@@ -55,7 +55,7 @@ namespace Synergy.NHibernate.Contexts
     /// <summary>
     ///     Contextual storage that stores object in a [ThreadStatic] field.
     /// </summary>
-    public interface IThreadStaticContextSorage<T> : IContextSorage<T>
+    public interface IThreadStaticContextStorage<T> : IContextStorage<T>
     {
     }
 

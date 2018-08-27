@@ -8,7 +8,7 @@ namespace Synergy.NHibernate.Contexts
     /// Contextual storage that stores object in a WCF context.
     /// </summary>
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
-    public class WcfContextSorage<T> : IWcfContextSorage<T>
+    public class WcfContextStorage<T> : IWcfContextStorage<T>
     {
         /// <inheritdoc />
         public bool IsAvailable()
@@ -79,7 +79,7 @@ namespace Synergy.NHibernate.Contexts
     /// <summary>
     /// Contextual storage that stores object in a WCF context.
     /// </summary>
-    public interface IWcfContextSorage<T> : IContextSorage<T>
+    public interface IWcfContextStorage<T> : IContextStorage<T>
     {
     }
 }
