@@ -8,8 +8,7 @@ namespace Synergy.Core.Test
     public class SynergyCoreTestLibrary : Library
     {
         public SynergyCoreTestLibrary() : base(
-            new SynergyCoreSampleLibrary(),
-            new SynergyCoreLibrary()
+            new SynergyCoreSampleLibrary()
         )
         {
         }

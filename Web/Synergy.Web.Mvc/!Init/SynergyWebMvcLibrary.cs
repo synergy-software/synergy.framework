@@ -9,7 +9,7 @@ namespace Synergy.Web.Mvc
     /// </summary>
     public class SynergyWebMvcLibrary : Library
     {
-        public SynergyWebMvcLibrary() : base(new SynergyCoreLibrary())
+        public SynergyWebMvcLibrary()
         {
         }
 

@@ -27,8 +27,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Antlr3.Runtime" Version="3.5.1" />
-    <PackageReference Include="Castle.Core" Version="4.2.1" />
-    <PackageReference Include="Castle.Windsor" Version="4.1.0" />
     <PackageReference Include="FluentNHibernate" Version="2.1.2" />
     <PackageReference Include="Iesi.Collections" Version="4.0.4" />
     <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />

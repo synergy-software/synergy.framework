@@ -25,7 +25,7 @@ namespace Synergy.Core.Windsor
         private Type[] excludeInterfaces;
 
         /// <summary>
-        /// Initilazes the installer with <see cref="Library" /> that will be searched for components.
+        /// Initialize the installer with <see cref="Library" /> that will be searched for components.
         /// </summary>
         public ComponentInstaller([NotNull] Library library)
         {
