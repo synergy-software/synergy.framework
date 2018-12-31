@@ -9,6 +9,7 @@ namespace Synergy.NHibernate.Engine
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
     public class DatabaseProvider : IDatabaseProvider
     {
+        // TODO:mace (from:mace on:05-04-2018) użyj component locatora
         private readonly IDatabase[] databases;
 
         /// <summary>

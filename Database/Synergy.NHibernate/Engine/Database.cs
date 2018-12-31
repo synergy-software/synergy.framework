@@ -40,6 +40,7 @@ namespace Synergy.NHibernate.Engine
         [NotNull, ItemNotNull] 
         public IConvention[] Conventions { get; set; }
 
+        // TODO:mace (from:mace on:22-08-2018) add Fail - this can be null when castle do not inject it
         /// <summary>
         /// WARN: This property is public as it is injected by Windsor container. DO NOT ASSIGN IT.
         /// </summary>
