@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using JetBrains.Annotations;
 using NUnit.Framework;
@@ -9,7 +8,7 @@ namespace Synergy.Reflection.Test
     [TestFixture]
     public class CustomAttributeExtensionsTest
     {
-        [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Interface | AttributeTargets.Property,
+        [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Interface | AttributeTargets.Property | AttributeTargets.Parameter,
             AllowMultiple = true)]
         private class MyAttribute : CategoryAttribute
         {
@@ -39,6 +38,19 @@ namespace Synergy.Reflection.Test
 
             [My("attribute on a class property")]
             public string Property { get; set; }
+
+            [My("from-base-on-method")]
+            public virtual void MethodWithAttribute([My("from-base-on-argument")] object arg)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        private class B : A
+        {
+            public override void MethodWithAttribute(object arg)
+            {
+            }
         }
 
         private interface IABase
@@ -56,7 +68,7 @@ namespace Synergy.Reflection.Test
             void Method(bool overriden);
 
             [My("attribute on a not overriden interface method")]
-            void NotOverridenMethod([Display] object argument);
+            void NotOverridenMethod([My("1")] object argument);
 
             [My("attribute on an interface property")]
             string Property { get; set; }
@@ -65,7 +77,7 @@ namespace Synergy.Reflection.Test
         private interface IQueryDispatcher
         {
             [NotNull, Pure]
-            TResult Query<TQuery, TResult>([Display] TQuery command) where TQuery : IA;
+            TResult Query<TQuery, TResult>([My("2")] TQuery command) where TQuery : IA;
         }
 
         private class QueryDispatcher:IQueryDispatcher
@@ -156,11 +168,11 @@ namespace Synergy.Reflection.Test
                                  .First();
 
             //ACT
-            var attributes = argument.GetCustomAttributesBasedOn<DisplayAttribute>();
+            var attributes = argument.GetCustomAttributesBasedOn<CategoryAttribute>();
 
             // ASSERT
             Assert.NotNull(attributes);
-            CollectionAssert.AllItemsAreInstancesOfType(attributes, typeof(DisplayAttribute));
+            CollectionAssert.AllItemsAreInstancesOfType(attributes, typeof(CategoryAttribute));
             CollectionAssert.IsNotEmpty(attributes);
         }
 
@@ -174,11 +186,46 @@ namespace Synergy.Reflection.Test
                                  .First();
 
             //ACT
-            var attributes = argument.GetCustomAttributesBasedOn<DisplayAttribute>();
+            var attributes = argument.GetCustomAttributesBasedOn<CategoryAttribute>();
 
             // ASSERT
             Assert.NotNull(attributes);
-            CollectionAssert.AllItemsAreInstancesOfType(attributes, typeof(DisplayAttribute));
+            CollectionAssert.AllItemsAreInstancesOfType(attributes, typeof(CategoryAttribute));
+            CollectionAssert.IsNotEmpty(attributes);
+        }
+
+        [Test]
+        public void InheritedAttributeCanBeTakenForClassFromMethodPlacedOnABaseClass()
+        {
+            //ARRANGE
+            var method = typeof(B).GetMethod(nameof(B.MethodWithAttribute));
+            Assert.NotNull(method);
+
+            //ACT
+            var attributes = method.GetCustomAttributesBasedOn<CategoryAttribute>();
+
+            // ASSERT
+            Assert.NotNull(attributes);
+            CollectionAssert.AllItemsAreInstancesOfType(attributes, typeof(CategoryAttribute));
+            CollectionAssert.IsNotEmpty(attributes);
+        }
+
+        [Test]
+        [Ignore("Does NOT work yet")]
+        public void InheritedAttributeCanBeTakenForClassFromMethodArgumentPlacedOnABaseClass()
+        {
+            //ARRANGE
+            var method = typeof(B).GetMethod(nameof(B.MethodWithAttribute));
+            Assert.NotNull(method);
+            var argument = method.GetParameters()
+                                 .First();
+
+            //ACT
+            var attributes = argument.GetCustomAttributesBasedOn<CategoryAttribute>();
+
+            // ASSERT
+            Assert.NotNull(attributes);
+            CollectionAssert.AllItemsAreInstancesOfType(attributes, typeof(CategoryAttribute));
             CollectionAssert.IsNotEmpty(attributes);
         }
 
@@ -192,11 +239,11 @@ namespace Synergy.Reflection.Test
                                  .First();
 
             //ACT
-            var attributes = argument.GetCustomAttributesBasedOn<DisplayAttribute>();
+            var attributes = argument.GetCustomAttributesBasedOn<CategoryAttribute>();
 
             // ASSERT
             Assert.NotNull(attributes);
-            CollectionAssert.AllItemsAreInstancesOfType(attributes, typeof(DisplayAttribute));
+            CollectionAssert.AllItemsAreInstancesOfType(attributes, typeof(CategoryAttribute));
             CollectionAssert.IsNotEmpty(attributes);
         }
     }

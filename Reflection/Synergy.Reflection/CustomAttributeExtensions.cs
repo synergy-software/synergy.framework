@@ -29,7 +29,7 @@ namespace Synergy.Reflection
             object[] interfaceAttributes = interfaceMembers.SelectMany(m => m.GetCustomAttributes(inherit: true))
                                                            .ToArray();
 
-            IEnumerable<object> allAttributes = memberAttributes.Union(interfaceAttributes);
+            IEnumerable<object> allAttributes = memberAttributes.Union(interfaceAttributes).ToList();
             TAttribute[] attributes = CustomAttributeExtensions.GetInheritedAttributes<TAttribute>(allAttributes, element.Name);
 
             return attributes;
