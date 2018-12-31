@@ -21,7 +21,7 @@ namespace Synergy.Core.Windsor
         public void Start(Library rootLibrary)
         {
             Fail.IfArgumentNull(rootLibrary, nameof(rootLibrary));
-            Fail.IfNotNull(this.container, $"{nameof(WindsorEngine)} already started");
+            Fail.IfNotNull(this.container, Violation.Message($"{nameof(WindsorEngine)} already started"));
 
             var librarian = new Librarian(rootLibrary);
             Library[] allLibraries = librarian.GetLibraries();

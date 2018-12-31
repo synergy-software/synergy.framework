@@ -249,11 +249,24 @@ namespace Synergy.Contracts
         [AssertionMethod]
         public static void IfNotNull<T>([CanBeNull] [NoEnumeration] T value, [NotNull] string message, [NotNull] params object[] args)
         {
-            // TODO:mace (from:mace on:17-11-2016) This method should be splitted to 5 generic methods to prevent unnecesesary memory allocation 
+            // TODO:mace (from:mace on:17-11-2016) This method should be split to 5 generic methods to prevent unnecessary memory allocation 
             Fail.RequiresMessage(message, args);
-
+            
             if (value != null)
                 throw Fail.Because(message, args);
+        }
+
+        /// <summary>
+        /// Throws exception when specified value is NOT <see langword="null" />.
+        /// </summary>
+        /// <param name="value">Value to check against being NOT <see langword="null" />.</param>
+        /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
+        [ContractAnnotation("value: notnull => halt")]
+        [AssertionMethod]
+        public static void IfNotNull<T>([CanBeNull] [NoEnumeration] T value, Violation message)
+        {
+            if (value != null)
+                throw Fail.Because(message);
         }
     }
 }
