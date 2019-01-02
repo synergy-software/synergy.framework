@@ -6,11 +6,11 @@
 
 using System;
 using JetBrains.Annotations;
-using Synergy.Pooling;
+using Synergy.Core.Pooling;
 
 // ReSharper disable once CheckNamespace
 
-namespace Synergy.Extensions
+namespace Synergy.Core.Extensions
 {
     /// <summary>
     /// Contains extension methods for string objects.

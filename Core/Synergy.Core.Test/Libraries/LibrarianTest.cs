@@ -2,7 +2,6 @@
 using Synergy.Core.Libraries;
 using Synergy.Core.Sample;
 using Synergy.Core.Windsor;
-using Synergy.WindsorCastle;
 
 namespace Synergy.Core.Test.Libraries
 {
@@ -26,7 +25,7 @@ namespace Synergy.Core.Test.Libraries
                     {
                         new SynergyCoreTestLibrary(),
                         new SynergyCoreSampleLibrary(),
-                        new SynergyWindsorCastleLibrary(), 
+                        new SynergyCoreLibrary(), 
                     }));
             windsorEngine.Stop();
         }
@@ -46,7 +45,7 @@ namespace Synergy.Core.Test.Libraries
                     new Library[]
                     {
                         new SynergyCoreSampleLibrary(),
-                        new SynergyWindsorCastleLibrary(), 
+                        new SynergyCoreLibrary(), 
                     }));
         }
 

@@ -47,9 +47,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.Pooling.Tutorial", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.Core.Web", "Core\Synergy.Core.Web\Synergy.Core.Web.csproj", "{AF5C4DD7-6365-46E6-9517-059FAA12D212}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.WindsorCastle", "Core\Synergy.WindsorCastle\Synergy.WindsorCastle.csproj", "{0D0ADA1E-3D79-4A0F-A67D-590A94994A40}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.NHibernate.AspCore", "Database\Synergy.NHibernate.AspCore\Synergy.NHibernate.AspCore.csproj", "{C0FD4CE7-D114-49F8-A8A6-75FDE366F989}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.NHibernate.AspCore", "Database\Synergy.NHibernate.AspCore\Synergy.NHibernate.AspCore.csproj", "{C0FD4CE7-D114-49F8-A8A6-75FDE366F989}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,10 +119,6 @@ Global
 		{AF5C4DD7-6365-46E6-9517-059FAA12D212}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF5C4DD7-6365-46E6-9517-059FAA12D212}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF5C4DD7-6365-46E6-9517-059FAA12D212}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D0ADA1E-3D79-4A0F-A67D-590A94994A40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D0ADA1E-3D79-4A0F-A67D-590A94994A40}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D0ADA1E-3D79-4A0F-A67D-590A94994A40}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D0ADA1E-3D79-4A0F-A67D-590A94994A40}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C0FD4CE7-D114-49F8-A8A6-75FDE366F989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C0FD4CE7-D114-49F8-A8A6-75FDE366F989}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0FD4CE7-D114-49F8-A8A6-75FDE366F989}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -150,7 +144,6 @@ Global
 		{773A3830-CD52-4E28-8A36-31FBCE83FF37} = {4DC6E072-2050-4CF8-89E4-913458FF71B2}
 		{E767CF43-F4DD-4CD0-A9AF-8375DF52E69B} = {4DC6E072-2050-4CF8-89E4-913458FF71B2}
 		{AF5C4DD7-6365-46E6-9517-059FAA12D212} = {D4BF36B2-3BB5-42D4-B989-7C85371E15FD}
-		{0D0ADA1E-3D79-4A0F-A67D-590A94994A40} = {D4BF36B2-3BB5-42D4-B989-7C85371E15FD}
 		{C0FD4CE7-D114-49F8-A8A6-75FDE366F989} = {38C76AB6-275F-4F67-9A71-2B605F7F3EEF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
