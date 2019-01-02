@@ -8,6 +8,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using Synergy.Core.Extensions;
 
 // ReSharper disable once CheckNamespace
 

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Reflection;
-using Synergy.Core;
 
-namespace Synergy.WindsorCastle.Libraries
+namespace Synergy.Core
 {
     public class ExternalLibrary: Library
     {

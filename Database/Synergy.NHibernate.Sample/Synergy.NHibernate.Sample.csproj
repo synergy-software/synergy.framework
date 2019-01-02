@@ -232,10 +232,6 @@
       <Project>{67dff55d-89f0-49f6-a05d-8892b6522471}</Project>
       <Name>Synergy.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\Synergy.WindsorCastle\Synergy.WindsorCastle.csproj">
-      <Project>{0d0ada1e-3d79-4a0f-a67d-590a94994a40}</Project>
-      <Name>Synergy.WindsorCastle</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Web\Synergy.Web.Mvc\Synergy.Web.Mvc.csproj">
       <Project>{d28dc806-e42b-4cbf-9c82-8b132c945b84}</Project>
       <Name>Synergy.Web.Mvc</Name>
@@ -249,8 +245,8 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />  
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />  
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">

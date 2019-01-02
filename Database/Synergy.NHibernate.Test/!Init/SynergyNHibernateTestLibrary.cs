@@ -1,7 +1,6 @@
 ﻿using Synergy.Core;
 using Synergy.NHibernate.Configurations;
 using Synergy.NHibernate.Sample;
-using Synergy.WindsorCastle.Libraries;
 
 namespace Synergy.NHibernate.Test
 {

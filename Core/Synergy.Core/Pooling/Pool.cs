@@ -11,7 +11,7 @@ using Synergy.Contracts;
 
 // ReSharper disable once CheckNamespace
 
-namespace Synergy.Pooling
+namespace Synergy.Core.Pooling
 {
     /// <summary>
     /// Object pool for reusing objects to prevent memory fragmentation.
