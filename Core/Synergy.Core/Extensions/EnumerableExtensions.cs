@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 using Synergy.Contracts;
 
 // ReSharper disable once CheckNamespace
-namespace Synergy.Core.Extensions
+namespace Synergy.Extensions
 {
     // ReSharper disable PossibleMultipleEnumeration
 
