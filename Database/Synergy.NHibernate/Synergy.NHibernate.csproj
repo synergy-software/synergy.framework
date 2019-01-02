@@ -3,6 +3,7 @@
     <TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
