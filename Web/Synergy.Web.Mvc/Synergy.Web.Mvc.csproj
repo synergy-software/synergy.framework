@@ -4,6 +4,15 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <IsPackable>true</IsPackable>
+    <PackageVersion>$(Version)</PackageVersion>
+    <Title>Synergy.Web.Mvc - MVC support for Synergy Layered Application Architecture (SLARCH)</Title>
+    <Authors>Synergy Marcin Celej</Authors>
+    <PackageLicenseUrl>https://github.com/synergy-software/synergy.framework/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/wiki/MVC</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/synergy-software/synergy.framework/blob/master/synergy.png?raw=true</PackageIconUrl>
+    <Description>MVC support for Synergy Layered Application Architecture (SLARCH)</Description>
+    <Copyright>Copyright © Synergy Marcin Celej 2019</Copyright>
+    <PackageTags>MVC SLARCH</PackageTags>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
