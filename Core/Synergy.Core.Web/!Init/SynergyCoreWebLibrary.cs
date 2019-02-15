@@ -1,4 +1,4 @@
-﻿namespace Synergy.Core.Web._Init
+﻿namespace Synergy.Core.Web
 {
     public class SynergyCoreWebLibrary : Library
     {
