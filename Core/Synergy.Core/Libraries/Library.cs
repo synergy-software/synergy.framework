@@ -161,5 +161,11 @@ namespace Synergy.Core
         {
             return new IWindsorEngineExtension[0];
         }
+
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return this.GetAssembly().ToString();
+        }
     }
 }

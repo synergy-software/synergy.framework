@@ -1,5 +1,5 @@
 ﻿using Synergy.Core;
-using Synergy.Core.Web._Init;
+using Synergy.Core.Web;
 using Synergy.Web.Mvc;
 
 namespace Synergy.NHibernate.Sample
