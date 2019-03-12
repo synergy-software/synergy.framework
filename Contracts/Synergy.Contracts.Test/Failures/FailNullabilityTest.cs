@@ -12,58 +12,47 @@ namespace Synergy.Contracts.Test.Failures
         #region variable.FailIfNull(nameof(variable))
 
         [Test]
-        public void FailIfNull()
+        [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
+        public void FailIfNull(object someNullObject)
         {
-            // ARRANGE
-            object someNullObject = null;
-
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
                 // ReSharper disable once ExpressionIsAlwaysNull
-                () => someNullObject.FailIfNull("'{0}' is null and it shouldn't be", nameof(someNullObject))
+                () => someNullObject.FailIfNull(nameof(someNullObject))
             );
 
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("'someNullObject' is null and it shouldn't be"));
+            Assert.That(exception.Message, Is.EqualTo("'someNullObject' is null; and it shouldn't be;"));
         }
 
         [Test]
-        public void FailIfNullOnNullableValue()
+        [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
+        public void FailIfNullWithViolationMessage(object someNullObject)
         {
-            // ARRANGE
-            long? someNullableLong = null;
-
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
                 // ReSharper disable once ExpressionIsAlwaysNull
-                () => someNullableLong.FailIfNull("'{0}' is null and it shouldn't be", nameof(someNullableLong))
+                () => someNullObject.FailIfNull(Violation.Of("this is null: {0}", nameof(someNullObject)))
             );
 
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("'someNullableLong' is null and it shouldn't be"));
+            Assert.That(exception.Message, Is.EqualTo("this is null: someNullObject"));
         }
 
         [Test]
-        public void FailIfNullSuccess()
+        [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
+        public void FailIfNullSuccess([NotNull] object thisIsNotNull)
         {
-            // ARRANGE
-            var thisIsNotNull = new object();
-
             // ACT
             thisIsNotNull.FailIfNull(nameof(thisIsNotNull));
-
-            long? itIsNotNull = 123;
-            itIsNotNull.FailIfNull(nameof(itIsNotNull));
         }
 
         [Test]
-        public void FailIfNullSuccessOnNullableValue()
+        [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
+        public void FailIfNullWithViolationMessageSuccess([NotNull] object thisIsNotNull)
         {
-            // ARRANGE
-            long? thisIsNotNull = 123;
-
             // ACT
-            thisIsNotNull.FailIfNull(nameof(thisIsNotNull));
+            thisIsNotNull.FailIfNull(Violation.Of("{0} should not be null", nameof(thisIsNotNull)));
         }
 
         [Test]
@@ -89,26 +78,22 @@ namespace Synergy.Contracts.Test.Failures
         #region variable.OrFail()
 
         [Test]
-        public void OrFail()
+        [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
+        public void OrFail(object thisMustBeNull)
         {
-            // ARRANGE
-            string thisMustBeNull = null;
-
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
                 // ReSharper disable once ExpressionIsAlwaysNull
                 () => thisMustBeNull.OrFail(nameof(thisMustBeNull)));
 
             // ASSERT
-            Console.WriteLine(exception.Message);
+            Assert.That(exception.Message, Is.EqualTo("'thisMustBeNull' is null; and it shouldn't be;"));
         }
 
         [Test]
-        public void OrFailSuccess()
+        [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
+        public void OrFailSuccess([NotNull] object thisCannotBeNull)
         {
-            // ARRANGE
-            var thisCannotBeNull = "i am not null";
-
             // ACT
             thisCannotBeNull.OrFail(nameof(thisCannotBeNull));
         }
@@ -118,36 +103,33 @@ namespace Synergy.Contracts.Test.Failures
         #region variable.NotNull()
 
         [Test]
-        public void NotNull()
+        [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
+        public void NotNull(object thisMustBeNull)
         {
-            // ARRANGE
-            string thisMustBeNull = null;
-
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
                 // ReSharper disable once ExpressionIsAlwaysNull
                 () => thisMustBeNull.NotNull(nameof(thisMustBeNull)));
 
             // ASSERT
-            Console.WriteLine(exception.Message);
+            Assert.That(exception.Message, Is.EqualTo("'thisMustBeNull' is null; and it shouldn't be;"));
         }
 
         [Test]
-        public void NotNullSuccess()
+        [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
+        public void NotNullSuccess([NotNull] object thisCannotBeNull)
         {
-            // ARRANGE
-            var thisCannotBeNull = "i am not null";
-
             // ACT
             thisCannotBeNull.NotNull(nameof(thisCannotBeNull));
         }
 
         #endregion
 
-        #region variable.OrFail()
+        #region variable.CanBeNull()
 
         [Test]
-        [TestCaseSource(nameof(FailNullabilityTest.GetMixOfNullsAndNotNulls))]
+        [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
+        [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
         public void CanBeNull(object value)
         {
             // ACT
@@ -157,23 +139,12 @@ namespace Synergy.Contracts.Test.Failures
             Assert.That(value, Is.EqualTo(result));
         }
 
-        [ItemCanBeNull]
-        private static IEnumerable<object> GetMixOfNullsAndNotNulls()
-        {
-            // ReSharper disable HeapView.BoxingAllocation
-            yield return 123;
-            yield return (long?)456;
-            yield return new object();
-            yield return null;
-            // ReSharper restore HeapView.BoxingAllocation
-        }
-
         #endregion
 
         #region Fail.IfArgumentNull
 
         [Test]
-        [TestCase(null)]
+        [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
         public void IfArgumentNull([CanBeNull] object argumentValue)
         {
             // ACT
@@ -187,20 +158,10 @@ namespace Synergy.Contracts.Test.Failures
 
         [Test]
         [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
-        public void IfArgumentNullSucces([NotNull] object argumentValue)
+        public void IfArgumentNullSuccess([NotNull] object argumentValue)
         {
             // ACT
             Fail.IfArgumentNull(argumentValue, nameof(argumentValue));
-        }
-
-        [ItemNotNull]
-        private static IEnumerable<object> GetNotNulls()
-        {
-            // ReSharper disable HeapView.BoxingAllocation
-            yield return 123;
-            yield return (long?) 456;
-            yield return new object();
-            // ReSharper restore HeapView.BoxingAllocation
         }
 
         #endregion
@@ -213,19 +174,19 @@ namespace Synergy.Contracts.Test.Failures
         {
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfNotNull(argumentValue, "value is NOT null - something went wrong")
+                () => Fail.IfNotNull(argumentValue, nameof(argumentValue))
             );
 
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("value is NOT null - something went wrong"));
+            Assert.That(exception.Message, Is.EqualTo("'argumentValue' is NOT null; and it should be;"));
         }
 
         [Test]
-        [TestCase(null)]
-        public void IfNotNullSucces([CanBeNull] object argumentValue)
+        [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
+        public void IfNotNullSuccess([CanBeNull] object argumentValue)
         {
             // ACT
-            Fail.IfNotNull(argumentValue, "value is NOT null - something went wrong");
+            Fail.IfNotNull(argumentValue, nameof(argumentValue));
         }
 
         #endregion
@@ -233,80 +194,28 @@ namespace Synergy.Contracts.Test.Failures
         #region Fail.IfNull
 
         [Test]
-        public void IfNullWith0Arguments()
+        [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
+        public void IfNullWithName(object thisIsNull)
         {
-            // ARRANGE
-            object thisIsNull = null;
-
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
                 // ReSharper disable once ExpressionIsAlwaysNull
-                () => Fail.IfNull(thisIsNull, "this is null and it shouldn't be")
+                () => Fail.IfNull(thisIsNull, nameof(thisIsNull))
             );
 
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("this is null and it shouldn't be"));
+            Assert.That(exception.Message, Is.EqualTo("'thisIsNull' is null; and it shouldn't be;"));
         }
 
         [Test]
-        public void IfNullWith1Arguments()
+        [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
+        public void IfNullWithMessage(object thisIsNull)
         {
-            // ARRANGE
-            object thisIsNull = null;
-
-            // ACT
-            var exception = Assert.Throws<DesignByContractViolationException>(
-                // ReSharper disable once ExpressionIsAlwaysNull
-                () => Fail.IfNull(thisIsNull, "this is null and it shouldn't be {0}", 1)
-            );
-
-            // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("this is null and it shouldn't be 1"));
-        }
-
-        [Test]
-        public void IfNullWith2Arguments()
-        {
-            // ARRANGE
-            object thisIsNull = null;
-
-            // ACT
-            var exception = Assert.Throws<DesignByContractViolationException>(
-                // ReSharper disable once ExpressionIsAlwaysNull
-                () => Fail.IfNull(thisIsNull, "this is null and it shouldn't be {0} {1}", 1, "never")
-            );
-
-            // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("this is null and it shouldn't be 1 never"));
-        }
-
-        [Test]
-        public void IfNullWith3Arguments()
-        {
-            // ARRANGE
-            object thisIsNull = null;
-
-            // ACT
-            var exception = Assert.Throws<DesignByContractViolationException>(
-                // ReSharper disable once ExpressionIsAlwaysNull
-                () => Fail.IfNull(thisIsNull, "this is null and it shouldn't be {0} {1} {2}", 1, "never", "maybe")
-            );
-
-            // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("this is null and it shouldn't be 1 never maybe"));
-        }
-
-        [Test]
-        public void IfNullWithNArguments()
-        {
-            // ARRANGE
-            object thisIsNull = null;
-
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
                 // ReSharper disable once ExpressionIsAlwaysNull
                 // ReSharper disable once HeapView.BoxingAllocation
-                () => Fail.IfNull(thisIsNull, "this is null and it shouldn't be {0} {1} {2} {3}", 1, "never", "maybe", "wow")
+                () => Fail.IfNull(thisIsNull, Violation.Of("this is null and it shouldn't be {0} {1} {2} {3}", 1, "never", "maybe", "wow"))
             );
 
             // ASSERT
@@ -314,25 +223,33 @@ namespace Synergy.Contracts.Test.Failures
         }
 
         [Test]
-        public void IfNullSuccess()
+        [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
+        public void IfNullSuccess([NotNull] object argumentValue)
         {
-            // ARRANGE
-            object thisIsNotNull = "not null";
-
             // ACT
-            Fail.IfNull(thisIsNotNull, "this is null and it shouldn't be");
-        }
-
-        [Test]
-        public void IfNullForNotNullableType()
-        {
-            // ARRANGE
-            long thisIsNotNull = 123;
-
-            // ACT
-            Fail.IfNull(thisIsNotNull, "this is null and it shouldn't be");
+            Fail.IfNull(argumentValue, nameof(argumentValue));
         }
 
         #endregion
+
+        [ItemNotNull]
+        private static IEnumerable<object> GetNotNulls()
+        {
+            // ReSharper disable HeapView.BoxingAllocation
+            yield return 123;
+            yield return (long?) 456;
+            yield return new object();
+            yield return "";
+            // ReSharper restore HeapView.BoxingAllocation
+        }
+
+        [ItemCanBeNull]
+        private static IEnumerable<object> GetNulls()
+        {
+            // ReSharper disable HeapView.BoxingAllocation
+            yield return null;
+            //yield return (long?) null;
+            // ReSharper restore HeapView.BoxingAllocation
+        }
     }
 }

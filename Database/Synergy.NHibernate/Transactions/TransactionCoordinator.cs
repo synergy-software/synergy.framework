@@ -80,14 +80,15 @@ namespace Synergy.NHibernate.Transactions
             Fail.IfArgumentNull(transactionalAttribute, nameof(transactionalAttribute));
 
             Type databaseType = transactionalAttribute.Database;
-            Fail.IfNull(databaseType, "There is no database pointed in {0}", transactionalAttribute);
+            Fail.IfNull(databaseType, Violation.Of("There is no database pointed in {0}", transactionalAttribute));
 
             IDatabase database = this.databaseProvider.Get(databaseType);
             Fail.IfNull(database,
-                "Could not find database used in {0}. Did you point {1} in the '{2}' argument?",
-                transactionalAttribute,
-                nameof(IDatabase),
-                nameof(ConnectToAttribute.Database));
+                Violation.Of("Could not find database used in {0}. Did you point {1} in the '{2}' argument?",
+                    transactionalAttribute,
+                    nameof(IDatabase),
+                    nameof(ConnectToAttribute.Database))
+            );
 
             return database;
         }

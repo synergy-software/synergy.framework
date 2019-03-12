@@ -217,7 +217,7 @@ namespace Synergy.NHibernate.Engine
         public string GetKey()
         {
             return this.GetType()
-                       .FullName.FailIfNull("FullName is null for {0}", this.GetType());
+                       .FullName.FailIfNull(Violation.Of("FullName is null for {0}", this.GetType()));
         }
 
         ///// <inheritdoc />

@@ -38,6 +38,17 @@ namespace Synergy.Contracts
         ///     Returns exception that can be thrown when contract is failed.
         /// </summary>
         /// <returns>The exception to throw when contract is violated.</returns>
+        [NotNull]
+        [Pure]
+        public static DesignByContractViolationException Because(Violation message)
+        {
+            return new DesignByContractViolationException(message.ToString());
+        }
+
+        /// <summary>
+        ///     Returns exception that can be thrown when contract is failed.
+        /// </summary>
+        /// <returns>The exception to throw when contract is violated.</returns>
         /// <example>
         ///     <code>
         /// public void SetPersonName([NotNull] string firstName, [NotNull] string lastName)
@@ -54,17 +65,6 @@ namespace Synergy.Contracts
             Fail.RequiresMessage(message);
 
             return new DesignByContractViolationException(message);
-        }
-
-        /// <summary>
-        ///     Returns exception that can be thrown when contract is failed.
-        /// </summary>
-        /// <returns>The exception to throw when contract is violated.</returns>
-        [NotNull]
-        [Pure]
-        public static DesignByContractViolationException Because(Violation message)
-        {
-            return new DesignByContractViolationException(message.ToString());
         }
 
         /// <summary>
