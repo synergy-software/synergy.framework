@@ -75,7 +75,7 @@ namespace Synergy.Contracts
             Fail.RequiresCollectionName(collectionName);
 
             Fail.IfArgumentNull(collection, nameof(collection));
-            Fail.IfTrue(collection.Contains(null), "Collection '{0}' contains null", collectionName);
+            Fail.IfTrue(collection.Contains(null), Violation.Of("Collection '{0}' contains null", collectionName));
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Synergy.Contracts
 
             bool areEquivalent = list1.Intersect(list2)
                                       .Count() == collection1Count;
-            Fail.IfFalse(areEquivalent, message, args);
+            Fail.IfFalse(areEquivalent, Violation.Of(message, args));
         }
 
         /// <summary>
