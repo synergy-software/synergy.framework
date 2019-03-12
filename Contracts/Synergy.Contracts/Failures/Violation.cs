@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
 
 namespace Synergy.Contracts
 {
@@ -7,34 +8,71 @@ namespace Synergy.Contracts
     /// </summary>
     public struct Violation
     {
-        [NotNull] 
-        private readonly string text;
+        [NotNull] private readonly string message;
+        [NotNull] private readonly object[] args;
 
         /// <summary>
-        /// Creates violation message.
+        /// 
         /// </summary>
-        /// <param name="text"></param>
-        private Violation([NotNull] string text)
+        /// <param name="message"></param>
+        /// <param name="args"></param>
+        [StringFormatMethod("message")]
+        public Violation(
+            [NotNull] string message,
+            [NotNull] params object[] args)
         {
-            this.text = text;
+            this.message = message;
+            this.args = args;
+        }
+
+        /// <summary>
+        /// Returns message of the violation message.
+        /// </summary>
+        public override string ToString()
+        {
+            return String.Format(this.message, this.args);
         }
 
         /// <summary>
         /// Creates violation message.
         /// </summary>
         /// <param name="text">Text of the message</param>
+        /// <param name="args"></param>
         /// <returns>Violation message</returns>
-        public static Violation Message([NotNull] string text)
+        [StringFormatMethod("message")]
+        public static Violation Of([NotNull] string text, [NotNull] params object[] args)
         {
-            return new Violation(text);
+            return new Violation(text, args);
         }
 
         /// <summary>
-        /// Returns text of the violation message.
+        /// 
         /// </summary>
-        public override string ToString()
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static Violation WhenVariableIsNull([NotNull] string name)
         {
-            return this.text;
+            return Violation.Of("'{0}' is null; and it shouldn't be;", name);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="argumentName"></param>
+        /// <returns></returns>
+        public static Violation WhenArgumentIsNull([NotNull] string argumentName)
+        {
+            return Violation.Of("Argument '{0}' was null.", argumentName);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static Violation WhenVariableIsNotNull([NotNull] string name)
+        {
+            return Violation.Of("'{0}' is NOT null; and it should be;", name);
         }
     }
 }

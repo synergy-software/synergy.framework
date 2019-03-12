@@ -68,7 +68,8 @@ namespace Synergy.NHibernate.Contexts
         protected ThreadStaticContextScope()
         {
             // WARN: nested scopes are not supported as it it to erroneous
-            Fail.IfNotNull(ThreadStaticContextScope<T>.Sack, nameof(ThreadStaticContextScope<T>) + " was not cleared properly - are you trying to nest the scope? It is forbidden.");
+            Fail.IfNotNull(ThreadStaticContextScope<T>.Sack,
+                Violation.Of(nameof(ThreadStaticContextScope<T>) + " was not cleared properly - are you trying to nest the scope? It is forbidden."));
 
             ThreadStaticContextScope<T>.Sack = new SackOf<T>();
         }

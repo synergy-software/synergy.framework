@@ -100,7 +100,7 @@ namespace Synergy.Contracts
 
             Fail.IfArgumentNull(collection, nameof(collection));
             T element = collection.FirstOrDefault(func);
-            Fail.IfNotNull(element, message, args);
+            Fail.IfNotNull(element, Violation.Of(message, args));
         }
 
         // TODO:mace (from:mace @ 22-10-2016) public static void IfCollectionDoesNotContain<T>([CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] IEnumerable<T> collection,) 

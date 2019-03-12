@@ -38,11 +38,11 @@ namespace Synergy.Core.Windsor
 
             this.assembly = library
                 .GetAssembly()
-                .FailIfNull("{0}.{1}() returned null", library, nameof(Library.GetAssembly));
+                .OrFail(nameof(this.assembly));
 
             this.excludeInterfaces = library
                 .IgnoreInterfaces()
-                .FailIfNull("{0}.{1}() returned null", library, nameof(Library.IgnoreInterfaces))
+                .OrFail(nameof(this.excludeInterfaces))
                 .ToArray();
         }
 

@@ -56,7 +56,7 @@ namespace Synergy.Reflection
         public string GetFileVersion()
         {
             return this.assembly.GetCustomAttribute<AssemblyFileVersionAttribute>()
-                ?.Version.FailIfNull("{1} is empty in assembly '{0}'", nameof(AssemblyFileVersionAttribute), this.assembly.FullName);
+                ?.Version.FailIfNull(Violation.Of("{1} is empty in assembly '{0}'", nameof(AssemblyFileVersionAttribute), this.assembly.FullName));
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Synergy.Reflection
         public string GetProduct()
         {
             return this.assembly.GetCustomAttribute<AssemblyProductAttribute>()
-                ?.Product.FailIfNull("{1} is empty in assembly '{0}'", nameof(AssemblyProductAttribute), this.assembly.FullName);
+                ?.Product.FailIfNull(Violation.Of("{1} is empty in assembly '{0}'", nameof(AssemblyProductAttribute), this.assembly.FullName));
         }
 
         //[NotNull, Pure]

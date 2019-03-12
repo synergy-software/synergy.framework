@@ -18,7 +18,6 @@ namespace Synergy.Contracts
             [NotNull] string argumentName)
         {
             Fail.RequiresArgumentName(argumentName);
-
             Fail.IfArgumentNull(argumentValue, argumentName);
 
             if (argumentValue.Length == 0)
@@ -54,7 +53,7 @@ namespace Synergy.Contracts
         {
             Fail.RequiresMessage(message, args);
 
-            Fail.IfNull(value, message, args);
+            Fail.IfNull(value, Violation.Of(message, args));
 
             if (value.Length == 0)
                 throw Fail.Because(message, args);
@@ -128,7 +127,7 @@ namespace Synergy.Contracts
         {
             Fail.RequiresMessage(message, args);
 
-            Fail.IfNull(value, message, args);
+            Fail.IfNull(value, Violation.Of(message, args));
 
             if (string.IsNullOrWhiteSpace(value))
                 throw Fail.Because(message, args);

@@ -60,7 +60,7 @@ namespace Synergy.NHibernate.AspCore
         [NotNull]
         private string GetKey()
         {
-            return typeof(T).FullName.FailIfNull("FullName is null for {0}", typeof(T));
+            return typeof(T).FullName.FailIfNull(Violation.Of("FullName is null for {0}", typeof(T)));
         }
     }
 }

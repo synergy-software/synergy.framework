@@ -95,7 +95,7 @@ namespace Synergy.Reflection
                 Fail.IfArgumentNull(@enum, nameof(@enum));
 
                 string name = Enum.GetName(this.type, @enum);
-                Fail.IfNull(name, "Enum value {0} not found in enum {1}", @enum, this.type);
+                Fail.IfNull(name, Violation.Of("Enum value {0} not found in enum {1}", @enum, this.type));
                 FieldInfo field = this.type.GetField(name);
                 return field.OrFail(nameof(field));
             }

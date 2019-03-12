@@ -28,7 +28,7 @@ namespace Synergy.Contracts.Samples
         public List<Contractor> FilterContractors(ContractorFilterParameters paramaters)
         {
             paramaters.OrFail(nameof(paramaters));
-            paramaters.EstablishedBetween.FailIfNull("'{0}' is null and it shouldn't be", nameof(paramaters.EstablishedBetween));
+            paramaters.EstablishedBetween.FailIfNull(Violation.Of("'{0}' is null and it shouldn't be", nameof(paramaters.EstablishedBetween)));
             paramaters.EstablishedBetween.Max.OrFail(nameof(paramaters.EstablishedBetween.Max));
 
             if (paramaters.EstablishedBetween == null)
