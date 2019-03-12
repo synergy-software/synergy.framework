@@ -50,29 +50,34 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static Violation WhenVariableIsNull([NotNull] string name)
-        {
-            return Violation.Of("'{0}' is null; and it shouldn't be;", name);
-        }
+        public static Violation WhenVariableIsNull([NotNull] string name) => Violation.Of("'{0}' is null; and it shouldn't be;", name);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="argumentName"></param>
         /// <returns></returns>
-        public static Violation WhenArgumentIsNull([NotNull] string argumentName)
-        {
-            return Violation.Of("Argument '{0}' was null.", argumentName);
-        }
+        public static Violation WhenArgumentIsNull([NotNull] string argumentName) => Violation.Of("Argument '{0}' was null.", argumentName);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static Violation WhenVariableIsNotNull([NotNull] string name)
-        {
-            return Violation.Of("'{0}' is NOT null; and it should be;", name);
-        }
+        public static Violation WhenVariableIsNotNull([NotNull] string name) => Violation.Of("'{0}' is NOT null; and it should be;", name);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static Violation WhenVariableIsFalse([NotNull] string name) => Violation.Of("'{0}' was false; and it should be true;", name);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static Violation WhenVariableIsTrue([NotNull] string name) => Violation.Of("'{0}' was true; and it should be false;", name);
     }
 }

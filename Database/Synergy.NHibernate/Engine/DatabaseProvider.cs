@@ -24,7 +24,7 @@ namespace Synergy.NHibernate.Engine
         public IDatabase Get(Type databaseType)
         {
             Fail.IfArgumentNull(databaseType, nameof(databaseType));
-            Fail.IfFalse(typeof(IDatabase).IsAssignableFrom(databaseType), "{0} is not " + nameof(IDatabase), databaseType);
+            Fail.IfFalse(typeof(IDatabase).IsAssignableFrom(databaseType), Violation.Of("{0} is not " + nameof(IDatabase), databaseType));
 
             return this.databases.SingleOrDefault(db => databaseType.IsInstanceOfType(db));
         }

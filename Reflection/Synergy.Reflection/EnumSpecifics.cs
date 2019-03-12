@@ -62,7 +62,7 @@ namespace Synergy.Reflection
             internal Weak([NotNull] Type type)
             {
                 Fail.IfArgumentNull(type, nameof(type));
-                Fail.IfFalse(type.IsEnum, "Type '{0}' is not an enum", type);
+                Fail.IfFalse(type.IsEnum, Violation.Of("Type '{0}' is not an enum", type));
 
                 this.type = type;
             }

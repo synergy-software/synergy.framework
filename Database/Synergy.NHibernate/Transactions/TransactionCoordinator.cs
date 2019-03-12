@@ -51,9 +51,10 @@ namespace Synergy.NHibernate.Transactions
                 ISession session = transactionsContainer.StartSession(database);
                 Fail.IfTrue(
                     session.Transaction.IsActive,
-                    "Transaction is started to database {0} and it shouldn't be due to attribute {1}",
-                    database,
-                    disabledTransaction);
+                    Violation.Of("Transaction is started to database {0} and it shouldn't be due to attribute {1}",
+                        database,
+                        disabledTransaction)
+                );
             }
         }
 
