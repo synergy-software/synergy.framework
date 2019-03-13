@@ -20,7 +20,7 @@ namespace Synergy.Contracts.Test.Failures
                 );
 
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("'someFalseValue' was false; and it should be true;"));
+            Assert.That(exception.Message, Is.EqualTo("'someFalseValue' is false; and it should be true;"));
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace Synergy.Contracts.Test.Failures
                 );
 
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("'someTrueValue' was true; and it should be false;"));
+            Assert.That(exception.Message, Is.EqualTo("'someTrueValue' is true; and it should be false;"));
         }
 
         [Test]

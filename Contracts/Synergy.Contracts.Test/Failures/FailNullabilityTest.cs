@@ -152,7 +152,7 @@ namespace Synergy.Contracts.Test.Failures
             );
 
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("Argument 'argumentValue' was null."));
+            Assert.That(exception.Message, Is.EqualTo("Argument 'argumentValue' is null."));
         }
 
         [Test]
