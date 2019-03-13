@@ -11,7 +11,7 @@ namespace Synergy.Contracts
         /// </summary>
         /// <typeparam name="T">Type of the value to check against nullability.</typeparam>
         /// <param name="value">Value to check against nullability.</param>
-        /// <param name="name"></param>
+        /// <param name="name">Name of the checked argument / parameter.</param>
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         [NotNull]
         [AssertionMethod]
@@ -21,11 +21,7 @@ namespace Synergy.Contracts
             [NotNull] string name)
         {
             Fail.RequiresArgumentName(name);
-
-            if (value == null)
-                throw Fail.Because(Violation.WhenVariableIsNull(name));
-
-            return value;
+            return value.FailIfNull(Violation.WhenVariableIsNull(name));
         }
 
         /// <summary>
@@ -33,7 +29,7 @@ namespace Synergy.Contracts
         /// </summary>
         /// <typeparam name="T">Type of the value to check against nullability.</typeparam>
         /// <param name="value">Value to check against nullability.</param>
-        /// <param name="message"></param>
+        /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         [NotNull]
         [AssertionMethod]
@@ -55,7 +51,7 @@ namespace Synergy.Contracts
         /// </summary>
         /// <typeparam name="T">Type of the value to check against nullability.</typeparam>
         /// <param name="value">Value to check against nullability.</param>
-        /// <param name="name">Name of the checked argument / parameter to check the nullability of.</param>
+        /// <param name="name">Name of the checked argument / parameter.</param>
         /// <returns>Exactly the same value as provided to this method.</returns>
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         [AssertionMethod]
@@ -78,7 +74,7 @@ namespace Synergy.Contracts
         /// </summary>
         /// <typeparam name="T">Type of the value to check against nullability.</typeparam>
         /// <param name="value">Value to check against nullability.</param>
-        /// <param name="name">Name of the checked argument / parameter to check the nullability of.</param>
+        /// <param name="name">Name of the checked argument / parameter.</param>
         /// <returns>Exactly the same value as provided to this method.</returns>
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         [AssertionMethod]
@@ -139,7 +135,7 @@ namespace Synergy.Contracts
         /// Throws exception when specified value is <see langword="null" />.
         /// </summary>
         /// <param name="value">Value to check against being <see langword="null" />.</param>
-        /// <param name="name">Name of the parameter / argument / variable to check.</param>
+        /// <param name="name">Name of the checked argument / parameter.</param>
         [ContractAnnotation("value: null => halt")]
         [AssertionMethod]
         public static void IfNull<T>(
@@ -148,9 +144,7 @@ namespace Synergy.Contracts
             [NotNull] string name)
         {
             Fail.RequiresArgumentName(name);
-
-            if (value == null)
-                throw Fail.Because(Violation.WhenVariableIsNull(name));
+            Fail.IfNull(value, Violation.WhenVariableIsNull(name));
         }
 
         /// <summary>
@@ -177,15 +171,13 @@ namespace Synergy.Contracts
         /// Throws exception when specified value is NOT <see langword="null" />.
         /// </summary>
         /// <param name="value">Value to check against being NOT <see langword="null" />.</param>
-        /// <param name="name"></param>
+        /// <param name="name">Name of the checked argument / parameter.</param>
         [ContractAnnotation("value: notnull => halt")]
         [AssertionMethod]
         public static void IfNotNull<T>([CanBeNull] [NoEnumeration] T value, [NotNull] string name)
         {
             Fail.RequiresArgumentName(name);
-
-            if (value != null)
-                throw Fail.Because(Violation.WhenVariableIsNotNull(name));
+            Fail.IfNotNull(value, Violation.WhenVariableIsNotNull(name));
         }
 
         /// <summary>

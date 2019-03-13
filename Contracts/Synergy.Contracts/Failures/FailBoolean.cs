@@ -22,9 +22,7 @@ namespace Synergy.Contracts
             [NotNull] string name)
         {
             Fail.RequiresArgumentName(name);
-
-            if (value == false)
-                throw Fail.Because(Violation.WhenVariableIsFalse(name));
+            Fail.IfFalse(value, Violation.WhenVariableIsFalse(name));
         }
 
         /// <summary>
@@ -60,9 +58,7 @@ namespace Synergy.Contracts
             [NotNull] string name)
         {
             Fail.RequiresArgumentName(name);
-
-            if (value)
-                throw Fail.Because(Violation.WhenVariableIsTrue(name));
+            Fail.IfTrue(value, Violation.WhenVariableIsTrue(name));
         }
 
         /// <summary>
