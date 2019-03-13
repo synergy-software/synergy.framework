@@ -36,13 +36,13 @@ namespace Synergy.Contracts
         /// <summary>
         /// Creates violation message.
         /// </summary>
-        /// <param name="text">Text of the message</param>
-        /// <param name="args"></param>
+        /// <param name="message">Text of the message</param>
+        /// <param name="args">Arguments array that contains 0 or more parameters to format a message</param>
         /// <returns>Violation message</returns>
         [StringFormatMethod("message")]
-        public static Violation Of([NotNull] string text, [NotNull] params object[] args)
+        public static Violation Of([NotNull] string message, [NotNull] params object[] args)
         {
-            return new Violation(text, args);
+            return new Violation(message, args);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="argumentName"></param>
         /// <returns></returns>
-        public static Violation WhenArgumentIsNull([NotNull] string argumentName) => Violation.Of("Argument '{0}' was null.", argumentName);
+        public static Violation WhenArgumentIsNull([NotNull] string argumentName) => Violation.Of("Argument '{0}' is null.", argumentName);
 
         /// <summary>
         /// 
@@ -71,13 +71,51 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static Violation WhenVariableIsFalse([NotNull] string name) => Violation.Of("'{0}' was false; and it should be true;", name);
+        public static Violation WhenVariableIsFalse([NotNull] string name) => Violation.Of("'{0}' is false; and it should be true;", name);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static Violation WhenVariableIsTrue([NotNull] string name) => Violation.Of("'{0}' was true; and it should be false;", name);
+        public static Violation WhenVariableIsTrue([NotNull] string name) => Violation.Of("'{0}' is true; and it should be false;", name);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static Violation WhenArgumentEmpty([NotNull] string name) => Violation.Of("Argument '{0}' is empty.", name);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static Violation WhenEmpty([NotNull] string name) => Violation.Of("'{0}' is empty.", name);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static Violation WhenArgumentWhitespace([NotNull] string name) => Violation.Of("Argument '{0}' is whitespace.", name);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static Violation WhenWhitespace([NotNull] string name) => Violation.Of("'{0}' is whitespace", name);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="currentLength"></param>
+        /// <param name="maxLength"></param>
+        /// <returns></returns>
+        public static Violation WhenTooLong([NotNull] string name, int currentLength, int maxLength) =>
+            Violation.Of("'{0}' is too long - {1} (max: {2})", name, currentLength, maxLength);
     }
 }
