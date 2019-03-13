@@ -165,5 +165,15 @@ namespace Synergy.Contracts
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
         }
+
+        /// <summary>
+        /// Checks if argument name was provided.
+        /// </summary>
+        [ExcludeFromCodeCoverage]
+        private static void RequiresArgumentName([NotNull] string argumentName)
+        {
+            if (string.IsNullOrWhiteSpace(argumentName))
+                throw new ArgumentNullException(nameof(argumentName));
+        }
     }
 }

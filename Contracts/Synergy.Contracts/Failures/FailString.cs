@@ -1,11 +1,11 @@
-using System;
-using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 
 namespace Synergy.Contracts
 {
     public static partial class Fail
     {
+        #region Fail.IfArgumentEmpty
+
         /// <summary>
         /// Throws exception if the specified argument is <see langword="null"/> or empty string ("").
         /// </summary>
@@ -21,20 +21,26 @@ namespace Synergy.Contracts
             Fail.IfArgumentNull(argumentValue, argumentName);
 
             if (argumentValue.Length == 0)
-                throw Fail.Because("Argument '{0}' was empty.", argumentName);
+                throw Fail.Because(Violation.WhenArgumentEmpty(argumentName));
         }
 
+        #endregion
+
+        #region Fail.IfEmpty
+
         /// <summary>
-        /// Template for expanding <c>Fail.IfArgumentEmpty(argument, nameof(argument));</c>
-        /// Type <c>argument.fiae</c> and press TAB and let Resharper complete the template.
+        /// Throws exception if the specified value is <see langword="null"/> or empty string ("").
         /// </summary>
-        /// <param name="argumentValue">Value of the argument to check against <see langword="null"/> or emptiness.</param>
-        [SourceTemplate]
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        public static void fiae([CanBeNull] this string argumentValue)
+        /// <param name="value">Value to check against <see langword="null"/> or emptiness.</param>
+        /// <param name="name">Name of the checked argument / parameter to check.</param>
+        [ContractAnnotation("value: null => halt")]
+        [AssertionMethod]
+        public static void IfEmpty(
+            [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string value,
+            [NotNull] string name)
         {
-            Fail.IfArgumentEmpty(argumentValue, nameof(argumentValue));
+            Fail.RequiresArgumentName(name);
+            Fail.IfEmpty(value, Violation.WhenEmpty(name));
         }
 
         /// <summary>
@@ -42,22 +48,19 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="value">Value to check against <see langword="null"/> or emptiness.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        /// <param name="args">Arguments that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        [StringFormatMethod("message")]
         [ContractAnnotation("value: null => halt")]
         [AssertionMethod]
         public static void IfEmpty(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string value,
-            [NotNull] string message,
-            [NotNull] params object[] args)
+            Violation message)
         {
-            Fail.RequiresMessage(message, args);
-
-            Fail.IfNull(value, Violation.Of(message, args));
+            Fail.IfNull(value, message);
 
             if (value.Length == 0)
-                throw Fail.Because(message, args);
+                throw Fail.Because(message);
         }
+
+        #endregion
 
         /// <summary>
         ///  Throws exception if the specified argument value is <see langword="null"/> or white space.
@@ -71,11 +74,10 @@ namespace Synergy.Contracts
             [NotNull] string argumentName)
         {
             Fail.RequiresArgumentName(argumentName);
-
             Fail.IfArgumentNull(argumentValue, argumentName);
 
             if (string.IsNullOrWhiteSpace(argumentValue))
-                throw Fail.Because("Argument '{0}' was empty.", argumentName);
+                throw Fail.Because(Violation.WhenArgumentWhitespace(argumentName));
         }
 
         /// <summary>
@@ -93,22 +95,26 @@ namespace Synergy.Contracts
         {
             Fail.RequiresArgumentName(name);
 
-            IfArgumentWhiteSpace(value, name);
+            Fail.IfWhitespace(value, name);
 
             return value;
         }
 
+        #region Fail.IfWhitespace
+
         /// <summary>
-        /// Template for expanding <c>Fail.IfArgumentWhiteSpace(argument, nameof(argument));</c>
-        /// Type <c>argument.fiaw</c> and press TAB and let Resharper complete the template.
+        /// Throws exception if the specified value is <see langword="null"/> or white space.
         /// </summary>
-        /// <param name="argumentValue">Value of the argument to check.</param>
-        [SourceTemplate]
-        [UsedImplicitly]
-        // ReSharper disable once InconsistentNaming
-        public static void fiaw([CanBeNull] this string argumentValue)
+        /// <param name="value">Value to check</param>
+        /// <param name="name">Name of the checked argument / parameter.</param>
+        [ContractAnnotation("value: null => halt")]
+        [AssertionMethod]
+        public static void IfWhitespace(
+            [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string value,
+            [NotNull] string name)
         {
-            Fail.IfArgumentWhiteSpace(argumentValue, nameof(argumentValue));
+            Fail.RequiresArgumentName(name);
+            Fail.IfWhitespace(value, Violation.WhenWhitespace(name));
         }
 
         /// <summary>
@@ -116,32 +122,19 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="value">Value to check</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        /// <param name="args">Arguments that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        [StringFormatMethod("message")]
         [ContractAnnotation("value: null => halt")]
         [AssertionMethod]
         public static void IfWhitespace(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string value,
-            [NotNull] string message,
-            [NotNull] params object[] args)
+            Violation message)
         {
-            Fail.RequiresMessage(message, args);
-
-            Fail.IfNull(value, Violation.Of(message, args));
+            Fail.IfNull(value, message);
 
             if (string.IsNullOrWhiteSpace(value))
-                throw Fail.Because(message, args);
+                throw Fail.Because(message);
         }
 
-        /// <summary>
-        /// Checks if argument name was provided.
-        /// </summary>
-        [ExcludeFromCodeCoverage]
-        private static void RequiresArgumentName([NotNull] string argumentName)
-        {
-            if (string.IsNullOrWhiteSpace(argumentName))
-                throw new ArgumentNullException(nameof(argumentName));
-        }
+        #endregion
 
         /// <summary>
         /// Throws exception if the specified string length exceeds provided maximum.
@@ -163,7 +156,7 @@ namespace Synergy.Contracts
 
             int currentLength = value.Length;
             if (currentLength > maxLength)
-                throw Fail.Because("{0} is to long - {1} (max: {2}", name, currentLength, maxLength);
+                throw Fail.Because(Violation.WhenTooLong(name, currentLength, maxLength));
         }
 
         /// <summary>

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using NUnit.Framework;
 
@@ -9,7 +10,7 @@ namespace Synergy.Contracts.Test.Failures
         #region Fail.IfArgumentEmpty
 
         [Test]
-        [TestCase(null)]
+        [TestCaseSource(nameof(FailStringTest.GetEmpty))]
         public void IfArgumentEmptyWithNull(string argumentValue)
         {
             // ACT
@@ -18,25 +19,11 @@ namespace Synergy.Contracts.Test.Failures
             );
             
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("Argument 'argumentValue' was null."));
+            Assert.That(exception, Is.Not.Null);
         }
 
         [Test]
-        [TestCase("")]
-        public void IfArgumentEmptyWithEmptyString(string argumentValue)
-        {
-            // ACT
-            var exception = Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfArgumentEmpty(argumentValue, nameof(argumentValue))
-            );
-
-            // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("Argument 'argumentValue' was empty."));
-        }
-
-        [Test]
-        [TestCase("not empty")]
-        [TestCase(" ")]
+        [TestCaseSource(nameof(FailStringTest.GetNotEmpty))]
         public void IfArgumentEmptySuccess([NotNull] string argumentValue)
         {
             // ACT
@@ -48,39 +35,58 @@ namespace Synergy.Contracts.Test.Failures
         #region Fail.IfEmpty
 
         [Test]
-        public void IfEmpty()
+        [TestCaseSource(nameof(FailStringTest.GetEmpty))]
+        public void IfEmptyWithName(string text)
         {
             Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfEmpty("", "message")
+                () => Fail.IfEmpty(text, nameof(text))
                 );
+        }
 
+        [Test]
+        [TestCaseSource(nameof(FailStringTest.GetNotEmpty))]
+        public void IfEmptyWithNameSuccess([NotNull] string text)
+        {
+            Fail.IfEmpty(text, nameof(text));
+        }
+
+        [Test]
+        [TestCaseSource(nameof(FailStringTest.GetEmpty))]
+        public void IfEmptyWithMessage(string text)
+        {
             Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfEmpty(null, "message")
-                );
+                () => Fail.IfEmpty(text, Violation.Of("it shouldn't be empty"))
+            );
+        }
 
-            Fail.IfEmpty("   ", "message");
-            Fail.IfEmpty("aa", "message");
+        [Test]
+        [TestCaseSource(nameof(FailStringTest.GetNotEmpty))]
+        public void IfEmptyWithMessageSuccess([NotNull] string text)
+        {
+            Fail.IfEmpty(text, Violation.Of("it shouldn't be empty"));
         }
 
         #endregion
 
+        #region Fail.IfArgumentWhiteSpace
+
         [Test]
-        public void IfArgumentWhiteSpace()
+        [TestCaseSource(nameof(FailStringTest.GetWhitespaces))]
+        public void IfArgumentWhiteSpace(string text)
         {
             Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfArgumentWhiteSpace(null, "null")
+                () => Fail.IfArgumentWhiteSpace(text, nameof(text))
             );
-
-            Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfArgumentWhiteSpace("", "empty")
-            );
-
-            Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfArgumentWhiteSpace("   ", "bia³e-znaki")
-            );
-
-            Fail.IfArgumentWhiteSpace("nie pusty", "nie-pusty");
         }
+
+        [Test]
+        [TestCaseSource(nameof(FailStringTest.GetNonWhitespaces))]
+        public void IfArgumentWhiteSpaceSuccess([NotNull] string text)
+        {
+            Fail.IfArgumentWhiteSpace(text, nameof(text));
+        }
+
+        #endregion
 
         [Test]
         public void OrFailIfWhiteSpace()
@@ -100,23 +106,41 @@ namespace Synergy.Contracts.Test.Failures
             "nie pusty".OrFailIfWhiteSpace("nie-pusty");
         }
 
+        #region Fail.IfWhitespace
+
         [Test]
-        public void IfWhitespace()
+        [TestCaseSource(nameof(FailStringTest.GetWhitespaces))]
+        public void IfWhitespaceWithName(string text)
         {
             Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfWhitespace("", "message")
+                () => Fail.IfWhitespace(text, nameof(text))
                 );
-
-            Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfWhitespace(null, "message")
-                );
-
-            Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfWhitespace("   ", "message")
-                );
-
-            Fail.IfWhitespace("aa", "message");
         }
+
+        [Test]
+        [TestCaseSource(nameof(FailStringTest.GetNonWhitespaces))]
+        public void IfWhitespaceWithNameSuccess([NotNull] string text)
+        {
+            Fail.IfWhitespace(text, nameof(text));
+        }
+
+        [Test]
+        [TestCaseSource(nameof(FailStringTest.GetWhitespaces))]
+        public void IfWhitespaceWithMessage(string text)
+        {
+            Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfWhitespace(text, Violation.Of("it is whitespace"))
+            );
+        }
+
+        [Test]
+        [TestCaseSource(nameof(FailStringTest.GetNonWhitespaces))]
+        public void IfWhitespaceWithMessageSuccess([NotNull] string text)
+        {
+            Fail.IfWhitespace(text, Violation.Of("it is whitespace"));
+        }
+
+        #endregion
 
         [Test]
         public void IfTooLong()
@@ -163,6 +187,36 @@ namespace Synergy.Contracts.Test.Failures
             Fail.IfTooLongOrWhitespace("a ", 2, "a ");
             Fail.IfTooLongOrWhitespace("aa", 300, "aa");
             Fail.IfTooLongOrWhitespace("aa", 2, "aa");
+        }
+
+        [ItemCanBeNull]
+        private static IEnumerable<string> GetWhitespaces()
+        {
+            yield return null;
+            yield return "";
+            yield return "   ";
+            yield return "\t \n";
+        }
+
+        [ItemCanBeNull]
+        private static IEnumerable<string> GetNonWhitespaces()
+        {
+            yield return "nie pusty";
+            yield return " spacious \t";
+        }
+
+        [ItemCanBeNull]
+        private static IEnumerable<string> GetEmpty()
+        {
+            yield return null;
+            yield return "";
+        }
+
+        [ItemCanBeNull]
+        private static IEnumerable<string> GetNotEmpty()
+        {
+            yield return "not empty";
+            yield return " ";
         }
     }
 }
