@@ -51,11 +51,11 @@ namespace Synergy.Contracts.Test.Failures
         #region Fail.IfEmpty
 
         [Test]
-        public void IfEmpty()
+        public void IfEmptyWithMessage()
         {
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfEmpty(Guid.Empty, "guid is empty and it shouldn't be")
+                () => Fail.IfEmpty(Guid.Empty, Violation.Of("guid is empty and it shouldn't be"))
             );
 
             // ASSERT
@@ -63,13 +63,13 @@ namespace Synergy.Contracts.Test.Failures
         }
 
         [Test]
-        public void IfEmptySuccess()
+        public void IfEmptyWithMessageSuccess()
         {
             // ARRANGE
             Guid notEmptyGuid = Guid.NewGuid();
 
             // ACT
-            Fail.IfEmpty(notEmptyGuid, "guid is empty and it shouldn't be");
+            Fail.IfEmpty(notEmptyGuid, Violation.Of("guid is empty and it shouldn't be"));
         }
 
         #endregion

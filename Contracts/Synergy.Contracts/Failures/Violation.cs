@@ -137,13 +137,20 @@ namespace Synergy.Contracts
             Violation.Of("Argument '{0}' is equal to {1} and it should NOT be.", name, FormatValue(unexpected));
 
         /// <summary>
-        /// 
+        /// '{0}' is NOT equal to {1} and it should be.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="expected"></param>
         /// <returns></returns>
         public static Violation WhenNotEqual<T>([NotNull] string name, [CanBeNull] T expected) =>
             Violation.Of("'{0}' is NOT equal to {1} and it should be.", name, FormatValue(expected));
+
+        /// <summary>
+        /// "Argument '{0}' is an empty Guid."
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static Violation WhenGuidArgumentIsEmpty([NotNull] string name) => Violation.Of("Argument '{0}' is an empty Guid.", name);
 
         [NotNull]
         private static string FormatValue<T>([CanBeNull] T value)
