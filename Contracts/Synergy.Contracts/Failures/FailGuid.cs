@@ -17,8 +17,7 @@ namespace Synergy.Contracts
         public static void IfEmpty(Guid value, [NotNull] string message, [NotNull] params object[] args)
         {
             Fail.RequiresMessage(message, args);
-
-            Fail.IfEqual(Guid.Empty, value, message, args);
+            Fail.IfEqual(Guid.Empty, value, Violation.Of(message, args));
         }
 
         /// <summary>
@@ -42,8 +41,7 @@ namespace Synergy.Contracts
         public static void IfArgumentEmpty(Guid value, [NotNull] [InvokerParameterName] string argumentName)
         {
             Fail.RequiresArgumentName(argumentName);
-
-            Fail.IfEqual(Guid.Empty, value, "Argument '{0}' is an empty Guid.", argumentName);
+            Fail.IfEqual(Guid.Empty, value, Violation.Of("Argument '{0}' is an empty Guid.", argumentName));
         }
 
         // TODO:mace (from:mace @ 22-10-2016): guid.FailIfEmpty

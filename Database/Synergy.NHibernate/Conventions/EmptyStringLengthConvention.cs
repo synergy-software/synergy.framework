@@ -18,7 +18,7 @@ namespace Synergy.NHibernate.Conventions
                 return;
 
             int length = ((IPropertyInspector)instance).Length;
-            Fail.IfEqual(0, length, "{0}.{1} length is 0", instance.EntityType.Name, instance.Name);
+            Fail.IfEqual(0, length, Violation.Of("{0}.{1} length is 0", instance.EntityType.Name, instance.Name));
         }
     }
 }
