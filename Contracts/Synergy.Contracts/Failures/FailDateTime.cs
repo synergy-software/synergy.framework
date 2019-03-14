@@ -45,7 +45,7 @@ namespace Synergy.Contracts
                 return;
 
             DateTime dateTime = value.Value;
-            Fail.IfNotEqual(dateTime.Date, dateTime, message, args);
+            Fail.IfNotEqual(dateTime.Date, dateTime, Violation.Of(message, args));
         }
 
         // TODO:mace (from:mace @ 22-10-2016): variable.FailIfNotMidnight(nameof(variable))

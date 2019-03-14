@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using JetBrains.Annotations;
 using NUnit.Framework;
 
 namespace Synergy.Contracts.Test.Failures
@@ -8,90 +10,24 @@ namespace Synergy.Contracts.Test.Failures
         #region Fail.IfEqual()
 
         [Test]
-        public void IfEqualWith0Arguments()
+        [TestCaseSource(nameof(FailEqualityTest.GetEquals))]
+        public void IfEqualWithMessage(Pair obj)
         {
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfEqual("s1", "s1", "values are equal and shouldn't be")
+                () => Fail.IfEqual(obj.Value1, obj.Value2, Violation.Of("{0} is equal to {1} and shouldn't {2}. {3}", "first", "second", "be", "Seriously?"))
             );
 
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("values are equal and shouldn't be"));
+            Assert.That(exception.Message, Is.EqualTo("first is equal to second and shouldn't be. Seriously?"));
         }
 
         [Test]
-        public void IfEqualWith1Arguments()
+        [TestCaseSource(nameof(FailEqualityTest.GetNotEquals))]
+        public void IfEqualSuccess(Pair obj)
         {
             // ACT
-            var exception = Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfEqual(1, 1, "{0} is equal to 1 and shouldn't be", 1)
-            );
-
-            // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("1 is equal to 1 and shouldn't be"));
-        }
-
-        [Test]
-        public void IfEqualWith2Arguments()
-        {
-            // ACT
-            var exception = Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfEqual(1, 1, "{0} is equal to {1} and shouldn't be", 1, 1)
-            );
-
-            // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("1 is equal to 1 and shouldn't be"));
-        }
-
-        [Test]
-        public void IfEqualWith3Arguments()
-        {
-            // ACT
-            var exception = Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfEqual(1, 1, "{0} is equal to {1} and shouldn't {2}", 1, 1, "be")
-            );
-
-            // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("1 is equal to 1 and shouldn't be"));
-        }
-
-        [Test]
-        public void IfEqualWithNArguments()
-        {
-            // ACT
-            var exception = Assert.Throws<DesignByContractViolationException>(
-                // ReSharper disable HeapView.BoxingAllocation
-                () => Fail.IfEqual(1, 1, "{0} is equal to {1} and shouldn't {2}. {3}", 1, 1, "be", "Seriously?")
-                // ReSharper restore HeapView.BoxingAllocation
-            );
-
-            // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("1 is equal to 1 and shouldn't be. Seriously?"));
-        }
-
-        [Test]
-        public void IfEqualNulls()
-        {
-            // ARRANGE
-            object o1 = null;
-            object o2 = null;
-
-            // ACT
-            var exception = Assert.Throws<DesignByContractViolationException>(
-                // ReSharper disable ExpressionIsAlwaysNull
-                () => Fail.IfEqual(o1, o2, "values are equal and shouldn't be")
-                // ReSharper restore ExpressionIsAlwaysNull
-            );
-
-            // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("values are equal and shouldn't be"));
-        }
-
-        [Test]
-        public void IfEqualSuccess()
-        {
-            // ACT
-            Fail.IfEqual("s1", "s2", "values are equal and shouldn't be");
+            Fail.IfEqual(obj.Value1, obj.Value2, "values are equal and shouldn't be");
         }
 
         #endregion
@@ -99,22 +35,24 @@ namespace Synergy.Contracts.Test.Failures
         #region Fail.IfArgumentEqual()
 
         [Test]
-        public void IfArgumentEqual([Values(0)] int argument)
+        [TestCaseSource(nameof(FailEqualityTest.GetEquals))]
+        public void IfArgumentEqual(Pair obj)
         {
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfArgumentEqual(argument, argument, nameof(argument))
+                () => Fail.IfArgumentEqual(obj.Value1, obj.Value2, nameof(obj))
             );
 
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("Argument 'argument' is equal to 0 and it should NOT be."));
+            Assert.That(exception.Message, Is.EqualTo("Argument 'obj' is equal to " + obj.GetValue2() + " and it should NOT be."));
         }
 
         [Test]
-        public void IfArgumentEqualSuccess([Values(1)] int argument)
+        [TestCaseSource(nameof(FailEqualityTest.GetNotEquals))]
+        public void IfArgumentEqualSuccess(Pair obj)
         {
             // ACT
-            Fail.IfArgumentEqual(argument - 1, argument, nameof(argument));
+            Fail.IfArgumentEqual(obj.Value1, obj.Value2, nameof(obj));
         }
 
         #endregion
@@ -122,11 +60,12 @@ namespace Synergy.Contracts.Test.Failures
         #region Fail.IfNotEqual()
 
         [Test]
-        public void IfNotEqual()
+        [TestCaseSource(nameof(FailEqualityTest.GetNotEquals))]
+        public void IfNotEqualWithMessage(Pair obj)
         {
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfNotEqual("s1", "s2", "values differ and should be equal")
+                () => Fail.IfNotEqual(obj.Value1, obj.Value2, Violation.Of("values differ and should be equal"))
             );
 
             // ASSERT
@@ -134,23 +73,62 @@ namespace Synergy.Contracts.Test.Failures
         }
 
         [Test]
-        public void IfNotEqualSuccess()
+        [TestCaseSource(nameof(FailEqualityTest.GetEquals))]
+        public void IfNotEqualWithMessageSuccess(Pair obj)
         {
             // ACT
-            Fail.IfNotEqual("s1", "s1", "values differ and should be equal");
+            Fail.IfNotEqual(obj.Value1, obj.Value2, Violation.Of("values differ and should be equal"));
         }
 
         [Test]
-        public void IfNotEqualNulls()
+        [TestCaseSource(nameof(FailEqualityTest.GetNotEquals))]
+        public void IfNotEqualWithName(Pair obj)
         {
-            // ARRANGE
-            object o1 = null;
-            object o2 = null;
-
             // ACT
-            Fail.IfNotEqual(o1, o2, "values differ and should be equal");
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfNotEqual(obj.Value2, obj.Value1, nameof(obj))
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("'obj' is NOT equal to " + obj.GetValue2() + " and it should be."));
+        }
+
+        [Test]
+        [TestCaseSource(nameof(FailEqualityTest.GetEquals))]
+        public void IfNotEqualWithNameSuccess(Pair obj)
+        {
+            // ACT
+            Fail.IfNotEqual(obj.Value1, obj.Value2, nameof(obj));
         }
 
         #endregion
+
+        private static IEnumerable<Pair> GetEquals()
+        {
+            yield return new Pair(1, 1);
+            yield return new Pair(null, null);
+        }
+
+        private static IEnumerable<Pair> GetNotEquals()
+        {
+            yield return new Pair(1, 2);
+            yield return new Pair(1, 1.0M);
+            yield return new Pair(new object(), null);
+        }
+
+        public struct Pair
+        {
+            public readonly object Value1;
+            public readonly object Value2;
+
+            public Pair(object v1, object v2)
+            {
+                this.Value1 = v1;
+                this.Value2 = v2;
+            }
+
+            [NotNull] public string GetValue2() => this.Value2 == null ? "null" : this.Value2.ToString();
+            public override string ToString() => $"{this.Value1}, {this.GetValue2()}";
+        }
     }
 }
