@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using JetBrains.Annotations;
 
 namespace Synergy.Contracts
@@ -151,6 +152,15 @@ namespace Synergy.Contracts
         /// <param name="name"></param>
         /// <returns></returns>
         public static Violation WhenGuidArgumentIsEmpty([NotNull] string name) => Violation.Of("Argument '{0}' is an empty Guid.", name);
+
+        /// <summary>
+        /// "'{0}' is empty = {1}"
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Violation WhenDateTimeIsEmpty(string name, DateTime value) =>
+            Violation.Of("'{0}' is empty = {1}", name, value.ToString(CultureInfo.InvariantCulture));
 
         [NotNull]
         private static string FormatValue<T>([CanBeNull] T value)
