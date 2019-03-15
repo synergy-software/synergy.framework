@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Globalization;
 using JetBrains.Annotations;
 
 namespace Synergy.Contracts
 {
     public static partial class Fail
     {
+        // TODO:mace (from:mace @ 22-10-2016): variable.FailIfNotMidnight(nameof(variable))
+
         /// <summary>
         ///     Throws exception when the checked DateTime contains more than just a date - when it contains hours, minutes or
         ///     seconds fraction.
@@ -17,10 +18,6 @@ namespace Synergy.Contracts
         /// <param name="value">Nullable DateTime to check.</param>
         /// <param name="message">
         ///     Message that will be passed to <see cref="DesignByContractViolationException" /> when the check
-        ///     fails.
-        /// </param>
-        /// <param name="args">
-        ///     Arguments that will be passed to <see cref="DesignByContractViolationException" /> when the check
         ///     fails.
         /// </param>
         /// <example>
@@ -35,20 +32,15 @@ namespace Synergy.Contracts
         /// }
         /// </code>
         /// </example>
-        [StringFormatMethod("message")]
         [AssertionMethod]
-        public static void IfNotMidnight([CanBeNull] DateTime? value, [NotNull] string message, [NotNull] params object[] args)
+        public static void IfNotMidnight([CanBeNull] DateTime? value, Violation message)
         {
-            Fail.RequiresMessage(message, args);
-
             if (value == null)
                 return;
 
             DateTime dateTime = value.Value;
-            Fail.IfNotEqual(dateTime.Date, dateTime, Violation.Of(message, args));
+            Fail.IfNotEqual(dateTime.Date, dateTime, message);
         }
-
-        // TODO:mace (from:mace @ 22-10-2016): variable.FailIfNotMidnight(nameof(variable))
 
         /// <summary>
         /// Checks whether specified DateTime is empty - is equal to DateTime.MinValue.
@@ -60,7 +52,7 @@ namespace Synergy.Contracts
         public static void IfEmpty(DateTime value, [NotNull] string name)
         {
             if (value == DateTime.MinValue)
-                throw Fail.Because("'{0}' is empty = {1}", name, value.ToString(CultureInfo.InvariantCulture));
+                throw Fail.Because(Violation.WhenDateTimeIsEmpty(name, value));
         }
 
         /// <summary>

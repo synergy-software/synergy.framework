@@ -17,7 +17,7 @@ namespace Synergy.Contracts.Test.Failures
 
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfNotMidnight(notMidnight, "date should have no hour nor second")
+                () => Fail.IfNotMidnight(notMidnight, Violation.Of("date should have no hour nor second"))
             );
 
             // ASSERT
@@ -28,14 +28,14 @@ namespace Synergy.Contracts.Test.Failures
         public void IfNotMidnightSuccess()
         {
             // ACT
-            Fail.IfNotMidnight(DateTime.Today, "date should have no hour nor second");
+            Fail.IfNotMidnight(DateTime.Today, Violation.Of("date should have no hour nor second"));
         }
 
         [Test]
         public void IfNotMidnightSuccessWithNull()
         {
             // ACT
-            Fail.IfNotMidnight(null, "date should have no hour nor second");
+            Fail.IfNotMidnight(null, Violation.Of("date should have no hour nor second"));
         }
 
         [Test]
