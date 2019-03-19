@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using NUnit.Framework;
 
 namespace Synergy.Contracts.Test.Failures
@@ -7,18 +10,42 @@ namespace Synergy.Contracts.Test.Failures
     [TestFixture]
     public class FailCollectionTest
     {
-        #region Fail.IfCollectionContains()
+        #region Fail.IfCollectionEmpty()
 
         [Test]
-        public void IfCollectionContains()
+        [TestCaseSource(nameof(FailCollectionTest.GetEmpty))]
+        public void IfCollectionEmpty([CanBeNull] IEnumerable collection)
         {
-            var kolekcja = new[] {new object(), "element"};
-
             Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfCollectionContains(kolekcja, e => object.Equals(e, "element"), "ta kolekcja ma 'ala'")
+                () => Fail.IfCollectionEmpty(collection, nameof(collection))
             );
+        }
 
-            Fail.IfCollectionContains(kolekcja, e => object.Equals(e, "dziwny"), "ta kolekcja NIE ma elementu dziwnego");
+        [Test]
+        [TestCaseSource(nameof(FailCollectionTest.GetNotEmpty))]
+        public void IfCollectionEmptySuccess([NotNull] IEnumerable collection)
+        {
+            Fail.IfCollectionEmpty(collection, "collection");
+        }
+
+        #endregion
+
+        #region variable.OrFailIfCollectionEmpty()
+
+        [Test]
+        [TestCaseSource(nameof(FailCollectionTest.GetEmpty))]
+        public void OrFailIfEmpty([CanBeNull] IEnumerable collection)
+        {
+            Assert.Throws<DesignByContractViolationException>(
+                () => collection.OrFailIfCollectionEmpty(nameof(collection))
+            );
+        }
+
+        [Test]
+        [TestCaseSource(nameof(FailCollectionTest.GetNotEmpty))]
+        public void OrFailIfEmptySuccess([NotNull] IEnumerable collection)
+        {
+            collection.OrFailIfCollectionEmpty(nameof(collection));
         }
 
         #endregion
@@ -26,58 +53,45 @@ namespace Synergy.Contracts.Test.Failures
         #region Fail.IfCollectionContainsNull()
 
         [Test]
-        public void IfCollectionContainsNull()
+        [TestCaseSource(nameof(FailCollectionTest.GetCollectionsWithNull))]
+        public void IfCollectionContainsNull([CanBeNull] IEnumerable<object> collection)
         {
-            var zNullem = new[] {new object(), null};
-            IEnumerable<string> pełna = Enumerable.Repeat("element", 2);
-
             Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfCollectionContainsNull(zNullem, "zNullem")
+                () => Fail.IfCollectionContainsNull(collection, nameof(collection))
             );
+        }
 
-            Fail.IfCollectionContainsNull(pełna, "pełna");
+        [Test]
+        [TestCaseSource(nameof(FailCollectionTest.GetCollectionsWithoutNull))]
+        public void IfCollectionContainsNullSuccess([CanBeNull] IEnumerable<object> collection)
+        {
+            Fail.IfCollectionContainsNull(collection, nameof(collection));
         }
 
         #endregion
 
-        #region Fail.IfCollectionEmpty()
+        #region Fail.IfCollectionContains()
 
         [Test]
-        public void IfCollectionEmpty()
+        [TestCaseSource(nameof(FailCollectionTest.GetCollectionsWithSuchElement))]
+        public void IfCollectionContains([NotNull] Tuple<IEnumerable<object>, object> pair)
         {
-            IEnumerable<object> pusta = Enumerable.Empty<object>();
-            IEnumerable<object> nullowata = null;
-            IEnumerable<string> pełna = Enumerable.Repeat("element", 2);
+            var collection = pair.Item1;
+            var element = pair.Item2;
 
             Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfCollectionEmpty(pusta, "collection")
+                () => Fail.IfCollectionContains(collection, e => object.Equals(e, element), Violation.Of("this collection contains '{0}'", element))
             );
-
-            Assert.Throws<DesignByContractViolationException>(
-                // ReSharper disable once ExpressionIsAlwaysNull
-                () => Fail.IfCollectionEmpty(nullowata, "collection")
-            );
-
-            Fail.IfCollectionEmpty(pełna, "collection");
         }
 
         [Test]
-        public void OrFailIfEmpty()
+        [TestCaseSource(nameof(FailCollectionTest.GetCollectionsWithoutSuchElement))]
+        public void IfCollectionContainsSuccess([NotNull] Tuple<IEnumerable<object>, object> pair)
         {
-            IEnumerable<object> pusta = Enumerable.Empty<object>();
-            IEnumerable<object> nullowata = null;
-            IEnumerable<string> pełna = Enumerable.Repeat("element", 2);
+            var collection = pair.Item1;
+            var element = pair.Item2;
 
-            Assert.Throws<DesignByContractViolationException>(
-                () => pusta.OrFaifIfCollectionEmpty("collection")
-            );
-
-            Assert.Throws<DesignByContractViolationException>(
-                // ReSharper disable once ExpressionIsAlwaysNull
-                () => nullowata.OrFaifIfCollectionEmpty("collection")
-            );
-
-            pełna.OrFaifIfCollectionEmpty("collection");
+            Fail.IfCollectionContains(collection, e => object.Equals(e,element), Violation.Of("this collection contains '{0}'", element));
         }
 
         #endregion
@@ -85,23 +99,90 @@ namespace Synergy.Contracts.Test.Failures
         #region Fail.IfCollectionsAreNotEquivalent()
 
         [Test]
-        public void IfCollectionsAreNotEquivalent()
+        [TestCaseSource(nameof(FailCollectionTest.GetNonEquivalentCollections))]
+        public void IfCollectionsAreNotEquivalent([NotNull] Tuple<IEnumerable<object>, IEnumerable<object>> pair)
         {
-            var kolekcja1 = new[] {"ala", "olo"};
-            var kolekcja1InnaKolejność = new[] {"olo", "ala"};
-            var kolekcja2 = new[] {"ala", "inna"};
-            var pusta1 = new string[0];
-            // ReSharper disable once CollectionNeverUpdated.Local
-            var pusta2 = new List<string>();
-
             Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfCollectionsAreNotEquivalent(kolekcja1, kolekcja2, "są różne")
+                () => Fail.IfCollectionsAreNotEquivalent(pair.Item1, pair.Item2, Violation.Of("collections are different"))
             );
+        }
 
-            Fail.IfCollectionsAreNotEquivalent(kolekcja1, kolekcja1InnaKolejność, "są różne");
-            Fail.IfCollectionsAreNotEquivalent(pusta1, pusta2, "są różne");
+        [Test]
+        [TestCaseSource(nameof(FailCollectionTest.GetEquivalentCollections))]
+        public void IfCollectionsAreNotEquivalentSuccess([NotNull] Tuple<IEnumerable<object>, IEnumerable<object>> pair)
+        {
+            Fail.IfCollectionsAreNotEquivalent(pair.Item1, pair.Item2, Violation.Of("collections are different"));
         }
 
         #endregion
+
+        [NotNull, ItemCanBeNull]
+        private static IEnumerable<IEnumerable> GetEmpty()
+        {
+            yield return Enumerable.Empty<object>();
+            yield return new string[0];
+            yield return new List<int>();
+            yield return null;
+        }
+
+        [NotNull, ItemNotNull]
+        private static IEnumerable<IEnumerable> GetNotEmpty()
+        {
+            yield return Enumerable.Repeat("element", 2);
+            yield return new string[] {null, null};
+            yield return new List<int>{1};
+        }
+
+        [NotNull, ItemNotNull]
+        private static IEnumerable<IEnumerable<object>> GetCollectionsWithNull()
+        {
+            yield return new[] {"not-null", null};
+            yield return new[] {new object(), null};
+        }
+
+        [NotNull, ItemNotNull]
+        private static IEnumerable<IEnumerable<object>> GetCollectionsWithoutNull()
+        {
+            yield return new object[] {"not-null", 1};
+            yield return Enumerable.Repeat("element", 2);
+        }
+
+        [NotNull, ItemCanBeNull]
+        private static IEnumerable<Tuple<IEnumerable<object>, object>> GetCollectionsWithSuchElement()
+        {
+            yield return new Tuple<IEnumerable<object>, object>(new object[] {"not-null", 1}, 1);
+            yield return new Tuple<IEnumerable<object>, object>(Enumerable.Repeat("element", 2), "element");
+        }
+
+        [NotNull, ItemCanBeNull]
+        private static IEnumerable<Tuple<IEnumerable<object>, object>> GetCollectionsWithoutSuchElement()
+        {
+            yield return new Tuple<IEnumerable<object>, object>(new object[] {"not-null", 1}, 2);
+            yield return new Tuple<IEnumerable<object>, object>(Enumerable.Repeat("element", 2), "something else");
+        }
+
+        [NotNull, ItemNotNull]
+        private static IEnumerable<Tuple<IEnumerable<object>, IEnumerable<object>>> GetNonEquivalentCollections()
+        {
+            var collection = new[] {"ala", "olo"};
+            var anotherCollection = new List<object> {"olo", "zyta"}.AsReadOnly();
+            var empty = new string[0];
+            var almostEmpty = new List<string>{null};
+
+            yield return new Tuple<IEnumerable<object>, IEnumerable<object>>(collection, anotherCollection);
+            yield return new Tuple<IEnumerable<object>, IEnumerable<object>>(empty, almostEmpty);
+        }
+
+        [NotNull, ItemNotNull]
+        private static IEnumerable<Tuple<IEnumerable<object>, IEnumerable<object>>> GetEquivalentCollections()
+        {
+            var collection = new[] {"ala", "olo"};
+            var collectionWithDifferentOrder = new List<object> {"olo", "ala"}.AsReadOnly();
+            var empty1 = new string[0];
+            var empty2 = new List<string>();
+
+            yield return new Tuple<IEnumerable<object>, IEnumerable<object>>(collection, collectionWithDifferentOrder);
+            yield return new Tuple<IEnumerable<object>, IEnumerable<object>>(empty1, empty2);
+        }
     }
 }
