@@ -32,30 +32,28 @@ namespace Synergy.Contracts
         public static DesignByContractViolationException BecauseEnumOutOfRange<T>(T value)
             where T : struct
         {
-            //Fail.RequiresEnumValue(value);
-
-            return Fail.CreateEnumException<T>(value);
+            return Fail.Because(Violation.WhenEnumOutOfRange<T>(null, value));
         }
 
-        [NotNull, Pure]
-        private static DesignByContractViolationException CreateEnumException<T>([NotNull] object value, [CanBeNull] string name = null)
-        {
-            string enumType = typeof(T).Name;
-            string enumValue = value.ToString();
-            name = name ?? "enum";
-            return new DesignByContractViolationException($"Unsupported {name} value: {enumValue} ({enumType})");
-        }
+        //[NotNull, Pure]
+        //private static DesignByContractViolationException CreateEnumException<T>([NotNull] object value, [CanBeNull] string name = null)
+        //{
+        //    string enumType = typeof(T).Name;
+        //    string enumValue = value.ToString();
+        //    name = name ?? "enum";
+        //    return new DesignByContractViolationException($"Unsupported {name} value: {enumValue} ({enumType})");
+        //}
 
         /// <summary>
-        ///     Checks whether specified value can be used as (casted to) an enum value.
+        ///     Checks whether specified value can be used as (cast to) an enum value.
         /// </summary>
         /// <typeparam name="T">Type of enum to check</typeparam>
-        /// <param name="value">Value of enum to chceck</param>
+        /// <param name="value">Value of enum to check</param>
         public static void IfEnumNotDefined<T>([NotNull] object value)
         {
             if (Enum.IsDefined(typeof(T), value) == false)
             {
-                throw Fail.CreateEnumException<T>(value);
+                throw Fail.Because(Violation.WhenEnumOutOfRange<T>(null, value));
             }
         }
 
@@ -68,14 +66,9 @@ namespace Synergy.Contracts
         {
             if (Enum.IsDefined(typeof(T), value) == false)
             {
-                throw Fail.CreateEnumException<T>(value);
+                throw Fail.Because(Violation.WhenEnumOutOfRange<T>(null, value));
             }
         }
-
-        //public static void IfEnumOutOfRange<T>([NotNull] Enum value, string name)
-        //{
-
-        //}
 
         /// <summary>
         /// </summary>
@@ -90,6 +83,7 @@ namespace Synergy.Contracts
         }
 
         /// <summary>
+        /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
@@ -103,7 +97,7 @@ namespace Synergy.Contracts
             Type type = value.GetType();
             if (Enum.IsDefined(type, value) == false)
             {
-                throw Fail.CreateEnumException<T>(value, name);
+                throw Fail.Because(Violation.WhenEnumOutOfRange<T>(name, value));
             }
 
             return value.CastOrFail<T>(name);

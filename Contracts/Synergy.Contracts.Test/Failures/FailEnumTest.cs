@@ -131,6 +131,13 @@ namespace Synergy.Contracts.Test.Failures
             //Assert.That(enumValue, Is.EqualTo(ContractorType.Company));
         }
 
+        [Test]
+        [Ignore("Not implemented yet")]
+        public void CastEnumOrFailWithNull()
+        {
+            Fail.CastEnumOrFail<ContractorType>(null, "null");
+        }
+
         #endregion
     }
 }
