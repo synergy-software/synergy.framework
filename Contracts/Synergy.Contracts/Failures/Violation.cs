@@ -9,8 +9,11 @@ namespace Synergy.Contracts
     /// </summary>
     public struct Violation
     {
-        [NotNull] private readonly string message;
-        [NotNull] private readonly object[] args;
+        [NotNull]
+        private readonly string message;
+
+        [NotNull]
+        private readonly object[] args;
 
         /// <summary>
         /// 
@@ -31,7 +34,7 @@ namespace Synergy.Contracts
         /// </summary>
         public override string ToString()
         {
-            return String.Format(this.message, this.args);
+            return string.Format(this.message, this.args);
         }
 
         /// <summary>
@@ -126,7 +129,7 @@ namespace Synergy.Contracts
         /// <param name="unexpected"></param>
         /// <returns>Violation message</returns>
         public static Violation WhenEqual<T>([NotNull] string name, [CanBeNull] T unexpected) =>
-            Violation.Of("'{0}' is equal to {1} and it should NOT be.", name, FormatValue(unexpected));
+            Violation.Of("'{0}' is equal to {1} and it should NOT be.", name, Violation.FormatValue(unexpected));
 
         /// <summary>
         /// "Argument '{0}' is equal to {1} and it should NOT be."
@@ -135,7 +138,7 @@ namespace Synergy.Contracts
         /// <param name="unexpected"></param>
         /// <returns>Violation message</returns>
         public static Violation WhenArgumentEqual<T>([NotNull] string name, [CanBeNull] T unexpected) =>
-            Violation.Of("Argument '{0}' is equal to {1} and it should NOT be.", name, FormatValue(unexpected));
+            Violation.Of("Argument '{0}' is equal to {1} and it should NOT be.", name, Violation.FormatValue(unexpected));
 
         /// <summary>
         /// '{0}' is NOT equal to {1} and it should be.
@@ -144,7 +147,7 @@ namespace Synergy.Contracts
         /// <param name="expected"></param>
         /// <returns>Violation message</returns>
         public static Violation WhenNotEqual<T>([NotNull] string name, [CanBeNull] T expected) =>
-            Violation.Of("'{0}' is NOT equal to {1} and it should be.", name, FormatValue(expected));
+            Violation.Of("'{0}' is NOT equal to {1} and it should be.", name, Violation.FormatValue(expected));
 
         /// <summary>
         /// "Argument '{0}' is an empty Guid."
@@ -182,21 +185,34 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="collectionName"></param>
         /// <returns>Violation message</returns>
-        public static Violation WhenCollectionIsNull([NotNull] string collectionName) => Violation.Of("Collection '{0}' should not be null but it is.", collectionName);
+        public static Violation WhenCollectionIsNull([NotNull] string collectionName) =>
+            Violation.Of("Collection '{0}' should not be null but it is.", collectionName);
 
         /// <summary>
         /// "Collection '{0}' should not be empty but it is."
         /// </summary>
         /// <param name="collectionName"></param>
         /// <returns>Violation message</returns>
-        public static Violation WhenCollectionIsEmpty([NotNull] string collectionName) => Violation.Of("Collection '{0}' should not be empty but it is.", collectionName);
+        public static Violation WhenCollectionIsEmpty([NotNull] string collectionName) =>
+            Violation.Of("Collection '{0}' should not be empty but it is.", collectionName);
 
         /// <summary>
         /// "Collection '{0}' contains null"
         /// </summary>
         /// <param name="collectionName"></param>
         /// <returns>Violation message</returns>
-        public static Violation WhenCollectionContainsNull([NotNull] string collectionName) => Violation.Of("Collection '{0}' contains null", collectionName);
+        public static Violation WhenCollectionContainsNull([NotNull] string collectionName) => 
+            Violation.Of("Collection '{0}' contains null", collectionName);
+
+        /// <summary>
+        /// "Expected {0} of type '{1}' but was '{2}'"
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Violation WhenCannotCast<T>([NotNull] string name, [CanBeNull] object value) =>
+            Violation.Of("Expected {0} of type '{1}' but was '{2}'", name, typeof(T), FormatValue(value));
 
         [NotNull]
         private static string FormatValue<T>([CanBeNull] T value)
