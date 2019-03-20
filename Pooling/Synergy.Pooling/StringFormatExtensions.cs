@@ -45,7 +45,7 @@ namespace Synergy.Extensions
             destructor: StringFormatExtensions.clearArray);
 
         /// <summary>
-        /// Formats the specified string using {0} annottations.
+        /// Formats the specified string using {0} annotations.
         /// </summary>
         [NotNull]
         [StringFormatMethod("format")]
@@ -61,7 +61,7 @@ namespace Synergy.Extensions
         }
 
         /// <summary>
-        /// Formats the specified string using {0}, {1} annottations.
+        /// Formats the specified string using {0}, {1} annotations.
         /// </summary>
         [NotNull]
         [StringFormatMethod("format")]
@@ -79,7 +79,7 @@ namespace Synergy.Extensions
         }
 
         /// <summary>
-        /// Formats the specified string using {0}, {1}, {2} annottations.
+        /// Formats the specified string using {0}, {1}, {2} annotations.
         /// </summary>
         [NotNull]
         [StringFormatMethod("format")]
@@ -99,7 +99,7 @@ namespace Synergy.Extensions
         }
 
         /// <summary>
-        /// Formats the specified string using {0}, {1}, {2}, {3} annottations.
+        /// Formats the specified string using {0}, {1}, {2}, {3} annotations.
         /// </summary>
         [NotNull]
         [StringFormatMethod("format")]
@@ -122,7 +122,7 @@ namespace Synergy.Extensions
         }
 
         /// <summary>
-        /// Formats the specified string using {0}, {1}, {2}, {3}, ... annottations.
+        /// Formats the specified string using {0}, {1}, {2}, {3}, ... annotations.
         /// </summary>
         [NotNull]
         [StringFormatMethod("format")]

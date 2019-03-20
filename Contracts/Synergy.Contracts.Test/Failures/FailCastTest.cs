@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Synergy.Contracts.Test.Failures
 {
     [TestFixture]
-    public class FailCastableTest
+    public class FailCastTest
     {
         #region object.AsOrFail<T>()
 
@@ -103,7 +103,7 @@ namespace Synergy.Contracts.Test.Failures
 
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfNotCastable<IQueryable>(somethingNotCastable, "wrong type")
+                () => Fail.IfNotCastable<IQueryable>(somethingNotCastable, Violation.Of("wrong type"))
             );
 
             // ASSERT
@@ -113,13 +113,13 @@ namespace Synergy.Contracts.Test.Failures
         [Test]
         public void IfNotCastableWithNull()
         {
-            Fail.IfNotCastable<IList<string>>(null, "wrong type");
+            Fail.IfNotCastable<IList<string>>(null, Violation.Of("wrong type"));
         }
 
         [Test]
         public void IfNotCastableSuccess()
         {
-            Fail.IfNotCastable<IList<string>>(new List<string>(), "wrong type");
+            Fail.IfNotCastable<IList<string>>(new List<string>(), Violation.Of("wrong type"));
         }
 
         #endregion
@@ -131,7 +131,7 @@ namespace Synergy.Contracts.Test.Failures
         {
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfNotCastable(new object(), typeof(IQueryable), "wrong type")
+                () => Fail.IfNotCastable(new object(), typeof(IQueryable), Violation.Of("wrong type"))
             );
 
             // ASSERT
@@ -141,13 +141,13 @@ namespace Synergy.Contracts.Test.Failures
         [Test]
         public void WeaklyTypedIfNotCastableWithNull()
         {
-            Fail.IfNotCastable(null, typeof(IList<string>), "wrong type");
+            Fail.IfNotCastable(null, typeof(IList<string>), Violation.Of("wrong type"));
         }
 
         [Test]
         public void WeaklyTypedIfNotCastableSuccess()
         {
-            Fail.IfNotCastable(new List<string>(), typeof(IList<string>), "wrong type");
+            Fail.IfNotCastable(new List<string>(), typeof(IList<string>), Violation.Of("wrong type"));
         }
 
         #endregion
@@ -177,7 +177,7 @@ namespace Synergy.Contracts.Test.Failures
 
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfNullOrNotCastable<IQueryable>(somethingNotCastable, "wrong type")
+                () => Fail.IfNullOrNotCastable<IQueryable>(somethingNotCastable, Violation.Of("wrong type"))
             );
 
             // ASSERT
@@ -197,7 +197,7 @@ namespace Synergy.Contracts.Test.Failures
             );
 
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("Expected object of type 'System.Linq.IQueryable' but was '<null>'"));
+            Assert.That(exception.Message, Is.EqualTo("Expected object of type 'System.Linq.IQueryable' but was 'null'"));
         }
 
         [Test]
@@ -209,7 +209,7 @@ namespace Synergy.Contracts.Test.Failures
         [Test]
         public void IfNullOrNotCastableSuccessWithMessage()
         {
-            Fail.IfNullOrNotCastable<IList<string>>(new List<string>(), "wrong type");
+            Fail.IfNullOrNotCastable<IList<string>>(new List<string>(), Violation.Of("wrong type"));
         }
 
         #endregion
