@@ -12,9 +12,9 @@ namespace Synergy.Contracts
         /// <typeparam name="T">Type of the value to check against nullability.</typeparam>
         /// <param name="value">Value to check against nullability.</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
-        [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         [NotNull]
         [AssertionMethod]
+        [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static T FailIfNull<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration]
             this T value,
@@ -30,9 +30,9 @@ namespace Synergy.Contracts
         /// <typeparam name="T">Type of the value to check against nullability.</typeparam>
         /// <param name="value">Value to check against nullability.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         [NotNull]
         [AssertionMethod]
+        [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static T FailIfNull<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration]
             this T value,
@@ -53,9 +53,9 @@ namespace Synergy.Contracts
         /// <param name="value">Value to check against nullability.</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
         /// <returns>Exactly the same value as provided to this method.</returns>
-        [ContractAnnotation("value: null => halt; value: notnull => notnull")]
-        [AssertionMethod]
         [NotNull]
+        [AssertionMethod]
+        [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static T OrFail<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration]
             this T value,
@@ -76,9 +76,9 @@ namespace Synergy.Contracts
         /// <param name="value">Value to check against nullability.</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
         /// <returns>Exactly the same value as provided to this method.</returns>
-        [ContractAnnotation("value: null => halt; value: notnull => notnull")]
-        [AssertionMethod]
         [NotNull]
+        [AssertionMethod]
+        [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static T NotNull<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration]
             this T value,
@@ -96,9 +96,9 @@ namespace Synergy.Contracts
         /// <typeparam name="T">Type of the value.</typeparam>
         /// <param name="value">Value to change its contract from [NotNull] to [CanBeNull].</param>
         /// <returns>Exactly the same value as provided to this method.</returns>
-        [ContractAnnotation("value: null => null; value: notnull => notnull")]
-        [AssertionMethod]
         [CanBeNull]
+        [AssertionMethod]
+        [ContractAnnotation("value: null => null; value: notnull => notnull")]
         public static T CanBeNull<T>([CanBeNull] [NoEnumeration] this T value)
         {
             return value;
@@ -113,8 +113,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="argumentValue">Value of the argument to check against being <see langword="null" />.</param>
         /// <param name="argumentName">Name of the argument passed to your method.</param>
-        [ContractAnnotation("argumentValue: null => halt")]
         [AssertionMethod]
+        [ContractAnnotation("argumentValue: null => halt")]
         //[Obsolete("Use " + nameof(Fail) + "." + nameof(IfNull) + " instead.")]
         public static void IfArgumentNull<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration]
@@ -136,8 +136,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="value">Value to check against being <see langword="null" />.</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
-        [ContractAnnotation("value: null => halt")]
         [AssertionMethod]
+        [ContractAnnotation("value: null => halt")]
         public static void IfNull<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
             T value,
@@ -152,8 +152,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="value">Value to check against being <see langword="null" />.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        [ContractAnnotation("value: null => halt")]
         [AssertionMethod]
+        [ContractAnnotation("value: null => halt")]
         public static void IfNull<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
             T value,
@@ -172,8 +172,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="value">Value to check against being NOT <see langword="null" />.</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
-        [ContractAnnotation("value: notnull => halt")]
         [AssertionMethod]
+        [ContractAnnotation("value: notnull => halt")]
         public static void IfNotNull<T>([CanBeNull] [NoEnumeration] T value, [NotNull] string name)
         {
             Fail.RequiresArgumentName(name);
@@ -185,8 +185,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="value">Value to check against being NOT <see langword="null" />.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        [ContractAnnotation("value: notnull => halt")]
         [AssertionMethod]
+        [ContractAnnotation("value: notnull => halt")]
         public static void IfNotNull<T>([CanBeNull] [NoEnumeration] T value, Violation message)
         {
             if (value != null)

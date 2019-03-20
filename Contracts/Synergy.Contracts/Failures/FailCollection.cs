@@ -18,8 +18,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="collection">Collection to check against being <see langword="null" /> or empty.</param>
         /// <param name="collectionName">Name of the collection.</param>
-        [ContractAnnotation("collection: null => halt")]
         [AssertionMethod]
+        [ContractAnnotation("collection: null => halt")]
         public static void IfCollectionEmpty(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
             IEnumerable collection,
@@ -40,9 +40,9 @@ namespace Synergy.Contracts
         /// <param name="collection">Collection to be checked against emptiness</param>
         /// <param name="collectionName">Collection name</param>
         /// <returns>The same collection as provided</returns>
-        [ContractAnnotation("collection: null => halt")]
-        [AssertionMethod]
         [NotNull]
+        [AssertionMethod]
+        [ContractAnnotation("collection: null => halt")]
         public static T OrFailIfCollectionEmpty<T>(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
             this T collection,
@@ -61,6 +61,7 @@ namespace Synergy.Contracts
             return collection;
         }
 
+        [MustUseReturnValue]
         private static bool IsEmpty([NotNull] this IEnumerable source)
         {
             if (source is ICollection collection)
@@ -81,8 +82,8 @@ namespace Synergy.Contracts
         /// <typeparam name="T">Type of the collection element.</typeparam>
         /// <param name="collection">Collection to investigate whether contains null.</param>
         /// <param name="collectionName">Name of the collection</param>
-        [ContractAnnotation("collection: null => halt")]
         [AssertionMethod]
+        [ContractAnnotation("collection: null => halt")]
         public static void IfCollectionContainsNull<T>(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
             IEnumerable<T> collection,
@@ -111,8 +112,8 @@ namespace Synergy.Contracts
         /// <param name="collection">Collection to investigate whether contains specific element.</param>
         /// <param name="func">Function with criteria that at least one element must meet.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        [ContractAnnotation("collection: null => halt")]
         [AssertionMethod]
+        [ContractAnnotation("collection: null => halt")]
         public static void IfCollectionContains<T>(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
             IEnumerable<T> collection,
@@ -137,9 +138,8 @@ namespace Synergy.Contracts
         /// <param name="collection1">First collection to compare.</param>
         /// <param name="collection2">Second collection to compare.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        [StringFormatMethod("message")]
-        [ContractAnnotation("collection1: null => halt; collection2: null => halt")]
         [AssertionMethod]
+        [ContractAnnotation("collection1: null => halt; collection2: null => halt")]
         public static void IfCollectionsAreNotEquivalent<T>(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
             IEnumerable<T> collection1,

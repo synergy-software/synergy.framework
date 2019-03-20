@@ -17,9 +17,9 @@ namespace Synergy.Contracts
         /// <param name="value">Value to check if it can be cast to specified type.</param>
         /// <param name="name">Name of the object to cast.</param>
         /// <returns>The cast object (or <see langword="null"/>).</returns>
-        [ContractAnnotation("value: null => null; value: notnull => notnull")]
         [CanBeNull]
         [AssertionMethod]
+        [ContractAnnotation("value: null => null; value: notnull => notnull")]
         public static T AsOrFail<T>([CanBeNull] [NoEnumeration] this object value, [CanBeNull] string name = null)
         {
             Fail.IfNotCastable<T>(value, Violation.WhenCannotCast<T>(name ?? "object", value));
@@ -35,9 +35,9 @@ namespace Synergy.Contracts
         /// <param name="value">Value to check if it can be cast to specified type.</param>
         /// <param name="name">Name of the object to cast.</param>
         /// <returns>The cast object. This method will NEVER return <see langword="null"/>.</returns>
-        [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         [NotNull]
         [AssertionMethod]
+        [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static T CastOrFail<T>([CanBeNull] [NoEnumeration] this object value, [CanBeNull] string name = null)
         {
             Type castType = typeof(T);
@@ -60,7 +60,6 @@ namespace Synergy.Contracts
         /// <param name="value">Value to check if it can be cast to specified type.</param>
         /// <param name="expectedType">The expected type.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        [StringFormatMethod("message")]
         [AssertionMethod]
         public static void IfNotCastable([CanBeNull] [NoEnumeration] object value, [NotNull] Type expectedType, Violation message)
         {
@@ -80,7 +79,6 @@ namespace Synergy.Contracts
         /// <typeparam name="T">The expected Type.</typeparam>
         /// <param name="value">Value to check if it can be cast to specified type.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        [StringFormatMethod("message")]
         [AssertionMethod]
         public static void IfNotCastable<T>([CanBeNull] [NoEnumeration] object value, Violation message)
         {
@@ -93,8 +91,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <typeparam name="T">The expected Type.</typeparam>
         /// <param name="value">Value to check if it can be cast to specified type.</param>
-        [ContractAnnotation("value: null => halt")]
         [AssertionMethod]
+        [ContractAnnotation("value: null => halt")]
         public static void IfNullOrNotCastable<T>([CanBeNull] [NoEnumeration] object value)
         {
             Fail.IfNull(value, Violation.WhenCannotCast<T>("object", value));
@@ -108,9 +106,8 @@ namespace Synergy.Contracts
         /// <typeparam name="T">The expected Type.</typeparam>
         /// <param name="value">Value to check if it can be cast to specified type.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        [ContractAnnotation("value: null => halt")]
-        [StringFormatMethod("message")]
         [AssertionMethod]
+        [ContractAnnotation("value: null => halt")]
         public static void IfNullOrNotCastable<T>(
             [CanBeNull] [NoEnumeration] object value,
             Violation message)

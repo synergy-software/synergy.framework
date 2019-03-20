@@ -14,8 +14,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="value">The value checked against being <see langword="false" />.</param>
         /// <param name="name"></param>
-        [ContractAnnotation("value: false => halt")]
         [AssertionMethod]
+        [ContractAnnotation("value: false => halt")]
         public static void IfFalse(
             [AssertionCondition(AssertionConditionType.IS_TRUE)]
             bool value,
@@ -30,8 +30,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="value">The value checked against being <see langword="false" />.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        [ContractAnnotation("value: false => halt")]
         [AssertionMethod]
+        [ContractAnnotation("value: false => halt")]
         public static void IfFalse(
             [AssertionCondition(AssertionConditionType.IS_TRUE)]
             bool value,
@@ -50,8 +50,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="value">The value checked against being <see langword="true" />.</param>
         /// <param name="name"></param>
-        [ContractAnnotation("value: true => halt")]
         [AssertionMethod]
+        [ContractAnnotation("value: true => halt")]
         public static void IfTrue(
             [AssertionCondition(AssertionConditionType.IS_FALSE)]
             bool value,
@@ -66,8 +66,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="value">The value checked against being <see langword="true" />.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        [ContractAnnotation("value: true => halt")]
         [AssertionMethod]
+        [ContractAnnotation("value: true => halt")]
         public static void IfTrue(
             [AssertionCondition(AssertionConditionType.IS_FALSE)]
             bool value,
