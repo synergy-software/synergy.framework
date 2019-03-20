@@ -11,8 +11,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="argumentValue">Value of the argument to check against <see langword="null"/> or emptiness.</param>
         /// <param name="argumentName">Name of the argument passed to your method.</param>
-        [ContractAnnotation("argumentValue: null => halt")]
         [AssertionMethod]
+        [ContractAnnotation("argumentValue: null => halt")]
         public static void IfArgumentEmpty(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string argumentValue,
             [NotNull] string argumentName)
@@ -33,8 +33,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="value">Value to check against <see langword="null"/> or emptiness.</param>
         /// <param name="name">Name of the checked argument / parameter to check.</param>
-        [ContractAnnotation("value: null => halt")]
         [AssertionMethod]
+        [ContractAnnotation("value: null => halt")]
         public static void IfEmpty(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string value,
             [NotNull] string name)
@@ -48,8 +48,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="value">Value to check against <see langword="null"/> or emptiness.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        [ContractAnnotation("value: null => halt")]
         [AssertionMethod]
+        [ContractAnnotation("value: null => halt")]
         public static void IfEmpty(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string value,
             Violation message)
@@ -67,8 +67,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="argumentValue">Value of the argument to check</param>
         /// <param name="argumentName">Name of the argument passed to your method.</param>
-        [ContractAnnotation("argumentValue: null => halt")]
         [AssertionMethod]
+        [ContractAnnotation("argumentValue: null => halt")]
         public static void IfArgumentWhiteSpace(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string argumentValue,
             [NotNull] string argumentName)
@@ -86,9 +86,9 @@ namespace Synergy.Contracts
         /// <param name="value">Value to check against nullability and white space.</param>
         /// <param name="name">Name of the checked argument / parameter to check.</param>
         /// <returns>Exactly the same value as provided to this method.</returns>
-        [ContractAnnotation("value: null => halt; value: notnull => notnull")]
-        [AssertionMethod]
         [NotNull]
+        [AssertionMethod]
+        [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static string OrFailIfWhiteSpace(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration] this string value,
             [NotNull] string name)
@@ -107,8 +107,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="value">Value to check</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
-        [ContractAnnotation("value: null => halt")]
         [AssertionMethod]
+        [ContractAnnotation("value: null => halt")]
         public static void IfWhitespace(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string value,
             [NotNull] string name)
@@ -122,8 +122,8 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="value">Value to check</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        [ContractAnnotation("value: null => halt")]
         [AssertionMethod]
+        [ContractAnnotation("value: null => halt")]
         public static void IfWhitespace(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string value,
             Violation message)

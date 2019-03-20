@@ -38,8 +38,7 @@ namespace Synergy.Contracts
         ///     Returns exception that can be thrown when contract is failed.
         /// </summary>
         /// <returns>The exception to throw when contract is violated.</returns>
-        [NotNull]
-        [Pure]
+        [NotNull, Pure]
         public static DesignByContractViolationException Because(Violation message)
         {
             return new DesignByContractViolationException(message.ToString());
@@ -57,9 +56,8 @@ namespace Synergy.Contracts
         /// }
         /// </code>
         /// </example>
+        [NotNull, Pure]
         [StringFormatMethod("message")]
-        [NotNull]
-        [Pure]
         public static DesignByContractViolationException Because([NotNull] string message)
         {
             Fail.RequiresMessage(message);
@@ -79,9 +77,8 @@ namespace Synergy.Contracts
         /// }
         /// </code>
         /// </example>
+        [NotNull, Pure]
         [StringFormatMethod("message")]
-        [NotNull]
-        [Pure]
         public static DesignByContractViolationException Because<T1>([NotNull] string message, T1 arg1)
         {
             return Fail.Because(message.Formatted(arg1));
@@ -99,9 +96,8 @@ namespace Synergy.Contracts
         /// }
         /// </code>
         /// </example>
+        [NotNull, Pure]
         [StringFormatMethod("message")]
-        [NotNull]
-        [Pure]
         public static DesignByContractViolationException Because<T1, T2>([NotNull] string message, T1 arg1, T2 arg2)
         {
             return Fail.Because(message.Formatted(arg1, arg2));
@@ -119,9 +115,8 @@ namespace Synergy.Contracts
         /// }
         /// </code>
         /// </example>
+        [NotNull, Pure]
         [StringFormatMethod("message")]
-        [NotNull]
-        [Pure]
         public static DesignByContractViolationException Because<T1, T2, T3>([NotNull] string message, T1 arg1, T2 arg2, T3 arg3)
         {
             return Fail.Because(message.Formatted(arg1, arg2, arg3));
@@ -141,9 +136,8 @@ namespace Synergy.Contracts
         /// }
         /// </code>
         /// </example>
+        [NotNull, Pure]
         [StringFormatMethod("message")]
-        [NotNull]
-        [Pure]
         public static DesignByContractViolationException Because([NotNull] string message, [NotNull] params object[] args)
         {
             return Fail.Because(message.Formatted(args));
@@ -154,16 +148,6 @@ namespace Synergy.Contracts
         {
             if (string.IsNullOrWhiteSpace(message))
                 throw new ArgumentNullException(nameof(message));
-        }
-
-        [ExcludeFromCodeCoverage]
-        private static void RequiresMessage([NotNull] string message, [NotNull] object[] args)
-        {
-            if (string.IsNullOrWhiteSpace(message))
-                throw new ArgumentNullException(nameof(message));
-
-            if (args == null)
-                throw new ArgumentNullException(nameof(args));
         }
 
         /// <summary>
