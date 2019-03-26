@@ -18,8 +18,8 @@ namespace Synergy.Contracts.Samples
 
         public List<Contractor> GetContractorsAged(DateTime minDate, DateTime? maxDate)
         {
-            Fail.IfNotMidnight(minDate, Violation.Of("minDate must be a midnight"));
-            Fail.IfNotMidnight(maxDate, Violation.Of("maxDate must be a midnight"));
+            Fail.IfNotDate(minDate, Violation.Of("minDate must be a midnight"));
+            Fail.IfNotDate(maxDate, Violation.Of("maxDate must be a midnight"));
 
             // WARN: Below is sample code with no sense at all
             return new List<Contractor>(0);

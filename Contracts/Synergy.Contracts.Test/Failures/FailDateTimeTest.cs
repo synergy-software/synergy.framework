@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using JetBrains.Annotations;
 using NUnit.Framework;
 using Synergy.Contracts.Samples;
 
@@ -7,17 +9,15 @@ namespace Synergy.Contracts.Test.Failures
     [TestFixture]
     public class FailDateTimeTest
     {
-        #region Fail.IfNotMidnight
+        #region Fail.IfNotDate
 
         [Test]
-        public void IfNotMidnight()
+        [TestCaseSource(nameof(FailDateTimeTest.GetDatesWithTime))]
+        public void IfNotMidnightWithMessage(DateTime dateTime)
         {
-            // ARRANGE
-            DateTime notMidnight = DateTime.Today.AddSeconds(1000);
-
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
-                () => Fail.IfNotMidnight(notMidnight, Violation.Of("date should have no hour nor second"))
+                () => Fail.IfNotDate(dateTime, Violation.Of("date should have no hour nor second"))
             );
 
             // ASSERT
@@ -25,17 +25,33 @@ namespace Synergy.Contracts.Test.Failures
         }
 
         [Test]
-        public void IfNotMidnightSuccess()
+        [TestCaseSource(nameof(FailDateTimeTest.GetDatesWithTime))]
+        public void IfNotMidnightWithName(DateTime dateTime)
         {
             // ACT
-            Fail.IfNotMidnight(DateTime.Today, Violation.Of("date should have no hour nor second"));
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfNotDate(dateTime, nameof(dateTime))
+            );
+
+            // ASSERT
+            Assert.That(exception, Is.Not.Null);
+            //Assert.That(exception.Message, Is.EqualTo("date should have no hour nor second"));
         }
 
         [Test]
-        public void IfNotMidnightSuccessWithNull()
+        [TestCaseSource(nameof(FailDateTimeTest.GetDates))]
+        public void IfNotMidnightSuccessWithMessage(DateTime? date)
         {
             // ACT
-            Fail.IfNotMidnight(null, Violation.Of("date should have no hour nor second"));
+            Fail.IfNotDate(date, Violation.Of("date should have no hour nor second"));
+        }
+
+        [Test]
+        [TestCaseSource(nameof(FailDateTimeTest.GetDates))]
+        public void IfNotMidnightSuccessWithName(DateTime? date)
+        {
+            // ACT
+            Fail.IfNotDate(date, nameof(date));
         }
 
         [Test]
@@ -56,6 +72,61 @@ namespace Synergy.Contracts.Test.Failures
         }
 
         #endregion
+
+        #region variable.FailIfNotDate
+
+        [Test]
+        [TestCaseSource(nameof(FailDateTimeTest.GetDatesWithTime))]
+        public void FailIfNotNullableDate(DateTime? dateTime)
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => dateTime.FailIfNotDate(nameof(dateTime))
+            );
+
+            // ASSERT
+            Assert.That(exception, Is.Not.Null);
+            //Assert.That(exception.Message, Is.EqualTo("date should have no hour nor second"));
+        }
+
+        [Test]
+        [TestCaseSource(nameof(FailDateTimeTest.GetDates))]
+        public void FailIfNotNullableDateSuccess(DateTime? date)
+        {
+            // ACT
+            var returned = date.FailIfNotDate(nameof(date));
+
+            // ASSERT
+            Assert.That(returned, Is.EqualTo(date));
+        }
+
+        [Test]
+        [TestCaseSource(nameof(FailDateTimeTest.GetDatesWithTime))]
+        public void FailIfNotNullableDate(DateTime dateTime)
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => dateTime.FailIfNotDate(nameof(dateTime))
+            );
+
+            // ASSERT
+            Assert.That(exception, Is.Not.Null);
+            //Assert.That(exception.Message, Is.EqualTo("date should have no hour nor second"));
+        }
+
+        [Test]
+        [TestCaseSource(nameof(FailDateTimeTest.GetDates))]
+        public void FailIfNotDateSuccess(DateTime? date)
+        {
+            // ACT
+            var returned = date?.FailIfNotDate(nameof(date));
+
+            // ASSERT
+            Assert.That(returned, Is.EqualTo(date));
+        }
+
+        #endregion
+
 
         #region Fail.IfDateEmpty
 
@@ -109,5 +180,24 @@ namespace Synergy.Contracts.Test.Failures
         }
 
         #endregion
+
+        [ItemCanBeNull]
+        private static IEnumerable<DateTime?> GetDates()
+        {
+            yield return null;
+            yield return DateTime.Today;
+            yield return DateTime.MinValue;
+            //yield return DateTime.MaxValue;
+            yield return new DateTime(2019,03,26);
+
+        }
+
+        private static IEnumerable<DateTime> GetDatesWithTime()
+        {
+            yield return DateTime.MaxValue;
+            yield return new DateTime(2019,03,26).AddMilliseconds(1);
+
+        }
+
     }
 }
