@@ -29,6 +29,22 @@ namespace Synergy.Contracts
             collection.OrFailIfCollectionEmpty(collectionName);
         }
 
+        /// <summary>
+        /// Throws exception when the collection is <see langword="null" /> or empty.
+        /// </summary>
+        /// <param name="collection">Collection to check against being <see langword="null" /> or empty.</param>
+        /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
+        [AssertionMethod]
+        [ContractAnnotation("collection: null => halt")]
+        public static void IfCollectionEmpty(
+            [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
+            IEnumerable collection,
+            Violation message
+        )
+        {
+            collection.OrFailIfCollectionEmpty(message);
+        }
+
         #endregion
 
         #region variable.OrFailIfCollectionEmpty()
@@ -60,6 +76,34 @@ namespace Synergy.Contracts
 
             return collection;
         }
+
+        /// <summary>
+        /// Throws exception when the collection is <see langword="null" /> or empty.
+        /// </summary>
+        /// <typeparam name="T">Type of the collection</typeparam>
+        /// <param name="collection">Collection to be checked against emptiness</param>
+        /// <param name="message">Collection name</param>
+        /// <returns>The same collection as provided</returns>
+        [NotNull]
+        [AssertionMethod]
+        [ContractAnnotation("collection: null => halt")]
+        public static T OrFailIfCollectionEmpty<T>(
+            [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
+            this T collection,
+            Violation message
+        )
+            where T : IEnumerable
+        {
+
+            if (collection == null)
+                throw Fail.Because(message);
+
+            if (collection.IsEmpty())
+                throw Fail.Because(message);
+
+            return collection;
+        }
+
 
         [MustUseReturnValue]
         private static bool IsEmpty([NotNull] this IEnumerable source)

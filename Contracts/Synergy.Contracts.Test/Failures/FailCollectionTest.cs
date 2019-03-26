@@ -14,7 +14,7 @@ namespace Synergy.Contracts.Test.Failures
 
         [Test]
         [TestCaseSource(nameof(FailCollectionTest.GetEmpty))]
-        public void IfCollectionEmpty([CanBeNull] IEnumerable collection)
+        public void IfCollectionEmptyWithName([CanBeNull] IEnumerable collection)
         {
             Assert.Throws<DesignByContractViolationException>(
                 () => Fail.IfCollectionEmpty(collection, nameof(collection))
@@ -23,9 +23,28 @@ namespace Synergy.Contracts.Test.Failures
 
         [Test]
         [TestCaseSource(nameof(FailCollectionTest.GetNotEmpty))]
-        public void IfCollectionEmptySuccess([NotNull] IEnumerable collection)
+        public void IfCollectionEmptySuccessWithName([NotNull] IEnumerable collection)
         {
             Fail.IfCollectionEmpty(collection, "collection");
+        }
+
+        [Test]
+        [TestCaseSource(nameof(FailCollectionTest.GetEmpty))]
+        public void IfCollectionEmptyWithMessage([CanBeNull] IEnumerable collection)
+        {
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfCollectionEmpty(collection, Violation.Of("collection cannot be null or empty"))
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("collection cannot be null or empty"));
+        }
+
+        [Test]
+        [TestCaseSource(nameof(FailCollectionTest.GetNotEmpty))]
+        public void IfCollectionEmptySuccessWithMessage([NotNull] IEnumerable collection)
+        {
+            Fail.IfCollectionEmpty(collection, Violation.Of("collection cannot be null or empty"));
         }
 
         #endregion
@@ -34,7 +53,7 @@ namespace Synergy.Contracts.Test.Failures
 
         [Test]
         [TestCaseSource(nameof(FailCollectionTest.GetEmpty))]
-        public void OrFailIfEmpty([CanBeNull] IEnumerable collection)
+        public void OrFailIfEmptyWithName([CanBeNull] IEnumerable collection)
         {
             Assert.Throws<DesignByContractViolationException>(
                 () => collection.OrFailIfCollectionEmpty(nameof(collection))
@@ -43,9 +62,28 @@ namespace Synergy.Contracts.Test.Failures
 
         [Test]
         [TestCaseSource(nameof(FailCollectionTest.GetNotEmpty))]
-        public void OrFailIfEmptySuccess([NotNull] IEnumerable collection)
+        public void OrFailIfEmptySuccessWithName([NotNull] IEnumerable collection)
         {
             collection.OrFailIfCollectionEmpty(nameof(collection));
+        }
+
+        [Test]
+        [TestCaseSource(nameof(FailCollectionTest.GetEmpty))]
+        public void OrFailIfEmptyWithMessage([CanBeNull] IEnumerable collection)
+        {
+            var exception= Assert.Throws<DesignByContractViolationException>(
+                () => collection.OrFailIfCollectionEmpty(Violation.Of("collection cannot be null or empty"))
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("collection cannot be null or empty"));
+        }
+
+        [Test]
+        [TestCaseSource(nameof(FailCollectionTest.GetNotEmpty))]
+        public void OrFailIfEmptySuccessWithMessage([NotNull] IEnumerable collection)
+        {
+            collection.OrFailIfCollectionEmpty(Violation.Of("collection cannot be null or empty"));
         }
 
         #endregion
