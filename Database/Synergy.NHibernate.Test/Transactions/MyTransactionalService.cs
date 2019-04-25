@@ -23,7 +23,7 @@ namespace Synergy.NHibernate.Test.Transactions
 
         public int StartTransactionBecauseThereIsAttributeOnInterface()
         {
-            Fail.IfFalse(this.myDatabase.CurrentSession.Transaction.IsActive, "Transaction not started");
+            Fail.IfFalse(this.myDatabase.CurrentSession.Transaction.IsActive, Violation.Of("Transaction not started"));
 
             return this.myRepository.GetAll()
                        .Length;
@@ -31,7 +31,7 @@ namespace Synergy.NHibernate.Test.Transactions
 
         public int GetMyEntitiesCount()
         {
-            Fail.IfFalse(this.myDatabase.CurrentSession.Transaction.IsActive, "Transaction not started");
+            Fail.IfFalse(this.myDatabase.CurrentSession.Transaction.IsActive, Violation.Of("Transaction not started"));
 
             return this.myRepository.GetAll()
                        .Length;
@@ -48,7 +48,7 @@ namespace Synergy.NHibernate.Test.Transactions
 
         public void InvokeAnotherSession()
         {
-            Fail.IfFalse(this.myDatabase.CurrentSession.Transaction.IsActive, "Transaction not started");
+            Fail.IfFalse(this.myDatabase.CurrentSession.Transaction.IsActive, Violation.Of("Transaction not started"));
 
             var task = new Task(session =>
                 {

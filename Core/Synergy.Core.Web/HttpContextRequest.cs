@@ -57,7 +57,7 @@ namespace Synergy.Web
         [Pure]
         private HttpRequest GetRequest()
         {
-            Fail.IfFalse(this.IsAvailable(), "HttpContext.Current.Request is not available.");
+            Fail.IfFalse(this.IsAvailable(), Violation.Of("HttpContext.Current.Request is not available."));
 
             return HttpContext.Current.Request;
         }
