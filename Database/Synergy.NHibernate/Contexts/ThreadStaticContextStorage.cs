@@ -48,7 +48,7 @@ namespace Synergy.NHibernate.Contexts
 
         private void FailIfThreadStaticContextScopeNotAvailable()
         {
-            Fail.IfFalse(this.IsAvailable(), nameof(ThreadStaticContextScope<T>) + " is not available");
+            Fail.IfFalse(this.IsAvailable(), Violation.Of(nameof(ThreadStaticContextScope<T>) + " is not available"));
         }
     }
 

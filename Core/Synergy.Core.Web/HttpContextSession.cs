@@ -52,7 +52,7 @@ namespace Synergy.Web
         [Pure]
         private HttpSessionState GetSession()
         {
-            Fail.IfFalse(this.IsAvailable(), "HttpContext.Current.Session is not available");
+            Fail.IfFalse(this.IsAvailable(), Violation.Of("HttpContext.Current.Session is not available"));
 
             return this.GetContext()
                        .Session;

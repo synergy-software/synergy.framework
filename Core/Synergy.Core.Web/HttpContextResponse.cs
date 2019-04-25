@@ -41,7 +41,7 @@ namespace Synergy.Web
         [Pure]
         private HttpResponse GetResponse()
         {
-            Fail.IfFalse(this.IsAvailable(), "HttpContext.Current.Response is not available.");
+            Fail.IfFalse(this.IsAvailable(), Violation.Of("HttpContext.Current.Response is not available."));
 
             return HttpContext.Current.Response;
         }

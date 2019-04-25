@@ -7,21 +7,6 @@ namespace Synergy.Contracts.Test.Failures
     {
         #region Fail.IfFalse
 
-        [Test]
-        public void IfFalseWithName()
-        {
-            // ARRANGE
-            bool someFalseValue = false;
-
-            // ACT
-            var exception = Assert.Throws<DesignByContractViolationException>(
-                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-                () => Fail.IfFalse(someFalseValue, nameof(someFalseValue))
-                );
-
-            // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("'someFalseValue' is false; and it should be true;"));
-        }
 
         [Test]
         public void IfFalseWithMessage()
@@ -46,29 +31,12 @@ namespace Synergy.Contracts.Test.Failures
             var someTrueValue = true;
 
             // ACT
-            Fail.IfFalse(someTrueValue, nameof(someTrueValue));
             Fail.IfFalse(someTrueValue, Violation.Of("this should be true"));
         }
 
         #endregion
 
         #region Fail.IfTrue
-
-        [Test]
-        public void IfTrueWithName()
-        {
-            // ARRANGE
-            var someTrueValue = true;
-
-            // ACT
-            var exception = Assert.Throws<DesignByContractViolationException>(
-                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-                () => Fail.IfTrue(someTrueValue, nameof(someTrueValue))
-                );
-
-            // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("'someTrueValue' is true; and it should be false;"));
-        }
 
         [Test]
         public void IfTrueWithMessage()
@@ -93,7 +61,6 @@ namespace Synergy.Contracts.Test.Failures
             var someFalseValue = false;
 
             // ACT
-            Fail.IfTrue(someFalseValue, nameof(someFalseValue));
             Fail.IfTrue(someFalseValue, Violation.Of("this should be false"));
         }
 

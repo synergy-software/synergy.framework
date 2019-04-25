@@ -69,7 +69,7 @@ namespace Synergy.Extensions
 
             // if successor == predecessor (cycle) fail
             Fail.IfTrue(successor.Equals(predecessor),
-                "There is at least one cycle in the graph. It cannot be sorted topologically.");
+                Violation.Of("There is at least one cycle in the graph. It cannot be sorted topologically."));
 
             List<T> successorsOfPredecessor = this.nodes[predecessor].Successors;
 

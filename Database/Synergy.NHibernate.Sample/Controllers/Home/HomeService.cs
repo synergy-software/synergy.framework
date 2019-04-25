@@ -24,14 +24,14 @@ namespace Synergy.NHibernate.Sample.Controllers.Home
 
         public void CreateDatabaseSchema()
         {
-            Fail.IfFalse(this.sampleDatabase.CurrentSession.Transaction.IsActive, "Transaction not started");
+            Fail.IfFalse(this.sampleDatabase.CurrentSession.Transaction.IsActive, Violation.Of("Transaction not started"));
 
             this.dataBaseSchema.CreateFor(this.sampleDatabase);
         }
 
         public void InvokeAnotherSession()
         {
-            Fail.IfFalse(this.sampleDatabase.CurrentSession.Transaction.IsActive, "Transaction not started");
+            Fail.IfFalse(this.sampleDatabase.CurrentSession.Transaction.IsActive, Violation.Of("Transaction not started"));
 
             var task = new Task(session =>
             {
