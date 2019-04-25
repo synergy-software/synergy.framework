@@ -18,7 +18,7 @@
     <ProjectReference Include="..\Synergy.Reflection\Synergy.Reflection.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
+    <PackageReference Include="JetBrains.Annotations" Version="2019.1.1" />
     <PackageReference Include="NUnit" Version="3.9.0" />
   </ItemGroup>
   <ItemGroup>

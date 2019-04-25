@@ -18,7 +18,7 @@
     <ProjectGuid>{F00B0114-A0FD-44BE-89F2-57152764EEC9}</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
+    <PackageReference Include="JetBrains.Annotations" Version="2019.1.1" />
     <PackageReference Include="Synergy.Contracts" Version="1.4.5" />
   </ItemGroup>
   <ItemGroup>
