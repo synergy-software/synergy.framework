@@ -18,7 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
     <ProjectReference Include="..\..\Core\Synergy.Core\Synergy.Core.csproj" />
-    <ProjectReference Include="..\Synergy.NHibernate.Sample\Synergy.NHibernate.Sample.csproj" />
     <ProjectReference Include="..\Synergy.NHibernate\Synergy.NHibernate.csproj" />
   </ItemGroup>
   <ItemGroup>
