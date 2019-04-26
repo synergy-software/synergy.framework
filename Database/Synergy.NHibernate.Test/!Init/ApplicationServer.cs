@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 using Synergy.Core.Windsor;
-using Synergy.NHibernate.Sample.Domain.Schema;
+using Synergy.NHibernate.Test.Database.Schema;
 using Synergy.NHibernate.Test.My;
 
 namespace Synergy.NHibernate.Test
