@@ -19,12 +19,14 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.1" />
-    <PackageReference Include="Synergy.Contracts" Version="1.4.5" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SynergyAssemblyInfo.cs" Link="Properties\SynergyAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
   </ItemGroup>
 </Project>

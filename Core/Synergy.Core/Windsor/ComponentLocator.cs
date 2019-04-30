@@ -1,4 +1,5 @@
 ﻿using System;
+using Castle.MicroKernel;
 using Castle.Windsor;
 using JetBrains.Annotations;
 using Synergy.Contracts;
@@ -25,7 +26,8 @@ namespace Synergy.Core
 
         public T GetComponent<T>(object argumentsAsAnonymousType)
         {
-            return this.windsorContainer.Resolve<T>(argumentsAsAnonymousType);
+            var arguments = new Arguments().AddProperties(argumentsAsAnonymousType);
+            return this.windsorContainer.Resolve<T>(arguments);
         }
 
         /// <inheritdoc />
