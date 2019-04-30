@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
@@ -21,16 +21,12 @@
     <ProjectReference Include="..\Synergy.NHibernate\Synergy.NHibernate.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Antlr3.Runtime" Version="3.5.1" />
     <PackageReference Include="Castle.Core" Version="4.2.1" />
     <PackageReference Include="Castle.Windsor" Version="4.1.0" />
     <PackageReference Include="FluentNHibernate" Version="2.1.2" />
-    <PackageReference Include="Iesi.Collections" Version="4.0.4" />
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.1" />
     <PackageReference Include="NHibernate" Version="5.1.3" />
     <PackageReference Include="NUnit" Version="3.9.0" />
-    <PackageReference Include="Remotion.Linq" Version="2.2.0" />
-    <PackageReference Include="Remotion.Linq.EagerFetching" Version="2.1.0" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.109.1" />
   </ItemGroup>
   <ItemGroup>
