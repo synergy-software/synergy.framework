@@ -21,6 +21,9 @@ namespace Synergy.Core
     [DebuggerDisplay("{" + nameof(Library.DebuggerDisplay) + ",nq}")]
     public abstract class Library : IEquatable<Library>
     {
+        [CanBeNull]
+        private Assembly assembly;
+
         /// <summary>
         ///     Allows you to provide your library dependencies - libraries used by your library.
         /// </summary>
@@ -69,9 +72,9 @@ namespace Synergy.Core
         [Pure]
         public override bool Equals(object obj)
         {
-            var otherLibrary = obj as Library;
-            if (otherLibrary != null)
+            if (obj is Library otherLibrary)
                 return this.Equals(otherLibrary);
+
             return false;
         }
 
@@ -98,8 +101,13 @@ namespace Synergy.Core
         // ReSharper disable once VirtualMemberNeverOverridden.Global
         public virtual Assembly GetAssembly()
         {
-            return this.GetType()
-                       .Assembly;
+            if (this.assembly == null)
+            {
+                this.assembly = this.GetType()
+                                    .Assembly;
+            }
+
+            return this.assembly;
         }
 
         /// <summary>
