@@ -148,9 +148,10 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="name"></param>
         /// <param name="expected"></param>
+        /// <param name="actual"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenNotEqual<T>([NotNull] string name, [CanBeNull] T expected) =>
-            Violation.Of("'{0}' is NOT equal to {1} and it should be.", name, Violation.FormatValue(expected));
+        internal static Violation WhenNotEqual<T>([NotNull] string name, [CanBeNull] T expected, [CanBeNull] T actual) =>
+            Violation.Of("'{0}' ({2}) is NOT equal to {1} and it should be.", name, Violation.FormatValue(expected), Violation.FormatValue(actual));
 
         /// <summary>
         /// "Argument '{0}' is an empty Guid."
