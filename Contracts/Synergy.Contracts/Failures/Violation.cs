@@ -150,7 +150,7 @@ namespace Synergy.Contracts
         /// <param name="expected"></param>
         /// <param name="actual"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenNotEqual<T>([NotNull] string name, [CanBeNull] T expected, [CanBeNull] T actual) =>
+        internal static Violation WhenNotEqual<TExpected, TActual>([NotNull] string name, [CanBeNull] TExpected expected, [CanBeNull] TActual actual) =>
             Violation.Of("'{0}' ({2}) is NOT equal to {1} and it should be.", name, Violation.FormatValue(expected), Violation.FormatValue(actual));
 
         /// <summary>

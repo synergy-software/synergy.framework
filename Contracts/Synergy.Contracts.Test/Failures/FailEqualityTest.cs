@@ -90,7 +90,7 @@ namespace Synergy.Contracts.Test.Failures
             );
 
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("'obj' is NOT equal to " + obj.GetValue2() + " and it should be."));
+            Assert.That(exception.Message, Is.EqualTo("'obj' (" + obj.GetValue1() + ") is NOT equal to " + obj.GetValue2() + " and it should be."));
         }
 
         [Test]
@@ -127,6 +127,7 @@ namespace Synergy.Contracts.Test.Failures
                 this.Value2 = v2;
             }
 
+            [NotNull] public string GetValue1() => this.Value1 == null ? "null" : this.Value1.ToString();
             [NotNull] public string GetValue2() => this.Value2 == null ? "null" : this.Value2.ToString();
             public override string ToString() => $"{this.Value1}, {this.GetValue2()}";
         }
