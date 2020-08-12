@@ -81,7 +81,7 @@ namespace Synergy.Contracts
         )
         {
             Fail.RequiresArgumentName(name);
-            Fail.IfNotEqual(expected, actual, Violation.WhenNotEqual(name, expected));
+            Fail.IfNotEqual(expected, actual, Violation.WhenNotEqual(name, expected, actual));
         }
 
         /// <summary>
