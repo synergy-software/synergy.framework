@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Mime;
 using System.Text;
+using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -16,7 +17,9 @@ namespace Synergy.Web.Api.Testing
         [MustUseReturnValue]
         public static JToken? ReadJson(this HttpContent? content)
         {
-            var str = content?.ReadAsStringAsync().Result;
+            Task<string> task = content?.ReadAsStringAsync();
+            task?.Wait();
+            var str = task?.Result;
             if (string.IsNullOrWhiteSpace(str))
                 return null;
 
@@ -71,6 +74,7 @@ namespace Synergy.Web.Api.Testing
             return headers;
         }
 
+        [NotNull]
         public static string ToHttpLook(this HttpRequestMessage request)
         {
             var report = new StringBuilder();
@@ -84,6 +88,7 @@ namespace Synergy.Web.Api.Testing
             return report.ToString().Trim();
         }
 
+        [NotNull]
         public static string ToHttpLook(this HttpResponseMessage response)
         {
             var report = new StringBuilder();

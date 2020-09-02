@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Mime;
 using System.Text;
+using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -56,7 +57,9 @@ namespace Synergy.Web.Api.Testing
 
             var request = CreateHttpRequest(httpMethod, path, urlParameters, body);
             var timer = Stopwatch.StartNew();
-            var response = HttpClient.SendAsync(request).Result;
+            Task<HttpResponseMessage> task = this.HttpClient.SendAsync(request);
+            task.Wait();
+            var response = task.Result;
             timer.Stop();
 
             var operation = new TOperation();
