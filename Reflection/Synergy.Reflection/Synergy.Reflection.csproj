@@ -40,8 +40,6 @@
     <Compile Include="..\..\SynergyAssemblyInfo.cs" Link="Properties\SynergyAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="synergy.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="images\icon.png" Pack="true" PackagePath=""/>
   </ItemGroup>
 </Project>

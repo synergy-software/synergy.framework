@@ -49,8 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Update="synergy.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="images\icon.png" Pack="true" PackagePath=""/>
   </ItemGroup>
 </Project>
