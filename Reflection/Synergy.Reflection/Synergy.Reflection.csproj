@@ -40,6 +40,6 @@
     <Compile Include="..\..\SynergyAssemblyInfo.cs" Link="Properties\SynergyAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="images\icon.png" Pack="true" PackagePath=""/>
+    <None Include="synergy.png" Pack="true" PackagePath=""/>
   </ItemGroup>
 </Project>
