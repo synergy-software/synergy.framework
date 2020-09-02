@@ -40,4 +40,9 @@
     <PackageReference Include="Castle.Windsor" Version="5.0.0" />
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.1" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="synergy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
