@@ -9,7 +9,7 @@
     <Authors>Synergy Marcin Celej</Authors>
     <PackageLicenseUrl>https://github.com/synergy-software/synergy.framework/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/wiki/Database</PackageProjectUrl>
-    <PackageIconUrl>https://github.com/synergy-software/synergy.framework/blob/master/synergy.png?raw=true</PackageIconUrl>
+    <PackageIcon>..\..\synergy.png</PackageIcon>
     <Description>Database support for Synergy Layered Application Architecture (SLARCH)</Description>
     <Copyright>Copyright © Synergy Marcin Celej 2019</Copyright>
     <PackageTags>NHibernate SLARCH Database</PackageTags>
