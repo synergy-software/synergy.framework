@@ -7,7 +7,7 @@
     <PackageVersion>$(Version)</PackageVersion>
     <Title>Synergy.NHibernate - database support for Synergy Layered Application Architecture (SLARCH)</Title>
     <Authors>Synergy Marcin Celej</Authors>
-    <PackageLicenseUrl>https://github.com/synergy-software/synergy.framework/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/wiki/Database</PackageProjectUrl>
     <PackageIcon>synergy.png</PackageIcon>
     <Description>Database support for Synergy Layered Application Architecture (SLARCH)</Description>
@@ -49,6 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="synergy.png" Pack="true" PackagePath=""/>
+    <None Include="license.txt" Pack="true" PackagePath=""/>
   </ItemGroup>
 </Project>

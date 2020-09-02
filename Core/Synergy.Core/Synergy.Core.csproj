@@ -7,7 +7,7 @@
     <PackageVersion>$(Version)</PackageVersion>
     <Title>Synergy.Core - Synergy Layered Application Architecture (SLARCH) support using Windsor Castle</Title>
     <Authors>Synergy Marcin Celej</Authors>
-    <PackageLicenseUrl>https://github.com/synergy-software/synergy.framework/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/wiki/Core</PackageProjectUrl>
     <PackageIcon>synergy.png</PackageIcon>
     <Description>Synergy Layered Application Architecture (SLARCH) support using Windsor Castle</Description>
@@ -42,5 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="synergy.png" Pack="true" PackagePath=""/>
+    <None Include="license.txt" Pack="true" PackagePath=""/>
   </ItemGroup>
 </Project>
