@@ -14,6 +14,7 @@
     <Description>Web API Testing support</Description>
     <Copyright>Copyright © Synergy Marcin Celej 2019</Copyright>
     <PackageTags>Web API Testing</PackageTags>
+    <RootNamespace>Web.Api.Testing</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -41,8 +42,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="synergy.png" Pack="true" PackagePath=""/>
-    <None Include="license.txt" Pack="true" PackagePath=""/>
+    <None Include="synergy.png" Pack="true" PackagePath="" />
+    <None Include="license.txt" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>

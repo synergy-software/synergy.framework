@@ -47,7 +47,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.Core.Web", "Core\Sy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.NHibernate.AspCore", "Database\Synergy.NHibernate.AspCore\Synergy.NHibernate.AspCore.csproj", "{C0FD4CE7-D114-49F8-A8A6-75FDE366F989}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Api.Testing", "Web\Web.Api.Testing\Web.Api.Testing.csproj", "{B9AE0E19-20E3-4902-9B89-2BAD6DA0D521}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.Web.Api.Testing", "Web\Synergy.Web.Api.Testing\Synergy.Web.Api.Testing.csproj", "{B9AE0E19-20E3-4902-9B89-2BAD6DA0D521}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
