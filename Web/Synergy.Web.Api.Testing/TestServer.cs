@@ -11,7 +11,7 @@ using Synergy.Contracts;
 
 namespace Synergy.Web.Api.Testing
 {
-    public abstract class TestServer
+    public abstract class TestServer : IDisposable
     {
         public HttpClient HttpClient { get; }
         public bool Repair { get; set; }
@@ -98,6 +98,12 @@ namespace Synergy.Web.Api.Testing
                 uriBuilder.Query = QueryBuilder.Build(parameterToGet);
 
             return uriBuilder.Uri;
+        }
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            this.HttpClient?.Dispose();
         }
     }
 }
