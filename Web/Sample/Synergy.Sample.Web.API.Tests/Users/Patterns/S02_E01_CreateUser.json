@@ -1,0 +1,38 @@
+{
+  "expectations": [
+    "Convention: HTTP request method is POST",
+    "Convention: Returned HTTP status code is 201 (Created)",
+    "Convention: Location header (pointing to newly created element) is returned with response.",
+    "Convention: Returned HTTP Content-Type is \"application/json\"",
+    "Manual: User is created and its details are returned"
+  ],
+  "request": {
+    "description": "Create a new user with login Synergy.Samples.Web.API.Services.Users.Domain.Login",
+    "method": "POST /api/v1/users",
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "body": {
+      "Login": {
+        "Value": "marcin@synergy.com"
+      }
+    }
+  },
+  "response": {
+    "status": "201 Created",
+    "headers": {
+      "Location": "http://localhost/api/v1/users/d08a07d9020943c3893309579e0c76c8",
+      "api-supported-versions": "1.0",
+      "Content-Type": "application/json; charset=utf-8",
+      "Content-Length": "129"
+    },
+    "body": {
+      "user": {
+        "id": "d08a07d9020943c3893309579e0c76c8",
+        "login": {
+          "value": "marcin@synergy.com"
+        }
+      }
+    }
+  }
+}

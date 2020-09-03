@@ -1,0 +1,38 @@
+{
+  "expectations": [
+    "Convention: HTTP request method is POST",
+    "Convention: Returned HTTP status code is 400 (BadRequest)",
+    "Convention: error JSON contains \"title\" node",
+    "Convention: error JSON contains \"traceId\" node",
+    "Convention: There is NO \"Location\" header returned in response",
+    "Manual: User is NOT created and error is returned"
+  ],
+  "request": {
+    "description": "Create a new user with login \"\"",
+    "method": "POST /api/v1/users",
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "body": {
+      "login": ""
+    }
+  },
+  "response": {
+    "status": "400 Bad Request",
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8",
+      "Content-Length": "349"
+    },
+    "body": {
+      "errors": {
+        "login": [
+          "Error converting value \"\" to type 'Synergy.Sample.Web.API.Services.Users.Domain.Login'. Path 'login', line 1, position 11."
+        ]
+      },
+      "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+      "title": "One or more validation errors occurred.",
+      "status": 400,
+      "traceId": "0HM2G07BRCKOM"
+    }
+  }
+}

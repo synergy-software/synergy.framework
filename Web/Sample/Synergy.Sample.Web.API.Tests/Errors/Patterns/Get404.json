@@ -1,0 +1,14 @@
+{
+  "expectations": [
+    "Convention: HTTP request method is GET",
+    "Convention: Returned HTTP status code is 404 (NotFound)",
+    "Manual: Error is returned"
+  ],
+  "request": {
+    "description": "Make GET request to not existing API",
+    "method": "GET /api/v1/i-do-not-exist"
+  },
+  "response": {
+    "status": "404 Not Found"
+  }
+}

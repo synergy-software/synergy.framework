@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    "Convention: HTTP request method is GET",
+    "Convention: Returned HTTP status code is 404 (NotFound)",
+    "Convention: Returned HTTP Content-Type is \"application/problem+json\"",
+    "Manual: User is not found and error is returned"
+  ],
+  "request": {
+    "description": "Get user with id '794e21cf23fa443d8222544b82ce367a'",
+    "method": "GET /api/v1/users/794e21cf23fa443d8222544b82ce367a"
+  },
+  "response": {
+    "status": "404 Not Found",
+    "headers": {
+      "api-supported-versions": "1.0",
+      "Content-Type": "application/problem+json"
+    },
+    "body": {
+      "type": "https://httpstatuses.com/404",
+      "title": "User with id 794e21cf23fa443d8222544b82ce367a does not exist",
+      "status": 404,
+      "traceId": "0HLSPQGI8OPFR"
+    }
+  }
+}

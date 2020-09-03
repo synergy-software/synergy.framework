@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    "Convention: HTTP request method is GET",
+    "Convention: Returned HTTP status code is 404 (NotFound)",
+    "Convention: Returned HTTP Content-Type is \"application/problem+json\"",
+    "Manual: No user details are returned and 404 error (not found) is returned instead"
+  ],
+  "request": {
+    "description": "Get user with id 'user-id-that-do-not-exist'",
+    "method": "GET /api/v1/users/user-id-that-do-not-exist"
+  },
+  "response": {
+    "status": "404 Not Found",
+    "headers": {
+      "api-supported-versions": "1.0",
+      "Content-Type": "application/problem+json"
+    },
+    "body": {
+      "type": "https://httpstatuses.com/404",
+      "title": "User with id user-id-that-do-not-exist does not exist",
+      "status": 404,
+      "traceId": "0HLSPQATK73P7"
+    }
+  }
+}

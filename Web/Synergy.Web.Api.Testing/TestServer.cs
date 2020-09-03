@@ -55,7 +55,7 @@ namespace Synergy.Web.Api.Testing
         {
             var requestedOperation = CreateHttpRequest(httpMethod, path, urlParameters, body);
 
-            var request = CreateHttpRequest(httpMethod, path, urlParameters, body);
+            using var request = CreateHttpRequest(httpMethod, path, urlParameters, body);
             var timer = Stopwatch.StartNew();
             Task<HttpResponseMessage> task = this.HttpClient.SendAsync(request);
             task.Wait();
