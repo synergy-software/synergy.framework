@@ -29,27 +29,43 @@ namespace Synergy.Web.Api.Testing
         }
 
         public HttpOperation Get(string path, [CanBeNull] object? urlParameters = null)
-            => Send<HttpOperation>(HttpMethod.Get, path, urlParameters);
-
+            => this.Get<HttpOperation>(path, urlParameters);
+        
+        public HttpOperation Get<TOperation>(string path, [CanBeNull] object? urlParameters = null)
+            where TOperation : HttpOperation, new() 
+            => this.Send<TOperation>(HttpMethod.Get, path, urlParameters);
+        
         public HttpOperation Post(string path, [CanBeNull] object? urlParameters = null, object? body = null)
-            => Send<HttpOperation>(HttpMethod.Post, path, urlParameters, body);
-
-        public HttpOperation Post(string path, [CanBeNull] object? urlParameters = null, JToken body = null)
-            => Send<HttpOperation>(HttpMethod.Post, path, urlParameters, body);
+            => this.Post<HttpOperation>(path, urlParameters, body);
 
         public TOperation Post<TOperation>(string path, [CanBeNull] object? urlParameters = null, object? body = null)
             where TOperation : HttpOperation, new()
-            => Send<TOperation>(HttpMethod.Post, path, urlParameters, body);
+            => this.Send<TOperation>(HttpMethod.Post, path, urlParameters, body);
 
+        public HttpOperation Post(string path, [CanBeNull] object? urlParameters = null, JToken body = null)
+            => this.Send<HttpOperation>(HttpMethod.Post, path, urlParameters, body);
+        
         public HttpOperation Put(string path, [CanBeNull] object? urlParameters = null, object? body = null)
-            => Send<HttpOperation>(HttpMethod.Put, path, urlParameters, body);
+            => this.Put<HttpOperation>(path, urlParameters, body);
 
+        public HttpOperation Put<TOperation>(string path, [CanBeNull] object? urlParameters = null, object? body = null)
+            where TOperation : HttpOperation, new()
+            => this.Send<TOperation>(HttpMethod.Put, path, urlParameters, body);
+        
         public HttpOperation Patch(string path, [CanBeNull] object? urlParameters = null, object? body = null)
-            => Send<HttpOperation>(HttpMethod.Patch, path, urlParameters, body);
+            => this.Patch<HttpOperation>(path, urlParameters, body);
 
+        public HttpOperation Patch<TOperation>(string path, [CanBeNull] object? urlParameters = null, object? body = null)
+            where TOperation : HttpOperation, new()
+            => this.Send<TOperation>(HttpMethod.Patch, path, urlParameters, body);
+        
         public HttpOperation Delete(string path, [CanBeNull] object? urlParameters = null)
-            => Send<HttpOperation>(HttpMethod.Delete, path, urlParameters);
+            => this.Delete<HttpOperation>(path, urlParameters);
 
+        public HttpOperation Delete<TOperation>(string path, [CanBeNull] object? urlParameters = null)
+            where TOperation : HttpOperation, new()
+            => this.Send<TOperation>(HttpMethod.Delete, path, urlParameters);
+        
         private TOperation Send<TOperation>(HttpMethod httpMethod, string path, object? urlParameters, object? body = null) 
             where TOperation : HttpOperation, new()
         {
