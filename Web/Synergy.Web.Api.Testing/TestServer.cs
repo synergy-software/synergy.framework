@@ -31,7 +31,7 @@ namespace Synergy.Web.Api.Testing
         public HttpOperation Get(string path, [CanBeNull] object? urlParameters = null)
             => this.Get<HttpOperation>(path, urlParameters);
         
-        public HttpOperation Get<TOperation>(string path, [CanBeNull] object? urlParameters = null)
+        public TOperation Get<TOperation>(string path, [CanBeNull] object? urlParameters = null)
             where TOperation : HttpOperation, new() 
             => this.Send<TOperation>(HttpMethod.Get, path, urlParameters);
         
@@ -48,21 +48,21 @@ namespace Synergy.Web.Api.Testing
         public HttpOperation Put(string path, [CanBeNull] object? urlParameters = null, object? body = null)
             => this.Put<HttpOperation>(path, urlParameters, body);
 
-        public HttpOperation Put<TOperation>(string path, [CanBeNull] object? urlParameters = null, object? body = null)
+        public TOperation Put<TOperation>(string path, [CanBeNull] object? urlParameters = null, object? body = null)
             where TOperation : HttpOperation, new()
             => this.Send<TOperation>(HttpMethod.Put, path, urlParameters, body);
         
         public HttpOperation Patch(string path, [CanBeNull] object? urlParameters = null, object? body = null)
             => this.Patch<HttpOperation>(path, urlParameters, body);
 
-        public HttpOperation Patch<TOperation>(string path, [CanBeNull] object? urlParameters = null, object? body = null)
+        public TOperation Patch<TOperation>(string path, [CanBeNull] object? urlParameters = null, object? body = null)
             where TOperation : HttpOperation, new()
             => this.Send<TOperation>(HttpMethod.Patch, path, urlParameters, body);
         
         public HttpOperation Delete(string path, [CanBeNull] object? urlParameters = null)
             => this.Delete<HttpOperation>(path, urlParameters);
 
-        public HttpOperation Delete<TOperation>(string path, [CanBeNull] object? urlParameters = null)
+        public TOperation Delete<TOperation>(string path, [CanBeNull] object? urlParameters = null)
             where TOperation : HttpOperation, new()
             => this.Send<TOperation>(HttpMethod.Delete, path, urlParameters);
         
