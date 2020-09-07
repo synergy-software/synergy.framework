@@ -43,7 +43,6 @@ namespace Synergy.Sample.Web.API.Tests.Errors
 
             this.errors.GetNonExistingResource()
                 .InStep(scenario.Step("Try to retrieve not existing resource"))
-                  
                 .ShouldBe(
                     this.EqualToPattern("/Patterns/Get404.json")
                         .Expected("Manual: Error is returned")

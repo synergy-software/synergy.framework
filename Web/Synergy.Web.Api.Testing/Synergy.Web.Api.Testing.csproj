@@ -15,6 +15,7 @@
     <Copyright>Copyright © Synergy Marcin Celej 2019</Copyright>
     <PackageTags>Web API Testing</PackageTags>
     <RootNamespace>Web.Api.Testing</RootNamespace>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

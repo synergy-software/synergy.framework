@@ -117,7 +117,7 @@ namespace Synergy.Web.Api.Testing
         }
 
         /// <inheritdoc />
-        public void Dispose()
+        public virtual void Dispose()
         {
             this.HttpClient?.Dispose();
         }

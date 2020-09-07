@@ -1,4 +1,5 @@
-﻿using Synergy.Sample.Web.API.Tests.Infrastructure;
+﻿using System;
+using Synergy.Sample.Web.API.Tests.Infrastructure;
 using Synergy.Web.Api.Testing;
 using Synergy.Web.Api.Testing.Assertions;
 using Synergy.Web.Api.Testing.Json;
@@ -15,7 +16,7 @@ namespace Synergy.Sample.Web.API.Tests.Swagger
         public void validate_api_contract_changes(string version)
         {
             // ARRANGE
-            var testServer = new SampleTestServer();
+            using var testServer = new SampleTestServer();
             var swagger = new SwaggerClient(testServer);
             testServer.Repair = Repair.Mode;
 

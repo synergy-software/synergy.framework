@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
+using JetBrains.Annotations;
 using Synergy.Contracts;
 using Synergy.Web.Api.Testing.Assertions;
 
@@ -9,6 +10,7 @@ namespace Synergy.Web.Api.Testing
 {
     public class HttpOperation
     {
+        [CanBeNull]
         public string? Description { get; private set; }
         public TimeSpan Duration { get; private set; }
         public TestServer TestServer { get; private set; }
@@ -37,7 +39,7 @@ namespace Synergy.Web.Api.Testing
             }
         }
 
-        internal void SetDescription(string details)
+        internal void SetDescription([NotNull] string details)
         {
             Description = details.OrFailIfWhiteSpace(nameof(details));
         }

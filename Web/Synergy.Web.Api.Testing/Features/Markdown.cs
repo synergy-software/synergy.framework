@@ -19,6 +19,8 @@ namespace Synergy.Web.Api.Testing.Features
 
         public string GenerateReportTo(string? filePath = null)
         {
+            // TODO:Marcin Celej: Do not regenerate report if every operation was 'unchanged' (check somehow HttpOperation.Assertions) - to achieve this add Status to HttpOperation
+            
             StringBuilder report = new StringBuilder();
             report.AppendLine($"# {_feature.Title}");
             report.AppendLine();

@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using JetBrains.Annotations;
 using Synergy.Sample.Web.API.Services.Users.Domain;
 using Synergy.Sample.Web.API.Tests.Infrastructure;
@@ -10,7 +11,7 @@ using Xunit;
 
 namespace Synergy.Sample.Web.API.Tests.Users
 {
-    public class UserScenario
+    public class UserScenario : IDisposable
     {
         private SampleTestServer testServer;
         private UsersClient users;
@@ -23,6 +24,11 @@ namespace Synergy.Sample.Web.API.Tests.Users
             this.testServer = new SampleTestServer();
             this.users = new UsersClient(this.testServer);
             this.testServer.Repair = Repair.Mode;
+        }
+
+        public void Dispose()
+        {
+            this.testServer.Dispose();
         }
 
         [Fact]

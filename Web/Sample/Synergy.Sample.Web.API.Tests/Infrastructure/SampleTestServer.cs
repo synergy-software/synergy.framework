@@ -8,11 +8,21 @@ namespace Synergy.Sample.Web.API.Tests.Infrastructure
 {
     public class SampleTestServer : TestServer
     {
+        private WebApplicationFactory<Startup>? webApplicationFactory;
+        
         protected override HttpClient Start()
         {
-            return new WebApplicationFactory<Startup>()
-                  .WithWebHostBuilder(configuration => { configuration.UseEnvironment(Application.Environment.Tests); })
-                  .CreateClient();
+            this.webApplicationFactory = new WebApplicationFactory<Startup>();
+            return this.webApplicationFactory
+                       .WithWebHostBuilder(configuration => { configuration.UseEnvironment(Application.Environment.Tests); })
+                       .CreateClient();
+        }
+
+        /// <inheritdoc />
+        public override void Dispose()
+        {
+            this.webApplicationFactory?.Dispose();
+            base.Dispose();
         }
     }
 }
