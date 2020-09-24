@@ -1,4 +1,5 @@
 ﻿using System.Net.Mime;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Synergy.Sample.Web.API.Services.Infrastructure.Commands;
@@ -29,6 +30,7 @@ namespace Synergy.Sample.Web.API.Controllers
         /// Returns all users stored in the system.
         /// </summary>
         [HttpGet]
+        [NotNull]
         public GetUsersQueryResult GetUsers()
         {
             return this._queryDispatcher.Dispatch<GetUsersQuery, IGetUsersQueryHandler, GetUsersQueryResult>(new GetUsersQuery());
@@ -40,7 +42,8 @@ namespace Synergy.Sample.Web.API.Controllers
         /// <param name="userId">Identifier of the user</param>
         /// <returns>User details</returns>
         [HttpGet("{userId}", Name = nameof(UsersController.GetUser))]
-        public GetUserQueryResult GetUser(string userId)
+        [NotNull]
+        public GetUserQueryResult GetUser([NotNull] string userId)
         {
             return this._queryDispatcher.Dispatch<GetUserQuery, IGetUserQueryHandler, GetUserQueryResult>(new GetUserQuery(userId));
         }
@@ -66,7 +69,7 @@ namespace Synergy.Sample.Web.API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         //[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Create))]
-        public ActionResult<CreateUserCommandResult> Create([FromRoute] string version, [FromBody] CreateUserCommand user)
+        public ActionResult<CreateUserCommandResult> Create([FromRoute] string version, [FromBody] [NotNull] CreateUserCommand user)
         {
             var created = this._commandDispatcher.Dispatch<CreateUserCommand, ICreateUserCommandHandler, CreateUserCommandResult>(user);
             return this.CreatedAtRoute(nameof(this.GetUser), new {version, userId = created.User.Id}, created);
@@ -78,7 +81,8 @@ namespace Synergy.Sample.Web.API.Controllers
         /// <param name="userId">Identifier of the user to delete</param>
         /// <returns>Result of the operation</returns>
         [HttpDelete("{userId}")]
-        public DeleteUserCommandResult DeleteUser(string userId)
+        [NotNull]
+        public DeleteUserCommandResult DeleteUser([NotNull] string userId)
         {
             return this._commandDispatcher.Dispatch<DeleteUserCommand, IDeleteUserCommandHandler, DeleteUserCommandResult>(new DeleteUserCommand(userId));
         }

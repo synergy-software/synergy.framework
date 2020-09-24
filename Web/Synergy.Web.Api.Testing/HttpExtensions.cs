@@ -17,7 +17,10 @@ namespace Synergy.Web.Api.Testing
         [MustUseReturnValue]
         public static JToken? ReadJson(this HttpContent? content)
         {
-            Task<string> task = content?.ReadAsStringAsync();
+            if (content == null)
+                return null;
+            
+            Task<string> task = content.ReadAsStringAsync();
             task?.Wait();
             var str = task?.Result;
             if (string.IsNullOrWhiteSpace(str))
@@ -43,7 +46,13 @@ namespace Synergy.Web.Api.Testing
         public static T Read<T>([NotNull] this HttpContent? content, string jsonPath)
         {
             Fail.IfNull(content, nameof(content));
-            var node = content.ReadJson()!.SelectToken(jsonPath);
+            JToken? json = content.ReadJson();
+            var node = json!.SelectToken(jsonPath);
+            if (node is JObject)
+            {
+                return node.ToObject<T>();
+            }
+            
             return node.Value<T>();
         }
 

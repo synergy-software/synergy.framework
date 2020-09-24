@@ -2,6 +2,7 @@
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Synergy.Sample.Web.API.Services.Infrastructure.Annotations;
@@ -32,7 +33,7 @@ namespace Synergy.Sample.Web.API.Extensions
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private Task HandleExceptionAsync([NotNull] HttpContext context, [NotNull] Exception exception)
         {
             var traceId = context.TraceIdentifier;
             var httpStatus = (int) ExceptionHandlingMiddleware.GetResponseStatus(exception);

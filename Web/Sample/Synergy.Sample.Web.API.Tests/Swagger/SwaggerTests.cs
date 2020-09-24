@@ -1,5 +1,4 @@
-﻿using System;
-using Synergy.Sample.Web.API.Tests.Infrastructure;
+﻿using Synergy.Sample.Web.API.Tests.Infrastructure;
 using Synergy.Web.Api.Testing;
 using Synergy.Web.Api.Testing.Assertions;
 using Synergy.Web.Api.Testing.Json;
