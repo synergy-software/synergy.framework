@@ -42,6 +42,9 @@ namespace Synergy.Web.Api.Testing
             return content;
         }
 
+        public static T Read<T>([NotNull] this HttpContent? content)
+            => Read<T>(content, "");
+        
         [MustUseReturnValue]
         public static T Read<T>([NotNull] this HttpContent? content, string jsonPath)
         {
