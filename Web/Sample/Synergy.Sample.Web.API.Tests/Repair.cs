@@ -10,7 +10,7 @@ namespace Synergy.Sample.Web.API.Tests
         [Fact]
         public void you_cannot_leave_repair_mode()
         {
-            var testServer = new SampleTestServer {Repair = Repair.Mode};
+            using var testServer = new SampleTestServer {Repair = Repair.Mode};
             testServer.FailIfLeftInRepairMode();
         }
     }

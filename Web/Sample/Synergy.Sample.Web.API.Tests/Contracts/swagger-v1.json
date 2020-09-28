@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Synergy sample API",
-    "description": "<label>API Version</label>: <strong>1.0 </strong><br/> <label>Application Name</label>: <strong>Turbine.Transactions.Web.API</strong><br/> <label>Application Version</label>: <strong>1.0.0.0</strong><br/> <label>Application Created on</label>: <strong>DEVELOPERS MACHINE</strong>",
+    "description": "<label>API Version</label>: <strong>1.0 </strong><br/> <label>Application Name</label>: <strong>Synergy.Sample.Web.API</strong><br/> <label>Application Version</label>: <strong>1.0.0.0</strong><br/> <label>Application Created on</label>: <strong>DEVELOPERS MACHINE</strong>",
     "contact": {
       "name": "Synergy software",
       "url": "https://github.com/synergy-software",
@@ -97,7 +97,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           }
         ],
@@ -124,7 +125,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           }
         ],
@@ -165,12 +167,7 @@
             "readOnly": true
           },
           "login": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Login"
-              }
-            ],
-            "readOnly": true
+            "$ref": "#/components/schemas/Login"
           }
         },
         "additionalProperties": false
@@ -196,11 +193,7 @@
         "type": "object",
         "properties": {
           "login": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Login"
-              }
-            ]
+            "$ref": "#/components/schemas/Login"
           }
         },
         "additionalProperties": false
@@ -209,13 +202,7 @@
         "type": "object",
         "properties": {
           "user": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/UserReadModel"
-              }
-            ],
-            "nullable": true,
-            "readOnly": true
+            "$ref": "#/components/schemas/UserReadModel"
           }
         },
         "additionalProperties": false
@@ -254,13 +241,7 @@
         "type": "object",
         "properties": {
           "user": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/UserReadModel"
-              }
-            ],
-            "nullable": true,
-            "readOnly": true
+            "$ref": "#/components/schemas/UserReadModel"
           }
         },
         "additionalProperties": false

@@ -67,13 +67,13 @@ Content-Type: application/json; charset=utf-8
 - Response
 ```
 HTTP/1.1 201 Created
-Location: http://localhost/api/v1/users/d08a07d9020943c3893309579e0c76c8
+Location: http://localhost/api/v1/users/aa1311498cda4bb6a3b0d1441d32df3b
 api-supported-versions: 1.0
 Content-Type: application/json; charset=utf-8
 Content-Length: 129
 {
   "user": {
-    "id": "d08a07d9020943c3893309579e0c76c8",
+    "id": "aa1311498cda4bb6a3b0d1441d32df3b",
     "login": {
       "value": "marcin@synergy.com"
     }
@@ -92,7 +92,7 @@ Content-Length: 129
 
 ### 2.2. Get created user pointed by "Location" header (1 request)
 
-### 2.2.2. Request to [Get user located at http://localhost/api/v1/users/b561ee74899e41ca904ba919fb369e7e]
+### 2.2.2. Request to [Get user located at http://localhost/api/v1/users/92244f5bb3fd470eb7551f2f1a7428ce]
 
 - Request
 ```
@@ -133,7 +133,7 @@ Content-Length: 129
 
 ### 3.1. Get user by id (1 request)
 
-### 3.1.1. Request to [Get user with id "b561ee74899e41ca904ba919fb369e7e"]
+### 3.1.1. Request to [Get user with id "92244f5bb3fd470eb7551f2f1a7428ce"]
 
 - Request
 ```
@@ -378,7 +378,7 @@ Content-Length: 351
 
 ### 6.1. Delete user by id (1 request)
 
-### 6.1.1. Request to [Delete user with id "b561ee74899e41ca904ba919fb369e7e"]
+### 6.1.1. Request to [Delete user with id "92244f5bb3fd470eb7551f2f1a7428ce"]
 
 - Request
 ```
@@ -404,7 +404,7 @@ Content-Length: 2
 
 ### 6.2. Try to get the deleted user (1 request)
 
-### 6.2.2. Request to [Get user with id "b561ee74899e41ca904ba919fb369e7e"]
+### 6.2.2. Request to [Get user with id "92244f5bb3fd470eb7551f2f1a7428ce"]
 
 - Request
 ```
