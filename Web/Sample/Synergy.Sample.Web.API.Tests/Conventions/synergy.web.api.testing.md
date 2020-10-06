@@ -1,31 +1,31 @@
 # Synergy.Web.Api.Testing
 
 ## HttpExtensions
- - ReadJson(
+ - HttpExtensions.ReadJson(
       content: HttpContent [CanBeNull]
    ) : JToken? [NullableContext, Extension, MustUseReturnValue]
- - Read<T>(
+ - HttpExtensions.Read<T>(
       content: HttpContent [NotNull],
       jsonPath: string? [Nullable],
       value: out T&? [Nullable, Out]
    ) : HttpContent? [NullableContext, Extension, MustUseReturnValue]
- - Read<T>(
+ - HttpExtensions.Read<T>(
       content: HttpContent [NotNull]
    ) : T? [NullableContext, Extension]
- - Read<T>(
+ - HttpExtensions.Read<T>(
       content: HttpContent? [Nullable, NotNull],
       jsonPath: string
    ) : T [Extension, MustUseReturnValue]
- - GetAllHeaders(
+ - HttpExtensions.GetAllHeaders(
       request: HttpRequestMessage
    ) : List`1 [Extension]
- - GetAllHeaders(
+ - HttpExtensions.GetAllHeaders(
       response: HttpResponseMessage
    ) : List`1 [Extension]
- - ToHttpLook(
+ - HttpExtensions.ToHttpLook(
       request: HttpRequestMessage
    ) : string [Extension, NotNull]
- - ToHttpLook(
+ - HttpExtensions.ToHttpLook(
       response: HttpResponseMessage
    ) : string [Extension, NotNull]
 
@@ -37,15 +37,15 @@
  - Response: HttpResponseMessage
 
 ## HttpOperationExtensions
- - Details<TOperation>(
+ - HttpOperationExtensions.Details<TOperation>(
       operation: TOperation,
       details: string
    ) : TOperation [Extension]
- - ShouldBe<TOperation>(
+ - HttpOperationExtensions.ShouldBe<TOperation>(
       operation: TOperation,
       assertion: IAssertion
    ) : TOperation [Extension]
- - ShouldBe<TOperation>(
+ - HttpOperationExtensions.ShouldBe<TOperation>(
       operation: TOperation,
       assertions: IEnumerable`1
    ) : TOperation [Extension]
@@ -114,13 +114,13 @@
  - And(
       ignore: Ignore
    ) : Ignore
- - ResponseBody(
+ - Ignore.ResponseBody(
       nodes: params String[] [ParamArray]
    ) : Ignore
- - RequestMethod() : Ignore
- - RequestDescription() : Ignore
- - ResponseLocationHeader() : Ignore
- - ResponseContentLength() : Ignore
+ - Ignore.RequestMethod() : Ignore
+ - Ignore.RequestDescription() : Ignore
+ - Ignore.ResponseLocationHeader() : Ignore
+ - Ignore.ResponseContentLength() : Ignore
 
 ## Json.JsonComparer
  - Pattern: JToken
@@ -139,7 +139,7 @@
    ) : Scenario [NotNull]
 
 ## Features.FeatureExtensions
- - InStep<TOperation>(
+ - FeatureExtensions.InStep<TOperation>(
       operation: TOperation [NotNull],
       step: Step [NotNull]
    ) : TOperation? [NullableContext, Extension]
@@ -179,7 +179,7 @@
  - Expected(
       expected: string
    ) : IAssertion
- - Failure(
+ - Assertion.Failure(
       message: string
    ) : Result
 
@@ -204,7 +204,7 @@
  - Expected(
       expected: string
    ) : IAssertion
- - Failure(
+ - Assertion.Failure(
       message: string
    ) : Result
 
@@ -217,7 +217,7 @@
  - Expected(
       expected: string
    ) : IAssertion
- - Failure(
+ - Assertion.Failure(
       message: string
    ) : Result
 
@@ -230,7 +230,7 @@
  - Expected(
       expected: string
    ) : IAssertion
- - Failure(
+ - Assertion.Failure(
       message: string
    ) : Result
 
@@ -243,7 +243,7 @@
  - Expected(
       expected: string
    ) : IAssertion
- - Failure(
+ - Assertion.Failure(
       message: string
    ) : Result
 
@@ -256,7 +256,7 @@
  - Expected(
       expected: string
    ) : IAssertion
- - Failure(
+ - Assertion.Failure(
       message: string
    ) : Result
 
@@ -269,7 +269,7 @@
  - Expected(
       expected: string
    ) : IAssertion
- - Failure(
+ - Assertion.Failure(
       message: string
    ) : Result
 
@@ -282,7 +282,7 @@
  - Expected(
       expected: string
    ) : IAssertion
- - Failure(
+ - Assertion.Failure(
       message: string
    ) : Result
 

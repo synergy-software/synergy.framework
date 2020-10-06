@@ -37,13 +37,21 @@ namespace Synergy.Convention.Testing
 
                     var generics = method.GetGenericArguments();
                     var gD = generics.Length == 0 ? "" : "<"+String.Join(", ", generics.Select(g => g.Name))+">";
-                    description.AppendLine($" - {method.Name}{gD}({GetParametersOf(method)}) : {GetTypeName(method)}{GetAttributes(method)}");
+                    description.AppendLine($" - {GetMethodName(method)}{gD}({GetParametersOf(method)}) : {GetTypeName(method)}{GetAttributes(method)}");
                 }
                 
                 description.AppendLine();
             }
             
             return description.ToString();
+        }
+
+        private static string GetMethodName(MethodInfo method)
+        {
+            if (method.IsStatic)
+                return $"{method.DeclaringType.Name}.{method.Name}";
+            
+            return method.Name;
         }
 
         private static string GetBaseTypeName(Type type)
