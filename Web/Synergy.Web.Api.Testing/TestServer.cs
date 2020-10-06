@@ -13,7 +13,8 @@ namespace Synergy.Web.Api.Testing
 {
     public abstract class TestServer : IDisposable
     {
-        public HttpClient HttpClient { get; }
+        [NotNull]
+        private HttpClient HttpClient { get; }
         public bool Repair { get; set; }
 
         [CanBeNull] 

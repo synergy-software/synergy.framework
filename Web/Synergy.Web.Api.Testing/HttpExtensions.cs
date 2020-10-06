@@ -15,7 +15,7 @@ namespace Synergy.Web.Api.Testing
     public static class HttpExtensions
     {
         [MustUseReturnValue]
-        public static JToken? ReadJson(this HttpContent? content)
+        public static JToken? ReadJson([CanBeNull] this HttpContent? content)
         {
             if (content == null)
                 return null;
