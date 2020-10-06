@@ -7,7 +7,7 @@
  - Read<T>(
       content: HttpContent [NotNull],
       jsonPath: string? [Nullable],
-      value: T&? [Nullable, Out]
+      value: out T&? [Nullable, Out]
    ) : HttpContent? [NullableContext, Extension, MustUseReturnValue]
  - Read<T>(
       content: HttpContent [NotNull]

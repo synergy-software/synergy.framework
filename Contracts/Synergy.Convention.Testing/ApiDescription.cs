@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Synergy.Convention.Testing
@@ -117,6 +118,11 @@ namespace Synergy.Convention.Testing
             
             if (paramsArray != null)
                 type = "params " + type;
+            
+            var outAttribute = parameter.GetCustomAttribute<OutAttribute>();
+            
+            if (outAttribute != null)
+                type = "out " + type;
             
             if (nullable)
                 return type +"?";
