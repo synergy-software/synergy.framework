@@ -60,12 +60,11 @@ namespace Synergy.Web.Api.Testing
         }
 
         [Pure]
-        public static string GetRequestFullMethod(this HttpRequestMessage request)
+        internal static string GetRequestFullMethod(this HttpRequestMessage request)
             => $"{request.Method} {request.GetRequestRelativeUrl()}";
-
         
         [Pure]
-        public static string GetRequestRelativeUrl(this HttpRequestMessage request)
+        private static string GetRequestRelativeUrl(this HttpRequestMessage request)
             => request.RequestUri.ToString().Replace("http://localhost", "");
 
         public static List<KeyValuePair<string, IEnumerable<string>>> GetAllHeaders(this HttpRequestMessage request)

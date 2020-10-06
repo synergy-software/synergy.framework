@@ -16,12 +16,6 @@
       content: HttpContent? [Nullable, NotNull],
       jsonPath: string
    ) : T [Extension, MustUseReturnValue]
- - GetRequestFullMethod(
-      request: HttpRequestMessage
-   ) : string [Extension, Pure]
- - GetRequestRelativeUrl(
-      request: HttpRequestMessage
-   ) : string [Extension, Pure]
  - GetAllHeaders(
       request: HttpRequestMessage
    ) : List`1 [Extension]
