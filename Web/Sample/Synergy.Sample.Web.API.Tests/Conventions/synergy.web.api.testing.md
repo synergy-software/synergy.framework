@@ -30,11 +30,11 @@
    ) : string [Extension, NotNull]
 
 ## HttpOperation
- - Description: string? [Nullable, CanBeNull]
- - Duration: TimeSpan
- - TestServer: TestServer
- - Request: HttpRequestMessage
- - Response: HttpResponseMessage
+ - Description: string? [Nullable, CanBeNull] { get; }
+ - Duration: TimeSpan { get; }
+ - TestServer: TestServer { get; }
+ - Request: HttpRequestMessage { get; }
+ - Response: HttpResponseMessage { get; }
  - Assertions: List`1 (field)
 
 ## HttpOperationExtensions
@@ -52,7 +52,7 @@
    ) : TOperation [Extension]
 
 ## TestServer
- - Repair: bool
+ - Repair: bool { get; set; }
  - FailIfLeftInRepairMode() : Void
  - Get(
       path: string,
@@ -108,7 +108,7 @@
  - Dispose() : Void
 
 ## Json.Ignore
- - Nodes: ReadOnlyCollection`1
+ - Nodes: ReadOnlyCollection`1 { get; }
  - Append(
       ignores: IEnumerable`1
    ) : Void
@@ -124,17 +124,17 @@
  - Ignore.ResponseContentLength() : Ignore
 
 ## Json.JsonComparer
- - Pattern: JToken
- - New: JToken
- - Ignore: Ignore
- - AreEquivalent: bool
+ - Pattern: JToken { get; }
+ - New: JToken { get; }
+ - Ignore: Ignore { get; }
+ - AreEquivalent: bool { get; }
  - GetDifferences(
       maxNoOfDifferences: int [Optional]
    ) : string? [NullableContext]
 
 ## Features.Feature
- - Title: string [NotNull]
- - Scenarios: List`1
+ - Title: string [NotNull] { get; }
+ - Scenarios: List`1 { get; }
  - Scenario(
       title: string [NotNull]
    ) : Scenario [NotNull]
@@ -146,7 +146,7 @@
    ) : TOperation? [NullableContext, Extension]
 
 ## Features.IExpectation
- - ExpectedResult: string
+ - ExpectedResult: string { get; }
 
 ## Features.IHttpRequestStorage
  - GetSavedRequest() : HttpRequestMessage
@@ -160,21 +160,21 @@
    ) : string
 
 ## Features.Scenario
- - No: int
- - Title: string [NotNull]
- - Steps: List`1
+ - No: int { get; }
+ - Title: string [NotNull] { get; }
+ - Steps: List`1 { get; }
  - Step(
       title: string [NotNull]
    ) : Step [NotNull]
 
 ## Features.Step
- - No: int
- - Title: string
+ - No: int { get; }
+ - Title: string { get; }
  - Operations: List`1 (field)
 
 ## Assertions.Assertion
- - ExpectedResult: string? [Nullable]
- - Assertion.Ok: Result
+ - ExpectedResult: string? [Nullable] { get; }
+ - Assertion.Ok: Result { get; }
  - Assert(
       operation: HttpOperation
    ) : Result
@@ -191,8 +191,8 @@
    ) : Result? [NullableContext]
 
 ## Assertions.CompareOperationWithPattern : Assertion
- - ExpectedResult: string? [Nullable]
- - Assertion.Ok: Result
+ - ExpectedResult: string? [Nullable] { get; }
+ - Assertion.Ok: Result { get; }
  - Assert(
       operation: HttpOperation
    ) : Result
@@ -211,8 +211,8 @@
    ) : Result
 
 ## Assertions.CompareResponseWithPattern : Assertion
- - ExpectedResult: string? [Nullable]
- - Assertion.Ok: Result
+ - ExpectedResult: string? [Nullable] { get; }
+ - Assertion.Ok: Result { get; }
  - Assert(
       operation: HttpOperation
    ) : Result
@@ -224,8 +224,8 @@
    ) : Result
 
 ## Assertions.VerifyRequestMethod : Assertion
- - ExpectedResult: string? [Nullable]
- - Assertion.Ok: Result
+ - ExpectedResult: string? [Nullable] { get; }
+ - Assertion.Ok: Result { get; }
  - Assert(
       operation: HttpOperation
    ) : Result
@@ -237,8 +237,8 @@
    ) : Result
 
 ## Assertions.VerifyResponseBody : Assertion
- - ExpectedResult: string? [Nullable]
- - Assertion.Ok: Result
+ - ExpectedResult: string? [Nullable] { get; }
+ - Assertion.Ok: Result { get; }
  - Assert(
       operation: HttpOperation
    ) : Result
@@ -250,8 +250,8 @@
    ) : Result
 
 ## Assertions.VerifyResponseContentType : Assertion
- - ExpectedResult: string? [Nullable]
- - Assertion.Ok: Result
+ - ExpectedResult: string? [Nullable] { get; }
+ - Assertion.Ok: Result { get; }
  - Assert(
       operation: HttpOperation
    ) : Result
@@ -263,8 +263,8 @@
    ) : Result
 
 ## Assertions.VerifyResponseHeader : Assertion
- - ExpectedResult: string? [Nullable]
- - Assertion.Ok: Result
+ - ExpectedResult: string? [Nullable] { get; }
+ - Assertion.Ok: Result { get; }
  - Assert(
       operation: HttpOperation
    ) : Result
@@ -276,8 +276,8 @@
    ) : Result
 
 ## Assertions.VerifyResponseStatus : Assertion
- - ExpectedResult: string? [Nullable]
- - Assertion.Ok: Result
+ - ExpectedResult: string? [Nullable] { get; }
+ - Assertion.Ok: Result { get; }
  - Assert(
       operation: HttpOperation
    ) : Result? [NullableContext]
@@ -289,19 +289,19 @@
    ) : Result
 
 ## Assertions.WebApiRuleViolationException : Exception
- - TargetSite: MethodBase
- - StackTrace: string
- - Message: string? [Nullable]
- - Data: IDictionary? [Nullable]
- - InnerException: Exception
- - HelpLink: string
- - Source: string
- - HResult: int
+ - TargetSite: MethodBase { get; }
+ - StackTrace: string { get; }
+ - Message: string? [Nullable] { get; }
+ - Data: IDictionary? [Nullable] { get; }
+ - InnerException: Exception { get; }
+ - HelpLink: string { get; set; }
+ - Source: string { get; set; }
+ - HResult: int { get; set; }
 
 ## Assertions.Assertion+Result (struct)
- - Message: string
- - IsOk: bool
- - Result.Ok: Result
+ - Message: string { get; }
+ - IsOk: bool { get; }
+ - Result.Ok: Result { get; }
 
 ## Assertions.CompareResponseWithPattern+Mode (enum)
  - Mode.ContractCheck: Mode (field)

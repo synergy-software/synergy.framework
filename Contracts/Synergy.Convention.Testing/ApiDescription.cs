@@ -28,7 +28,7 @@ namespace Synergy.Convention.Testing
                 description.AppendLine($"## {type.FullName.Replace(assemblyName + ".", "")}{gType}{baseType}");
                 foreach (var property in type.GetProperties(BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public))
                 {
-                    description.AppendLine($" - {GetPropertyName(property)}: {GetTypeName(property)}{GetAttributes(property)}");
+                    description.AppendLine($" - {GetPropertyName(property)}: {GetTypeName(property)}{GetAttributes(property)} {GetAccessors(property)}");
                 }
 
                 foreach (var field in type.GetFields(BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public))
@@ -59,6 +59,23 @@ namespace Synergy.Convention.Testing
             }
             
             return description.ToString();
+        }
+
+        private static string GetAccessors(PropertyInfo property)
+        {
+            var canRead = property.GetGetMethod(false)?.IsPublic ?? false;
+            var canWrite = property.GetSetMethod(false)?.IsPublic ?? false;
+            
+            if (canRead && canWrite)
+                return "{ get; set; }";
+            
+            if (canRead)
+                return "{ get; }";
+            
+            if (canWrite)
+                return "{ set; }";
+
+            return "{ ??? }";
         }
 
         private static string GetFieldName(FieldInfo field)

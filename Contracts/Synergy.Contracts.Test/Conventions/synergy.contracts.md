@@ -1,14 +1,14 @@
 # Synergy.Contracts
 
 ## DesignByContractViolationException : Exception
- - Message: string
- - Data: IDictionary
- - InnerException: Exception
- - TargetSite: MethodBase
- - StackTrace: string
- - HelpLink: string
- - Source: string
- - HResult: int
+ - Message: string { get; }
+ - Data: IDictionary { get; }
+ - InnerException: Exception { get; }
+ - TargetSite: MethodBase { get; }
+ - StackTrace: string { get; }
+ - HelpLink: string { get; set; }
+ - Source: string { get; set; }
+ - HResult: int { get; }
 
 ## Fail
  - Fail.Because(
