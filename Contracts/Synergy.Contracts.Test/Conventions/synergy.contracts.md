@@ -260,13 +260,8 @@
    ) : Void [AssertionMethod]
 
 ## Violation (struct)
- - ToString() : string
  - Violation.Of(
       message: string [NotNull],
       args: params Object[] [ParamArray, NotNull]
    ) : Violation [StringFormatMethod]
- - Equals(
-      obj: object
-   ) : bool [SecuritySafeCritical]
- - GetHashCode() : int [SecuritySafeCritical]
 

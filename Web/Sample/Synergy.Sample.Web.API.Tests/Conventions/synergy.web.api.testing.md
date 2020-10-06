@@ -35,6 +35,7 @@
  - TestServer: TestServer
  - Request: HttpRequestMessage
  - Response: HttpResponseMessage
+ - Assertions: List`1 (field)
 
 ## HttpOperationExtensions
  - HttpOperationExtensions.Details<TOperation>(
@@ -169,10 +170,11 @@
 ## Features.Step
  - No: int
  - Title: string
+ - Operations: List`1 (field)
 
 ## Assertions.Assertion
  - ExpectedResult: string? [Nullable]
- - Ok: Result
+ - Assertion.Ok: Result
  - Assert(
       operation: HttpOperation
    ) : Result
@@ -190,7 +192,7 @@
 
 ## Assertions.CompareOperationWithPattern : Assertion
  - ExpectedResult: string? [Nullable]
- - Ok: Result
+ - Assertion.Ok: Result
  - Assert(
       operation: HttpOperation
    ) : Result
@@ -210,7 +212,7 @@
 
 ## Assertions.CompareResponseWithPattern : Assertion
  - ExpectedResult: string? [Nullable]
- - Ok: Result
+ - Assertion.Ok: Result
  - Assert(
       operation: HttpOperation
    ) : Result
@@ -223,7 +225,7 @@
 
 ## Assertions.VerifyRequestMethod : Assertion
  - ExpectedResult: string? [Nullable]
- - Ok: Result
+ - Assertion.Ok: Result
  - Assert(
       operation: HttpOperation
    ) : Result
@@ -236,7 +238,7 @@
 
 ## Assertions.VerifyResponseBody : Assertion
  - ExpectedResult: string? [Nullable]
- - Ok: Result
+ - Assertion.Ok: Result
  - Assert(
       operation: HttpOperation
    ) : Result
@@ -249,7 +251,7 @@
 
 ## Assertions.VerifyResponseContentType : Assertion
  - ExpectedResult: string? [Nullable]
- - Ok: Result
+ - Assertion.Ok: Result
  - Assert(
       operation: HttpOperation
    ) : Result
@@ -262,7 +264,7 @@
 
 ## Assertions.VerifyResponseHeader : Assertion
  - ExpectedResult: string? [Nullable]
- - Ok: Result
+ - Assertion.Ok: Result
  - Assert(
       operation: HttpOperation
    ) : Result
@@ -275,7 +277,7 @@
 
 ## Assertions.VerifyResponseStatus : Assertion
  - ExpectedResult: string? [Nullable]
- - Ok: Result
+ - Assertion.Ok: Result
  - Assert(
       operation: HttpOperation
    ) : Result? [NullableContext]
@@ -295,4 +297,13 @@
  - HelpLink: string
  - Source: string
  - HResult: int
+
+## Assertions.Assertion+Result (struct)
+ - Message: string
+ - IsOk: bool
+ - Result.Ok: Result
+
+## Assertions.CompareResponseWithPattern+Mode (enum)
+ - Mode.ContractCheck: Mode (field)
+ - Mode.Default: Mode (field)
 
