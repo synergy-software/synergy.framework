@@ -13,260 +13,260 @@
 ## Fail:
  - Because(
       message: Violation
-   ) : DesignByContractViolationException
+   ) : DesignByContractViolationException [NotNull, Pure]
  - Because(
-      [NotNull] message: string
-   ) : DesignByContractViolationException
- - Because(
-      [NotNull] message: string,
+      message: string [NotNull]
+   ) : DesignByContractViolationException [NotNull, Pure, StringFormatMethod]
+ - Because<T1>(
+      message: string [NotNull],
       arg1: T1
-   ) : DesignByContractViolationException
- - Because(
-      [NotNull] message: string,
+   ) : DesignByContractViolationException [NotNull, Pure, StringFormatMethod]
+ - Because<T1, T2>(
+      message: string [NotNull],
       arg1: T1,
       arg2: T2
-   ) : DesignByContractViolationException
- - Because(
-      [NotNull] message: string,
+   ) : DesignByContractViolationException [NotNull, Pure, StringFormatMethod]
+ - Because<T1, T2, T3>(
+      message: string [NotNull],
       arg1: T1,
       arg2: T2,
       arg3: T3
-   ) : DesignByContractViolationException
+   ) : DesignByContractViolationException [NotNull, Pure, StringFormatMethod]
  - Because(
-      [NotNull] message: string,
-      [ParamArray, NotNull] args: Object[]
-   ) : DesignByContractViolationException
+      message: string [NotNull],
+      args: Object[] [ParamArray, NotNull]
+   ) : DesignByContractViolationException [NotNull, Pure, StringFormatMethod]
  - IfFalse(
-      [AssertionCondition] value: bool,
+      value: bool [AssertionCondition],
       message: Violation
-   ) : Void
+   ) : Void [AssertionMethod, ContractAnnotation]
  - IfTrue(
-      [AssertionCondition] value: bool,
+      value: bool [AssertionCondition],
       message: Violation
-   ) : Void
- - AsOrFail(
-      [CanBeNull, NoEnumeration] value: Object,
-      [CanBeNull, Optional] name: string
-   ) : T
- - CastOrFail(
-      [CanBeNull, NoEnumeration] value: Object,
-      [CanBeNull, Optional] name: string
-   ) : T
+   ) : Void [AssertionMethod, ContractAnnotation]
+ - AsOrFail<T>(
+      value: object [CanBeNull, NoEnumeration],
+      name: string [CanBeNull, Optional]
+   ) : T [Extension, CanBeNull, AssertionMethod, ContractAnnotation]
+ - CastOrFail<T>(
+      value: object [CanBeNull, NoEnumeration],
+      name: string [CanBeNull, Optional]
+   ) : T [Extension, NotNull, AssertionMethod, ContractAnnotation]
  - IfNotCastable(
-      [CanBeNull, NoEnumeration] value: Object,
-      [NotNull] expectedType: Type,
+      value: object [CanBeNull, NoEnumeration],
+      expectedType: Type [NotNull],
       message: Violation
-   ) : Void
- - IfNotCastable(
-      [CanBeNull, NoEnumeration] value: Object,
+   ) : Void [AssertionMethod]
+ - IfNotCastable<T>(
+      value: object [CanBeNull, NoEnumeration],
       message: Violation
-   ) : Void
- - IfNullOrNotCastable(
-      [CanBeNull, NoEnumeration] value: Object
-   ) : Void
- - IfNullOrNotCastable(
-      [CanBeNull, NoEnumeration] value: Object,
+   ) : Void [AssertionMethod]
+ - IfNullOrNotCastable<T>(
+      value: object [CanBeNull, NoEnumeration]
+   ) : Void [AssertionMethod, ContractAnnotation]
+ - IfNullOrNotCastable<T>(
+      value: object [CanBeNull, NoEnumeration],
       message: Violation
-   ) : Void
+   ) : Void [AssertionMethod, ContractAnnotation]
  - IfCollectionEmpty(
-      [CanBeNull, AssertionCondition] collection: IEnumerable,
-      [NotNull] collectionName: string
-   ) : Void
+      collection: IEnumerable [CanBeNull, AssertionCondition],
+      collectionName: string [NotNull]
+   ) : Void [AssertionMethod, ContractAnnotation]
  - IfCollectionEmpty(
-      [CanBeNull, AssertionCondition] collection: IEnumerable,
+      collection: IEnumerable [CanBeNull, AssertionCondition],
       message: Violation
-   ) : Void
- - OrFailIfCollectionEmpty(
-      [CanBeNull, AssertionCondition] collection: T,
-      [NotNull] collectionName: string
-   ) : T
- - OrFailIfCollectionEmpty(
-      [CanBeNull, AssertionCondition] collection: T,
+   ) : Void [AssertionMethod, ContractAnnotation]
+ - OrFailIfCollectionEmpty<T>(
+      collection: T [CanBeNull, AssertionCondition],
+      collectionName: string [NotNull]
+   ) : T [Extension, NotNull, AssertionMethod, ContractAnnotation]
+ - OrFailIfCollectionEmpty<T>(
+      collection: T [CanBeNull, AssertionCondition],
       message: Violation
-   ) : T
- - IfCollectionContainsNull(
-      [CanBeNull, AssertionCondition] collection: IEnumerable`1,
-      [NotNull] collectionName: string
-   ) : Void
- - IfCollectionContains(
-      [CanBeNull, AssertionCondition] collection: IEnumerable`1,
-      [NotNull] func: Func`2,
+   ) : T [Extension, NotNull, AssertionMethod, ContractAnnotation]
+ - IfCollectionContainsNull<T>(
+      collection: IEnumerable`1 [CanBeNull, AssertionCondition],
+      collectionName: string [NotNull]
+   ) : Void [AssertionMethod, ContractAnnotation]
+ - IfCollectionContains<T>(
+      collection: IEnumerable`1 [CanBeNull, AssertionCondition],
+      func: Func`2 [NotNull],
       message: Violation
-   ) : Void
- - IfCollectionsAreNotEquivalent(
-      [CanBeNull, AssertionCondition] collection1: IEnumerable`1,
-      [CanBeNull, AssertionCondition] collection2: IEnumerable`1,
+   ) : Void [AssertionMethod, ContractAnnotation]
+ - IfCollectionsAreNotEquivalent<T>(
+      collection1: IEnumerable`1 [CanBeNull, AssertionCondition],
+      collection2: IEnumerable`1 [CanBeNull, AssertionCondition],
       message: Violation
-   ) : Void
+   ) : Void [AssertionMethod, ContractAnnotation]
  - IfNotDate(
-      [CanBeNull] date: Nullable`1,
+      date: Nullable`1 [CanBeNull],
       name: string
-   ) : Void
+   ) : Void [AssertionMethod]
  - IfNotDate(
-      [CanBeNull] date: Nullable`1,
+      date: Nullable`1 [CanBeNull],
       message: Violation
-   ) : Void
+   ) : Void [AssertionMethod]
  - FailIfNotDate(
-      [CanBeNull] date: Nullable`1,
+      date: Nullable`1 [CanBeNull],
       name: string
-   ) : Nullable`1
+   ) : Nullable`1 [Extension, CanBeNull, AssertionMethod]
  - FailIfNotDate(
       date: DateTime,
       name: string
-   ) : DateTime
+   ) : DateTime [Extension, AssertionMethod]
  - IfEmpty(
       value: DateTime,
-      [NotNull] name: string
-   ) : Void
+      name: string [NotNull]
+   ) : Void [AssertionMethod]
  - FailIfEmpty(
       value: DateTime,
-      [NotNull] name: string
-   ) : DateTime
- - BecauseEnumOutOfRange(
+      name: string [NotNull]
+   ) : DateTime [Extension, AssertionMethod]
+ - BecauseEnumOutOfRange<T>(
       value: T
-   ) : DesignByContractViolationException
- - IfEnumNotDefined(
-      [NotNull] value: Object
+   ) : DesignByContractViolationException [NotNull, Pure]
+ - IfEnumNotDefined<T>(
+      value: object [NotNull]
    ) : Void
- - IfEnumNotDefined(
+ - IfEnumNotDefined<T>(
       value: T
    ) : Void
- - FailIfEnumOutOfRange(
-      [NotNull] value: Enum,
-      [NotNull] name: string
-   ) : T
- - CastEnumOrFail(
-      [CanBeNull, NoEnumeration] value: Enum,
-      [NotNull] name: string
-   ) : T
- - IfEqual(
-      [CanBeNull] unexpected: TExpected,
-      [CanBeNull] actual: TActual,
-      [NotNull] name: string
-   ) : Void
- - IfEqual(
-      [CanBeNull] unexpected: TExpected,
-      [CanBeNull] actual: TActual,
+ - FailIfEnumOutOfRange<T>(
+      value: Enum [NotNull],
+      name: string [NotNull]
+   ) : T [Extension, NotNull]
+ - CastEnumOrFail<T>(
+      value: Enum [CanBeNull, NoEnumeration],
+      name: string [NotNull]
+   ) : T [Extension, NotNull]
+ - IfEqual<TExpected, TActual>(
+      unexpected: TExpected [CanBeNull],
+      actual: TActual [CanBeNull],
+      name: string [NotNull]
+   ) : Void [AssertionMethod]
+ - IfEqual<TExpected, TActual>(
+      unexpected: TExpected [CanBeNull],
+      actual: TActual [CanBeNull],
       message: Violation
-   ) : Void
- - IfArgumentEqual(
-      [CanBeNull] unexpected: TExpected,
-      [CanBeNull] argumentValue: TActual,
-      [NotNull] argumentName: string
-   ) : Void
- - IfNotEqual(
-      [CanBeNull] expected: TExpected,
-      [CanBeNull] actual: TActual,
-      [NotNull] name: string
-   ) : Void
- - IfNotEqual(
-      [CanBeNull] expected: TExpected,
-      [CanBeNull] actual: TActual,
+   ) : Void [AssertionMethod]
+ - IfArgumentEqual<TExpected, TActual>(
+      unexpected: TExpected [CanBeNull],
+      argumentValue: TActual [CanBeNull],
+      argumentName: string [NotNull]
+   ) : Void [AssertionMethod]
+ - IfNotEqual<TExpected, TActual>(
+      expected: TExpected [CanBeNull],
+      actual: TActual [CanBeNull],
+      name: string [NotNull]
+   ) : Void [AssertionMethod]
+ - IfNotEqual<TExpected, TActual>(
+      expected: TExpected [CanBeNull],
+      actual: TActual [CanBeNull],
       message: Violation
-   ) : Void
+   ) : Void [AssertionMethod]
  - IfEmpty(
       value: Guid,
       message: Violation
-   ) : Void
+   ) : Void [AssertionMethod]
  - IfArgumentEmpty(
       value: Guid,
-      [NotNull] argumentName: string
-   ) : Void
- - FailIfNull(
-      [CanBeNull, AssertionCondition, NoEnumeration] value: T,
-      [NotNull] name: string
-   ) : T
- - FailIfNull(
-      [CanBeNull, AssertionCondition, NoEnumeration] value: T,
+      argumentName: string [NotNull]
+   ) : Void [AssertionMethod]
+ - FailIfNull<T>(
+      value: T [CanBeNull, AssertionCondition, NoEnumeration],
+      name: string [NotNull]
+   ) : T [Extension, NotNull, AssertionMethod, ContractAnnotation]
+ - FailIfNull<T>(
+      value: T [CanBeNull, AssertionCondition, NoEnumeration],
       message: Violation
-   ) : T
- - OrFail(
-      [CanBeNull, AssertionCondition, NoEnumeration] value: T,
-      [NotNull] name: string
-   ) : T
- - OrFail(
+   ) : T [Extension, NotNull, AssertionMethod, ContractAnnotation]
+ - OrFail<T>(
+      value: T [CanBeNull, AssertionCondition, NoEnumeration],
+      name: string [NotNull]
+   ) : T [Extension, NotNull, AssertionMethod, ContractAnnotation]
+ - OrFail<T>(
       value: Nullable`1,
-      [NotNull] name: string
-   ) : T
- - NotNull(
-      [CanBeNull, AssertionCondition, NoEnumeration] value: T,
-      [NotNull] name: string
-   ) : T
- - CanBeNull(
-      [CanBeNull, NoEnumeration] value: T
-   ) : T
- - IfArgumentNull(
-      [CanBeNull, AssertionCondition, NoEnumeration] argumentValue: T,
-      [NotNull] argumentName: string
-   ) : Void
- - IfNull(
-      [CanBeNull, AssertionCondition] value: T,
-      [NotNull] name: string
-   ) : Void
- - IfNull(
-      [CanBeNull, AssertionCondition] value: T,
+      name: string [NotNull]
+   ) : T [Extension, ContractAnnotation]
+ - NotNull<T>(
+      value: T [CanBeNull, AssertionCondition, NoEnumeration],
+      name: string [NotNull]
+   ) : T [Extension, NotNull, AssertionMethod, ContractAnnotation]
+ - CanBeNull<T>(
+      value: T [CanBeNull, NoEnumeration]
+   ) : T [Extension, CanBeNull, AssertionMethod, ContractAnnotation]
+ - IfArgumentNull<T>(
+      argumentValue: T [CanBeNull, AssertionCondition, NoEnumeration],
+      argumentName: string [NotNull]
+   ) : Void [AssertionMethod, ContractAnnotation]
+ - IfNull<T>(
+      value: T [CanBeNull, AssertionCondition],
+      name: string [NotNull]
+   ) : Void [AssertionMethod, ContractAnnotation]
+ - IfNull<T>(
+      value: T [CanBeNull, AssertionCondition],
       message: Violation
-   ) : Void
- - IfNotNull(
-      [CanBeNull, NoEnumeration] value: T,
-      [NotNull] name: string
-   ) : Void
- - IfNotNull(
-      [CanBeNull, NoEnumeration] value: T,
+   ) : Void [AssertionMethod, ContractAnnotation]
+ - IfNotNull<T>(
+      value: T [CanBeNull, NoEnumeration],
+      name: string [NotNull]
+   ) : Void [AssertionMethod, ContractAnnotation]
+ - IfNotNull<T>(
+      value: T [CanBeNull, NoEnumeration],
       message: Violation
-   ) : Void
+   ) : Void [AssertionMethod, ContractAnnotation]
  - IfArgumentEmpty(
-      [CanBeNull, AssertionCondition] argumentValue: string,
-      [NotNull] argumentName: string
-   ) : Void
+      argumentValue: string [CanBeNull, AssertionCondition],
+      argumentName: string [NotNull]
+   ) : Void [AssertionMethod, ContractAnnotation]
  - IfEmpty(
-      [CanBeNull, AssertionCondition] value: string,
-      [NotNull] name: string
-   ) : Void
+      value: string [CanBeNull, AssertionCondition],
+      name: string [NotNull]
+   ) : Void [AssertionMethod, ContractAnnotation]
  - IfEmpty(
-      [CanBeNull, AssertionCondition] value: string,
+      value: string [CanBeNull, AssertionCondition],
       message: Violation
-   ) : Void
+   ) : Void [AssertionMethod, ContractAnnotation]
  - IfArgumentWhiteSpace(
-      [CanBeNull, AssertionCondition] argumentValue: string,
-      [NotNull] argumentName: string
-   ) : Void
+      argumentValue: string [CanBeNull, AssertionCondition],
+      argumentName: string [NotNull]
+   ) : Void [AssertionMethod, ContractAnnotation]
  - OrFailIfWhiteSpace(
-      [CanBeNull, AssertionCondition, NoEnumeration] value: string,
-      [NotNull] name: string
-   ) : string
+      value: string [CanBeNull, AssertionCondition, NoEnumeration],
+      name: string [NotNull]
+   ) : string [Extension, NotNull, AssertionMethod, ContractAnnotation]
  - IfWhitespace(
-      [CanBeNull, AssertionCondition] value: string,
-      [NotNull] name: string
-   ) : Void
+      value: string [CanBeNull, AssertionCondition],
+      name: string [NotNull]
+   ) : Void [AssertionMethod, ContractAnnotation]
  - IfWhitespace(
-      [CanBeNull, AssertionCondition] value: string,
+      value: string [CanBeNull, AssertionCondition],
       message: Violation
-   ) : Void
+   ) : Void [AssertionMethod, ContractAnnotation]
  - IfTooLong(
-      [CanBeNull] value: string,
+      value: string [CanBeNull],
       maxLength: int,
-      [NotNull] name: string
-   ) : Void
+      name: string [NotNull]
+   ) : Void [AssertionMethod]
  - OrFailIfTooLong(
-      [CanBeNull] value: string,
+      value: string [CanBeNull],
       maxLength: int,
-      [NotNull] name: string
-   ) : string
+      name: string [NotNull]
+   ) : string [Extension, CanBeNull, AssertionMethod, ContractAnnotation]
  - IfTooLongOrWhitespace(
-      [CanBeNull] value: string,
+      value: string [CanBeNull],
       maxLength: int,
-      [NotNull] name: string
-   ) : Void
+      name: string [NotNull]
+   ) : Void [AssertionMethod]
 
-## struct Violation:
+## Violation (struct):
  - ToString() : string
  - Of(
-      [NotNull] message: string,
-      [ParamArray, NotNull] args: Object[]
-   ) : Violation
+      message: string [NotNull],
+      args: Object[] [ParamArray, NotNull]
+   ) : Violation [StringFormatMethod]
  - Equals(
-      obj: Object
-   ) : bool
- - GetHashCode() : int
+      obj: object
+   ) : bool [SecuritySafeCritical]
+ - GetHashCode() : int [SecuritySafeCritical]
 

@@ -21,19 +21,21 @@ namespace Synergy.Convention.Testing
                 if (type.IsPublic == false)
                     continue;
 
-                var gType = type.IsValueType ? "struct " : (type.IsEnum ? "enum " : "");
-                description.AppendLine($"## {gType}{type.FullName.Replace(assemblyName + ".", "")}:");
+                var gType = type.IsValueType ? " (struct)" : (type.IsEnum ? " (enum)" : "");
+                description.AppendLine($"## {type.FullName.Replace(assemblyName + ".", "")}{gType}:");
                 foreach (var property in type.GetProperties(BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public))
                 {
-                    description.AppendLine($" - {GetAttributes(property)}{property.Name}: {GetTypeName(property)}");
+                    description.AppendLine($" - {property.Name}: {GetTypeName(property)}{GetAttributes(property)}");
                 }
                 
                 foreach (var method in type.GetMethods(BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public))
                 {
                     if (method.IsSpecialName || method.DeclaringType == typeof(object) || method.DeclaringType == typeof(Exception))
                         continue;
-                    
-                    description.AppendLine($" - {method.Name}({GetParametersOf(method)}) : {GetTypeName(method.ReturnType)}");
+
+                    var generics = method.GetGenericArguments();
+                    var gD = generics.Length == 0 ? "" : "<"+String.Join(", ", generics.Select(g => g.Name))+">";
+                    description.AppendLine($" - {method.Name}{gD}({GetParametersOf(method)}) : {GetTypeName(method)}{GetAttributes(method)}");
                 }
                 
                 description.AppendLine();
@@ -41,8 +43,6 @@ namespace Synergy.Convention.Testing
             
             return description.ToString();
         }
-
-
 
         private static string GetParametersOf(MethodInfo method)
         {
@@ -55,7 +55,7 @@ namespace Synergy.Convention.Testing
             foreach (ParameterInfo parameter in parameters)
             {
                 description.AppendLine();
-                description.Append($"      {GetAttributes(parameter)}{parameter.Name}: {GetTypeName(parameter.ParameterType)}");
+                description.Append($"      {parameter.Name}: {GetTypeName(parameter)}{GetAttributes(parameter)}");
                 if (parameter != last)
                     description.Append(",");
             }
@@ -78,8 +78,42 @@ namespace Synergy.Convention.Testing
             return type;
         }
         
+        private static string GetTypeName(MethodInfo method)
+        {
+            var type = GetTypeName(method.ReturnType);
+            var nullable = method.GetCustomAttributes()
+                                   .Any(a => a.GetType()
+                                              .FullName == "System.Runtime.CompilerServices.NullableContextAttribute");
+            
+            if (nullable)
+                return type +"?";
+            
+            return type;
+        }
+        
+        private static string GetTypeName(ParameterInfo parameter)
+        {
+            var type = GetTypeName(parameter.ParameterType);
+            var nullable = parameter.GetCustomAttributes()
+                                    .Any(a => a.GetType()
+                                               .FullName == "System.Runtime.CompilerServices.NullableAttribute");
+            
+            // var paramsArray = parameter.GetCustomAttribute<ParamArrayAttribute>();
+            //
+            // if (paramsArray != null)
+            //     type = "params " + type;
+            
+            if (nullable)
+                return type +"?";
+            
+            return type;
+        }
+        
         private static string GetTypeName(Type type)
         {
+            if (type == typeof(object))
+                return "object";
+            
             if (type == typeof(string))
                 return "string";
 
@@ -115,7 +149,7 @@ namespace Synergy.Convention.Testing
             if (attributes.Any() == false)
                 return "";
 
-            return $"[{string.Join(", ", attributes)}] ";
+            return $" [{string.Join(", ", attributes)}]";
         }
     }
 }

@@ -16,6 +16,7 @@
     <PackageTags>Web API Testing</PackageTags>
     <RootNamespace>Web.Api.Testing</RootNamespace>
     <Nullable>enable</Nullable>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
