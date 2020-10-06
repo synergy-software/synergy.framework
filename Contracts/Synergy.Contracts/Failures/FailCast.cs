@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 
 namespace Synergy.Contracts
@@ -116,7 +115,7 @@ namespace Synergy.Contracts
             Fail.IfNotCastable(value, typeof(T), message);
         }
 
-        [ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         private static void RequiresType([NotNull] Type expectedType)
         {
             if (expectedType == null)

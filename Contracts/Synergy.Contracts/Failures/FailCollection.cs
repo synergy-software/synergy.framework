@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using JetBrains.Annotations;
 
@@ -213,7 +212,7 @@ namespace Synergy.Contracts
         /// <summary>
         /// Checks if collection name was provided.
         /// </summary>
-        [ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         private static void RequiresCollectionName([NotNull] string collectionName)
         {
             if (string.IsNullOrWhiteSpace(collectionName))

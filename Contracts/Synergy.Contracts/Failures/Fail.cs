@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 using Synergy.Extensions;
 
@@ -143,7 +142,7 @@ namespace Synergy.Contracts
             return Fail.Because(message.Formatted(args));
         }
 
-        [ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         private static void RequiresMessage([NotNull] string message)
         {
             if (string.IsNullOrWhiteSpace(message))
@@ -153,7 +152,7 @@ namespace Synergy.Contracts
         /// <summary>
         /// Checks if argument name was provided.
         /// </summary>
-        [ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         private static void RequiresArgumentName([NotNull] string argumentName)
         {
             if (string.IsNullOrWhiteSpace(argumentName))
