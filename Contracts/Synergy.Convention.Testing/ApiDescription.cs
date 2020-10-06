@@ -98,10 +98,10 @@ namespace Synergy.Convention.Testing
                                     .Any(a => a.GetType()
                                                .FullName == "System.Runtime.CompilerServices.NullableAttribute");
             
-            // var paramsArray = parameter.GetCustomAttribute<ParamArrayAttribute>();
-            //
-            // if (paramsArray != null)
-            //     type = "params " + type;
+            var paramsArray = parameter.GetCustomAttribute<ParamArrayAttribute>();
+            
+            if (paramsArray != null)
+                type = "params " + type;
             
             if (nullable)
                 return type +"?";

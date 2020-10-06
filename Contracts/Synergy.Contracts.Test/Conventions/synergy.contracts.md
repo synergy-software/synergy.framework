@@ -34,7 +34,7 @@
    ) : DesignByContractViolationException [NotNull, Pure, StringFormatMethod]
  - Because(
       message: string [NotNull],
-      args: Object[] [ParamArray, NotNull]
+      args: params Object[] [ParamArray, NotNull]
    ) : DesignByContractViolationException [NotNull, Pure, StringFormatMethod]
  - IfFalse(
       value: bool [AssertionCondition],
@@ -263,7 +263,7 @@
  - ToString() : string
  - Of(
       message: string [NotNull],
-      args: Object[] [ParamArray, NotNull]
+      args: params Object[] [ParamArray, NotNull]
    ) : Violation [StringFormatMethod]
  - Equals(
       obj: object

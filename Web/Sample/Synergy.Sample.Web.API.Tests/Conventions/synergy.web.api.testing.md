@@ -121,7 +121,7 @@
       ignore: Ignore
    ) : Ignore
  - ResponseBody(
-      nodes: String[] [ParamArray]
+      nodes: params String[] [ParamArray]
    ) : Ignore
  - RequestMethod() : Ignore
  - RequestDescription() : Ignore
@@ -202,7 +202,7 @@
    ) : Result
  - Ignore(
       ignore: string,
-      ignores: String[] [ParamArray]
+      ignores: params String[] [ParamArray]
    ) : CompareOperationWithPattern
  - Ignore(
       ignore: Ignore
