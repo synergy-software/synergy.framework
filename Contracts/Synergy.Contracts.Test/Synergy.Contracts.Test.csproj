@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Synergy.Contracts.Samples\Synergy.Contracts.Samples.csproj" />
     <ProjectReference Include="..\Synergy.Contracts\Synergy.Contracts.csproj" />
+    <ProjectReference Include="..\Synergy.Convention.Testing\Synergy.Convention.Testing.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SynergyAssemblyInfo.cs" Link="Properties\SynergyAssemblyInfo.cs" />
