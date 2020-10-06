@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using JetBrains.Annotations;
 using Synergy.Contracts;
@@ -79,7 +78,7 @@ namespace Synergy.Reflection
         //}
 
         [NotNull]
-        [ExcludeFromCodeCoverage]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         private string DebuggerDisplay => $"specifics-of[{this.assembly.GetName().Name}.dll]";
     }
 }
