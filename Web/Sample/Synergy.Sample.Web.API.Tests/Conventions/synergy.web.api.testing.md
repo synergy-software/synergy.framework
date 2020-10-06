@@ -1,6 +1,6 @@
 # Synergy.Web.Api.Testing
 
-## HttpExtensions:
+## HttpExtensions
  - ReadJson(
       content: HttpContent [CanBeNull]
    ) : JToken? [NullableContext, Extension, MustUseReturnValue]
@@ -35,14 +35,14 @@
       response: HttpResponseMessage
    ) : string [Extension, NotNull]
 
-## HttpOperation:
+## HttpOperation
  - Description: string? [Nullable, CanBeNull]
  - Duration: TimeSpan
  - TestServer: TestServer
  - Request: HttpRequestMessage
  - Response: HttpResponseMessage
 
-## HttpOperationExtensions:
+## HttpOperationExtensions
  - Details<TOperation>(
       operation: TOperation,
       details: string
@@ -56,7 +56,7 @@
       assertions: IEnumerable`1
    ) : TOperation [Extension]
 
-## TestServer:
+## TestServer
  - Repair: bool
  - FailIfLeftInRepairMode() : Void
  - Get(
@@ -112,7 +112,7 @@
    ) : TOperation
  - Dispose() : Void
 
-## Json.Ignore:
+## Json.Ignore
  - Nodes: ReadOnlyCollection`1
  - Append(
       ignores: IEnumerable`1
@@ -128,7 +128,7 @@
  - ResponseLocationHeader() : Ignore
  - ResponseContentLength() : Ignore
 
-## Json.JsonComparer:
+## Json.JsonComparer
  - Pattern: JToken
  - New: JToken
  - Ignore: Ignore
@@ -137,34 +137,34 @@
       maxNoOfDifferences: int [Optional]
    ) : string? [NullableContext]
 
-## Features.Feature:
+## Features.Feature
  - Title: string [NotNull]
  - Scenarios: List`1
  - Scenario(
       title: string [NotNull]
    ) : Scenario [NotNull]
 
-## Features.FeatureExtensions:
+## Features.FeatureExtensions
  - InStep<TOperation>(
       operation: TOperation [NotNull],
       step: Step [NotNull]
    ) : TOperation? [NullableContext, Extension]
 
-## Features.IExpectation:
+## Features.IExpectation
  - ExpectedResult: string
 
-## Features.IHttpRequestStorage:
+## Features.IHttpRequestStorage
  - GetSavedRequest() : HttpRequestMessage
 
-## Features.IHttpResponseStorage:
+## Features.IHttpResponseStorage
  - GetSavedResponse() : HttpResponseMessage
 
-## Features.Markdown:
+## Features.Markdown
  - GenerateReportTo(
       filePath: string? [Nullable, Optional]
    ) : string
 
-## Features.Scenario:
+## Features.Scenario
  - No: int
  - Title: string [NotNull]
  - Steps: List`1
@@ -172,11 +172,11 @@
       title: string [NotNull]
    ) : Step [NotNull]
 
-## Features.Step:
+## Features.Step
  - No: int
  - Title: string
 
-## Assertions.Assertion:
+## Assertions.Assertion
  - ExpectedResult: string? [Nullable]
  - Ok: Result
  - Assert(
@@ -189,12 +189,12 @@
       message: string
    ) : Result
 
-## Assertions.IAssertion:
+## Assertions.IAssertion
  - Assert(
       operation: HttpOperation
    ) : Result? [NullableContext]
 
-## Assertions.CompareOperationWithPattern:
+## Assertions.CompareOperationWithPattern : Assertion
  - ExpectedResult: string? [Nullable]
  - Ok: Result
  - Assert(
@@ -214,7 +214,7 @@
       message: string
    ) : Result
 
-## Assertions.CompareResponseWithPattern:
+## Assertions.CompareResponseWithPattern : Assertion
  - ExpectedResult: string? [Nullable]
  - Ok: Result
  - Assert(
@@ -227,7 +227,7 @@
       message: string
    ) : Result
 
-## Assertions.VerifyRequestMethod:
+## Assertions.VerifyRequestMethod : Assertion
  - ExpectedResult: string? [Nullable]
  - Ok: Result
  - Assert(
@@ -240,7 +240,7 @@
       message: string
    ) : Result
 
-## Assertions.VerifyResponseBody:
+## Assertions.VerifyResponseBody : Assertion
  - ExpectedResult: string? [Nullable]
  - Ok: Result
  - Assert(
@@ -253,7 +253,7 @@
       message: string
    ) : Result
 
-## Assertions.VerifyResponseContentType:
+## Assertions.VerifyResponseContentType : Assertion
  - ExpectedResult: string? [Nullable]
  - Ok: Result
  - Assert(
@@ -266,7 +266,7 @@
       message: string
    ) : Result
 
-## Assertions.VerifyResponseHeader:
+## Assertions.VerifyResponseHeader : Assertion
  - ExpectedResult: string? [Nullable]
  - Ok: Result
  - Assert(
@@ -279,7 +279,7 @@
       message: string
    ) : Result
 
-## Assertions.VerifyResponseStatus:
+## Assertions.VerifyResponseStatus : Assertion
  - ExpectedResult: string? [Nullable]
  - Ok: Result
  - Assert(
@@ -292,7 +292,7 @@
       message: string
    ) : Result
 
-## Assertions.WebApiRuleViolationException:
+## Assertions.WebApiRuleViolationException : Exception
  - TargetSite: MethodBase
  - StackTrace: string
  - Message: string? [Nullable]

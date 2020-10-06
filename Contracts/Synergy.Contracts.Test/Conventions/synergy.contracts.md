@@ -1,6 +1,6 @@
 # Synergy.Contracts
 
-## DesignByContractViolationException:
+## DesignByContractViolationException : Exception
  - Message: string
  - Data: IDictionary
  - InnerException: Exception
@@ -10,7 +10,7 @@
  - Source: string
  - HResult: int
 
-## Fail:
+## Fail
  - Because(
       message: Violation
    ) : DesignByContractViolationException [NotNull, Pure]
@@ -259,7 +259,7 @@
       name: string [NotNull]
    ) : Void [AssertionMethod]
 
-## Violation (struct):
+## Violation (struct)
  - ToString() : string
  - Of(
       message: string [NotNull],

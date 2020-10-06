@@ -22,7 +22,8 @@ namespace Synergy.Convention.Testing
                     continue;
 
                 var gType = type.IsValueType ? " (struct)" : (type.IsEnum ? " (enum)" : "");
-                description.AppendLine($"## {type.FullName.Replace(assemblyName + ".", "")}{gType}:");
+                var baseType = ApiDescription.GetBaseTypeName(type);
+                description.AppendLine($"## {type.FullName.Replace(assemblyName + ".", "")}{gType}{baseType}");
                 foreach (var property in type.GetProperties(BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public))
                 {
                     description.AppendLine($" - {property.Name}: {GetTypeName(property)}{GetAttributes(property)}");
@@ -42,6 +43,20 @@ namespace Synergy.Convention.Testing
             }
             
             return description.ToString();
+        }
+
+        private static string GetBaseTypeName(Type type)
+        {
+            if (type.BaseType == null)
+                return "";
+            
+            if (type.BaseType == typeof(object))
+                return "";
+            
+            if (type.IsValueType)
+                return "";
+            
+            return " : " + type.BaseType.Name;
         }
 
         private static string GetParametersOf(MethodInfo method)
