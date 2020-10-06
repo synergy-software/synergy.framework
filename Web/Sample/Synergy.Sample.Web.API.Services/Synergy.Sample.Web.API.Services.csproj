@@ -11,8 +11,11 @@
     <PackageReference Include="Castle.Windsor" Version="5.0.1" />
     <PackageReference Include="JetBrains.Annotations" Version="2020.2.0-eap" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.0" />
-    <PackageReference Include="Synergy.Contracts" Version="2.0.152" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

@@ -18,7 +18,6 @@
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
-    <PackageReference Include="Synergy.Contracts" Version="2.0.152" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
     <ProjectReference Include="..\..\..\Reflection\Synergy.Reflection\Synergy.Reflection.csproj" />
     <ProjectReference Include="..\Synergy.Sample.Web.API.Services\Synergy.Sample.Web.API.Services.csproj" />
   </ItemGroup>
