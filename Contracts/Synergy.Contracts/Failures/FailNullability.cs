@@ -70,6 +70,25 @@ namespace Synergy.Contracts
         }
 
         /// <summary>
+        /// /// Throws exception when provided value is <see langword="null"/>.
+        /// </summary>
+        /// <param name="value">Value to check against nullability.</param>
+        /// <param name="name">Name of the checked argument / parameter.</param>
+        /// <typeparam name="T">Type of the value to check against nullability.</typeparam>
+        /// <returns>Value (not null) of the passed argument / parameter</returns>
+        /// <exception cref="DesignByContractViolationException"></exception>
+        [ContractAnnotation("value: null => halt")]
+        public static T OrFail<T>(this T? value, [NotNull] string name) where T : struct
+        {
+            Fail.RequiresArgumentName(name);
+            
+            if (value == null)
+                throw Fail.Because(Violation.WhenVariableIsNull(name));
+
+            return value.Value;
+        }
+        
+        /// <summary>
         /// Throws exception when provided value is <see langword="null"/>.
         /// </summary>
         /// <typeparam name="T">Type of the value to check against nullability.</typeparam>
