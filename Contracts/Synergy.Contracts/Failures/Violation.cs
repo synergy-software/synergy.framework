@@ -7,7 +7,7 @@ namespace Synergy.Contracts
     /// <summary>
     /// Holds violation message.
     /// </summary>
-    public struct Violation
+    public readonly struct Violation
     {
         [NotNull]
         private readonly string message;

@@ -14,7 +14,7 @@ namespace Synergy.Web.Api.Testing.Features
             No = no;
         }
 
-        public void Attach(HttpOperation operation)
+        internal void Attach(HttpOperation operation)
         {
             Operations.Add(operation);
         }
