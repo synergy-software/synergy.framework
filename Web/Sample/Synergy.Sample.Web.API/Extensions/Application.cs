@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using Castle.Core.Internal;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Hosting;
 using Synergy.Contracts;
 using Synergy.Sample.Web.API.Services.Infrastructure;
@@ -12,11 +13,13 @@ namespace Synergy.Sample.Web.API.Extensions
 {
     public static class Application
     {
+        [NotNull]
         public static Assembly GetRootAssembly()
         {
             return Assembly.GetExecutingAssembly();
         }
 
+        [NotNull, ItemNotNull]
         public static ReadOnlyCollection<Assembly> GetApplicationAssemblies()
         {
             return ReflectionUtil.GetApplicationAssemblies(Application.GetRootAssembly()).AsReadOnly();
@@ -36,7 +39,7 @@ namespace Synergy.Sample.Web.API.Extensions
         /// </summary>
         /// <param name="hostEnvironment">An instance of <see cref="IHostEnvironment"/>.</param>
         /// <returns>True if the environment name is <see cref="Application.Environment.Tests"/>, otherwise false.</returns>
-        public static bool IsTests(this IHostEnvironment hostEnvironment)
+        public static bool IsTests([NotNull] this IHostEnvironment hostEnvironment)
         {
             Fail.IfNull(hostEnvironment, nameof(hostEnvironment));
 
@@ -54,7 +57,7 @@ namespace Synergy.Sample.Web.API.Extensions
             public string FileVersion { get; }
             public DateTime CreatedOn { get; }
 
-            public Info(FileVersionInfo fileVersionInfo, DateTime createdOn)
+            public Info([NotNull] FileVersionInfo fileVersionInfo, DateTime createdOn)
             {
                 this.ProductName = fileVersionInfo.ProductName;
                 this.FileVersion = fileVersionInfo.FileVersion;
