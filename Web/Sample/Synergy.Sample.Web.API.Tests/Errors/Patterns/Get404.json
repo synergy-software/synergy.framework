@@ -5,8 +5,11 @@
     "Manual: Error is returned"
   ],
   "request": {
-    "description": "Make GET request to not existing API",
-    "method": "GET /api/v1/i-do-not-exist"
+    "description": "GET not existing resource",
+    "method": "GET /api/v1/i-do-not-exist",
+    "headers": {
+      "test": "header"
+    }
   },
   "response": {
     "status": "404 Not Found"

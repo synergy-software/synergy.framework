@@ -15,6 +15,7 @@
 - Request
 ```
 GET  /api/v1/i-do-not-exist
+test: header
 ```
 
 - Response
