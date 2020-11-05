@@ -87,7 +87,7 @@ namespace Synergy.Web.Api.Testing
             return operation;
         }
 
-        private HttpRequestMessage CreateHttpRequest(HttpMethod httpMethod, string path, object? urlParameters, object? body = null)
+        protected virtual HttpRequestMessage CreateHttpRequest(HttpMethod httpMethod, string path, object? urlParameters, object? body = null)
         {
             var request = new HttpRequestMessage
                           {
