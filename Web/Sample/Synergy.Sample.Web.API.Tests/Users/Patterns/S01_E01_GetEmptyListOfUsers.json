@@ -7,7 +7,10 @@
   ],
   "request": {
     "description": "Get list of users",
-    "method": "GET /api/v1/users"
+    "method": "GET /api/v1/users",
+    "headers": {
+      "test": "header"
+    }
   },
   "response": {
     "status": "200 OK",

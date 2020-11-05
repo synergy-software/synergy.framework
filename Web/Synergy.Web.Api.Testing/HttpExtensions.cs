@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,11 +68,13 @@ namespace Synergy.Web.Api.Testing
         private static string GetRequestRelativeUrl(this HttpRequestMessage request)
             => request.RequestUri.ToString().Replace("http://localhost", "");
 
-        public static List<KeyValuePair<string, IEnumerable<string>>> GetAllHeaders(this HttpRequestMessage request)
+        public static List<KeyValuePair<string, IEnumerable<string>>> GetAllHeaders(this HttpRequestMessage request,
+            HttpRequestHeaders httpClientDefaultRequestHeaders)
         {
             var headers = request.Headers.ToList();
             if (request.Content != null)
                 headers.AddRange(request.Content.Headers);
+            headers.AddRange(httpClientDefaultRequestHeaders);
 
             return headers;
         }
@@ -86,11 +89,11 @@ namespace Synergy.Web.Api.Testing
         }
 
         [NotNull]
-        public static string ToHttpLook(this HttpRequestMessage request)
+        public static string ToHttpLook(this HttpRequestMessage request, HttpRequestHeaders httpClientDefaultRequestHeaders)
         {
             var report = new StringBuilder();
             report.AppendLine(request.GetRequestFullMethod());
-            InsertHeaders(report, request.GetAllHeaders());
+            InsertHeaders(report, request.GetAllHeaders(httpClientDefaultRequestHeaders));
             var requestBody = request.Content.ReadJson();
             if (requestBody != null)
             {

@@ -13,9 +13,12 @@ namespace Synergy.Sample.Web.API.Tests.Infrastructure
         protected override HttpClient Start()
         {
             this.webApplicationFactory = new WebApplicationFactory<Startup>();
-            return this.webApplicationFactory
-                       .WithWebHostBuilder(configuration => { configuration.UseEnvironment(Application.Environment.Tests); })
-                       .CreateClient();
+            HttpClient httpClient = this.webApplicationFactory
+                                        .WithWebHostBuilder(configuration => { configuration.UseEnvironment(Application.Environment.Tests); })
+                                        .CreateClient();
+            httpClient.DefaultRequestHeaders.Add("test", "header");
+            
+            return httpClient;
         }
 
         /// <inheritdoc />

@@ -7,7 +7,10 @@
   ],
   "request": {
     "description": "Get list of users",
-    "method": "GET /api/v1/users"
+    "method": "GET /api/v1/users",
+    "headers": {
+      "test": "header"
+    }
   },
   "response": {
     "status": "200 OK",
@@ -19,7 +22,7 @@
     "body": {
       "users": [
         {
-          "id": "d08a07d9020943c3893309579e0c76c8",
+          "id": "102a023150d94b1b99dbfbd5d6a695d8",
           "login": {
             "value": "marcin@synergy.com"
           }

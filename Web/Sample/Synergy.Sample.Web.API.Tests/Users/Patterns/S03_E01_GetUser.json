@@ -6,8 +6,11 @@
     "Manual: User details are returned"
   ],
   "request": {
-    "description": "Get user with id 'd08a07d9020943c3893309579e0c76c8'",
-    "method": "GET /api/v1/users/d08a07d9020943c3893309579e0c76c8"
+    "description": "Get user with id \"102a023150d94b1b99dbfbd5d6a695d8\"",
+    "method": "GET /api/v1/users/102a023150d94b1b99dbfbd5d6a695d8",
+    "headers": {
+      "test": "header"
+    }
   },
   "response": {
     "status": "200 OK",
@@ -18,7 +21,7 @@
     },
     "body": {
       "user": {
-        "id": "d08a07d9020943c3893309579e0c76c8",
+        "id": "102a023150d94b1b99dbfbd5d6a695d8",
         "login": {
           "value": "marcin@synergy.com"
         }

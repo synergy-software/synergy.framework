@@ -112,7 +112,7 @@ namespace Synergy.Web.Api.Testing.Features
 
             report.AppendLine("- Request");
             report.AppendLine("```");
-            report.AppendLine(request.ToHttpLook());
+            report.AppendLine(request.ToHttpLook(operation.TestServer.HttpClient.DefaultRequestHeaders));
             report.AppendLine("```");
         }
 

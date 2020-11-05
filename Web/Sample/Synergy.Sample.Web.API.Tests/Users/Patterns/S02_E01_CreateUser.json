@@ -10,7 +10,8 @@
     "description": "Create a new user with login marcin@synergy.com",
     "method": "POST /api/v1/users",
     "headers": {
-      "Content-Type": "application/json; charset=utf-8"
+      "Content-Type": "application/json; charset=utf-8",
+      "test": "header"
     },
     "body": {
       "Login": {
@@ -21,14 +22,14 @@
   "response": {
     "status": "201 Created",
     "headers": {
-      "Location": "http://localhost/api/v1/users/aa1311498cda4bb6a3b0d1441d32df3b",
+      "Location": "http://localhost/api/v1/users/102a023150d94b1b99dbfbd5d6a695d8",
       "api-supported-versions": "1.0",
       "Content-Type": "application/json; charset=utf-8",
       "Content-Length": "129"
     },
     "body": {
       "user": {
-        "id": "aa1311498cda4bb6a3b0d1441d32df3b",
+        "id": "102a023150d94b1b99dbfbd5d6a695d8",
         "login": {
           "value": "marcin@synergy.com"
         }

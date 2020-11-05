@@ -6,8 +6,11 @@
     "Manual: No user details are returned and 404 error (not found) is returned instead"
   ],
   "request": {
-    "description": "Get user with id 'user-id-that-do-not-exist'",
-    "method": "GET /api/v1/users/user-id-that-do-not-exist"
+    "description": "Get user with id \"user-id-that-do-not-exist\"",
+    "method": "GET /api/v1/users/user-id-that-do-not-exist",
+    "headers": {
+      "test": "header"
+    }
   },
   "response": {
     "status": "404 Not Found",
@@ -19,7 +22,7 @@
       "type": "https://httpstatuses.com/404",
       "title": "User with id user-id-that-do-not-exist does not exist",
       "status": 404,
-      "traceId": "0HLSPQATK73P7"
+      "traceId": "0HM41E3T9D4BB"
     }
   }
 }

@@ -6,8 +6,11 @@
     "Manual: User is not found and error is returned"
   ],
   "request": {
-    "description": "Get user with id '794e21cf23fa443d8222544b82ce367a'",
-    "method": "GET /api/v1/users/794e21cf23fa443d8222544b82ce367a"
+    "description": "Get user with id \"102a023150d94b1b99dbfbd5d6a695d8\"",
+    "method": "GET /api/v1/users/102a023150d94b1b99dbfbd5d6a695d8",
+    "headers": {
+      "test": "header"
+    }
   },
   "response": {
     "status": "404 Not Found",
@@ -17,9 +20,9 @@
     },
     "body": {
       "type": "https://httpstatuses.com/404",
-      "title": "User with id 794e21cf23fa443d8222544b82ce367a does not exist",
+      "title": "User with id 102a023150d94b1b99dbfbd5d6a695d8 does not exist",
       "status": 404,
-      "traceId": "0HLSPQGI8OPFR"
+      "traceId": "0HM41E3T9D4BF"
     }
   }
 }

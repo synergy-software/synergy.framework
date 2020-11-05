@@ -17,13 +17,15 @@
       jsonPath: string
    ) : T [Extension, MustUseReturnValue]
  - HttpExtensions.GetAllHeaders(
-      request: HttpRequestMessage
+      request: HttpRequestMessage,
+      httpClientDefaultRequestHeaders: HttpRequestHeaders
    ) : List`1 [Extension]
  - HttpExtensions.GetAllHeaders(
       response: HttpResponseMessage
    ) : List`1 [Extension]
  - HttpExtensions.ToHttpLook(
-      request: HttpRequestMessage
+      request: HttpRequestMessage,
+      httpClientDefaultRequestHeaders: HttpRequestHeaders
    ) : string [Extension, NotNull]
  - HttpExtensions.ToHttpLook(
       response: HttpResponseMessage
