@@ -54,6 +54,7 @@ namespace Synergy.Contracts
         /// <param name="name">Name of the checked argument / parameter.</param>
         /// <returns>Exactly the same value as provided to this method.</returns>
         [NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
         [AssertionMethod]
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static T OrFail<T>(
