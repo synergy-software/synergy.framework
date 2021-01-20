@@ -24,14 +24,14 @@ namespace Synergy.Contracts
         /// Constructs the exception with a message.
         /// </summary>
         /// <param name="message"></param>
-        public DesignByContractViolationException([NotNull] string message) : base(message)
+        public DesignByContractViolationException([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message) : base(message)
         {
         }
 
         /// <summary>
         /// Serialization required constructor.
         /// </summary>
-        protected DesignByContractViolationException([NotNull] SerializationInfo info, StreamingContext context) :
+        protected DesignByContractViolationException([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] SerializationInfo info, StreamingContext context) :
             base(info, context)
         {
         }

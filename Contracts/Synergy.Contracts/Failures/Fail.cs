@@ -37,7 +37,7 @@ namespace Synergy.Contracts
         ///     Returns exception that can be thrown when contract is failed.
         /// </summary>
         /// <returns>The exception to throw when contract is violated.</returns>
-        [NotNull, Pure]
+        [NotNull, Pure] [return: System.Diagnostics.CodeAnalysis.NotNull]
         public static DesignByContractViolationException Because(Violation message)
         {
             return new DesignByContractViolationException(message.ToString());
@@ -55,9 +55,9 @@ namespace Synergy.Contracts
         /// }
         /// </code>
         /// </example>
-        [NotNull, Pure]
+        [NotNull, Pure] [return: System.Diagnostics.CodeAnalysis.NotNull]
         [StringFormatMethod("message")]
-        public static DesignByContractViolationException Because([NotNull] string message)
+        public static DesignByContractViolationException Because([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message)
         {
             Fail.RequiresMessage(message);
 
@@ -76,9 +76,9 @@ namespace Synergy.Contracts
         /// }
         /// </code>
         /// </example>
-        [NotNull, Pure]
+        [NotNull, Pure] [return: System.Diagnostics.CodeAnalysis.NotNull]
         [StringFormatMethod("message")]
-        public static DesignByContractViolationException Because<T1>([NotNull] string message, T1 arg1)
+        public static DesignByContractViolationException Because<T1>([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message, T1 arg1)
         {
             return Fail.Because(message.Formatted(arg1));
         }
@@ -95,9 +95,9 @@ namespace Synergy.Contracts
         /// }
         /// </code>
         /// </example>
-        [NotNull, Pure]
+        [NotNull, Pure] [return: System.Diagnostics.CodeAnalysis.NotNull]
         [StringFormatMethod("message")]
-        public static DesignByContractViolationException Because<T1, T2>([NotNull] string message, T1 arg1, T2 arg2)
+        public static DesignByContractViolationException Because<T1, T2>([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message, T1 arg1, T2 arg2)
         {
             return Fail.Because(message.Formatted(arg1, arg2));
         }
@@ -114,9 +114,9 @@ namespace Synergy.Contracts
         /// }
         /// </code>
         /// </example>
-        [NotNull, Pure]
+        [NotNull, Pure] [return: System.Diagnostics.CodeAnalysis.NotNull]
         [StringFormatMethod("message")]
-        public static DesignByContractViolationException Because<T1, T2, T3>([NotNull] string message, T1 arg1, T2 arg2, T3 arg3)
+        public static DesignByContractViolationException Because<T1, T2, T3>([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message, T1 arg1, T2 arg2, T3 arg3)
         {
             return Fail.Because(message.Formatted(arg1, arg2, arg3));
         }
@@ -135,15 +135,18 @@ namespace Synergy.Contracts
         /// }
         /// </code>
         /// </example>
-        [NotNull, Pure]
+        [NotNull, Pure] [return: System.Diagnostics.CodeAnalysis.NotNull]
         [StringFormatMethod("message")]
-        public static DesignByContractViolationException Because([NotNull] string message, [NotNull] params object[] args)
+        public static DesignByContractViolationException Because(
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message,
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] params object[] args
+        )
         {
             return Fail.Because(message.Formatted(args));
         }
 
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        private static void RequiresMessage([NotNull] string message)
+        private static void RequiresMessage([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message)
         {
             if (string.IsNullOrWhiteSpace(message))
                 throw new ArgumentNullException(nameof(message));
@@ -153,7 +156,7 @@ namespace Synergy.Contracts
         /// Checks if argument name was provided.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        private static void RequiresArgumentName([NotNull] string argumentName)
+        private static void RequiresArgumentName([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string argumentName)
         {
             if (string.IsNullOrWhiteSpace(argumentName))
                 throw new ArgumentNullException(nameof(argumentName));

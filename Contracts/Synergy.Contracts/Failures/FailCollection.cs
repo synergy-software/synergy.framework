@@ -22,7 +22,7 @@ namespace Synergy.Contracts
         public static void IfCollectionEmpty(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
             IEnumerable collection,
-            [NotNull] string collectionName
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string collectionName
         )
         {
             collection.OrFailIfCollectionEmpty(collectionName);
@@ -55,13 +55,13 @@ namespace Synergy.Contracts
         /// <param name="collection">Collection to be checked against emptiness</param>
         /// <param name="collectionName">Collection name</param>
         /// <returns>The same collection as provided</returns>
-        [NotNull]
+        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull] 
         [AssertionMethod]
         [ContractAnnotation("collection: null => halt")]
         public static T OrFailIfCollectionEmpty<T>(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
             this T collection,
-            [NotNull] string collectionName
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string collectionName
         )
             where T : IEnumerable
         {
@@ -83,7 +83,7 @@ namespace Synergy.Contracts
         /// <param name="collection">Collection to be checked against emptiness</param>
         /// <param name="message">Collection name</param>
         /// <returns>The same collection as provided</returns>
-        [NotNull]
+        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull] 
         [AssertionMethod]
         [ContractAnnotation("collection: null => halt")]
         public static T OrFailIfCollectionEmpty<T>(
@@ -105,7 +105,7 @@ namespace Synergy.Contracts
 
 
         [MustUseReturnValue]
-        private static bool IsEmpty([NotNull] this IEnumerable source)
+        private static bool IsEmpty([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] this IEnumerable source)
         {
             if (source is ICollection collection)
                 return collection.Count == 0;
@@ -130,7 +130,7 @@ namespace Synergy.Contracts
         public static void IfCollectionContainsNull<T>(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
             IEnumerable<T> collection,
-            [NotNull] string collectionName
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string collectionName
         )
             where T : class
         {
@@ -160,7 +160,7 @@ namespace Synergy.Contracts
         public static void IfCollectionContains<T>(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
             IEnumerable<T> collection,
-            [NotNull] Func<T, bool> func,
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] Func<T, bool> func,
             Violation message
         )
         {
@@ -213,7 +213,7 @@ namespace Synergy.Contracts
         /// Checks if collection name was provided.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        private static void RequiresCollectionName([NotNull] string collectionName)
+        private static void RequiresCollectionName([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string collectionName)
         {
             if (string.IsNullOrWhiteSpace(collectionName))
                 throw new ArgumentNullException(nameof(collectionName));

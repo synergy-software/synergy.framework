@@ -118,7 +118,7 @@ namespace Synergy.Contracts
         /// <param name="value">DateTime to check</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
         [AssertionMethod]
-        public static void IfEmpty(DateTime value, [NotNull] string name)
+        public static void IfEmpty(DateTime value, [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
         {
             if (value == DateTime.MinValue)
                 throw Fail.Because(Violation.WhenDateTimeIsEmpty(name, value));
@@ -131,7 +131,7 @@ namespace Synergy.Contracts
         /// <param name="value">DateTime to check</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
         [AssertionMethod]
-        public static DateTime FailIfEmpty(this DateTime value, [NotNull] string name)
+        public static DateTime FailIfEmpty(this DateTime value, [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
         {
             Fail.IfEmpty(value, name);
             return value;

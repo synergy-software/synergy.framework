@@ -15,7 +15,7 @@ namespace Synergy.Contracts
         [ContractAnnotation("argumentValue: null => halt")]
         public static void IfArgumentEmpty(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string argumentValue,
-            [NotNull] string argumentName)
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string argumentName)
         {
             Fail.RequiresArgumentName(argumentName);
             Fail.IfArgumentNull(argumentValue, argumentName);
@@ -37,7 +37,7 @@ namespace Synergy.Contracts
         [ContractAnnotation("value: null => halt")]
         public static void IfEmpty(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string value,
-            [NotNull] string name)
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
         {
             Fail.RequiresArgumentName(name);
             Fail.IfEmpty(value, Violation.WhenEmpty(name));
@@ -71,7 +71,7 @@ namespace Synergy.Contracts
         [ContractAnnotation("argumentValue: null => halt")]
         public static void IfArgumentWhiteSpace(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string argumentValue,
-            [NotNull] string argumentName)
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string argumentName)
         {
             Fail.RequiresArgumentName(argumentName);
             Fail.IfArgumentNull(argumentValue, argumentName);
@@ -86,12 +86,12 @@ namespace Synergy.Contracts
         /// <param name="value">Value to check against nullability and white space.</param>
         /// <param name="name">Name of the checked argument / parameter to check.</param>
         /// <returns>Exactly the same value as provided to this method.</returns>
-        [NotNull]
+        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull]
         [AssertionMethod]
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static string OrFailIfWhiteSpace(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration] this string value,
-            [NotNull] string name)
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
         {
             Fail.RequiresArgumentName(name);
 
@@ -111,7 +111,7 @@ namespace Synergy.Contracts
         [ContractAnnotation("value: null => halt")]
         public static void IfWhitespace(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string value,
-            [NotNull] string name)
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
         {
             Fail.RequiresArgumentName(name);
             Fail.IfWhitespace(value, Violation.WhenWhitespace(name));
@@ -147,7 +147,7 @@ namespace Synergy.Contracts
         public static void IfTooLong(
             [CanBeNull] string value,
             int maxLength,
-            [NotNull] string name)
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
         {
             Fail.RequiresArgumentName(name);
 
@@ -172,7 +172,7 @@ namespace Synergy.Contracts
         public static string OrFailIfTooLong(
             [CanBeNull] this string value,
             int maxLength,
-            [NotNull] string name)
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
         {
             Fail.IfTooLong(value, maxLength, name);
             return value;
@@ -188,7 +188,7 @@ namespace Synergy.Contracts
         public static void IfTooLongOrWhitespace(
             [CanBeNull] string value,
             int maxLength,
-            [NotNull] string name)
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
         {
             Fail.IfArgumentWhiteSpace(value, name);
             Fail.IfTooLong(value, maxLength, name);

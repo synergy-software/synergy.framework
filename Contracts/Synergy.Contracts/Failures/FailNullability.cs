@@ -12,13 +12,13 @@ namespace Synergy.Contracts
         /// <typeparam name="T">Type of the value to check against nullability.</typeparam>
         /// <param name="value">Value to check against nullability.</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
-        [NotNull]
+        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull] 
         [AssertionMethod]
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static T FailIfNull<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration]
             this T value,
-            [NotNull] string name)
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
         {
             Fail.RequiresArgumentName(name);
             return value.FailIfNull(Violation.WhenVariableIsNull(name));
@@ -30,7 +30,7 @@ namespace Synergy.Contracts
         /// <typeparam name="T">Type of the value to check against nullability.</typeparam>
         /// <param name="value">Value to check against nullability.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        [NotNull]
+        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull]
         [AssertionMethod]
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static T FailIfNull<T>(
@@ -53,14 +53,13 @@ namespace Synergy.Contracts
         /// <param name="value">Value to check against nullability.</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
         /// <returns>Exactly the same value as provided to this method.</returns>
-        [NotNull]
-        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull]
         [AssertionMethod]
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static T OrFail<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration]
             this T value,
-            [NotNull] string name)
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
         {
             Fail.RequiresArgumentName(name);
 
@@ -79,7 +78,7 @@ namespace Synergy.Contracts
         /// <returns>Value (not null) of the passed argument / parameter</returns>
         /// <exception cref="DesignByContractViolationException"></exception>
         [ContractAnnotation("value: null => halt")]
-        public static T OrFail<T>(this T? value, [NotNull] string name) where T : struct
+        public static T OrFail<T>(this T? value, [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) where T : struct
         {
             Fail.RequiresArgumentName(name);
             
@@ -96,13 +95,14 @@ namespace Synergy.Contracts
         /// <param name="value">Value to check against nullability.</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
         /// <returns>Exactly the same value as provided to this method.</returns>
-        [NotNull]
+        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull]
         [AssertionMethod]
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static T NotNull<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration]
             this T value,
-            [NotNull] string name)
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name
+            )
         {
             return value.OrFail(name);
         }
@@ -139,7 +139,7 @@ namespace Synergy.Contracts
         public static void IfArgumentNull<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration]
             T argumentValue,
-            [NotNull] string argumentName)
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string argumentName)
         {
             Fail.RequiresArgumentName(argumentName);
 
@@ -161,7 +161,7 @@ namespace Synergy.Contracts
         public static void IfNull<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
             T value,
-            [NotNull] string name)
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
         {
             Fail.RequiresArgumentName(name);
             Fail.IfNull(value, Violation.WhenVariableIsNull(name));
@@ -194,7 +194,7 @@ namespace Synergy.Contracts
         /// <param name="name">Name of the checked argument / parameter.</param>
         [AssertionMethod]
         [ContractAnnotation("value: notnull => halt")]
-        public static void IfNotNull<T>([CanBeNull] [NoEnumeration] T value, [NotNull] string name)
+        public static void IfNotNull<T>([CanBeNull] [NoEnumeration] T value, [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
         {
             Fail.RequiresArgumentName(name);
             Fail.IfNotNull(value, Violation.WhenVariableIsNotNull(name));

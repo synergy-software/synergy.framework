@@ -34,7 +34,7 @@ namespace Synergy.Contracts
         /// <param name="value">Value to check if it can be cast to specified type.</param>
         /// <param name="name">Name of the object to cast.</param>
         /// <returns>The cast object. This method will NEVER return <see langword="null"/>.</returns>
-        [NotNull]
+        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull] 
         [AssertionMethod]
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static T CastOrFail<T>([CanBeNull] [NoEnumeration] this object value, [CanBeNull] string name = null)
@@ -60,7 +60,7 @@ namespace Synergy.Contracts
         /// <param name="expectedType">The expected type.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
         [AssertionMethod]
-        public static void IfNotCastable([CanBeNull] [NoEnumeration] object value, [NotNull] Type expectedType, Violation message)
+        public static void IfNotCastable([CanBeNull] [NoEnumeration] object value, [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] Type expectedType, Violation message)
         {
             Fail.RequiresType(expectedType);
 
@@ -116,7 +116,7 @@ namespace Synergy.Contracts
         }
 
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        private static void RequiresType([NotNull] Type expectedType)
+        private static void RequiresType([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] Type expectedType)
         {
             if (expectedType == null)
                 throw new ArgumentNullException(nameof(expectedType));

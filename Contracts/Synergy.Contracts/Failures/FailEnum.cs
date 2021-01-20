@@ -28,7 +28,7 @@ namespace Synergy.Contracts
         ///  }
         /// </code>
         /// </example>
-        [NotNull, Pure]
+        [NotNull, Pure] [return: System.Diagnostics.CodeAnalysis.NotNull]
         public static DesignByContractViolationException BecauseEnumOutOfRange<T>(T value)
             where T : struct
         {
@@ -49,7 +49,7 @@ namespace Synergy.Contracts
         /// </summary>
         /// <typeparam name="T">Type of enum to check</typeparam>
         /// <param name="value">Value of enum to check</param>
-        public static void IfEnumNotDefined<T>([NotNull] object value)
+        public static void IfEnumNotDefined<T>([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] object value)
         {
             if (Enum.IsDefined(typeof(T), value) == false)
             {
@@ -76,8 +76,8 @@ namespace Synergy.Contracts
         /// <param name="value"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        [NotNull]
-        public static T FailIfEnumOutOfRange<T>([NotNull] this Enum value, [NotNull] string name)
+        [NotNull][return: System.Diagnostics.CodeAnalysis.NotNull] 
+        public static T FailIfEnumOutOfRange<T>([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] this Enum value, [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
         {
             return value.CastEnumOrFail<T>(name);
         }
@@ -89,8 +89,8 @@ namespace Synergy.Contracts
         /// <param name="value"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        [NotNull]
-        public static T CastEnumOrFail<T>([CanBeNull] [NoEnumeration] this Enum value, [NotNull] string name)
+        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull] 
+        public static T CastEnumOrFail<T>([CanBeNull] [NoEnumeration] this Enum value, [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
         {
             Fail.RequiresArgumentName(name);
 

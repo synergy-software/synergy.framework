@@ -9,10 +9,10 @@ namespace Synergy.Contracts
     /// </summary>
     public readonly struct Violation
     {
-        [NotNull]
+        [NotNull] [System.Diagnostics.CodeAnalysis.NotNull]
         private readonly string message;
 
-        [NotNull]
+        [NotNull] [System.Diagnostics.CodeAnalysis.NotNull]
         private readonly object[] args;
 
         /// <summary>
@@ -22,8 +22,8 @@ namespace Synergy.Contracts
         /// <param name="args"></param>
         [StringFormatMethod("message")]
         public Violation(
-            [NotNull] string message,
-            [NotNull] params object[] args)
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message,
+            [NotNull]  [System.Diagnostics.CodeAnalysis.NotNull] params object[] args)
         {
             this.message = message;
             this.args = args;
@@ -32,6 +32,7 @@ namespace Synergy.Contracts
         /// <summary>
         /// Returns message of the violation message.
         /// </summary>
+        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull]
         public override string ToString()
         {
             if (this.args.Length == 0)
@@ -47,7 +48,7 @@ namespace Synergy.Contracts
         /// <param name="args">Arguments array that contains 0 or more parameters to format a message</param>
         /// <returns>Violation message</returns>
         [StringFormatMethod("message")]
-        public static Violation Of([NotNull] string message, [NotNull] params object[] args)
+        public static Violation Of([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message, [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] params object[] args)
         {
             return new Violation(message, args);
         }
@@ -57,63 +58,63 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="name"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenVariableIsNull([NotNull] string name) => Violation.Of("'{0}' is null; and it shouldn't be;", name);
+        internal static Violation WhenVariableIsNull([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) => Violation.Of("'{0}' is null; and it shouldn't be;", name);
 
         /// <summary>
         /// "Argument '{0}' is null."
         /// </summary>
         /// <param name="argumentName"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenArgumentIsNull([NotNull] string argumentName) => Violation.Of("Argument '{0}' is null.", argumentName);
+        internal static Violation WhenArgumentIsNull([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string argumentName) => Violation.Of("Argument '{0}' is null.", argumentName);
 
         /// <summary>
         /// "'{0}' is NOT null; and it should be;"
         /// </summary>
         /// <param name="name"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenVariableIsNotNull([NotNull] string name) => Violation.Of("'{0}' is NOT null; and it should be;", name);
+        internal static Violation WhenVariableIsNotNull([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) => Violation.Of("'{0}' is NOT null; and it should be;", name);
 
         /// <summary>
         /// "'{0}' is false; and it should be true;"
         /// </summary>
         /// <param name="name"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenVariableIsFalse([NotNull] string name) => Violation.Of("'{0}' is false; and it should be true;", name);
+        internal static Violation WhenVariableIsFalse([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) => Violation.Of("'{0}' is false; and it should be true;", name);
 
         /// <summary>
         /// "'{0}' is true; and it should be false;"
         /// </summary>
         /// <param name="name"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenVariableIsTrue([NotNull] string name) => Violation.Of("'{0}' is true; and it should be false;", name);
+        internal static Violation WhenVariableIsTrue([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) => Violation.Of("'{0}' is true; and it should be false;", name);
 
         /// <summary>
         /// "Argument '{0}' is empty."
         /// </summary>
         /// <param name="name"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenArgumentEmpty([NotNull] string name) => Violation.Of("Argument '{0}' is empty.", name);
+        internal static Violation WhenArgumentEmpty([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) => Violation.Of("Argument '{0}' is empty.", name);
 
         /// <summary>
         /// "'{0}' is empty."
         /// </summary>
         /// <param name="name"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenEmpty([NotNull] string name) => Violation.Of("'{0}' is empty.", name);
+        internal static Violation WhenEmpty([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) => Violation.Of("'{0}' is empty.", name);
 
         /// <summary>
         /// "Argument '{0}' is whitespace."
         /// </summary>
         /// <param name="name"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenArgumentWhitespace([NotNull] string name) => Violation.Of("Argument '{0}' is whitespace.", name);
+        internal static Violation WhenArgumentWhitespace([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) => Violation.Of("Argument '{0}' is whitespace.", name);
 
         /// <summary>
         /// "'{0}' is whitespace"
         /// </summary>
         /// <param name="name"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenWhitespace([NotNull] string name) => Violation.Of("'{0}' is whitespace", name);
+        internal static Violation WhenWhitespace([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) => Violation.Of("'{0}' is whitespace", name);
 
         /// <summary>
         /// "'{0}' is too long - {1} (max: {2})"
@@ -122,7 +123,7 @@ namespace Synergy.Contracts
         /// <param name="currentLength"></param>
         /// <param name="maxLength"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenTooLong([NotNull] string name, int currentLength, int maxLength) =>
+        internal static Violation WhenTooLong([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name, int currentLength, int maxLength) =>
             Violation.Of("'{0}' is too long - {1} (max: {2})", name, currentLength, maxLength);
 
         /// <summary>
@@ -131,7 +132,7 @@ namespace Synergy.Contracts
         /// <param name="name"></param>
         /// <param name="unexpected"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenEqual<T>([NotNull] string name, [CanBeNull] T unexpected) =>
+        internal static Violation WhenEqual<T>([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name, [CanBeNull] T unexpected) =>
             Violation.Of("'{0}' is equal to {1} and it should NOT be.", name, Violation.FormatValue(unexpected));
 
         /// <summary>
@@ -140,7 +141,7 @@ namespace Synergy.Contracts
         /// <param name="name"></param>
         /// <param name="unexpected"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenArgumentEqual<T>([NotNull] string name, [CanBeNull] T unexpected) =>
+        internal static Violation WhenArgumentEqual<T>([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name, [CanBeNull] T unexpected) =>
             Violation.Of("Argument '{0}' is equal to {1} and it should NOT be.", name, Violation.FormatValue(unexpected));
 
         /// <summary>
@@ -150,7 +151,7 @@ namespace Synergy.Contracts
         /// <param name="expected"></param>
         /// <param name="actual"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenNotEqual<TExpected, TActual>([NotNull] string name, [CanBeNull] TExpected expected, [CanBeNull] TActual actual) =>
+        internal static Violation WhenNotEqual<TExpected, TActual>([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name, [CanBeNull] TExpected expected, [CanBeNull] TActual actual) =>
             Violation.Of("'{0}' ({2}) is NOT equal to {1} and it should be.", name, Violation.FormatValue(expected), Violation.FormatValue(actual));
 
         /// <summary>
@@ -158,7 +159,7 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="name"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenGuidArgumentIsEmpty([NotNull] string name) => Violation.Of("Argument '{0}' is an empty Guid.", name);
+        internal static Violation WhenGuidArgumentIsEmpty([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) => Violation.Of("Argument '{0}' is an empty Guid.", name);
 
         /// <summary>
         /// "'{0}' is not date = {1}"
@@ -184,7 +185,7 @@ namespace Synergy.Contracts
         /// <param name="name"></param>
         /// <param name="value"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenEnumOutOfRange<T>([CanBeNull] string name, [NotNull] object value)
+        internal static Violation WhenEnumOutOfRange<T>([CanBeNull] string name, [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] object value)
         {
             string enumType = typeof(T).Name;
             string enumValue = value.ToString();
@@ -198,7 +199,7 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="collectionName"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenCollectionIsNull([NotNull] string collectionName) =>
+        internal static Violation WhenCollectionIsNull([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string collectionName) =>
             Violation.Of("Collection '{0}' should not be null but it is.", collectionName);
 
         /// <summary>
@@ -206,7 +207,7 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="collectionName"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenCollectionIsEmpty([NotNull] string collectionName) =>
+        internal static Violation WhenCollectionIsEmpty([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string collectionName) =>
             Violation.Of("Collection '{0}' should not be empty but it is.", collectionName);
 
         /// <summary>
@@ -214,7 +215,7 @@ namespace Synergy.Contracts
         /// </summary>
         /// <param name="collectionName"></param>
         /// <returns>Violation message</returns>
-        internal static Violation WhenCollectionContainsNull([NotNull] string collectionName) => 
+        internal static Violation WhenCollectionContainsNull([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string collectionName) => 
             Violation.Of("Collection '{0}' contains null", collectionName);
 
         /// <summary>
@@ -224,10 +225,10 @@ namespace Synergy.Contracts
         /// <param name="name"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static Violation WhenCannotCast<T>([NotNull] string name, [CanBeNull] object value) =>
+        internal static Violation WhenCannotCast<T>([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name, [CanBeNull] object value) =>
             Violation.Of("Expected {0} of type '{1}' but was '{2}'", name, typeof(T), FormatValue(value));
 
-        [NotNull]
+        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull]
         private static string FormatValue<T>([CanBeNull] T value)
         {
             if (value == null)
