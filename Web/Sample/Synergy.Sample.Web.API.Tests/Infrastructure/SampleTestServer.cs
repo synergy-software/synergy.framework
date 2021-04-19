@@ -9,8 +9,16 @@ namespace Synergy.Sample.Web.API.Tests.Infrastructure
     public class SampleTestServer : TestServer
     {
         private WebApplicationFactory<Startup>? webApplicationFactory;
+
+        /// <inheritdoc />
+        public override HttpClient HttpClient { get; }
         
-        protected override HttpClient Start()
+        public SampleTestServer()
+        {
+            this.HttpClient = this.Start();
+        }
+
+        private HttpClient Start()
         {
             this.webApplicationFactory = new WebApplicationFactory<Startup>();
             HttpClient httpClient = this.webApplicationFactory

@@ -14,16 +14,12 @@ namespace Synergy.Web.Api.Testing
     public abstract class TestServer : IDisposable
     {
         [NotNull]
-        internal HttpClient HttpClient { get; }
+        public abstract HttpClient HttpClient { get; }
+
         public bool Repair { get; set; }
 
         [CanBeNull] 
         protected virtual JsonSerializerSettings serializationSettings { get; }
-
-        protected TestServer()
-        {
-            HttpClient = Start();
-        }
 
         protected abstract HttpClient Start();
 
