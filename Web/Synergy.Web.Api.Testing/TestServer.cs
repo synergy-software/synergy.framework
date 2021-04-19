@@ -21,8 +21,6 @@ namespace Synergy.Web.Api.Testing
         [CanBeNull] 
         protected virtual JsonSerializerSettings serializationSettings { get; }
 
-        protected abstract HttpClient Start();
-
         public virtual void FailIfLeftInRepairMode()
         {
             Fail.IfTrue(Repair, Violation.Of("Test server is in repair mode. Do not leave it like that."));
