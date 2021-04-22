@@ -54,6 +54,7 @@
    ) : TOperation [Extension]
 
 ## TestServer
+ - HttpClient: HttpClient [NotNull] { get; }
  - Repair: bool { get; set; }
  - FailIfLeftInRepairMode() : Void
  - Get(
@@ -101,11 +102,13 @@
    ) : TOperation
  - Delete(
       path: string,
-      urlParameters: object? [Nullable, CanBeNull, Optional]
+      urlParameters: object? [Nullable, CanBeNull, Optional],
+      body: object? [Nullable, Optional]
    ) : HttpOperation
  - Delete<TOperation>(
       path: string,
-      urlParameters: object? [Nullable, CanBeNull, Optional]
+      urlParameters: object? [Nullable, CanBeNull, Optional],
+      body: object? [Nullable, Optional]
    ) : TOperation
  - Dispose() : Void
 
@@ -299,6 +302,14 @@
  - HelpLink: string { get; set; }
  - Source: string { get; set; }
  - HResult: int { get; set; }
+
+## TestServer+AsyncHelper
+ - AsyncHelper.RunSync<TResult>(
+      func: Func`1
+   ) : TResult
+ - AsyncHelper.RunSync(
+      func: Func`1
+   ) : Void
 
 ## Assertions.Assertion+Result (struct)
  - Message: string { get; }

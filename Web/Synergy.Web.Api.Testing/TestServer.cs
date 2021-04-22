@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Mime;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
@@ -57,12 +58,12 @@ namespace Synergy.Web.Api.Testing
             where TOperation : HttpOperation, new()
             => this.Send<TOperation>(HttpMethod.Patch, path, urlParameters, body);
         
-        public HttpOperation Delete(string path, [CanBeNull] object? urlParameters = null)
-            => this.Delete<HttpOperation>(path, urlParameters);
+        public HttpOperation Delete(string path, [CanBeNull] object? urlParameters = null, object? body = null)
+            => this.Delete<HttpOperation>(path, urlParameters, body);
 
-        public TOperation Delete<TOperation>(string path, [CanBeNull] object? urlParameters = null)
+        public TOperation Delete<TOperation>(string path, [CanBeNull] object? urlParameters = null, object? body = null)
             where TOperation : HttpOperation, new()
-            => this.Send<TOperation>(HttpMethod.Delete, path, urlParameters);
+            => this.Send<TOperation>(HttpMethod.Delete, path, urlParameters, body);
         
         private TOperation Send<TOperation>(HttpMethod httpMethod, string path, object? urlParameters, object? body = null) 
             where TOperation : HttpOperation, new()
