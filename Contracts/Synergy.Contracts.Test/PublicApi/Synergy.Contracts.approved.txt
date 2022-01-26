@@ -209,6 +209,7 @@ namespace Synergy.Contracts
         [return: System.Diagnostics.CodeAnalysis.NotNull]
         public static string OrFailIfWhiteSpace([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] this string value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
     }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "HeapView.BoxingAllocation")]
     public readonly struct Violation
     {
         [JetBrains.Annotations.StringFormatMethod("message")]

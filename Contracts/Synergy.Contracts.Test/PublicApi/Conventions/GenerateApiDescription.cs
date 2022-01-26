@@ -18,7 +18,7 @@ namespace Synergy.Contracts.Test.Conventions
 
             // ASSERT
             var writer = new MarkdownTextWriter(publicApi);
-            var approvalNamer = new PublicApi.PublicApiGenerator.AssemblyPathNamer(assembly.Location);
+            var approvalNamer = new PublicApi.PublicApiGenerator.AssemblyPathNamer(assembly);
             Approvals.Verify(writer, approvalNamer, Approvals.GetReporter());
         }
     }

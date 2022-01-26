@@ -32,6 +32,7 @@ namespace Synergy.Contracts
         public static DesignByContractViolationException BecauseEnumOutOfRange<T>(T value)
             where T : struct
         {
+            // ReSharper disable once HeapView.BoxingAllocation
             return Fail.Because(Violation.WhenEnumOutOfRange<T>(null, value));
         }
 
@@ -64,6 +65,7 @@ namespace Synergy.Contracts
         /// <param name="value"></param>
         public static void IfEnumNotDefined<T>(T value) where T : struct
         {
+            // ReSharper disable once HeapView.BoxingAllocation
             if (Enum.IsDefined(typeof(T), value) == false)
             {
                 throw Fail.Because(Violation.WhenEnumOutOfRange<T>(null, value));

@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Reflection;
+﻿using System.Reflection;
 using ApprovalTests;
 using ApprovalTests.Namers;
 using PublicApiGenerator;
@@ -15,7 +14,7 @@ namespace Synergy.Contracts.Test.PublicApi
             Assembly assembly = typeof(Fail).Assembly;
             var publicApi = assembly.GeneratePublicApi();
             var writer = new ApprovalTextWriter(publicApi, "txt");
-            var approvalNamer = new AssemblyPathNamer(assembly.Location);
+            var approvalNamer = new AssemblyPathNamer(assembly);
             Approvals.Verify(writer, approvalNamer, Approvals.GetReporter());
         }
 
@@ -23,9 +22,9 @@ namespace Synergy.Contracts.Test.PublicApi
         {
             private readonly string name;
 
-            public AssemblyPathNamer(string assemblyPath)
+            public AssemblyPathNamer(Assembly assembly)
             {
-                name = Path.GetFileNameWithoutExtension(assemblyPath);
+                name = assembly.GetName().Name;
             }
 
             public override string Name
