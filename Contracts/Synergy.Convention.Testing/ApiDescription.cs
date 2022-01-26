@@ -51,7 +51,7 @@ namespace Synergy.Convention.Testing
 
                         var generics = method.GetGenericArguments();
                         var gD = generics.Length == 0 ? "" : "<" + String.Join(", ", generics.Select(g => g.Name)) + ">";
-                        description.AppendLine($"- {GetMethodName(method)}{gD}({GetParametersOf(method)}) : {GetTypeName(method)}{GetAttributes(method)}");
+                        description.AppendLine($" - {GetMethodName(method)}{gD}({GetParametersOf(method)}) : {GetTypeName(method)}{GetAttributes(method)}");
                     }
                 }
 
@@ -136,13 +136,13 @@ namespace Synergy.Convention.Testing
             foreach (ParameterInfo parameter in parameters)
             {
                 description.AppendLine();
-                description.Append($"    {parameter.Name}: {GetTypeName(parameter)}{GetAttributes(parameter)}");
+                description.Append($"     {parameter.Name}: {GetTypeName(parameter)}{GetAttributes(parameter)}");
                 if (parameter != last)
                     description.Append(",");
             }
 
             description.AppendLine();
-            description.Append("  ");
+            description.Append("   ");
             return description.ToString();
         }
 
