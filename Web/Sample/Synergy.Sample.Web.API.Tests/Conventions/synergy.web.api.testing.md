@@ -303,14 +303,6 @@
  - Source: string { get; set; }
  - HResult: int { get; set; }
 
-## TestServer+AsyncHelper
- - AsyncHelper.RunSync<TResult>(
-      func: Func`1
-   ) : TResult
- - AsyncHelper.RunSync(
-      func: Func`1
-   ) : Void
-
 ## Assertions.Assertion+Result (struct)
  - Message: string { get; }
  - IsOk: bool { get; }
