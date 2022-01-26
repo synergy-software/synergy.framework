@@ -16,7 +16,7 @@
     <ProjectGuid>{E767CF43-F4DD-4CD0-A9AF-8375DF52E69B}</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2019.1.1" />
+    <PackageReference Include="JetBrains.Annotations" Version="2021.3.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SynergyAssemblyInfo.cs" Link="Properties\SynergyAssemblyInfo.cs" />
