@@ -175,8 +175,7 @@ namespace Synergy.Contracts
         [AssertionMethod]
         [ContractAnnotation("value: null => halt")]
         public static void IfNull<T>(
-            [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
-            T value,
+            [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] T value,
             Violation message)
         {
             if (value == null)

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 using NUnit.Framework;
 using Synergy.Contracts.Samples;
@@ -91,10 +93,11 @@ namespace Synergy.Contracts.Test.Failures
 
         [Test]
         [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
+        [SuppressMessage("ReSharper", "UnusedVariable")]
         public void OrFailSuccess([NotNull] object thisCannotBeNull)
         {
             // ACT
-            thisCannotBeNull.OrFail(nameof(thisCannotBeNull));
+            Type type = thisCannotBeNull.OrFail(nameof(thisCannotBeNull)).GetType();
         }
 
         #endregion
