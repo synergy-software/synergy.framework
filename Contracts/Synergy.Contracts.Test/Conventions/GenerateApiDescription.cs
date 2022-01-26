@@ -1,4 +1,4 @@
-﻿using System.IO;
+﻿using ApprovalTests;
 using NUnit.Framework;
 using Synergy.Convention.Testing;
 
@@ -8,17 +8,26 @@ namespace Synergy.Contracts.Test.Conventions
     public class GenerateApiDescription
     {
         [Test]
-        [Ignore("Doesn't work on build server for unknown reasons")]
         public void Generate()
         {
             // ARRANGE
             var assembly = typeof(Fail).Assembly;
-            
+
             // ACT
-            var d = ApiDescription.GenerateFor(assembly);
+            var publicApi = ApiDescription.GenerateFor(assembly);
 
             // ASSERT
-            File.WriteAllText(@"../../../Conventions/synergy.contracts.md", d);
+            var writer = new MarkdownTextWriter(publicApi);
+            var approvalNamer = new PublicApi.PublicApiGenerator.AssemblyPathNamer(assembly.Location);
+            Approvals.Verify(writer, approvalNamer, Approvals.GetReporter());
+        }
+    }
+
+    public class MarkdownTextWriter : ApprovalTextWriter
+    {
+        /// <inheritdoc />
+        public MarkdownTextWriter(string data) : base(data, "md")
+        {
         }
     }
 }

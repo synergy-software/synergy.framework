@@ -1,0 +1,284 @@
+﻿[assembly: System.Resources.NeutralResourcesLanguage("en")]
+[assembly: System.Runtime.InteropServices.ComVisible(false)]
+[assembly: System.Runtime.Versioning.TargetFramework(".NETFramework,Version=v4.7.2", FrameworkDisplayName=".NET Framework 4.7.2")]
+namespace Synergy.Contracts
+{
+    [System.Serializable]
+    public class DesignByContractViolationException : System.Exception
+    {
+        public DesignByContractViolationException() { }
+        public DesignByContractViolationException([JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message) { }
+        protected DesignByContractViolationException([JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) { }
+    }
+    public static class Fail
+    {
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.CanBeNull]
+        [JetBrains.Annotations.ContractAnnotation("value: null => null; value: notnull => notnull")]
+        public static T AsOrFail<T>([JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] this object value, [JetBrains.Annotations.CanBeNull] string name = null) { }
+        [JetBrains.Annotations.NotNull]
+        [JetBrains.Annotations.Pure]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static Synergy.Contracts.DesignByContractViolationException Because(Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.NotNull]
+        [JetBrains.Annotations.Pure]
+        [JetBrains.Annotations.StringFormatMethod("message")]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static Synergy.Contracts.DesignByContractViolationException Because([JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message) { }
+        [JetBrains.Annotations.NotNull]
+        [JetBrains.Annotations.Pure]
+        [JetBrains.Annotations.StringFormatMethod("message")]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static Synergy.Contracts.DesignByContractViolationException Because([JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] params object[] args) { }
+        [JetBrains.Annotations.NotNull]
+        [JetBrains.Annotations.Pure]
+        [JetBrains.Annotations.StringFormatMethod("message")]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static Synergy.Contracts.DesignByContractViolationException Because<T1>([JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message, T1 arg1) { }
+        [JetBrains.Annotations.NotNull]
+        [JetBrains.Annotations.Pure]
+        [JetBrains.Annotations.StringFormatMethod("message")]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static Synergy.Contracts.DesignByContractViolationException Because<T1, T2>([JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message, T1 arg1, T2 arg2) { }
+        [JetBrains.Annotations.NotNull]
+        [JetBrains.Annotations.Pure]
+        [JetBrains.Annotations.StringFormatMethod("message")]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static Synergy.Contracts.DesignByContractViolationException Because<T1, T2, T3>([JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message, T1 arg1, T2 arg2, T3 arg3) { }
+        [JetBrains.Annotations.NotNull]
+        [JetBrains.Annotations.Pure]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static Synergy.Contracts.DesignByContractViolationException BecauseEnumOutOfRange<T>(T value)
+            where T :  struct { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.CanBeNull]
+        [JetBrains.Annotations.ContractAnnotation("value: null => null; value: notnull => notnull")]
+        public static T CanBeNull<T>([JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] this T value) { }
+        [JetBrains.Annotations.NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static T CastEnumOrFail<T>([JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] this System.Enum value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: null => halt; value: notnull => notnull")]
+        [JetBrains.Annotations.NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static T CastOrFail<T>([JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] this object value, [JetBrains.Annotations.CanBeNull] string name = null) { }
+        [JetBrains.Annotations.AssertionMethod]
+        public static System.DateTime FailIfEmpty(this System.DateTime value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        [JetBrains.Annotations.NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static T FailIfEnumOutOfRange<T>([JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] this System.Enum value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        [JetBrains.Annotations.AssertionMethod]
+        public static System.DateTime FailIfNotDate(this System.DateTime date, string name) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.CanBeNull]
+        public static System.DateTime? FailIfNotDate([JetBrains.Annotations.CanBeNull] this System.DateTime? date, string name) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: null => halt; value: notnull => notnull")]
+        [JetBrains.Annotations.NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static T FailIfNull<T>([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] this T value, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: null => halt; value: notnull => notnull")]
+        [JetBrains.Annotations.NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static T FailIfNull<T>([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] this T value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        [JetBrains.Annotations.AssertionMethod]
+        public static void IfArgumentEmpty(System.Guid value, [JetBrains.Annotations.NotNull] string argumentName) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("argumentValue: null => halt")]
+        public static void IfArgumentEmpty([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] string argumentValue, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string argumentName) { }
+        [JetBrains.Annotations.AssertionMethod]
+        public static void IfArgumentEqual<TExpected, TActual>([JetBrains.Annotations.CanBeNull] TExpected unexpected, [JetBrains.Annotations.CanBeNull] TActual argumentValue, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string argumentName) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("argumentValue: null => halt")]
+        public static void IfArgumentNull<T>([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] T argumentValue, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string argumentName) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("argumentValue: null => halt")]
+        public static void IfArgumentWhiteSpace([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] string argumentValue, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string argumentName) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("collection: null => halt")]
+        public static void IfCollectionContains<T>([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] System.Collections.Generic.IEnumerable<T> collection, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] System.Func<T, bool> func, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("collection: null => halt")]
+        public static void IfCollectionContainsNull<T>([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] System.Collections.Generic.IEnumerable<T> collection, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string collectionName)
+            where T :  class { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("collection: null => halt")]
+        public static void IfCollectionEmpty([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] System.Collections.IEnumerable collection, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("collection: null => halt")]
+        public static void IfCollectionEmpty([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] System.Collections.IEnumerable collection, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string collectionName) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("collection1: null => halt; collection2: null => halt")]
+        public static void IfCollectionsAreNotEquivalent<T>([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] System.Collections.Generic.IEnumerable<T> collection1, [JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] System.Collections.Generic.IEnumerable<T> collection2, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        public static void IfEmpty(System.DateTime value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        [JetBrains.Annotations.AssertionMethod]
+        public static void IfEmpty(System.Guid value, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: null => halt")]
+        public static void IfEmpty([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] string value, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: null => halt")]
+        public static void IfEmpty([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] string value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        public static void IfEnumNotDefined<T>([JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] object value) { }
+        public static void IfEnumNotDefined<T>(T value)
+            where T :  struct { }
+        [JetBrains.Annotations.AssertionMethod]
+        public static void IfEqual<TExpected, TActual>([JetBrains.Annotations.CanBeNull] TExpected unexpected, [JetBrains.Annotations.CanBeNull] TActual actual, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        public static void IfEqual<TExpected, TActual>([JetBrains.Annotations.CanBeNull] TExpected unexpected, [JetBrains.Annotations.CanBeNull] TActual actual, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: false => halt")]
+        public static void IfFalse([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_TRUE)] bool value, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        public static void IfNotCastable([JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] object value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] System.Type expectedType, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        public static void IfNotCastable<T>([JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] object value, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        public static void IfNotDate([JetBrains.Annotations.CanBeNull] System.DateTime? date, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        public static void IfNotDate([JetBrains.Annotations.CanBeNull] System.DateTime? date, string name) { }
+        [JetBrains.Annotations.AssertionMethod]
+        public static void IfNotEqual<TExpected, TActual>([JetBrains.Annotations.CanBeNull] TExpected expected, [JetBrains.Annotations.CanBeNull] TActual actual, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        public static void IfNotEqual<TExpected, TActual>([JetBrains.Annotations.CanBeNull] TExpected expected, [JetBrains.Annotations.CanBeNull] TActual actual, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: notnull => halt")]
+        public static void IfNotNull<T>([JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] T value, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: notnull => halt")]
+        public static void IfNotNull<T>([JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] T value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: null => halt")]
+        public static void IfNull<T>([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] T value, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: null => halt")]
+        public static void IfNull<T>([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] T value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: null => halt")]
+        public static void IfNullOrNotCastable<T>([JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] object value) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: null => halt")]
+        public static void IfNullOrNotCastable<T>([JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] object value, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        public static void IfTooLong([JetBrains.Annotations.CanBeNull] string value, int maxLength, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        [JetBrains.Annotations.AssertionMethod]
+        public static void IfTooLongOrWhitespace([JetBrains.Annotations.CanBeNull] string value, int maxLength, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: true => halt")]
+        public static void IfTrue([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_FALSE)] bool value, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: null => halt")]
+        public static void IfWhitespace([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] string value, Synergy.Contracts.Violation message) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: null => halt")]
+        public static void IfWhitespace([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] string value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: null => halt; value: notnull => notnull")]
+        [JetBrains.Annotations.NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static T NotNull<T>([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] this T value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: null => halt; value: notnull => notnull")]
+        [JetBrains.Annotations.NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static T OrFail<T>([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] this T value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        [JetBrains.Annotations.ContractAnnotation("value: null => halt")]
+        public static T OrFail<T>(this T? value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
+            where T :  struct { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("collection: null => halt")]
+        [JetBrains.Annotations.NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static T OrFailIfCollectionEmpty<T>([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] this T collection, Synergy.Contracts.Violation message)
+            where T : System.Collections.IEnumerable { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("collection: null => halt")]
+        [JetBrains.Annotations.NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static T OrFailIfCollectionEmpty<T>([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] this T collection, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string collectionName)
+            where T : System.Collections.IEnumerable { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.CanBeNull]
+        [JetBrains.Annotations.ContractAnnotation("value: null => null")]
+        public static string OrFailIfTooLong([JetBrains.Annotations.CanBeNull] this string value, int maxLength, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        [JetBrains.Annotations.AssertionMethod]
+        [JetBrains.Annotations.ContractAnnotation("value: null => halt; value: notnull => notnull")]
+        [JetBrains.Annotations.NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static string OrFailIfWhiteSpace([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] this string value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+    }
+    public readonly struct Violation
+    {
+        [JetBrains.Annotations.StringFormatMethod("message")]
+        public Violation([JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] params object[] args) { }
+        [JetBrains.Annotations.NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public override string ToString() { }
+        [JetBrains.Annotations.StringFormatMethod("message")]
+        public static Synergy.Contracts.Violation Of([JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string message, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] params object[] args) { }
+    }
+}
+namespace Synergy.Contracts.Requirements
+{
+    public static class Business
+    {
+        [JetBrains.Annotations.MustUseReturnValue]
+        public static Synergy.Contracts.Requirements.Business.Requirement Requires(bool condition) { }
+        [JetBrains.Annotations.MustUseReturnValue]
+        public static Synergy.Contracts.Requirements.Business.Principle Rule(string description) { }
+        [JetBrains.Annotations.MustUseReturnValue]
+        public static Synergy.Contracts.Requirements.Business.Precondition When(bool preCondition) { }
+        public interface IPrecondition
+        {
+            bool Met { get; }
+        }
+        public readonly struct Precondition : Synergy.Contracts.Requirements.Business.IPrecondition
+        {
+            public Precondition(bool preCondition, [JetBrains.Annotations.CanBeNull] Synergy.Contracts.Requirements.Business.IPrecondition previous = null, [JetBrains.Annotations.CanBeNull] string comment = null) { }
+            [JetBrains.Annotations.CanBeNull]
+            public string Comment { get; }
+            public Synergy.Contracts.Requirements.Business.Precondition this[string when] { get; }
+            public bool Met { get; }
+            [JetBrains.Annotations.MustUseReturnValue]
+            public Synergy.Contracts.Requirements.Business.Precondition And(bool preCondition) { }
+            [JetBrains.Annotations.MustUseReturnValue]
+            public Synergy.Contracts.Requirements.Business.Requirement Requires(bool condition) { }
+            [JetBrains.Annotations.MustUseReturnValue]
+            public Synergy.Contracts.Requirements.Business.Requirement Requires(System.Func<bool> condition) { }
+            [JetBrains.Annotations.NotNull]
+            public override string ToString() { }
+        }
+        public readonly struct Principle
+        {
+            public Principle(string description) { }
+            public string Description { get; }
+            public void Throws(System.Exception exception) { }
+            public override string ToString() { }
+            [JetBrains.Annotations.MustUseReturnValue]
+            public static Synergy.Contracts.Requirements.Business.Requirement Requires(bool condition) { }
+            [JetBrains.Annotations.MustUseReturnValue]
+            public static Synergy.Contracts.Requirements.Business.Precondition When(bool preCondition) { }
+        }
+        public readonly struct Requirement
+        {
+            public Requirement(bool condition) { }
+            public Requirement(Synergy.Contracts.Requirements.Business.Precondition? precondition, bool condition) { }
+            public Requirement(Synergy.Contracts.Requirements.Business.Precondition? precondition, System.Func<bool> condition, [JetBrains.Annotations.CanBeNull] string comment = null) { }
+            [JetBrains.Annotations.CanBeNull]
+            public string Comment { get; }
+            public Synergy.Contracts.Requirements.Business.Requirement this[string rule] { get; }
+            public bool Met { get; }
+            public void Throws(System.Exception exception) { }
+            public void Throws(string message) { }
+            [JetBrains.Annotations.NotNull]
+            public override string ToString() { }
+        }
+    }
+    public class BusinessRuleViolationException : System.Exception
+    {
+        public BusinessRuleViolationException(string message, Synergy.Contracts.Requirements.Business.Requirement requirement) { }
+        public Synergy.Contracts.Requirements.Business.Requirement Requirement { get; }
+    }
+}
