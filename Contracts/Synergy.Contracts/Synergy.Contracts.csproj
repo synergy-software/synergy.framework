@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;JETBRAINS_ANNOTATIONS;INTERNAL_POOL</DefineConstants>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <DocumentationFile>bin\Debug\Synergy.Contracts.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -27,7 +27,7 @@
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <DefineConstants>TRACE;JETBRAINS_ANNOTATIONS;INTERNAL_POOL</DefineConstants>
     <DocumentationFile>bin\Release\Synergy.Contracts.XML</DocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <ProjectGuid>{653FF172-0DC5-4D81-91AE-3CE09D8CF7C1}</ProjectGuid>
