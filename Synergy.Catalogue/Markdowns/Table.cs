@@ -3,9 +3,9 @@ using System.Text;
 
 namespace Synergy.Catalogue.Markdowns
 {
-    public class Markdown
+    public partial class Markdown
     {
-        public class Table
+        public class Table : IElement
         {
             private readonly string[] headers;
             private readonly List<string[]> rows;
@@ -44,7 +44,7 @@ namespace Synergy.Catalogue.Markdowns
                     }
                     table.AppendLine("|");
                 }
-            
+
                 return table.ToString();
             }
         }
