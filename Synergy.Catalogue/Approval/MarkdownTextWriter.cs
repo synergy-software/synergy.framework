@@ -1,4 +1,5 @@
 ﻿using ApprovalTests;
+using Synergy.Catalogue.Markdowns;
 
 namespace Synergy.Catalogue.Approval
 {
@@ -6,6 +7,10 @@ namespace Synergy.Catalogue.Approval
     {
         /// <inheritdoc />
         public MarkdownTextWriter(string data) : base(data, "md")
+        {
+        }
+        
+        public MarkdownTextWriter(Markdown.Document data) : base(data.ToString(), "md")
         {
         }
     }

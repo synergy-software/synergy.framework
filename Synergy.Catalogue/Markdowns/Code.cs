@@ -4,20 +4,20 @@ namespace Synergy.Catalogue.Markdowns
 {
     public partial class Markdown
     {
-        public class Paragraph : IElement
+        public class Code : IElement
         {
             private readonly string text;
 
-            public Paragraph(string text)
+            public Code(string text)
                 => this.text = text.OrFail(nameof(text))
                                    .Trim();
 
-            public Paragraph Line(string line)
+            public Code Line(string line)
             {
-                return new Paragraph(this.text + NL + line);
+                return new Code(this.text + NL + line);
             }
             
-            public override string ToString() => $"{this.text}{NL}";
+            public override string ToString() => $"```{NL}{this.text}{NL}```{NL}";
         }
     }
 }
