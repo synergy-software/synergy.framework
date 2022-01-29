@@ -17,9 +17,10 @@ namespace Synergy.Catalogue.Markdowns
         {
             private readonly List<IElement> elements = new();
             
-            public void Append(IElement element)
+            public Document Append(IElement element)
             {
                 this.elements.Add(element);
+                return this;
             }
 
             /// <inheritdoc />

@@ -4,15 +4,33 @@ namespace Synergy.Catalogue.Markdowns
 {
     public partial class Markdown
     {
-        public class Header1 : IElement
+        public abstract class Header : IElement
         {
+            private readonly int level;
             private readonly string header;
 
-            public Header1(string header)
-                => this.header = header.OrFail(nameof(header))
-                                       .Trim();
+            protected Header(int level, string header)
+            {
+                this.level = level;
+                this.header = header.OrFail(nameof(header))
+                                    .Trim();
+            }
 
-            public override string ToString() => $"# {this.header}{Markdown.NL}";
+            public override string ToString() => $"{new string('#', this.level)} {this.header}{Markdown.NL}";
+        }
+
+        public class Header1 : Header
+        {
+            public Header1(string header) : base(1, header)
+            {
+            }
+        }
+
+        public class Header2 : Header
+        {
+            public Header2(string header) : base(2, header)
+            {
+            }
         }
     }
 }
