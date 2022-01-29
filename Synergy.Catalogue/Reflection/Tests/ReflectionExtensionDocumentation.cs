@@ -25,7 +25,7 @@ namespace Synergy.Catalogue.Reflection.Tests
             typeof(decimal),
             typeof(bool),
         };
-        
+
         private readonly List<Type> primitiveTypesNullable = new List<Type>()
         {
             typeof(byte?),
@@ -42,7 +42,7 @@ namespace Synergy.Catalogue.Reflection.Tests
             typeof(decimal?),
             typeof(bool?),
         };
-        
+
         private readonly List<Type> complexTypes = new List<Type>()
         {
             typeof(object),
@@ -53,7 +53,7 @@ namespace Synergy.Catalogue.Reflection.Tests
             typeof(int[]),
             typeof(Dictionary<string, long>),
         };
-        
+
         [Fact]
         public void GetFriendlyTypeName()
         {
@@ -77,7 +77,7 @@ namespace Synergy.Catalogue.Reflection.Tests
 
             documentation.Append(new Markdown.Header2("Remarks"))
                          .Append(new Markdown.Paragraph("This method is intended to be used mainly for testing purposes."));
-            
+
             var writer = new MarkdownTextWriter(documentation);
             Approvals.Verify(writer);
         }
@@ -89,6 +89,7 @@ namespace Synergy.Catalogue.Reflection.Tests
             {
                 table.Append(type.ToString(), type.GetFriendlyTypeName());
             }
+
             return table;
         }
     }
