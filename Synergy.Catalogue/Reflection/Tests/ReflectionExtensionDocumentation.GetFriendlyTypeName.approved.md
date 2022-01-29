@@ -2,10 +2,10 @@
 
 ## Definition
 
-Namespace: Synergy.Catalogue.Reflection
+Namespace: Synergy.Catalogue.Reflection<br/>
 Assembly: Synergy.Catalogue.dll
 
-Returns friendly name of Type
+Returns friendly name of Type.
 
 ## Examples
 
