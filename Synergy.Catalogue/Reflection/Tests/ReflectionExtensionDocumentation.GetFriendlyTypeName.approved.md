@@ -9,7 +9,7 @@ Returns friendly name of Type.
 
 ## Examples
 
-```
+``` csharp
 var type = typeof(string);
 var friendlyName = type.GetFriendlyTypeName();
 ```
