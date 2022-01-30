@@ -1,16 +1,31 @@
 ﻿# Synergy.Contracts
 
 ## DesignByContractViolationException : Exception
- - Message: string { get; }
- - Data: IDictionary { get; }
- - InnerException: Exception { get; }
  - TargetSite: MethodBase { get; }
  - StackTrace: string { get; }
+ - Message: string? [Nullable] { get; }
+ - Data: IDictionary? [Nullable] { get; }
+ - InnerException: Exception { get; }
  - HelpLink: string { get; set; }
  - Source: string { get; set; }
- - HResult: int { get; }
+ - HResult: int { get; set; }
 
 ## Fail
+ - Fail.IfTooLong(
+     value: string [CanBeNull],
+     maxLength: int,
+     name: string [NotNull, NotNull]
+   ) : Void [AssertionMethod]
+ - Fail.OrFailIfTooLong(
+     value: string [CanBeNull],
+     maxLength: int,
+     name: string [NotNull, NotNull]
+   ) : string [Extension, CanBeNull, AssertionMethod, ContractAnnotation]
+ - Fail.IfTooLongOrWhitespace(
+     value: string [CanBeNull],
+     maxLength: int,
+     name: string [NotNull, NotNull]
+   ) : Void [AssertionMethod]
  - Fail.Because(
      message: Violation
    ) : DesignByContractViolationException [NotNull, Pure]
@@ -243,21 +258,6 @@
      value: string [CanBeNull, AssertionCondition],
      message: Violation
    ) : Void [AssertionMethod, ContractAnnotation]
- - Fail.IfTooLong(
-     value: string [CanBeNull],
-     maxLength: int,
-     name: string [NotNull, NotNull]
-   ) : Void [AssertionMethod]
- - Fail.OrFailIfTooLong(
-     value: string [CanBeNull],
-     maxLength: int,
-     name: string [NotNull, NotNull]
-   ) : string [Extension, CanBeNull, AssertionMethod, ContractAnnotation]
- - Fail.IfTooLongOrWhitespace(
-     value: string [CanBeNull],
-     maxLength: int,
-     name: string [NotNull, NotNull]
-   ) : Void [AssertionMethod]
 
 ## Violation (struct)
  - Violation.Of(
@@ -278,14 +278,14 @@
 
 ## Requirements.BusinessRuleViolationException : Exception
  - Requirement: Requirement { get; }
- - Message: string { get; }
- - Data: IDictionary { get; }
- - InnerException: Exception { get; }
  - TargetSite: MethodBase { get; }
  - StackTrace: string { get; }
+ - Message: string? [Nullable] { get; }
+ - Data: IDictionary? [Nullable] { get; }
+ - InnerException: Exception { get; }
  - HelpLink: string { get; set; }
  - Source: string { get; set; }
- - HResult: int { get; }
+ - HResult: int { get; set; }
 
 ## Requirements.Business+Precondition (struct)
  - Met: bool { get; }
