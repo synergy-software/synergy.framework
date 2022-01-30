@@ -7,6 +7,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
+      <ProjectReference Include="..\Markdown\Synergy.Markdowns.Test\Synergy.Markdowns.Test.csproj" />
+      <ProjectReference Include="..\Markdown\Synergy.Markdowns\Synergy.Markdowns.csproj" />
     </ItemGroup>
 
     <ItemGroup>

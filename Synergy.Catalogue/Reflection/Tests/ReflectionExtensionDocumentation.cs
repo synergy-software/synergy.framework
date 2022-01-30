@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using ApprovalTests;
-using Synergy.Catalogue.Approval;
-using Synergy.Catalogue.Markdowns;
+using Synergy.Markdowns;
+using Synergy.Markdowns.Test;
 using Xunit;
 
 namespace Synergy.Catalogue.Reflection.Tests
