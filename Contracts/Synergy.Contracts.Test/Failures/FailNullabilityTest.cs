@@ -42,7 +42,7 @@ namespace Synergy.Contracts.Test.Failures
 
         [Test]
         [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
-        public void FailIfNullSuccess([NotNull] object thisIsNotNull)
+        public void FailIfNullSuccess(object thisIsNotNull)
         {
             // ACT
             thisIsNotNull.FailIfNull(nameof(thisIsNotNull));
@@ -50,7 +50,7 @@ namespace Synergy.Contracts.Test.Failures
 
         [Test]
         [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
-        public void FailIfNullWithViolationMessageSuccess([NotNull] object thisIsNotNull)
+        public void FailIfNullWithViolationMessageSuccess(object thisIsNotNull)
         {
             // ACT
             thisIsNotNull.FailIfNull(Violation.Of("{0} should not be null", nameof(thisIsNotNull)));
@@ -94,7 +94,7 @@ namespace Synergy.Contracts.Test.Failures
         [Test]
         [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
         [SuppressMessage("ReSharper", "UnusedVariable")]
-        public void OrFailSuccess([NotNull] object thisCannotBeNull)
+        public void OrFailSuccess(object thisCannotBeNull)
         {
             // ACT
             Type type = thisCannotBeNull.OrFail(nameof(thisCannotBeNull)).GetType();
@@ -148,7 +148,7 @@ namespace Synergy.Contracts.Test.Failures
 
         [Test]
         [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
-        public void NotNullSuccess([NotNull] object thisCannotBeNull)
+        public void NotNullSuccess(object thisCannotBeNull)
         {
             // ACT
             thisCannotBeNull.NotNull(nameof(thisCannotBeNull));
@@ -189,7 +189,7 @@ namespace Synergy.Contracts.Test.Failures
 
         [Test]
         [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
-        public void IfArgumentNullSuccess([NotNull] object argumentValue)
+        public void IfArgumentNullSuccess(object argumentValue)
         {
             // ACT
             Fail.IfArgumentNull(argumentValue, nameof(argumentValue));
@@ -255,7 +255,7 @@ namespace Synergy.Contracts.Test.Failures
 
         [Test]
         [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
-        public void IfNullSuccess([NotNull] object argumentValue)
+        public void IfNullSuccess(object argumentValue)
         {
             // ACT
             Fail.IfNull(argumentValue, nameof(argumentValue));
@@ -263,7 +263,6 @@ namespace Synergy.Contracts.Test.Failures
 
         #endregion
 
-        [ItemNotNull]
         private static IEnumerable<object> GetNotNulls()
         {
             // ReSharper disable HeapView.BoxingAllocation
@@ -274,8 +273,7 @@ namespace Synergy.Contracts.Test.Failures
             // ReSharper restore HeapView.BoxingAllocation
         }
 
-        [ItemCanBeNull]
-        private static IEnumerable<object> GetNulls()
+        private static IEnumerable<object?> GetNulls()
         {
             // ReSharper disable HeapView.BoxingAllocation
             yield return null;
