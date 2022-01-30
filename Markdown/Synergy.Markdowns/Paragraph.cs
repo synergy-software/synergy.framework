@@ -1,6 +1,6 @@
 ﻿using Synergy.Contracts;
 
-namespace Synergy.Catalogue.Markdowns
+namespace Synergy.Markdowns
 {
     public partial class Markdown
     {
@@ -14,10 +14,10 @@ namespace Synergy.Catalogue.Markdowns
 
             public Paragraph Line(string line)
             {
-                return new Paragraph(this.text + NL + line);
+                return new Paragraph(this.text + Markdown.NL + line);
             }
             
-            public override string ToString() => $"{this.text}{NL}";
+            public override string ToString() => $"{this.text}{Markdown.NL}";
         }
     }
 }

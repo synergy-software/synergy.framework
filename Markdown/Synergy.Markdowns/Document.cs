@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Synergy.Catalogue.Markdowns
+namespace Synergy.Markdowns
 {
     public static partial class Markdown
     {
         // ReSharper disable once InconsistentNaming
         private static readonly string NL = Environment.NewLine;
         // ReSharper disable once InconsistentNaming
-        private static readonly string NL2 = NL + NL;
+        private static readonly string NL2 = Markdown.NL + Markdown.NL;
         
         public interface IElement{}
         

@@ -1,8 +1,7 @@
 ﻿using ApprovalTests;
-using Synergy.Catalogue.Approval;
 using Xunit;
 
-namespace Synergy.Catalogue.Markdowns
+namespace Synergy.Markdowns.Test
 {
     public class MarkdownTests
     {

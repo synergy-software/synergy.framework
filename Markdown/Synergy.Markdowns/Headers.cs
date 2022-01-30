@@ -1,6 +1,6 @@
 ﻿using Synergy.Contracts;
 
-namespace Synergy.Catalogue.Markdowns
+namespace Synergy.Markdowns
 {
     public partial class Markdown
     {
@@ -16,7 +16,7 @@ namespace Synergy.Catalogue.Markdowns
                                     .Trim();
             }
 
-            public override string ToString() => $"{new string('#', this.level)} {this.header}{NL}";
+            public override string ToString() => $"{new string('#', this.level)} {this.header}{Markdown.NL}";
         }
 
         public class Header1 : Header

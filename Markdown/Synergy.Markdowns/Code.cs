@@ -1,6 +1,6 @@
 ﻿using Synergy.Contracts;
 
-namespace Synergy.Catalogue.Markdowns
+namespace Synergy.Markdowns
 {
     public partial class Markdown
     {
@@ -18,12 +18,12 @@ namespace Synergy.Catalogue.Markdowns
 
             public Code Line(string line)
             {
-                return new Code(this.text + NL + line);
+                return new Code(this.text + Markdown.NL + line);
             }
 
-            public override string ToString() => $"``` {this.language ?? ""}{NL}" +
-                                                 $"{this.text}{NL}" +
-                                                 $"```{NL}";
+            public override string ToString() => $"``` {this.language ?? ""}{Markdown.NL}" +
+                                                 $"{this.text}{Markdown.NL}" +
+                                                 $"```{Markdown.NL}";
         }
     }
 }

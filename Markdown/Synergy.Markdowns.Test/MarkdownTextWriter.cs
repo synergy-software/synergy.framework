@@ -1,7 +1,6 @@
 ﻿using ApprovalTests;
-using Synergy.Catalogue.Markdowns;
 
-namespace Synergy.Catalogue.Approval
+namespace Synergy.Markdowns.Test
 {
     public class MarkdownTextWriter : ApprovalTextWriter
     {

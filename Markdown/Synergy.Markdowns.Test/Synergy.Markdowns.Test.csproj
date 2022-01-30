@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Update="MarkdownTests.CreateMarkdownDocument.approved.md">
+        <ParentExtension>.cs</ParentExtension>
+        <ParentFile>MarkdownTests</ParentFile>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Synergy.Markdowns\Synergy.Markdowns.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="ApprovalTests" Version="5.7.1" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+      <PackageReference Include="xunit" Version="2.4.1" />
+    </ItemGroup>
+
+</Project>
