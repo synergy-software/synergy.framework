@@ -14,6 +14,7 @@ namespace Synergy.Catalogue.Markdowns
                 .Append(new Markdown.Header1("header - level 1"))
                 .Append(new Markdown.Header2("header - level 2"))
                 .Append(new Markdown.Paragraph("some text"))
+                .Append(new Markdown.Code("var code = new PieceOfCode();"))
                 .Append(SampleTable());
 
             var writer = new MarkdownTextWriter(markdown.ToString());
