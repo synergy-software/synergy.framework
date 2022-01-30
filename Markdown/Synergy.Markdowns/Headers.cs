@@ -16,7 +16,7 @@ namespace Synergy.Markdowns
                                     .Trim();
             }
 
-            public override string ToString() => $"{new string('#', this.level)} {this.header}{Markdown.NL}";
+            public override string ToString() => $"{new string('#', this.level)} {this.header}{NL}";
         }
 
         public class Header1 : Header

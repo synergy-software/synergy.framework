@@ -14,10 +14,10 @@ namespace Synergy.Markdowns
 
             public Paragraph Line(string line)
             {
-                return new Paragraph(this.text + Markdown.NL + line);
+                return new Paragraph(this.text + NL + line);
             }
             
-            public override string ToString() => $"{this.text}{Markdown.NL}";
+            public override string ToString() => $"{this.text}{NL}";
         }
     }
 }

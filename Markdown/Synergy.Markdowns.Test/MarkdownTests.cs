@@ -15,7 +15,8 @@ namespace Synergy.Markdowns.Test
                 .Append(new Markdown.Header3("header - level 3"))
                 .Append(new Markdown.Paragraph("some text"))
                 .Append(new Markdown.Code("var code = new PieceOfCode();"))
-                .Append(SampleTable());
+                .Append(SampleTable())
+                .Append(new Markdown.Quote("some quote"));
 
             var writer = new MarkdownTextWriter(markdown.ToString());
             Approvals.Verify(writer);

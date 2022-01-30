@@ -8,8 +8,6 @@ namespace Synergy.Markdowns
     {
         // ReSharper disable once InconsistentNaming
         private static readonly string NL = Environment.NewLine;
-        // ReSharper disable once InconsistentNaming
-        private static readonly string NL2 = Markdown.NL + Markdown.NL;
         
         public interface IElement{}
         
