@@ -32,5 +32,12 @@ namespace Synergy.Markdowns
             {
             }
         }
+        
+        public class Header3 : Header
+        {
+            public Header3(string header) : base(3, header)
+            {
+            }
+        }
     }
 }
