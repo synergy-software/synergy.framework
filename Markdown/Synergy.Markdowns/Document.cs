@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,13 +12,19 @@ namespace Synergy.Markdowns
         
         public interface IElement{}
         
-        public class Document
+        public class Document : IEnumerable<IElement>
         {
             private readonly List<IElement> elements = new();
             
             public Document Append(IElement element)
             {
                 this.elements.Add(element);
+                return this;
+            }
+            
+            public Document Append(IEnumerable<IElement> newElements)
+            {
+                this.elements.AddRange(newElements);
                 return this;
             }
 
@@ -32,6 +39,14 @@ namespace Synergy.Markdowns
                 
                 return markdown.ToString();
             }
+
+            /// <inheritdoc />
+            public IEnumerator<IElement> GetEnumerator() 
+                => this.elements.GetEnumerator();
+
+            /// <inheritdoc />
+            IEnumerator IEnumerable.GetEnumerator() 
+                => this.GetEnumerator();
         }
     }
 }
