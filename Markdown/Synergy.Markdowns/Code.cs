@@ -1,4 +1,6 @@
-﻿namespace Synergy.Markdowns
+﻿using Synergy.Catalogue;
+
+namespace Synergy.Markdowns
 {
     public partial class Markdown
     {
@@ -9,7 +11,7 @@
 
             public Code(string? text = null, string? language = "csharp")
             {
-                this.language = language?.Trim();
+                this.language = language?.TrimToNull();
                 this.text = text;
             }
 
