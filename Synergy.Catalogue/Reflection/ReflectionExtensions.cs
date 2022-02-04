@@ -107,5 +107,10 @@ namespace Synergy.Catalogue.Reflection
             typeName = typeName.Substring(0, index);
             return $"{typeName}<{String.Join(", ", inner)}>";
         }
+
+        public static string GetFriendlyMethodName(this MethodInfo method)
+        {
+            return $"{method.Name}({String.Join(", ", method.GetParameters().Select(p => p.ParameterType.GetFriendlyTypeName()))})";
+        }
     }
 }

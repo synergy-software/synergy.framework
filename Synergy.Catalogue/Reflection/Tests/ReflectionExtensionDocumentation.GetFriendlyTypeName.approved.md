@@ -7,11 +7,16 @@ Assembly: Synergy.Catalogue.dll
 
 Returns friendly name of Type.
 
+## Remarks
+
+This method is intended to be used mainly for testing purposes.
+
 ## Examples
 
 ``` csharp
 var type = typeof(string);
 var friendlyName = type.GetFriendlyTypeName();
+Assert.Equal("string", friendlyName);
 ```
 
 The following example table shows result of method execution on C# primitive types
@@ -61,8 +66,4 @@ The following example table shows result of method execution on some more comple
 | System.Collections.Generic.List`1[System.Int32] | List<int> |
 | System.Int32[] | int[] |
 | System.Collections.Generic.Dictionary`2[System.String,System.Int64] | Dictionary<string, long> |
-
-## Remarks
-
-This method is intended to be used mainly for testing purposes.
 
