@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace Synergy.Contracts
 {
     // TODO:mace (from:mace @ 22-10-2016): Add [AssertionCondition] below
-    public static partial class Fail
+    static partial class Fail
     {
         // TODO:mace (from:mace @ 22-10-2016): public static void Fail.IfArgumentNotCastable<T>([CanBeNull, AssertionCondition(conditionType: AssertionConditionType.IS_NOT_NULL)] string argumentValue)
 

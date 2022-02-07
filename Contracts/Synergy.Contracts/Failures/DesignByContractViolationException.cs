@@ -11,7 +11,12 @@ namespace Synergy.Contracts
     /// </summary>
     [Serializable]
     [DebuggerStepThrough]
-    public class DesignByContractViolationException : Exception
+#if INTERNALS
+    internal
+#else
+    public
+#endif
+        class DesignByContractViolationException : Exception
     {
         /// <summary>
         /// Constructs the exception with no message.

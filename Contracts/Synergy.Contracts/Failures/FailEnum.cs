@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace Synergy.Contracts
 {
-    public static partial class Fail
+    static partial class Fail
     {
         /// <summary>
         ///     Return the exception to be thrown when enum value is not supported.

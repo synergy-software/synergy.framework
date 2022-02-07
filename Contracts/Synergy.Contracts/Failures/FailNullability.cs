@@ -2,7 +2,7 @@ using JetBrains.Annotations;
 
 namespace Synergy.Contracts
 {
-    public static partial class Fail
+    static partial class Fail
     {
         #region variable.FailIfNull(nameof(variable))
 

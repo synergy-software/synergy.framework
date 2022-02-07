@@ -31,7 +31,12 @@ namespace Synergy.Contracts
     ///     </para>
     /// </summary>
     [DebuggerStepThrough]
-    public static partial class Fail
+#if INTERNALS
+    internal
+#else
+    public
+#endif
+        static partial class Fail
     {
         /// <summary>
         ///     Returns exception that can be thrown when contract is failed.

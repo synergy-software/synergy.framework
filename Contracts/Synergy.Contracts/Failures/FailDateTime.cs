@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace Synergy.Contracts
 {
-    public static partial class Fail
+    static partial class Fail
     {
         /// <summary>
         ///     Throws exception when the checked DateTime contains more than just a date - when it contains hours, minutes or

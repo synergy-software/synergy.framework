@@ -9,7 +9,12 @@ namespace Synergy.Contracts
     /// Holds violation message.
     /// </summary>
     [SuppressMessage("ReSharper", "HeapView.BoxingAllocation")]
-    public readonly struct Violation
+#if INTERNALS
+    internal
+#else
+    public
+#endif
+        readonly struct Violation
     {
         [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull]
         private readonly string message;
