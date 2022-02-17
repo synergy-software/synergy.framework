@@ -152,11 +152,11 @@ namespace Synergy.Contracts.Requirements
                 => this.Description;
 
             [MustUseReturnValue]
-            public static Precondition When(bool preCondition) 
+            public Precondition When(bool preCondition) 
                 => new Precondition(preCondition);
 
             [MustUseReturnValue]
-            public static Requirement Requires(bool condition)
+            public Requirement Requires(bool condition)
                 => new Requirement(condition);
             
             /// <summary>
