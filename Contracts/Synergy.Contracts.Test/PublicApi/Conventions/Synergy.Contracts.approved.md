@@ -317,10 +317,10 @@
 
 ## Requirements.Business+Principle (struct)
  - Description: string { get; }
- - Principle.When(
+ - When(
      preCondition: bool
    ) : Precondition [MustUseReturnValue]
- - Principle.Requires(
+ - Requires(
      condition: bool
    ) : Requirement [MustUseReturnValue]
  - Throws(

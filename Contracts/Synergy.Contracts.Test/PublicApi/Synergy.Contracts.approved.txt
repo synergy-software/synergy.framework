@@ -255,12 +255,12 @@ namespace Synergy.Contracts.Requirements
         {
             public Principle(string description) { }
             public string Description { get; }
+            [JetBrains.Annotations.MustUseReturnValue]
+            public Synergy.Contracts.Requirements.Business.Requirement Requires(bool condition) { }
             public void Throws(System.Exception exception) { }
             public override string ToString() { }
             [JetBrains.Annotations.MustUseReturnValue]
-            public static Synergy.Contracts.Requirements.Business.Requirement Requires(bool condition) { }
-            [JetBrains.Annotations.MustUseReturnValue]
-            public static Synergy.Contracts.Requirements.Business.Precondition When(bool preCondition) { }
+            public Synergy.Contracts.Requirements.Business.Precondition When(bool preCondition) { }
         }
         public readonly struct Requirement
         {
