@@ -3,8 +3,14 @@ using JetBrains.Annotations;
 
 namespace Synergy.Contracts.Requirements
 {
+    /// <summary>
+    /// Allows to create business requirement verification conditions and checks.
+    /// </summary>
     public static class Business
     {
+        /// <summary>
+        /// Gets rule with description only.
+        /// </summary>
         [MustUseReturnValue]
         public static Principle Rule(string description)
             => new Principle(description);
