@@ -14,7 +14,6 @@
     <Description>Web API Testing support</Description>
     <Copyright>Copyright © Synergy Marcin Celej 2019</Copyright>
     <PackageTags>Web API Testing</PackageTags>
-    <RootNamespace>Web.Api.Testing</RootNamespace>
     <Nullable>enable</Nullable>
     <LangVersion>8</LangVersion>
   </PropertyGroup>
