@@ -6,11 +6,11 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <DefineConstants>TRACE;INTERNAL_STRING_EXTENSIONS</DefineConstants>
+      <DefineConstants>TRACE;INTERNAL_STRING_EXTENIONS</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <DefineConstants>TRACE;INTERNAL_STRING_EXTENSIONS</DefineConstants>
+      <DefineConstants>TRACE;INTERNAL_STRING_EXTENIONS</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup>
@@ -18,7 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Include="..\..\Synergy.Catalogue\StringExtensions.cs">
+      <Compile Include="..\..\Synergy.Catalogue\Extensions\StringExtensions.cs">
         <Link>StringExtensions.cs</Link>
       </Compile>
     </ItemGroup>
