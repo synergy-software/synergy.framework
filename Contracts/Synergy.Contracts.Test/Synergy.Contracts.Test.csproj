@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Markdown\Synergy.Markdowns.Test\Synergy.Markdowns.Test.csproj" />
     <ProjectReference Include="..\..\Markdown\Synergy.Markdowns\Synergy.Markdowns.csproj" />
+    <ProjectReference Include="..\..\Synergy.Catalogue\Synergy.Catalogue.csproj" />
     <ProjectReference Include="..\Synergy.Contracts.Samples\Synergy.Contracts.Samples.csproj" />
     <ProjectReference Include="..\Synergy.Contracts\Synergy.Contracts.csproj" />
     <ProjectReference Include="..\Synergy.Convention.Testing\Synergy.Convention.Testing.csproj" />

@@ -9,6 +9,16 @@ namespace Synergy.Contracts.Test.Requirements
         private const bool Failure = true;
         private const bool OK = false;
 
+        [Fact]
+        public void Rule()
+        {
+            this.Act(() =>
+                    Business.Rule("For online payment, transaction amount cannot exceed online payment limit")
+                            .Throws(new NotImplementedException("NOT IMPLEMENTED"))
+                )
+                .AssertException("NOT IMPLEMENTED");
+        }
+        
         [Theory]
         [InlineData(-10, BusinessTest.Failure)]
         [InlineData(10, BusinessTest.OK)]
@@ -109,18 +119,8 @@ namespace Synergy.Contracts.Test.Requirements
                 .AssertException(exception)
                 .AssertRequirementDescription("WHEN Transaction is Online Payment AND Online Payment Limit is set THEN Online Payment Amount must be <= to Online Payment Limit");
         }
-
-        [Fact]
-        public void Rule()
-        {
-            this.Act(() =>
-                    Business.Rule("When debit card is active then PIN must be set")
-                            .Throws(new NotImplementedException("NOT IMPLEMENTED"))
-                )
-                .AssertException("NOT IMPLEMENTED");
-        }
         
-        private TestResult Act(Action action)
+        protected TestResult Act(Action action)
         {
             try
             {
@@ -133,7 +133,7 @@ namespace Synergy.Contracts.Test.Requirements
             }
         }
 
-        private class TestResult
+        protected class TestResult
         {
             public Exception? Exception { get; }
 
