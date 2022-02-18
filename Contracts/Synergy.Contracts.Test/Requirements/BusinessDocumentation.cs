@@ -86,7 +86,7 @@ namespace Synergy.Contracts.Test.Requirements
             Business.Rule("When withdraw limit is set, withdrawn amount cannot exceed the limit")
                     .When(withdrawLimit != null)
                     .Requires(withdrawAmount <= withdrawLimit)
-                    .Throws(new WithdrawAmountExceedsLimit(withdrawLimit, withdrawAmount));
+                    .Throws(new WithdrawAmountExceedsLimitException(withdrawLimit, withdrawAmount));
         }
 
         private IEnumerable<Markdown.IElement> Step3IntroduceDedicatedException()
@@ -114,7 +114,7 @@ namespace Synergy.Contracts.Test.Requirements
             Business.Rule("When withdraw limit is set, withdrawn amount cannot exceed the limit")
                     .When(withdrawLimit != null)["Withdraw Limit is set"]
                     .Requires(withdrawAmount <= withdrawLimit)["Withdraw Amount must be <= to Withdraw Limit"]
-                    .Throws(new WithdrawAmountExceedsLimit(withdrawLimit, withdrawAmount));
+                    .Throws(new WithdrawAmountExceedsLimitException(withdrawLimit, withdrawAmount));
         }
         
         private IEnumerable<Markdown.IElement> Step4DocumentTheRequirement()
@@ -188,9 +188,9 @@ namespace Synergy.Contracts.Test.Requirements
             yield return new Markdown.Paragraph("TODO");
         }
         
-        private class WithdrawAmountExceedsLimit : Exception
+        private class WithdrawAmountExceedsLimitException : Exception
         {
-            public WithdrawAmountExceedsLimit(int withdrawLimit, int withdrawAmount) : base(
+            public WithdrawAmountExceedsLimitException(int withdrawLimit, int withdrawAmount) : base(
                 $"Withdraw Amount ({withdrawAmount}) exceeds the Withdraw Limit ({withdrawLimit})")
             {
             }
