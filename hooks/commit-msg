@@ -1,2 +1,0 @@
-#!C:/Program\ Files/Git/usr/bin/sh.exe
-exec powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\.gitconfig_files\hooks\commit-msg.ps1" $1
