@@ -69,6 +69,10 @@ Business.Rule("When withdraw limit is set, withdrawn amount cannot exceed the li
         .Throws(new WithdrawAmountExceedsLimitException(withdrawLimit, withdrawAmount));
 ```
 
+### Fifth step: generate automatically markdown documentation
+
+TODO: Describe how to convert the code to human readable markdown file using Unit Tests and ApprovalTests framework
+
 ### More samples
 
 ``` csharp

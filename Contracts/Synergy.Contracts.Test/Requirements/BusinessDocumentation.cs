@@ -24,6 +24,7 @@ namespace Synergy.Contracts.Test.Requirements
                          .Append(this.Step2MakeItWorking())
                          .Append(this.Step3IntroduceDedicatedException())
                          .Append(this.Step4DocumentTheRequirement())
+                         .Append(this.Step5GenerateDocumentation())
                          .Append(this.QuickSamples())
                          .Append(this.ValueObjectExample())
                 ;
@@ -138,21 +139,7 @@ namespace Synergy.Contracts.Test.Requirements
             foreach (var element in this.Sample1().Union(this.Sample2()))
                 yield return element;
         }
-
-        private IEnumerable<Markdown.IElement> Sample2()
-        {
-            TransactionType transactionType = TransactionType.OnlinePayment;
-            double? onlinePaymentLimit = 10;
-            double paymentAmount = 11;
-
-            this.Act(() =>
-                    this.QuickSample2(transactionType, onlinePaymentLimit, paymentAmount)
-                )
-                .AssertException($"Online Payment Amount ({paymentAmount}) exceeds the Online Payment Limit ({onlinePaymentLimit})");
-
-            yield return new Markdown.Code(ClassReader.ReadMethodBody(nameof(this.QuickSample2)));
-        }
-
+        
         private IEnumerable<Markdown.IElement> Sample1()
         {
             var balance = -10;
@@ -171,6 +158,20 @@ namespace Synergy.Contracts.Test.Requirements
                     .Throws($"balance cannot be < 0 and actually is {balance}");
         }
 
+        private IEnumerable<Markdown.IElement> Sample2()
+        {
+            TransactionType transactionType = TransactionType.OnlinePayment;
+            double? onlinePaymentLimit = 10;
+            double paymentAmount = 11;
+
+            this.Act(() =>
+                    this.QuickSample2(transactionType, onlinePaymentLimit, paymentAmount)
+                )
+                .AssertException($"Online Payment Amount ({paymentAmount}) exceeds the Online Payment Limit ({onlinePaymentLimit})");
+
+            yield return new Markdown.Code(ClassReader.ReadMethodBody(nameof(this.QuickSample2)));
+        }
+        
         private void QuickSample2(TransactionType transactionType, double? onlinePaymentLimit, double paymentAmount)
         {
             Business.Rule("For online payment transaction: when online payment limit is set than payment amount cannot exceed the limit")
