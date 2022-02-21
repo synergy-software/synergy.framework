@@ -141,8 +141,6 @@ namespace Synergy.Contracts.Test.Requirements
 
         private IEnumerable<Markdown.IElement> Sample2()
         {
-            yield return new Markdown.Quote("For online payment transaction: when online payment limit is set than payment amount cannot exceed the limit");
-
             TransactionType transactionType = TransactionType.OnlinePayment;
             double? onlinePaymentLimit = 10;
             double paymentAmount = 11;
@@ -157,8 +155,6 @@ namespace Synergy.Contracts.Test.Requirements
 
         private IEnumerable<Markdown.IElement> Sample1()
         {
-            yield return new Markdown.Quote("Account balance cannot be less than 0");
-
             var balance = -10;
             this.Act(() =>
                     this.QuickSample1(balance)
@@ -170,13 +166,15 @@ namespace Synergy.Contracts.Test.Requirements
 
         private void QuickSample1(int balance)
         {
-            Business.Requires(balance >= 0)
+            Business.Rule("Account balance cannot be less than 0")
+                    .Requires(balance >= 0)
                     .Throws($"balance cannot be < 0 and actually is {balance}");
         }
 
         private void QuickSample2(TransactionType transactionType, double? onlinePaymentLimit, double paymentAmount)
         {
-            Business.When(transactionType == TransactionType.OnlinePayment)
+            Business.Rule("For online payment transaction: when online payment limit is set than payment amount cannot exceed the limit")
+                    .When(transactionType == TransactionType.OnlinePayment)
                     .And(onlinePaymentLimit != null)
                     .Requires(paymentAmount <= onlinePaymentLimit)
                     .Throws($"Online Payment Amount ({paymentAmount}) exceeds the Online Payment Limit ({onlinePaymentLimit})");

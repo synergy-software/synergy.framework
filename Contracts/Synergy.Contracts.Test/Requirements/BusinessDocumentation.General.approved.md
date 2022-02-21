@@ -12,7 +12,7 @@ Allows to create business requirement verification conditions and checks.
 | Name | Summary |
 |------|---------|
 | Rule(string) | Gets rule with description only. |
-| When(bool) |  |
+| When(bool, string) |  |
 | Requires(bool) |  |
 
 ## Examples
@@ -71,17 +71,15 @@ Business.Rule("When withdraw limit is set, withdrawn amount cannot exceed the li
 
 ### More samples
 
-> Account balance cannot be less than 0
-
 ``` csharp
-Business.Requires(balance >= 0)
+Business.Rule("Account balance cannot be less than 0")
+        .Requires(balance >= 0)
         .Throws($"balance cannot be < 0 and actually is {balance}");
 ```
 
-> For online payment transaction: when online payment limit is set than payment amount cannot exceed the limit
-
 ``` csharp
-Business.When(transactionType == TransactionType.OnlinePayment)
+Business.Rule("For online payment transaction: when online payment limit is set than payment amount cannot exceed the limit")
+        .When(transactionType == TransactionType.OnlinePayment)
         .And(onlinePaymentLimit != null)
         .Requires(paymentAmount <= onlinePaymentLimit)
         .Throws($"Online Payment Amount ({paymentAmount}) exceeds the Online Payment Limit ({onlinePaymentLimit})");
