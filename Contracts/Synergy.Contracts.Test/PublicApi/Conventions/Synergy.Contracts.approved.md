@@ -2,13 +2,13 @@
 
 ## DesignByContractViolationException : Exception
  - TargetSite: MethodBase { get; }
- - StackTrace: string { get; }
  - Message: string? [Nullable] { get; }
  - Data: IDictionary? [Nullable] { get; }
  - InnerException: Exception { get; }
  - HelpLink: string { get; set; }
  - Source: string { get; set; }
  - HResult: int { get; set; }
+ - StackTrace: string { get; }
 
 ## Fail
  - Fail.IfTooLong(
@@ -139,13 +139,13 @@
    ) : DateTime [Extension, AssertionMethod]
  - Fail.BecauseEnumOutOfRange<T>(
      value: T
-   ) : DesignByContractViolationException [NotNull, Pure]
+   ) : DesignByContractViolationException? [NullableContext, NotNull, Pure]
  - Fail.IfEnumNotDefined<T>(
      value: object [NotNull, NotNull]
    ) : Void
  - Fail.IfEnumNotDefined<T>(
      value: T
-   ) : Void
+   ) : Void? [NullableContext]
  - Fail.FailIfEnumOutOfRange<T>(
      value: Enum [NotNull, NotNull],
      name: string [NotNull, NotNull]
@@ -201,8 +201,8 @@
    ) : T [Extension, NotNull, AssertionMethod, ContractAnnotation]
  - Fail.OrFail<T>(
      value: Nullable`1,
-     name: string [NotNull, NotNull]
-   ) : T [Extension, ContractAnnotation]
+     name: string? [Nullable, NotNull, NotNull]
+   ) : T? [NullableContext, Extension, ContractAnnotation]
  - Fail.NotNull<T>(
      value: T [CanBeNull, AssertionCondition, NoEnumeration],
      name: string [NotNull, NotNull]
@@ -247,7 +247,7 @@
      argumentName: string [NotNull, NotNull]
    ) : Void [AssertionMethod, ContractAnnotation]
  - Fail.OrFailIfWhiteSpace(
-     value: string [CanBeNull, AssertionCondition, NoEnumeration],
+     value: string? [Nullable, AssertionCondition, NoEnumeration],
      name: string [NotNull, NotNull]
    ) : string [Extension, NotNull, AssertionMethod, ContractAnnotation]
  - Fail.IfWhitespace(
@@ -270,8 +270,9 @@
      description: string
    ) : Principle [MustUseReturnValue]
  - Business.When(
-     preCondition: bool
-   ) : Precondition [MustUseReturnValue]
+     preCondition: bool,
+     expression: string [CallerArgumentExpression, Optional]
+   ) : Precondition? [NullableContext, MustUseReturnValue]
  - Business.Requires(
      condition: bool
    ) : Requirement [MustUseReturnValue]
@@ -279,13 +280,13 @@
 ## Requirements.BusinessRuleViolationException : Exception
  - Requirement: Requirement { get; }
  - TargetSite: MethodBase { get; }
- - StackTrace: string { get; }
  - Message: string? [Nullable] { get; }
  - Data: IDictionary? [Nullable] { get; }
  - InnerException: Exception { get; }
  - HelpLink: string { get; set; }
  - Source: string { get; set; }
  - HResult: int { get; set; }
+ - StackTrace: string { get; }
 
 ## Requirements.Business+Precondition (struct)
  - Met: bool { get; }

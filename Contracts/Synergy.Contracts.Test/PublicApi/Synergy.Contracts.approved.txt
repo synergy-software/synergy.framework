@@ -1,6 +1,6 @@
 ﻿[assembly: System.Resources.NeutralResourcesLanguage("en")]
 [assembly: System.Runtime.InteropServices.ComVisible(false)]
-[assembly: System.Runtime.Versioning.TargetFramework(".NETCoreApp,Version=v5.0", FrameworkDisplayName="")]
+[assembly: System.Runtime.Versioning.TargetFramework(".NETCoreApp,Version=v6.0", FrameworkDisplayName="")]
 namespace Synergy.Contracts
 {
     [System.Serializable]
@@ -207,7 +207,7 @@ namespace Synergy.Contracts
         [JetBrains.Annotations.ContractAnnotation("value: null => halt; value: notnull => notnull")]
         [JetBrains.Annotations.NotNull]
         [return: System.Diagnostics.CodeAnalysis.NotNull]
-        public static string OrFailIfWhiteSpace([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.CanBeNull] [JetBrains.Annotations.NoEnumeration] this string value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
+        public static string OrFailIfWhiteSpace([JetBrains.Annotations.AssertionCondition(JetBrains.Annotations.AssertionConditionType.IS_NOT_NULL)] [JetBrains.Annotations.NoEnumeration] this string? value, [JetBrains.Annotations.NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) { }
     }
     [System.Diagnostics.CodeAnalysis.SuppressMessage("ReSharper", "HeapView.BoxingAllocation")]
     public readonly struct Violation
@@ -230,7 +230,7 @@ namespace Synergy.Contracts.Requirements
         [JetBrains.Annotations.MustUseReturnValue]
         public static Synergy.Contracts.Requirements.Business.Principle Rule(string description) { }
         [JetBrains.Annotations.MustUseReturnValue]
-        public static Synergy.Contracts.Requirements.Business.Precondition When(bool preCondition) { }
+        public static Synergy.Contracts.Requirements.Business.Precondition When(bool preCondition, [System.Runtime.CompilerServices.CallerArgumentExpression("preCondition")] string? expression = null) { }
         public interface IPrecondition
         {
             bool Met { get; }

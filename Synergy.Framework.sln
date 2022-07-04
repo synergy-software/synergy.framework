@@ -67,6 +67,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.Markdowns", "Markdo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.Markdowns.Test", "Markdown\Synergy.Markdowns.Test\Synergy.Markdowns.Test.csproj", "{2464CDA4-AA2E-4932-A17A-7283647689B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.Documentation", "Contracts\Synergy.Documentation\Synergy.Documentation.csproj", "{C2D8A794-86EC-48F5-A7ED-B7B6746757DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -169,6 +171,10 @@ Global
 		{2464CDA4-AA2E-4932-A17A-7283647689B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2464CDA4-AA2E-4932-A17A-7283647689B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2464CDA4-AA2E-4932-A17A-7283647689B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2D8A794-86EC-48F5-A7ED-B7B6746757DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2D8A794-86EC-48F5-A7ED-B7B6746757DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2D8A794-86EC-48F5-A7ED-B7B6746757DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2D8A794-86EC-48F5-A7ED-B7B6746757DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -198,6 +204,7 @@ Global
 		{50DBF0BA-6592-4876-81DE-99D9684625E4} = {146E5D84-D923-4731-BAB4-8D46E30A1433}
 		{CDA7013B-5E75-4A1F-8549-F8B9057118B3} = {A72ACF23-1F2D-425F-A349-A39DA75C373D}
 		{2464CDA4-AA2E-4932-A17A-7283647689B6} = {A72ACF23-1F2D-425F-A349-A39DA75C373D}
+		{C2D8A794-86EC-48F5-A7ED-B7B6746757DA} = {146E5D84-D923-4731-BAB4-8D46E30A1433}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2DD5F49D-3F67-4D88-A29C-EFDBE7B76098}

@@ -12,6 +12,11 @@ namespace Synergy.Contracts.Test.Requirements
 {
     public class BusinessDocumentation : BusinessTest
     {
+        public static string? Read(string method)
+        {
+            return ClassReader.ReadMethodBody(method);
+        }
+        
         [Fact]
         public void General()
         {
@@ -57,6 +62,8 @@ namespace Synergy.Contracts.Test.Requirements
             yield return new Markdown.Paragraph("This will throw `NotImplementedException` for sure. But we have not finished our job yet.");
         }
 
+
+        
         private void Step2Sample(int withdrawLimit, int withdrawAmount)
         {
             Business.Rule("When withdraw limit is set, withdrawn amount cannot exceed the limit")

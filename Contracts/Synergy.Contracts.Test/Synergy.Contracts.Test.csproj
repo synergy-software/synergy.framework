@@ -3,8 +3,8 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <Nullable>enable</Nullable>
-    <LangVersion>9</LangVersion>
-    <TargetFramework>net5.0</TargetFramework>
+    <LangVersion>10</LangVersion>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -24,9 +24,15 @@
     <ProjectReference Include="..\Synergy.Contracts.Samples\Synergy.Contracts.Samples.csproj" />
     <ProjectReference Include="..\Synergy.Contracts\Synergy.Contracts.csproj" />
     <ProjectReference Include="..\Synergy.Convention.Testing\Synergy.Convention.Testing.csproj" />
+    <ProjectReference Include="..\Synergy.Documentation\Synergy.Documentation.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SynergyAssemblyInfo.cs" Link="Properties\SynergyAssemblyInfo.cs" />
+    <Compile Update="Requirements\BusinessUsage.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BusinessUsage.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ApprovalTests" Version="5.7.1" />
@@ -35,5 +41,12 @@
     <PackageReference Include="NUnit" Version="3.11.0" />
     <PackageReference Include="PublicApiGenerator" Version="10.2.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
+    <Reference Include="System.Runtime, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Requirements\BusinessUsage.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>BusinessUsage.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 </Project>

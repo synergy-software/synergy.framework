@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net452;net472;net5.0;netcoreapp2.1;netcoreapp3.1;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net472;net5.0;net6.0;netcoreapp2.1;netcoreapp3.1;netstandard2.0;netstandard2.1</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <IsPackable>true</IsPackable>
@@ -13,7 +13,8 @@
     <Description>Design by contract programming support</Description>
     <Copyright>Copyright © Synergy Marcin Celej 2019</Copyright>
     <PackageTags>DbC Design-By-Contract Precondition Postcondition Contract Code-Contract Resharper Annotations R# jetbrains.annotations design contract programming SLARCH</PackageTags>
-    <LangVersion>9</LangVersion>
+    <LangVersion>10</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
