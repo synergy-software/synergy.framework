@@ -89,7 +89,7 @@ namespace Synergy.Web.Api.Testing.Features
         private static void InsertScenarioStatusTable(StringBuilder report, Scenario scenario)
         {
             report.AppendLine("| # | Step Actions | Status |");
-            report.AppendLine("| - | - | - |");
+            report.AppendLine("|---|--------------|--------|");
             foreach (var step in scenario.Steps)
             {
                 report.AppendLine($"| {step.No} | {step.Title} | OK |");
@@ -99,7 +99,7 @@ namespace Synergy.Web.Api.Testing.Features
         private static void InsertOperationResponseStatusTable(StringBuilder report, HttpOperation operation)
         {
             report.AppendLine($"| Expected Results  | Status |");
-            report.AppendLine($"| - | - |");
+            report.AppendLine($"|-------------------|--------|");
             foreach (var assertion in operation.Assertions.Cast<IExpectation>())
             {
                 report.AppendLine($"| {assertion.ExpectedResult} | OK |");
