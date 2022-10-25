@@ -5,7 +5,7 @@
 ## 1. Get not existing resource from API (1 step)
 
 | # | Step Actions | Status |
-| - | - | - |
+|---|--------------|--------|
 | 1 | Try to retrieve not existing resource | OK |
 
 ### 1.1. Try to retrieve not existing resource (1 request)
@@ -24,7 +24,7 @@ HTTP/1.1 404 NotFound
 ```
 
 | Expected Results  | Status |
-| - | - |
+|-------------------|--------|
 | Convention: HTTP request method is GET | OK |
 | Convention: Returned HTTP status code is 404 (NotFound) | OK |
 | Manual: Error is returned | OK |

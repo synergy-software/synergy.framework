@@ -2,33 +2,33 @@
 
 ## HttpExtensions
  - HttpExtensions.ReadJson(
-      content: HttpContent [CanBeNull]
+     content: HttpContent [CanBeNull]
    ) : JToken? [NullableContext, Extension, MustUseReturnValue]
  - HttpExtensions.Read<T>(
-      content: HttpContent [NotNull],
-      jsonPath: string? [Nullable],
-      value: out T&? [Nullable, Out]
+     content: HttpContent [NotNull],
+     jsonPath: string? [Nullable],
+     value: out T&? [Nullable, Out]
    ) : HttpContent? [NullableContext, Extension, MustUseReturnValue]
  - HttpExtensions.Read<T>(
-      content: HttpContent [NotNull]
+     content: HttpContent [NotNull]
    ) : T? [NullableContext, Extension]
  - HttpExtensions.Read<T>(
-      content: HttpContent? [Nullable, NotNull],
-      jsonPath: string
+     content: HttpContent? [Nullable, NotNull],
+     jsonPath: string
    ) : T [Extension, MustUseReturnValue]
  - HttpExtensions.GetAllHeaders(
-      request: HttpRequestMessage,
-      httpClientDefaultRequestHeaders: HttpRequestHeaders
+     request: HttpRequestMessage,
+     httpClientDefaultRequestHeaders: HttpRequestHeaders
    ) : List`1 [Extension]
  - HttpExtensions.GetAllHeaders(
-      response: HttpResponseMessage
+     response: HttpResponseMessage
    ) : List`1 [Extension]
  - HttpExtensions.ToHttpLook(
-      request: HttpRequestMessage,
-      httpClientDefaultRequestHeaders: HttpRequestHeaders
+     request: HttpRequestMessage,
+     httpClientDefaultRequestHeaders: HttpRequestHeaders
    ) : string [Extension, NotNull]
  - HttpExtensions.ToHttpLook(
-      response: HttpResponseMessage
+     response: HttpResponseMessage
    ) : string [Extension, NotNull]
 
 ## HttpOperation
@@ -41,16 +41,16 @@
 
 ## HttpOperationExtensions
  - HttpOperationExtensions.Details<TOperation>(
-      operation: TOperation,
-      details: string
+     operation: TOperation,
+     details: string
    ) : TOperation [Extension]
  - HttpOperationExtensions.ShouldBe<TOperation>(
-      operation: TOperation,
-      assertion: IAssertion
+     operation: TOperation,
+     assertion: IAssertion
    ) : TOperation [Extension]
  - HttpOperationExtensions.ShouldBe<TOperation>(
-      operation: TOperation,
-      assertions: IEnumerable`1
+     operation: TOperation,
+     assertions: IEnumerable`1
    ) : TOperation [Extension]
 
 ## TestServer
@@ -58,70 +58,81 @@
  - Repair: bool { get; set; }
  - FailIfLeftInRepairMode() : Void
  - Get(
-      path: string,
-      urlParameters: object? [Nullable, CanBeNull, Optional]
+     path: string,
+     urlParameters: object? [Nullable, Optional],
+     headers: Dictionary`2? [Nullable, Optional]
    ) : HttpOperation
  - Get<TOperation>(
-      path: string,
-      urlParameters: object? [Nullable, CanBeNull, Optional]
+     path: string,
+     urlParameters: object? [Nullable, Optional],
+     headers: Dictionary`2? [Nullable, Optional]
    ) : TOperation
  - Post(
-      path: string,
-      urlParameters: object? [Nullable, CanBeNull, Optional],
-      body: object? [Nullable, Optional]
+     path: string,
+     urlParameters: object? [Nullable, Optional],
+     body: object? [Nullable, Optional],
+     headers: Dictionary`2? [Nullable, Optional]
    ) : HttpOperation
  - Post<TOperation>(
-      path: string,
-      urlParameters: object? [Nullable, CanBeNull, Optional],
-      body: object? [Nullable, Optional]
+     path: string,
+     urlParameters: object? [Nullable, Optional],
+     body: object? [Nullable, Optional],
+     headers: Dictionary`2? [Nullable, Optional]
    ) : TOperation
  - Post(
-      path: string,
-      urlParameters: object? [Nullable, CanBeNull, Optional],
-      body: JToken [Optional]
+     path: string,
+     urlParameters: object? [Nullable, Optional],
+     body: JToken [Optional],
+     headers: Dictionary`2? [Nullable, Optional]
    ) : HttpOperation
  - Put(
-      path: string,
-      urlParameters: object? [Nullable, CanBeNull, Optional],
-      body: object? [Nullable, Optional]
+     path: string,
+     urlParameters: object? [Nullable, Optional],
+     body: object? [Nullable, Optional],
+     headers: Dictionary`2? [Nullable, Optional]
    ) : HttpOperation
  - Put<TOperation>(
-      path: string,
-      urlParameters: object? [Nullable, CanBeNull, Optional],
-      body: object? [Nullable, Optional]
+     path: string,
+     urlParameters: object? [Nullable, Optional],
+     body: object? [Nullable, Optional],
+     headers: Dictionary`2? [Nullable, Optional]
    ) : TOperation
  - Patch(
-      path: string,
-      urlParameters: object? [Nullable, CanBeNull, Optional],
-      body: object? [Nullable, Optional]
+     path: string,
+     urlParameters: object? [Nullable, Optional],
+     body: object? [Nullable, Optional],
+     headers: Dictionary`2? [Nullable, Optional]
    ) : HttpOperation
  - Patch<TOperation>(
-      path: string,
-      urlParameters: object? [Nullable, CanBeNull, Optional],
-      body: object? [Nullable, Optional]
+     path: string,
+     urlParameters: object? [Nullable, Optional],
+     body: object? [Nullable, Optional],
+     headers: Dictionary`2? [Nullable, Optional]
    ) : TOperation
  - Delete(
-      path: string,
-      urlParameters: object? [Nullable, CanBeNull, Optional],
-      body: object? [Nullable, Optional]
+     path: string,
+     urlParameters: object? [Nullable, Optional],
+     body: object? [Nullable, Optional],
+     headers: Dictionary`2? [Nullable, Optional]
    ) : HttpOperation
  - Delete<TOperation>(
-      path: string,
-      urlParameters: object? [Nullable, CanBeNull, Optional],
-      body: object? [Nullable, Optional]
+     path: string,
+     urlParameters: object? [Nullable, Optional],
+     body: object? [Nullable, Optional],
+     headers: Dictionary`2? [Nullable, Optional]
    ) : TOperation
  - Dispose() : Void
 
 ## Json.Ignore
  - Nodes: ReadOnlyCollection`1 { get; }
  - Append(
-      ignores: IEnumerable`1
+     ignores: IEnumerable`1
    ) : Void
  - And(
-      ignore: Ignore
+     ignore: Ignore
    ) : Ignore
  - Ignore.ResponseBody(
-      nodes: params String[] [ParamArray]
+     nodes: params String[] [ParamArray]
    ) : Ignore
  - Ignore.RequestMethod() : Ignore
  - Ignore.RequestDescription() : Ignore
@@ -134,20 +145,20 @@
  - Ignore: Ignore { get; }
  - AreEquivalent: bool { get; }
  - GetDifferences(
-      maxNoOfDifferences: int [Optional]
+     maxNoOfDifferences: int [Optional]
    ) : string? [NullableContext]
 
 ## Features.Feature
  - Title: string [NotNull] { get; }
  - Scenarios: List`1 { get; }
  - Scenario(
-      title: string [NotNull]
+     title: string [NotNull]
    ) : Scenario [NotNull]
 
 ## Features.FeatureExtensions
  - FeatureExtensions.InStep<TOperation>(
-      operation: TOperation [NotNull],
-      step: Step [NotNull]
+     operation: TOperation [NotNull],
+     step: Step [NotNull]
    ) : TOperation? [NullableContext, Extension]
 
 ## Features.IExpectation
@@ -161,7 +172,7 @@
 
 ## Features.Markdown
  - GenerateReportTo(
-      filePath: string? [Nullable, Optional]
+     filePath: string? [Nullable, Optional]
    ) : string
 
 ## Features.Scenario
@@ -169,7 +180,7 @@
  - Title: string [NotNull] { get; }
  - Steps: List`1 { get; }
  - Step(
-      title: string [NotNull]
+     title: string [NotNull]
    ) : Step [NotNull]
 
 ## Features.Step
@@ -181,116 +192,116 @@
  - ExpectedResult: string? [Nullable] { get; }
  - Assertion.Ok: Result { get; }
  - Assert(
-      operation: HttpOperation
+     operation: HttpOperation
    ) : Result
  - Expected(
-      expected: string
+     expected: string
    ) : IAssertion
  - Assertion.Failure(
-      message: string
+     message: string
    ) : Result
 
 ## Assertions.IAssertion
  - Assert(
-      operation: HttpOperation
+     operation: HttpOperation
    ) : Result? [NullableContext]
 
 ## Assertions.CompareOperationWithPattern : Assertion
  - ExpectedResult: string? [Nullable] { get; }
  - Assertion.Ok: Result { get; }
  - Assert(
-      operation: HttpOperation
+     operation: HttpOperation
    ) : Result
  - Ignore(
-      ignore: string,
-      ignores: params String[] [ParamArray]
+     ignore: string,
+     ignores: params String[] [ParamArray]
    ) : CompareOperationWithPattern
  - Ignore(
-      ignore: Ignore
+     ignore: Ignore
    ) : CompareOperationWithPattern
  - Expected(
-      expected: string
+     expected: string
    ) : IAssertion
  - Assertion.Failure(
-      message: string
+     message: string
    ) : Result
 
 ## Assertions.CompareResponseWithPattern : Assertion
  - ExpectedResult: string? [Nullable] { get; }
  - Assertion.Ok: Result { get; }
  - Assert(
-      operation: HttpOperation
+     operation: HttpOperation
    ) : Result
  - Expected(
-      expected: string
+     expected: string
    ) : IAssertion
  - Assertion.Failure(
-      message: string
+     message: string
    ) : Result
 
 ## Assertions.VerifyRequestMethod : Assertion
  - ExpectedResult: string? [Nullable] { get; }
  - Assertion.Ok: Result { get; }
  - Assert(
-      operation: HttpOperation
+     operation: HttpOperation
    ) : Result
  - Expected(
-      expected: string
+     expected: string
    ) : IAssertion
  - Assertion.Failure(
-      message: string
+     message: string
    ) : Result
 
 ## Assertions.VerifyResponseBody : Assertion
  - ExpectedResult: string? [Nullable] { get; }
  - Assertion.Ok: Result { get; }
  - Assert(
-      operation: HttpOperation
+     operation: HttpOperation
    ) : Result
  - Expected(
-      expected: string
+     expected: string
    ) : IAssertion
  - Assertion.Failure(
-      message: string
+     message: string
    ) : Result
 
 ## Assertions.VerifyResponseContentType : Assertion
  - ExpectedResult: string? [Nullable] { get; }
  - Assertion.Ok: Result { get; }
  - Assert(
-      operation: HttpOperation
+     operation: HttpOperation
    ) : Result
  - Expected(
-      expected: string
+     expected: string
    ) : IAssertion
  - Assertion.Failure(
-      message: string
+     message: string
    ) : Result
 
 ## Assertions.VerifyResponseHeader : Assertion
  - ExpectedResult: string? [Nullable] { get; }
  - Assertion.Ok: Result { get; }
  - Assert(
-      operation: HttpOperation
+     operation: HttpOperation
    ) : Result
  - Expected(
-      expected: string
+     expected: string
    ) : IAssertion
  - Assertion.Failure(
-      message: string
+     message: string
    ) : Result
 
 ## Assertions.VerifyResponseStatus : Assertion
  - ExpectedResult: string? [Nullable] { get; }
  - Assertion.Ok: Result { get; }
  - Assert(
-      operation: HttpOperation
+     operation: HttpOperation
    ) : Result? [NullableContext]
  - Expected(
-      expected: string
+     expected: string
    ) : IAssertion
  - Assertion.Failure(
-      message: string
+     message: string
    ) : Result
 
 ## Assertions.WebApiRuleViolationException : Exception

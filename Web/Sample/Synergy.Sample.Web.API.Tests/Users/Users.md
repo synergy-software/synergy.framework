@@ -10,7 +10,7 @@
 ## 1. Get empty list of users (1 step)
 
 | # | Step Actions | Status |
-| - | - | - |
+|---|--------------|--------|
 | 1 | Retrieve users | OK |
 
 ### 1.1. Retrieve users (1 request)
@@ -35,7 +35,7 @@ Content-Length: 19
 ```
 
 | Expected Results  | Status |
-| - | - |
+|-------------------|--------|
 | Convention: HTTP request method is GET | OK |
 | Convention: Returned HTTP status code is 200 (OK) | OK |
 | Convention: Returned HTTP Content-Type is "application/json" | OK |
@@ -46,7 +46,7 @@ Content-Length: 19
 ## 2. Create a user (2 steps)
 
 | # | Step Actions | Status |
-| - | - | - |
+|---|--------------|--------|
 | 1 | Create new user | OK |
 | 2 | Get created user pointed by "Location" header | OK |
 
@@ -84,7 +84,7 @@ Content-Length: 129
 ```
 
 | Expected Results  | Status |
-| - | - |
+|-------------------|--------|
 | Convention: HTTP request method is POST | OK |
 | Convention: Returned HTTP status code is 201 (Created) | OK |
 | Convention: Location header (pointing to newly created element) is returned with response. | OK |
@@ -94,7 +94,7 @@ Content-Length: 129
 
 ### 2.2. Get created user pointed by "Location" header (1 request)
 
-### 2.2.2. Request to [Get user located at http://localhost/api/v1/users/766d108c4e654122b07b9097d7f379e0]
+### 2.2.2. Request to [Get user located at http://localhost/api/v1/users/ef067a8966b04b3399714939f4841ac1]
 
 - Request
 ```
@@ -119,7 +119,7 @@ Content-Length: 129
 ```
 
 | Expected Results  | Status |
-| - | - |
+|-------------------|--------|
 | Convention: HTTP request method is GET | OK |
 | Convention: Returned HTTP status code is 200 (OK) | OK |
 | Convention: Returned HTTP Content-Type is "application/json" | OK |
@@ -130,13 +130,13 @@ Content-Length: 129
 ## 3. Get user (2 steps)
 
 | # | Step Actions | Status |
-| - | - | - |
+|---|--------------|--------|
 | 1 | Get user by id | OK |
 | 2 | Negative test: Try to get user that do not exist | OK |
 
 ### 3.1. Get user by id (1 request)
 
-### 3.1.1. Request to [Get user with id "766d108c4e654122b07b9097d7f379e0"]
+### 3.1.1. Request to [Get user with id "ef067a8966b04b3399714939f4841ac1"]
 
 - Request
 ```
@@ -161,7 +161,7 @@ Content-Length: 129
 ```
 
 | Expected Results  | Status |
-| - | - |
+|-------------------|--------|
 | Convention: HTTP request method is GET | OK |
 | Convention: Returned HTTP status code is 200 (OK) | OK |
 | Convention: Returned HTTP Content-Type is "application/json" | OK |
@@ -192,7 +192,7 @@ Content-Type: application/problem+json
 ```
 
 | Expected Results  | Status |
-| - | - |
+|-------------------|--------|
 | Convention: HTTP request method is GET | OK |
 | Convention: Returned HTTP status code is 404 (NotFound) | OK |
 | Convention: Returned HTTP Content-Type is "application/problem+json" | OK |
@@ -203,7 +203,7 @@ Content-Type: application/problem+json
 ## 4. Get list of users (1 step)
 
 | # | Step Actions | Status |
-| - | - | - |
+|---|--------------|--------|
 | 1 | Retrieve users | OK |
 
 ### 4.1. Retrieve users (1 request)
@@ -235,7 +235,7 @@ Content-Length: 152
 ```
 
 | Expected Results  | Status |
-| - | - |
+|-------------------|--------|
 | Convention: HTTP request method is GET | OK |
 | Convention: Returned HTTP status code is 200 (OK) | OK |
 | Convention: Returned HTTP Content-Type is "application/json" | OK |
@@ -246,7 +246,7 @@ Content-Length: 152
 ## 5. Try to create user without login (3 steps)
 
 | # | Step Actions | Status |
-| - | - | - |
+|---|--------------|--------|
 | 1 | Negative test: Create user with a null login | OK |
 | 2 | Negative test: Create user with an empty login | OK |
 | 3 | Negative test: Create user with a whitespace login | OK |
@@ -284,7 +284,7 @@ Content-Length: 351
 ```
 
 | Expected Results  | Status |
-| - | - |
+|-------------------|--------|
 | Convention: HTTP request method is POST | OK |
 | Convention: Returned HTTP status code is 400 (BadRequest) | OK |
 | Convention: error JSON contains "title" node | OK |
@@ -326,7 +326,7 @@ Content-Length: 349
 ```
 
 | Expected Results  | Status |
-| - | - |
+|-------------------|--------|
 | Convention: HTTP request method is POST | OK |
 | Convention: Returned HTTP status code is 400 (BadRequest) | OK |
 | Convention: error JSON contains "title" node | OK |
@@ -368,7 +368,7 @@ Content-Length: 351
 ```
 
 | Expected Results  | Status |
-| - | - |
+|-------------------|--------|
 | Convention: HTTP request method is POST | OK |
 | Convention: Returned HTTP status code is 400 (BadRequest) | OK |
 | Convention: error JSON contains "title" node | OK |
@@ -381,13 +381,13 @@ Content-Length: 351
 ## 6. Delete user (2 steps)
 
 | # | Step Actions | Status |
-| - | - | - |
+|---|--------------|--------|
 | 1 | Delete user by id | OK |
 | 2 | Try to get the deleted user | OK |
 
 ### 6.1. Delete user by id (1 request)
 
-### 6.1.1. Request to [Delete user with id "766d108c4e654122b07b9097d7f379e0"]
+### 6.1.1. Request to [Delete user with id "ef067a8966b04b3399714939f4841ac1"]
 
 - Request
 ```
@@ -405,7 +405,7 @@ Content-Length: 2
 ```
 
 | Expected Results  | Status |
-| - | - |
+|-------------------|--------|
 | Convention: HTTP request method is DELETE | OK |
 | Convention: Returned HTTP status code is 200 (OK) | OK |
 | Convention: Returned HTTP Content-Type is "application/json" | OK |
@@ -414,7 +414,7 @@ Content-Length: 2
 
 ### 6.2. Try to get the deleted user (1 request)
 
-### 6.2.2. Request to [Get user with id "766d108c4e654122b07b9097d7f379e0"]
+### 6.2.2. Request to [Get user with id "ef067a8966b04b3399714939f4841ac1"]
 
 - Request
 ```
@@ -436,7 +436,7 @@ Content-Type: application/problem+json
 ```
 
 | Expected Results  | Status |
-| - | - |
+|-------------------|--------|
 | Convention: HTTP request method is GET | OK |
 | Convention: Returned HTTP status code is 404 (NotFound) | OK |
 | Convention: Returned HTTP Content-Type is "application/problem+json" | OK |
