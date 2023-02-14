@@ -16,9 +16,8 @@
      content: HttpContent? [Nullable, NotNull],
      jsonPath: string
    ) : T [Extension, MustUseReturnValue]
- - HttpExtensions.GetAllHeaders(
-     request: HttpRequestMessage,
-     httpClientDefaultRequestHeaders: HttpRequestHeaders
+ - HttpExtensions.GetAllRequestHeaders(
+     operation: HttpOperation
    ) : List`1 [Extension]
  - HttpExtensions.GetAllHeaders(
      response: HttpResponseMessage

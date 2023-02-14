@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,15 +67,21 @@ namespace Synergy.Web.Api.Testing
         private static string GetRequestRelativeUrl(this HttpRequestMessage request)
             => request.RequestUri.ToString().Replace("http://localhost", "");
 
-        public static List<KeyValuePair<string, IEnumerable<string>>> GetAllHeaders(this HttpRequestMessage request,
-            HttpRequestHeaders httpClientDefaultRequestHeaders)
+        public static List<KeyValuePair<string, IEnumerable<string>>> GetAllRequestHeaders(this HttpOperation operation)
         {
-            var headers = request.Headers.ToList();
-            if (request.Content != null)
-                headers.AddRange(request.Content.Headers);
-            headers.AddRange(httpClientDefaultRequestHeaders);
+            var headers = operation.Request.Headers.ToList();
+            if (operation.Request.Content != null)
+                headers.AddRange(operation.Request.Content.Headers);
 
-            return headers;
+            foreach (var defaultHeader in operation.TestServer.HttpClient.DefaultRequestHeaders)
+            {
+                if (headers.Any(h => h.Key == defaultHeader.Key))
+                    continue;
+
+                headers.Add(defaultHeader);
+            }
+
+            return headers.ToList();
         }
 
         public static List<KeyValuePair<string, IEnumerable<string>>> GetAllHeaders(this HttpResponseMessage response)
@@ -95,7 +100,7 @@ namespace Synergy.Web.Api.Testing
         {
             var report = new StringBuilder();
             report.AppendLine(request.GetRequestFullMethod());
-            InsertHeaders(report, request.GetAllHeaders(operation.TestServer.HttpClient.DefaultRequestHeaders));
+            InsertHeaders(report, operation.GetAllRequestHeaders());
             var requestBody = request.Content.ReadJson();
             if (requestBody != null)
             {

@@ -98,7 +98,7 @@ namespace Synergy.Web.Api.Testing.Assertions
             var request = operation.Request;
             yield return new JProperty("method", request.GetRequestFullMethod());
 
-            var headers = request.GetAllHeaders(operation.TestServer.HttpClient.DefaultRequestHeaders);
+            var headers = operation.GetAllRequestHeaders();
             if (headers.Count > 0)
             {
                 yield return new JProperty("headers", new JObject(headers.Select(GetHeader)));
