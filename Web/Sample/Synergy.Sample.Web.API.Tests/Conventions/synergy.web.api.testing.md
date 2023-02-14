@@ -25,7 +25,7 @@
    ) : List`1 [Extension]
  - HttpExtensions.ToHttpLook(
      request: HttpRequestMessage,
-     httpClientDefaultRequestHeaders: HttpRequestHeaders
+     operation: HttpOperation
    ) : string [Extension, NotNull]
  - HttpExtensions.ToHttpLook(
      response: HttpResponseMessage

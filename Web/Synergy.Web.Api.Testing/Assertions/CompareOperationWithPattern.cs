@@ -61,7 +61,12 @@ namespace Synergy.Web.Api.Testing.Assertions
         private void SaveNewPattern(JObject current, HttpOperation operation)
         {
             _savedPattern = current;
-            File.WriteAllText(_patternFilePath, current.ToString(Formatting.Indented, operation.TestServer.SerializationSettings.Converters.ToArray()));
+            File.WriteAllText(_patternFilePath,
+                current.ToString(
+                    Formatting.Indented,
+                    operation.TestServer.Converters()
+                )
+            );
         }
 
         private static JObject GeneratePattern(HttpOperation operation)

@@ -88,16 +88,22 @@ namespace Synergy.Web.Api.Testing
             return headers;
         }
 
-        [NotNull]
-        public static string ToHttpLook(this HttpRequestMessage request, HttpRequestHeaders httpClientDefaultRequestHeaders)
+        internal static JsonConverter[] Converters(this TestServer testServer)
+            => testServer.SerializationSettings?.Converters.ToArray() ?? Array.Empty<JsonConverter>();
+        
+        public static string ToHttpLook(this HttpRequestMessage request, HttpOperation operation)
         {
             var report = new StringBuilder();
             report.AppendLine(request.GetRequestFullMethod());
-            InsertHeaders(report, request.GetAllHeaders(httpClientDefaultRequestHeaders));
+            InsertHeaders(report, request.GetAllHeaders(operation.TestServer.HttpClient.DefaultRequestHeaders));
             var requestBody = request.Content.ReadJson();
             if (requestBody != null)
             {
-                report.Append(requestBody.ToString(Formatting.Indented));
+                report.Append(requestBody.ToString(
+                        Formatting.Indented,
+                        operation.TestServer.Converters()
+                    )
+                );
             }
             return report.ToString().Trim();
         }

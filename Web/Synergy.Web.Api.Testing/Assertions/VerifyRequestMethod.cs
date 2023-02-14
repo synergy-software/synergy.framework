@@ -27,7 +27,7 @@ namespace Synergy.Web.Api.Testing.Assertions
 
             return Failure(
                 $"Expected HTTP method is ({methods}) but was {actualMethod} " +
-                $"in request: \n\n{operation.Request.ToHttpLook(operation.TestServer.HttpClient.DefaultRequestHeaders)}");
+                $"in request: \n\n{operation.Request.ToHttpLook(operation)}");
         }
     }
 }
