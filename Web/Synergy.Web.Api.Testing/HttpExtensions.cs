@@ -109,14 +109,18 @@ namespace Synergy.Web.Api.Testing
         }
 
         [NotNull]
-        public static string ToHttpLook(this HttpResponseMessage response)
+        public static string ToHttpLook(this HttpResponseMessage response, HttpOperation operation)
         {
             var report = new StringBuilder();
             report.AppendLine($"HTTP/{response.Version} {(int) response.StatusCode} {response.StatusCode}");
             InsertHeaders(report, response.GetAllHeaders());
             var responseBody = response.Content.ReadJson();
             if (responseBody != null)
-                report.Append(responseBody.ToString(Formatting.Indented));
+                report.Append(responseBody.ToString(
+                        Formatting.Indented,
+                        operation.TestServer.Converters()
+                    )
+                );
 
             return report.ToString().Trim();
         }

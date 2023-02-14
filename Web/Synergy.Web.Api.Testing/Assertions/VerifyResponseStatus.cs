@@ -22,7 +22,7 @@ namespace Synergy.Web.Api.Testing.Assertions
 
             return Failure(
                 $"Expected HTTP status is {_expectedStatus} but was {actualStatus} " +
-                $"in response: \n\n{operation.Response.ToHttpLook()}");
+                $"in response: \n\n{operation.Response.ToHttpLook(operation)}");
         }
     }
 }

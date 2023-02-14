@@ -19,7 +19,7 @@ namespace Synergy.Web.Api.Testing.Assertions
                 return Ok;
 
             return Failure($"Expected HTTP Content-Type is \"{_expectedContentType}\" but was \"{actualContentType}\" " +
-                           $"in response: \n\n{operation.Response.ToHttpLook()}");
+                           $"in response: \n\n{operation.Response.ToHttpLook(operation)}");
         }
     }
 }

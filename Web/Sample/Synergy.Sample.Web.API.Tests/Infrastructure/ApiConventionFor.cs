@@ -52,7 +52,7 @@ namespace Synergy.Sample.Web.API.Tests.Infrastructure
                             return Assertion.Ok;
 
                         return Assertion.Failure(
-                            $"There is no 'Location' header returned in response:\n\n{operation.Response.ToHttpLook()}"
+                            $"There is no 'Location' header returned in response:\n\n{operation.Response.ToHttpLook(operation)}"
                             );
                     })
                .Expected("Convention: Location header (pointing to newly created element) is returned with response.");
@@ -92,7 +92,7 @@ namespace Synergy.Sample.Web.API.Tests.Infrastructure
                         return Assertion.Ok;
 
                     return Assertion.Failure(
-                        $"There is 'Location' header returned in response and it shouldn't be:\n\n{operation.Response.ToHttpLook()}"
+                        $"There is 'Location' header returned in response and it shouldn't be:\n\n{operation.Response.ToHttpLook(operation)}"
                         );
                 }).Expected("Convention: There is NO \"Location\" header returned in response");
         }
@@ -113,12 +113,12 @@ namespace Synergy.Sample.Web.API.Tests.Infrastructure
         private static Assertion.Result ValidateIfNodeExists(HttpOperation operation, JToken? token, string node)
         {
             if (token == null)
-                return Assertion.Failure($"\"{node}\" is not present in response: \n\n{operation.Response.ToHttpLook()}");
+                return Assertion.Failure($"\"{node}\" is not present in response: \n\n{operation.Response.ToHttpLook(operation)}");
 
             var value = token.Value<string>();
             if (String.IsNullOrWhiteSpace(value))
             {
-                return Assertion.Failure($"\"{node}\" is empty in response: \n\n{operation.Response.ToHttpLook()}");
+                return Assertion.Failure($"\"{node}\" is empty in response: \n\n{operation.Response.ToHttpLook(operation)}");
             }
 
             return Assertion.Ok;

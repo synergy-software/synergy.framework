@@ -146,7 +146,7 @@ namespace Synergy.Web.Api.Testing.Features
 
             report.AppendLine("- Response");
             report.AppendLine("```");
-            report.AppendLine(response.ToHttpLook());
+            report.AppendLine(response.ToHttpLook(operation));
             report.AppendLine("```");
         }
 

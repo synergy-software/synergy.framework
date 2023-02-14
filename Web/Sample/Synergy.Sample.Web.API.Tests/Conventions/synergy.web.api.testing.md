@@ -26,9 +26,10 @@
  - HttpExtensions.ToHttpLook(
      request: HttpRequestMessage,
      operation: HttpOperation
-   ) : string [Extension, NotNull]
+   ) : string [Extension]
  - HttpExtensions.ToHttpLook(
-     response: HttpResponseMessage
+     response: HttpResponseMessage,
+     operation: HttpOperation
    ) : string [Extension, NotNull]
 
 ## HttpOperation
