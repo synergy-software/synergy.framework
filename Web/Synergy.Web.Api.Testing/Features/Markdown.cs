@@ -40,6 +40,9 @@ namespace Synergy.Web.Api.Testing.Features
                     report.AppendLine($"### {scenario.No}.{step.No}. {step.Title} ({step.Operations.Count} request{GetPluralSuffix(step.Operations)})");
                     report.AppendLine();
 
+                    if (step.Content != null)
+                        report.AppendLine(step.Content);
+
                     foreach (var operation in step.Operations)
                     {
                         report.AppendLine($"### {scenario.No}.{step.No}.{step.No}. {GetOperationRequestTitle(operation)}");

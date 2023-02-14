@@ -18,5 +18,12 @@ namespace Synergy.Web.Api.Testing.Features
         {
             Operations.Add(operation);
         }
+
+        public string? Content { get; private set; }
+
+        public void Markdown(string markdown)
+        {
+            Content = markdown;
+        }
     }
 }
