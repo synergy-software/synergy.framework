@@ -61,66 +61,66 @@
  - Get(
      path: string,
      urlParameters: object? [Nullable, Optional],
-     headers: Dictionary`2? [Nullable, Optional]
+     headers: Action`1? [Nullable, Optional]
    ) : HttpOperation
  - Get<TOperation>(
      path: string,
      urlParameters: object? [Nullable, Optional],
-     headers: Dictionary`2? [Nullable, Optional]
+     headers: Action`1? [Nullable, Optional]
    ) : TOperation
  - Post(
      path: string,
      urlParameters: object? [Nullable, Optional],
      body: object? [Nullable, Optional],
-     headers: Dictionary`2? [Nullable, Optional]
+     headers: Action`1? [Nullable, Optional]
    ) : HttpOperation
  - Post<TOperation>(
      path: string,
      urlParameters: object? [Nullable, Optional],
      body: object? [Nullable, Optional],
-     headers: Dictionary`2? [Nullable, Optional]
+     headers: Action`1? [Nullable, Optional]
    ) : TOperation
  - Post(
      path: string,
      urlParameters: object? [Nullable, Optional],
      body: JToken [Optional],
-     headers: Dictionary`2? [Nullable, Optional]
+     headers: Action`1? [Nullable, Optional]
    ) : HttpOperation
  - Put(
      path: string,
      urlParameters: object? [Nullable, Optional],
      body: object? [Nullable, Optional],
-     headers: Dictionary`2? [Nullable, Optional]
+     headers: Action`1? [Nullable, Optional]
    ) : HttpOperation
  - Put<TOperation>(
      path: string,
      urlParameters: object? [Nullable, Optional],
      body: object? [Nullable, Optional],
-     headers: Dictionary`2? [Nullable, Optional]
+     headers: Action`1? [Nullable, Optional]
    ) : TOperation
  - Patch(
      path: string,
      urlParameters: object? [Nullable, Optional],
      body: object? [Nullable, Optional],
-     headers: Dictionary`2? [Nullable, Optional]
+     headers: Action`1? [Nullable, Optional]
    ) : HttpOperation
  - Patch<TOperation>(
      path: string,
      urlParameters: object? [Nullable, Optional],
      body: object? [Nullable, Optional],
-     headers: Dictionary`2? [Nullable, Optional]
+     headers: Action`1? [Nullable, Optional]
    ) : TOperation
  - Delete(
      path: string,
      urlParameters: object? [Nullable, Optional],
      body: object? [Nullable, Optional],
-     headers: Dictionary`2? [Nullable, Optional]
+     headers: Action`1? [Nullable, Optional]
    ) : HttpOperation
  - Delete<TOperation>(
      path: string,
      urlParameters: object? [Nullable, Optional],
      body: object? [Nullable, Optional],
-     headers: Dictionary`2? [Nullable, Optional]
+     headers: Action`1? [Nullable, Optional]
    ) : TOperation
  - Dispose() : Void
 
