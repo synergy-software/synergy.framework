@@ -19,8 +19,7 @@ namespace Synergy.Web.Api.Testing
 
         public bool Repair { get; set; }
 
-        
-        protected virtual JsonSerializerSettings serializationSettings { get; }
+        public virtual JsonSerializerSettings SerializationSettings { get; }
 
         public virtual void FailIfLeftInRepairMode()
         {
@@ -104,7 +103,7 @@ namespace Synergy.Web.Api.Testing
 
             if (body != null)
             {
-                string json = JsonConvert.SerializeObject(body, this.serializationSettings);
+                string json = JsonConvert.SerializeObject(body, this.SerializationSettings);
                 request.Content = new StringContent(json, Encoding.UTF8, MediaTypeNames.Application.Json);
             }
 

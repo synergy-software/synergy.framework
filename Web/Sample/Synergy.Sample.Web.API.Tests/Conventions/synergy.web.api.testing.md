@@ -56,6 +56,7 @@
 ## TestServer
  - HttpClient: HttpClient [NotNull] { get; }
  - Repair: bool { get; set; }
+ - SerializationSettings: JsonSerializerSettings { get; }
  - FailIfLeftInRepairMode() : Void
  - Get(
      path: string,

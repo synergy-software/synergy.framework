@@ -38,7 +38,7 @@ namespace Synergy.Web.Api.Testing.Assertions
             var current = GeneratePattern(operation);
             if (_savedPattern == null)
             {
-                SaveNewPattern(current);
+                SaveNewPattern(current, operation);
                 return Ok;
             }
 
@@ -46,10 +46,10 @@ namespace Synergy.Web.Api.Testing.Assertions
 
             if (operation.TestServer.Repair && patterns.AreEquivalent == false)
             {
-                SaveNewPattern(current);
+                SaveNewPattern(current, operation);
                 return Ok;
             }
-
+            
             if (patterns.AreEquivalent)
             {
                 return Ok;
@@ -58,10 +58,10 @@ namespace Synergy.Web.Api.Testing.Assertions
             return Failure($"Operation is different than expected. \nVerify the differences: \n\n{patterns.GetDifferences()}");
         }
 
-        private void SaveNewPattern(JObject current)
+        private void SaveNewPattern(JObject current, HttpOperation operation)
         {
             _savedPattern = current;
-            File.WriteAllText(_patternFilePath, current.ToString(Formatting.Indented));
+            File.WriteAllText(_patternFilePath, current.ToString(Formatting.Indented, operation.TestServer.SerializationSettings.Converters.ToArray()));
         }
 
         private static JObject GeneratePattern(HttpOperation operation)
