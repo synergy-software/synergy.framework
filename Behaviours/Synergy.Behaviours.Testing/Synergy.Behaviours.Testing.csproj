@@ -6,6 +6,7 @@
         <Nullable>enable</Nullable>
         <Title>Synergy Behaviour Driven Development</Title>
         <Authors>Synergy Marcin Celej</Authors>
+        <PackageLicenseFile>license.txt</PackageLicenseFile>
         <Description>Behaviour Driven Development support</Description>
         <Copyright>Copyright © Synergy Marcin Celej 2023</Copyright>
         <PackageProjectUrl>https://github.com/synergy-software/synergy.framework</PackageProjectUrl>
@@ -15,6 +16,10 @@
 
     <ItemGroup>
       <None Update="synergy.png">
+        <Pack>true</Pack>
+        <PackagePath></PackagePath>
+      </None>
+      <None Update="license.txt">
         <Pack>true</Pack>
         <PackagePath></PackagePath>
       </None>
