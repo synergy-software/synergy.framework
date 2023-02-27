@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Title>Synergy Behaviour Driven Development</Title>
+        <Authors>Synergy Marcin Celej</Authors>
+        <Description>Behaviour Driven Development support</Description>
+        <Copyright>Copyright © Synergy Marcin Celej 2023</Copyright>
+        <PackageProjectUrl>https://github.com/synergy-software/synergy.framework</PackageProjectUrl>
+        <PackageIcon>synergy.png</PackageIcon>
+        <PackageTags>BDD Behaviour Driven Development</PackageTags>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Update="synergy.png">
+        <Pack>true</Pack>
+        <PackagePath></PackagePath>
+      </None>
+    </ItemGroup>
+
+</Project>
