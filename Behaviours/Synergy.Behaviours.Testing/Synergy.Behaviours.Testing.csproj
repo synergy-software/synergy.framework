@@ -4,6 +4,8 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <IsPackable>true</IsPackable>
+        <PackageVersion>$(Version)</PackageVersion>
         <Title>Synergy Behaviour Driven Development</Title>
         <Authors>Synergy Marcin Celej</Authors>
         <PackageLicenseFile>license.txt</PackageLicenseFile>
