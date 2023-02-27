@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Synergy.Behaviours.Testing</id>
+    <version>$version$</version>
+    <title>Synergy Behaviour Driven Development</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/synergy-software/synergy.framework/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/synergy-software/synergy.framework/wiki/Behaviours</projectUrl>
+    <iconUrl>https://github.com/synergy-software/synergy.framework/blob/master/synergy.png?raw=true</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>BDD Behaviour Driven Development</tags>
+  </metadata>
+</package>
