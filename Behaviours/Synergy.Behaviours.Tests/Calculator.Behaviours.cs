@@ -9,7 +9,9 @@ public partial class CalculatorFeature : Feature<CalculatorFeature>
     public void GenerateFeature()
         => this.Generate(
             from: "Calculator.feature",
-            to: "Calculator.Feature.cs"
+            to: "Calculator.Feature.cs",
+            include: new[] { "@Add" }
+            //exclude: new[] { "@Divide" }
         );
 
     private int _firstNumber;
