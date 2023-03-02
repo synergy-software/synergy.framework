@@ -15,7 +15,6 @@ public static class FeatureGenerator
         string[]? exclude = null,
         [CallerFilePath] string callerFilePath = ""
     )
-        where TBehaviour : IFeature
     {
         var code = feature.Generate(from, withMoreover, include, exclude, callerFilePath);
         var destinationFilePath = Path.Combine(Path.GetDirectoryName(callerFilePath), to);
@@ -30,7 +29,6 @@ public static class FeatureGenerator
         string[]? exclude = null,
         [CallerFilePath] string callerFilePath = ""
     )
-        where TBehaviour : IFeature
     {
         StringBuilder code = new StringBuilder();
         string className = feature.GetType().Name;
