@@ -98,6 +98,10 @@ public static class FeatureGenerator
             if (and.Success)
                 code.AppendLine($"             .And().{FeatureGenerator.ToMethod(and.Groups[1].Value)}()  // {line.Trim()}");
 
+            var asterisk = Regex.Match(line, "\\s*\\* (.*)");
+            if (asterisk.Success)
+                code.AppendLine($"             .And().{FeatureGenerator.ToMethod(asterisk.Groups[1].Value)}()  // {line.Trim()}");
+            
             var but = Regex.Match(line, "\\s*But (.*)");
             if (but.Success)
                 code.AppendLine($"             .But().{FeatureGenerator.ToMethod(but.Groups[1].Value)}()  // {line.Trim()}");
