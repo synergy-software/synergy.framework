@@ -1,3 +1,4 @@
+@tag
 Feature: Calculator
   ![Calculator](https://specflow.org/wp-content/uploads/2020/09/calculator.png)
   Simple calculator for performing calculations on **two** numbers
@@ -12,6 +13,14 @@ Feature: Calculator
     When the two numbers are added
     Then the result should be 120
 
+  @Add
+  Scenario: Add two numbers in different way
+    Given Two numbers:
+        * the first number is 50
+        * the second number is 70
+    When the two numbers are added
+    Then the result should be 120
+    
   @Subtract
   Scenario: Subtract two numbers
     Given the first number is 50

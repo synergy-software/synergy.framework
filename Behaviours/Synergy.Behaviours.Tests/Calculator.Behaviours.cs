@@ -1,18 +1,21 @@
 ﻿using Synergy.Behaviours.Testing;
-using Xunit;
 
 namespace Synergy.Behaviours.Tests;
 
+[UsesVerify]
 public partial class CalculatorFeature : Feature<CalculatorFeature>
 {
     [Fact]
-    public void GenerateFeature()
-        => this.Generate(
+    public async Task GenerateFeature()
+    {
+        var code = this.Generate(
             from: "Calculator.feature",
-            to: "Calculator.Feature.cs",
             include: new[] { "@Add" }
             //exclude: new[] { "@Divide" }
         );
+
+        await Verify(code, "cs").UseFileName("Calculator.Feature");
+    }
 
     private int _firstNumber;
 
@@ -45,6 +48,11 @@ public partial class CalculatorFeature : Feature<CalculatorFeature>
     }
 
     private CalculatorFeature VerifyAddTwoNumbers()
+    {
+        return this;
+    }
+
+    private CalculatorFeature TwoNumbers()
     {
         return this;
     }

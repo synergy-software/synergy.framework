@@ -17,6 +17,21 @@ public static class FeatureGenerator
     )
         where TBehaviour : IFeature
     {
+        var code = feature.Generate(from, withMoreover, include, exclude, callerFilePath);
+        var destinationFilePath = Path.Combine(Path.GetDirectoryName(callerFilePath), to);
+        File.WriteAllText(destinationFilePath, code.ToString());
+    }
+
+    public static string Generate<TBehaviour>(
+        this TBehaviour feature,
+        string from,
+        bool withMoreover = false,
+        string[]? include = null,
+        string[]? exclude = null,
+        [CallerFilePath] string callerFilePath = ""
+    )
+        where TBehaviour : IFeature
+    {
         StringBuilder code = new StringBuilder();
         string className = feature.GetType().Name;
         var gherkinPath = Path.Combine(Path.GetDirectoryName(callerFilePath), from);
@@ -27,14 +42,15 @@ public static class FeatureGenerator
         code.AppendLine();
         code.AppendLine($"namespace {feature.GetType().Namespace};");
         code.AppendLine();
-        code.AppendLine(
-            $"[GeneratedCode(\"{typeof(FeatureGenerator).Assembly.FullName}\", \"{typeof(FeatureGenerator).Assembly.GetName().Version.ToString()}\")]");
+        code.AppendLine($"[GeneratedCode(\"{typeof(FeatureGenerator).Assembly.FullName}\", \"{typeof(FeatureGenerator).Assembly.GetName().Version.ToString()}\")]");
         code.AppendLine($"public partial class {className}");
         code.AppendLine("{");
         // code.AppendLine("    [Fact]");
         // code.AppendLine("    public void Generate()");
         // code.AppendLine($"        => Behaviours<{featureClass}>.Generate({nameof(from)}: \"{from}\", this);");
 
+        // TODO: Support tags above the feature
+        
         string? scenarioMethod = null;
         bool includeScenario = ResetInclude();
         List<string>? tags = null;
@@ -77,6 +93,10 @@ public static class FeatureGenerator
 
             if (includeScenario == false) 
                 continue;
+
+            // TODO: add Rule handling
+            
+            // TODO: Add Background handling
             
             var scenario = Regex.Match(line, "\\s*Scenario\\: (.*)");
             if (scenario.Success)
@@ -123,8 +143,7 @@ public static class FeatureGenerator
         // code.AppendLine("    }");
         code.AppendLine("}");
 
-        var destinationFilePath = Path.Combine(Path.GetDirectoryName(callerFilePath), to);
-        File.WriteAllText(destinationFilePath, code.ToString());
+        return code.ToString();
 
         string? CloseScenario()
         {
@@ -161,4 +180,14 @@ public static class FeatureGenerator
         m = Regex.Replace(m, "[^A-Za-z0-9_]", "");
         return m;
     }
+
+    // private static string[]? ReadTagsFrom(string line)
+    // {
+    //     if (line.TrimStart().StartsWith("@") == false)
+    //         return null;
+    //
+    //     return Regex.Match(line, "\\@\\w+")
+    //                 .Groups.Values.Select(g => g.Value)
+    //                 .ToArray();
+    // }
 }
