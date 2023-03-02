@@ -60,8 +60,8 @@ public static class FeatureGenerator
 
             if (line.Trim().StartsWith("@"))
             {
-                tags = Regex.Match(line, "\\@\\w+")
-                                .Groups.Values.Select(g => g.Value).ToList();
+                tags = Regex.Matches(line, "\\@\\w+")
+                            .Select(m=>m.Value).ToList();
 
                 if (include != null)
                     includeScenario = tags.Intersect(include)
