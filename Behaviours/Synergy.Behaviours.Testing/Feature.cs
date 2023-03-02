@@ -3,7 +3,7 @@
 public class Feature<TFeature> : IFeature
     where TFeature : new()
 {
-    public static TFeature Given() => new();
+    public TFeature Given() => Self;
     public TFeature When() => Self;
     public TFeature Then() => Self;
     public TFeature And() => Self;
