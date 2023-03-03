@@ -1,12 +1,12 @@
 ﻿namespace Synergy.Behaviours.Testing;
 
-public class Feature<TFeature> : IFeature
+public abstract class Feature<TFeature> : IFeature
 {
-    public TFeature Given() => Self;
-    public TFeature When() => Self;
-    public TFeature Then() => Self;
-    public TFeature And() => Self;
-    public TFeature But() => Self;
-    public TFeature Moreover() => Self;
-    protected TFeature Self => (TFeature)(object)this;
+    public virtual TFeature Given() => Self;
+    public virtual TFeature When() => Self;
+    public virtual TFeature Then() => Self;
+    public virtual TFeature And() => Self;
+    public virtual TFeature But() => Self;
+    public virtual TFeature Moreover() => Self;
+    protected virtual TFeature Self => (TFeature)(object)this;
 }
