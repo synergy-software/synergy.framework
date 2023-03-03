@@ -1,7 +1,6 @@
 ﻿namespace Synergy.Behaviours.Testing;
 
 public class Feature<TFeature> : IFeature
-    where TFeature : new()
 {
     public TFeature Given() => Self;
     public TFeature When() => Self;
