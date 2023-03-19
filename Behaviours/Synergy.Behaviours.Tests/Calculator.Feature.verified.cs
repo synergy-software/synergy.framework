@@ -8,11 +8,12 @@ public partial class CalculatorFeature
 {
 
 
+
+
     [Xunit.Fact]
     // @Add
     public void AddTwoNumbers() // Scenario: Add two numbers
-        => 
-            Given().TheFirstNumberIs50()  // Given the first number is 50
+        =>  Given().TheFirstNumberIs50()  // Given the first number is 50
              .And().TheSecondNumberIs70()  // And the second number is 70
             .When().TheTwoNumbersAreAdded()  // When the two numbers are added
             .Then().TheResultShouldBe120() // Then the result should be 120
@@ -21,13 +22,15 @@ public partial class CalculatorFeature
     [Xunit.Fact]
     // @Add
     public void AddTwoNumbersInDifferentWay() // Scenario: Add two numbers in different way
-        => 
-            Given().TwoNumbers()  // Given Two numbers:
+        =>  Given().TwoNumbers()  // Given Two numbers:
              .And().TheFirstNumberIs50()  // * the first number is 50
              .And().TheSecondNumberIs70()  // * the second number is 70
             .When().TheTwoNumbersAreAdded()  // When the two numbers are added
             .Then().TheResultShouldBe120() // Then the result should be 120
             ;
+
+
+
 
 
 

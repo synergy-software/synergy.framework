@@ -26,7 +26,6 @@ public partial class CalculatorFeature : Feature<CalculatorFeature>
     }
 
     private int _secondNumber;
-    private int _result;
 
     private CalculatorFeature TheSecondNumberIs70()
     {
@@ -34,6 +33,7 @@ public partial class CalculatorFeature : Feature<CalculatorFeature>
         return this;
     }
 
+    private int _result;
     private CalculatorFeature TheTwoNumbersAreAdded()
     {
         var calculator = new Calculator { FirstNumber = this._firstNumber, SecondNumber = this._secondNumber };

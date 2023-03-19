@@ -52,8 +52,10 @@ public static class FeatureGenerator
         string? scenarioMethod = null;
         bool includeScenario = ResetInclude();
         List<string>? tags = null;
+        int lineNo = 0;
         foreach (var line in gherkins)
         {
+            lineNo++;
             if (line.Contains("#"))
             {
                 tags = null;
@@ -71,7 +73,34 @@ public static class FeatureGenerator
                 code.AppendLine();
                 continue;
             }
-
+            
+            var background = Regex.Match(line, "\\s*Background\\: (.*)");
+            if (background.Success)
+            {
+                throw new NotSupportedException($"Background keyword is not supported\nLine {lineNo}: {line.Trim()}");
+            }
+            
+            var outline = Regex.Match(line, "\\s*Scenario (Outline|Template)\\: (.*)");
+            if (outline.Success)
+            {
+                throw new NotSupportedException($"Scenario Outline keyword is not supported\nLine {lineNo}: {line.Trim()}");
+            }
+            
+            var example = Regex.Match(line, "\\s*(Examples|Scenarios)\\: (.*)");
+            if (example.Success)
+            {
+                throw new NotSupportedException($"Examples keyword is not supported\nLine {lineNo}: {line.Trim()}");
+            }
+            
+            // if (line.TrimStart().StartsWithAny("scenario", "rule", "background", "example", "@") &&
+            //     scenarioMethod != null
+            //     )
+            // {
+            //     tags = null;
+            //     includeScenario = ResetInclude();
+            //     scenarioMethod = CloseScenario();
+            // }
+            
             if (line.Trim().StartsWith("@"))
             {
                 tags = Regex.Matches(line, "\\@\\w+")
@@ -105,12 +134,12 @@ public static class FeatureGenerator
                 if (tags != null)
                     code.AppendLine($"    // {String.Join(" ", tags)}");
                 code.AppendLine($"    public void {scenarioMethod}() // {line.Trim()}");
-                code.AppendLine($"        => ");
+                code.Append($"        => ");
             }
 
             var given = Regex.Match(line, "\\s*Given (.*)");
             if (given.Success)
-                code.AppendLine($"            Given().{FeatureGenerator.ToMethod(given.Groups[1].Value)}()  // {line.Trim()}");
+                code.AppendLine($" Given().{FeatureGenerator.ToMethod(given.Groups[1].Value)}()  // {line.Trim()}");
 
             var and = Regex.Match(line, "\\s*And (.*)");
             if (and.Success)
@@ -188,4 +217,15 @@ public static class FeatureGenerator
     //                 .Groups.Values.Select(g => g.Value)
     //                 .ToArray();
     // }
+
+    private static bool StartsWithAny(this string line, params string[] starts)
+    {
+        foreach (string start in starts)
+        {
+            if (line.StartsWith(start, StringComparison.InvariantCultureIgnoreCase))
+                return true;
+        }
+
+        return false;
+    }
 }
