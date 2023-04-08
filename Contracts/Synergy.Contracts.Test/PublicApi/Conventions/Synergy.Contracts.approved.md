@@ -248,7 +248,7 @@
    ) : Void [AssertionMethod, ContractAnnotation]
  - Fail.OrFailIfWhiteSpace(
      value: string? [Nullable, AssertionCondition, NoEnumeration],
-     name: string [NotNull, NotNull]
+     name: string [NotNull, NotNull, CallerArgumentExpression, Optional]
    ) : string [Extension, NotNull, AssertionMethod, ContractAnnotation]
  - Fail.IfWhitespace(
      value: string [CanBeNull, AssertionCondition],

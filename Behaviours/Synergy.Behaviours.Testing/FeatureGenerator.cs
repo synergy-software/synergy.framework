@@ -122,8 +122,8 @@ public static class FeatureGenerator
                 continue;
 
             // TODO: add Rule handling
-            
-            // TODO: Add Background handling
+
+            // TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: Add 'Background' handling - generate method with background steps and call it in each following scenario
             
             var scenario = Regex.Match(line, "\\s*Scenario\\: (.*)");
             if (scenario.Success)

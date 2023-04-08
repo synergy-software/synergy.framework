@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <LangVersion>10</LangVersion>
         <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,9 +14,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="ApprovalTests" Version="5.7.1" />
       <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
-      <PackageReference Include="xunit" Version="2.4.1" />
+      <PackageReference Include="Verify.Xunit" Version="19.12.1" />
+      <PackageReference Include="xunit" Version="2.4.2" />
     </ItemGroup>
 
 </Project>

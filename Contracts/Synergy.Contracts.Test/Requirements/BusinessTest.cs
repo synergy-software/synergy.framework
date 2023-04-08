@@ -52,7 +52,7 @@ namespace Synergy.Contracts.Test.Requirements
         [InlineData(10, 11, BusinessTest.Failure)]
         [InlineData(10, 10, BusinessTest.OK)]
         [InlineData(null, 10, BusinessTest.OK)]
-        public void RequiresWhen(double? withdrawLimit, double withdrawAmount, bool expectedException)
+        public void RequiresWhen(int? withdrawLimit, int withdrawAmount, bool expectedException)
         {
             var exception = expectedException ? $"Withdraw Amount ({withdrawAmount}) exceeds the Withdraw Limit ({withdrawLimit})" : null;
 
@@ -65,9 +65,9 @@ namespace Synergy.Contracts.Test.Requirements
         }
 
         [Theory]
-        [InlineData(10, 11, BusinessTest.Failure)]
-        [InlineData(10, 10, BusinessTest.OK)]
-        [InlineData(null, 10, BusinessTest.OK)]
+        [InlineData(10d, 11d, BusinessTest.Failure)]
+        [InlineData(10d, 10d, BusinessTest.OK)]
+        [InlineData(null, 10d, BusinessTest.OK)]
         public void RequiresWhen_Documented(double? withdrawLimit, double withdrawAmount, bool expectedException)
         {
             var exception = expectedException ? $"Withdraw Amount ({withdrawAmount}) exceeds the Withdraw Limit ({withdrawLimit})" : null;
@@ -82,11 +82,11 @@ namespace Synergy.Contracts.Test.Requirements
         }
         
         [Theory]
-        [InlineData(TransactionType.OnlinePayment , 10, 11, BusinessTest.Failure)]
-        [InlineData(TransactionType.OnlinePayment, 10, 10, BusinessTest.OK)]
-        [InlineData(TransactionType.OnlinePayment, null, 10, BusinessTest.OK)]
-        [InlineData(TransactionType.ATM , 10, 10, BusinessTest.OK)]
-        [InlineData(TransactionType.ATM, null, 10, BusinessTest.OK)]
+        [InlineData(TransactionType.OnlinePayment , 10d, 11d, BusinessTest.Failure)]
+        [InlineData(TransactionType.OnlinePayment, 10d, 10d, BusinessTest.OK)]
+        [InlineData(TransactionType.OnlinePayment, null, 10d, BusinessTest.OK)]
+        [InlineData(TransactionType.ATM , 10d, 10d, BusinessTest.OK)]
+        [InlineData(TransactionType.ATM, null, 10d, BusinessTest.OK)]
         public void WhenAndRequires(TransactionType transactionType, double? onlinePaymentLimit, double paymentAmount, bool expectedException)
         {
             var exception = expectedException ? $"Online Payment Amount ({paymentAmount}) exceeds the Online Payment Limit ({onlinePaymentLimit})" : null;
@@ -101,11 +101,11 @@ namespace Synergy.Contracts.Test.Requirements
         }
         
         [Theory]
-        [InlineData(TransactionType.OnlinePayment , 10, 11, BusinessTest.Failure)]
-        [InlineData(TransactionType.OnlinePayment, 10, 10, BusinessTest.OK)]
-        [InlineData(TransactionType.OnlinePayment, null, 10, BusinessTest.OK)]
-        [InlineData(TransactionType.ATM , 10, 10, BusinessTest.OK)]
-        [InlineData(TransactionType.ATM, null, 10, BusinessTest.OK)]
+        [InlineData(TransactionType.OnlinePayment , 10d, 11d, BusinessTest.Failure)]
+        [InlineData(TransactionType.OnlinePayment, 10d, 10d, BusinessTest.OK)]
+        [InlineData(TransactionType.OnlinePayment, null, 10d, BusinessTest.OK)]
+        [InlineData(TransactionType.ATM , 10d, 10d, BusinessTest.OK)]
+        [InlineData(TransactionType.ATM, null, 10d, BusinessTest.OK)]
         public void WhenAndRequires_Documented(TransactionType transactionType, double? onlinePaymentLimit, double paymentAmount, bool expectedException)
         {
             var exception = expectedException ? $"Online Payment Amount ({paymentAmount}) exceeds the Online Payment Limit ({onlinePaymentLimit})" : null;

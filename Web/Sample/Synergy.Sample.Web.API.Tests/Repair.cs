@@ -3,6 +3,8 @@ using Xunit;
 
 namespace Synergy.Sample.Web.API.Tests
 {
+    // TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: Do something to prevent orphan process from this web api tests
+    
     public class Repair
     {
         public const bool Mode = false;

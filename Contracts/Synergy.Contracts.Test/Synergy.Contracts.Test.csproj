@@ -18,13 +18,13 @@
     <ProjectGuid>{6FFB403F-FFDE-44A5-B3DA-C16F008CA8FE}</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Documentation\Synergy.Documentation\Synergy.Documentation.csproj" />
     <ProjectReference Include="..\..\Markdown\Synergy.Markdowns.Test\Synergy.Markdowns.Test.csproj" />
     <ProjectReference Include="..\..\Markdown\Synergy.Markdowns\Synergy.Markdowns.csproj" />
     <ProjectReference Include="..\..\Synergy.Catalogue\Synergy.Catalogue.csproj" />
     <ProjectReference Include="..\Synergy.Contracts.Samples\Synergy.Contracts.Samples.csproj" />
     <ProjectReference Include="..\Synergy.Contracts\Synergy.Contracts.csproj" />
     <ProjectReference Include="..\Synergy.Convention.Testing\Synergy.Convention.Testing.csproj" />
-    <ProjectReference Include="..\Synergy.Documentation\Synergy.Documentation.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SynergyAssemblyInfo.cs" Link="Properties\SynergyAssemblyInfo.cs" />
@@ -35,12 +35,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ApprovalTests" Version="5.7.1" />
     <PackageReference Include="JetBrains.Annotations" Version="2021.3.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
-    <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="PublicApiGenerator" Version="10.2.0" />
-    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="Verify.Xunit" Version="19.12.1" />
+    <PackageReference Include="xunit" Version="2.4.2" />
     <Reference Include="System.Runtime, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <LangVersion>10</LangVersion>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DefineConstants>TRACE;INTERNALS</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DefineConstants>TRACE;INTERNALS</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Update="license.txt">
+        <Pack>true</Pack>
+        <PackagePath></PackagePath>
+      </None>
+      <None Update="synergy.png">
+        <Pack>true</Pack>
+        <PackagePath></PackagePath>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
+      <ProjectReference Include="..\..\Markdown\Synergy.Markdowns\Synergy.Markdowns.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="..\..\Synergy.Catalogue\Reflection\ReflectionExtensions.cs">
+        <Link>Api\ReflectionExtensions.cs</Link>
+      </Compile>
+    </ItemGroup>
+
+
+</Project>

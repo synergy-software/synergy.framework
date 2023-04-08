@@ -1,7 +1,6 @@
-﻿using ApprovalTests;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Synergy.Convention.Testing;
-using Synergy.Markdowns.Test;
+using VerifyXunit;
 
 namespace Synergy.Contracts.Test.Conventions
 {
@@ -18,9 +17,8 @@ namespace Synergy.Contracts.Test.Conventions
             var publicApi = ApiDescription.GenerateFor(assembly);
 
             // ASSERT
-            var writer = new MarkdownTextWriter(publicApi);
-            var approvalNamer = new PublicApi.PublicApiGenerator.AssemblyPathNamer(assembly);
-            Approvals.Verify(writer, approvalNamer, Approvals.GetReporter());
+            Verifier.Verify(publicApi, "md")
+                    .UseMethodName(assembly.GetName().Name);
         }
     }
 }

@@ -1,17 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ApprovalTests;
+using System.Threading.Tasks;
 using Synergy.Contracts.Requirements;
 using Synergy.Contracts.Test.Documentation;
+using Synergy.Documentation.Code;
 using Synergy.Markdowns;
-using Synergy.Markdowns.Test;
+using VerifyXunit;
 using Xunit;
 
 namespace Synergy.Contracts.Test.Requirements
 {
+    [UsesVerify]
     public class BusinessDocumentation : BusinessTest
     {
+        [Fact]
+        public async Task Generate()
+        {
+            // TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: check that and probably convert docs int tt
+
+            BusinessUsage docs = new BusinessUsage();
+            var content = docs.TransformText();
+
+            await Verifier.Verify(content, "md");
+        }
+        
         public static string? Read(string method)
         {
             return ClassReader.ReadMethodBody(method);
@@ -34,8 +47,7 @@ namespace Synergy.Contracts.Test.Requirements
                          .Append(this.ValueObjectExample())
                 ;
 
-            var writer = new MarkdownTextWriter(documentation);
-            Approvals.Verify(writer);
+            Verifier.Verify(documentation.ToString());
         }
 
         private void Step1Sample()
@@ -62,8 +74,6 @@ namespace Synergy.Contracts.Test.Requirements
             yield return new Markdown.Paragraph("This will throw `NotImplementedException` for sure. But we have not finished our job yet.");
         }
 
-
-        
         private void Step2Sample(int withdrawLimit, int withdrawAmount)
         {
             Business.Rule("When withdraw limit is set, withdrawn amount cannot exceed the limit")

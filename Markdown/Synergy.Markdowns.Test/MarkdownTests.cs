@@ -1,4 +1,4 @@
-﻿using ApprovalTests;
+﻿using VerifyXunit;
 using Xunit;
 
 namespace Synergy.Markdowns.Test
@@ -18,8 +18,7 @@ namespace Synergy.Markdowns.Test
                 .Append(SampleTable())
                 .Append(new Markdown.Quote("some quote"));
 
-            var writer = new MarkdownTextWriter(markdown.ToString());
-            Approvals.Verify(writer);
+            Verifier.Verify(markdown.ToString(), "md");
 
             Markdown.Table SampleTable()
             {

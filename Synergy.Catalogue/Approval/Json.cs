@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using ApprovalTests.Namers;
+﻿using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
@@ -100,21 +98,21 @@ namespace Synergy.Catalogue.Approval
         }
     }
 
-    public static class JsonApprovalsExtensions
-    {
-        public static void Approve<T>(this Json<T> json)
-        {
-            ApprovalTests.Approvals.VerifyJson(json.ToString());
-        }
-
-        public static void ApproveForScenario<T>(this Json<T> json, string scenario)
-        {
-            Fail.IfArgumentWhiteSpace(scenario, nameof(scenario));
-
-            using (ApprovalResults.ForScenario(scenario))
-            {
-                json.Approve();
-            }
-        }
-    }
+    // public static class JsonApprovalsExtensions
+    // {
+    //     public static void Approve<T>(this Json<T> json)
+    //     {
+    //         ApprovalTests.Approvals.VerifyJson(json.ToString());
+    //     }
+    //
+    //     public static void ApproveForScenario<T>(this Json<T> json, string scenario)
+    //     {
+    //         Fail.IfArgumentWhiteSpace(scenario, nameof(scenario));
+    //
+    //         using (ApprovalResults.ForScenario(scenario))
+    //         {
+    //             json.Approve();
+    //         }
+    //     }
+    // }
 }

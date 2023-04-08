@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsPackable>true</IsPackable>
+        <PackageVersion>$(Version)</PackageVersion>
+        <Title>Synergy Architecture Diagrams</Title>
+        <Authors>Synergy Marcin Celej</Authors>
+        <PackageLicenseFile>license.txt</PackageLicenseFile>
+        <Description>Behaviour Driven Development support</Description>
+        <Copyright>Copyright © Synergy Marcin Celej 2023</Copyright>
+        <PackageProjectUrl>https://github.com/synergy-software/synergy.framework</PackageProjectUrl>
+        <PackageIcon>synergy.png</PackageIcon>
+        <PackageTags>BDD Behaviour Driven Development</PackageTags>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
+      <ProjectReference Include="..\Synergy.Architecture.Annotations\Synergy.Architecture.Annotations.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="..\..\Reflection\Synergy.Reflection\CustomAttributeExtensions.cs">
+        <Link>CustomAttributeExtensions.cs</Link>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="PlantUml.Net" Version="1.4.80" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="license.txt">
+        <Pack>true</Pack>
+        <PackagePath></PackagePath>
+      </None>
+      <None Update="synergy.png">
+        <Pack>true</Pack>
+        <PackagePath></PackagePath>
+      </None>
+    </ItemGroup>
+
+</Project>

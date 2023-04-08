@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/wiki/Contracts</PackageProjectUrl>
     <PackageIcon>synergy.png</PackageIcon>
     <Description>Design by contract programming support</Description>
-    <Copyright>Copyright © Synergy Marcin Celej 2019</Copyright>
+    <Copyright>Copyright © Synergy Marcin Celej 2023</Copyright>
     <PackageTags>DbC Design-By-Contract Precondition Postcondition Contract Code-Contract Resharper Annotations R# jetbrains.annotations design contract programming SLARCH</PackageTags>
     <LangVersion>10</LangVersion>
     <Nullable>enable</Nullable>

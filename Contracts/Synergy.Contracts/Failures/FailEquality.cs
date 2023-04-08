@@ -4,6 +4,7 @@ namespace Synergy.Contracts
 {
     static partial class Fail
     {
+        // TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: Add variable.OrFailIfEqual(sth)
         // TODO:mace (from:mace @ 22-10-2016): a.FailIfEqual(b)
         // TODO:mace (from:mace @ 22-10-2016): IfArgumentNotEqual
         // TODO:mace (from:mace @ 22-10-2016): a.FailIfNotEqual(b)

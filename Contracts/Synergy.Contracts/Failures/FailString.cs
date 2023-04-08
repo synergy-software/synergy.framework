@@ -90,8 +90,13 @@ namespace Synergy.Contracts
         [AssertionMethod]
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static string OrFailIfWhiteSpace(
-            [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration] this string value,
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
+            [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration] this string? value,
+#if NET6_0
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull][System.Runtime.CompilerServices.CallerArgumentExpression("value")] string name = ""
+#else
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name
+#endif
+            )
         {
             Fail.RequiresArgumentName(name);
 

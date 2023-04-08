@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <LangVersion>10</LangVersion>
         <TargetFramework>net6.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
         <OutputType>Library</OutputType>
     </PropertyGroup>
 
@@ -16,15 +16,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Synergy.Behaviours.Testing\Synergy.Behaviours.Testing.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Update="Calculator.Steps.cs">
-        <DependentUpon>Calculator.feature</DependentUpon>
-      </Compile>
-      <Compile Update="Calculator.Feature.verified.cs">
-        <DependentUpon>Calculator.feature</DependentUpon>
-      </Compile>
     </ItemGroup>
 
 </Project>

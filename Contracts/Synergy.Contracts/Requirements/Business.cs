@@ -16,7 +16,7 @@ namespace Synergy.Contracts.Requirements
             => new Principle(description);
         
         [MustUseReturnValue]
-        public static Precondition When(bool preCondition) 
+        public static Precondition When(bool preCondition, [System.Runtime.CompilerServices.CallerArgumentExpression("preCondition")] string? expression = null) 
             => new Precondition(preCondition);
 
         [MustUseReturnValue]

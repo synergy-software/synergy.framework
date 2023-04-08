@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using ApprovalTests;
+﻿using System.Reflection;
 using Synergy.Markdowns;
-using Synergy.Markdowns.Test;
-using Xunit;
 
 namespace Synergy.Catalogue.Reflection.Tests
 {
@@ -77,9 +72,8 @@ namespace Synergy.Catalogue.Reflection.Tests
                          .Append(ReflectionExtensionDocumentation.GenerateExampleTable(this.primitiveTypesNullable))
                          .Append(new Markdown.Paragraph("The following example table shows result of method execution on some more complex types"))
                          .Append(ReflectionExtensionDocumentation.GenerateExampleTable(this.complexTypes));
-
-            var writer = new MarkdownTextWriter(documentation);
-            Approvals.Verify(writer);
+            
+            Verifier.Verify(documentation.ToString());
         }
 
         private Markdown.Code GetSampleUsageOfGetFriendlyTypeName()
@@ -127,8 +121,7 @@ namespace Synergy.Catalogue.Reflection.Tests
                          .Append(this.GenerateExampleTableForGetFriendlyMethodName(new[]{this.GetType().GetMethod(nameof(GenerateExampleTableForGetFriendlyMethodName))}))
                          ;
 
-            var writer = new MarkdownTextWriter(documentation);
-            Approvals.Verify(writer);
+            Verifier.Verify(documentation.ToString());
         }
         
         private Markdown.Code GetSampleUsageOfGetFriendlyMethodName()

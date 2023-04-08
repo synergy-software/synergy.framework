@@ -1,6 +1,6 @@
 ﻿using System;
 using Synergy.Contracts.Requirements;
-using Synergy.Contracts.Test.Documentation;
+using Synergy.Documentation.Code;
 
 namespace Synergy.Contracts.Test.Requirements
 {

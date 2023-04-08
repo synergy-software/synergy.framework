@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 
 namespace Synergy.Catalogue.Reflection
 {
-    public static class ReflectionExtensions
+#if INTERNALS
+    internal
+#else
+    public
+#endif
+     static class ReflectionExtensions
     {
         public static string? GetDescription(this PropertyInfo property)
         {

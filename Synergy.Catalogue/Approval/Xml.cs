@@ -1,8 +1,5 @@
-﻿using System.IO;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Xml.Serialization;
-using ApprovalTests.Namers;
-using Synergy.Contracts;
 
 namespace Synergy.Catalogue.Approval
 {
@@ -82,21 +79,21 @@ namespace Synergy.Catalogue.Approval
         }
     }
 
-    public static class XmlApprovalsExtensions
-    {
-        public static void Approve(this Xml xml)
-        {
-            ApprovalTests.Approvals.VerifyXml(xml.OrFail(nameof(xml)).ToString());
-        }
-
-        public static void ApproveForScenario(this Xml xml, string scenario)
-        {
-            Fail.IfArgumentNull(scenario, nameof(scenario));
-            
-            using (ApprovalResults.ForScenario(scenario))
-            {
-                xml.Approve();
-            }
-        }
-    }
+    // public static class XmlApprovalsExtensions
+    // {
+    //     public static void Approve(this Xml xml)
+    //     {
+    //         ApprovalTests.Approvals.VerifyXml(xml.OrFail(nameof(xml)).ToString());
+    //     }
+    //
+    //     public static void ApproveForScenario(this Xml xml, string scenario)
+    //     {
+    //         Fail.IfArgumentNull(scenario, nameof(scenario));
+    //         
+    //         using (ApprovalResults.ForScenario(scenario))
+    //         {
+    //             xml.Approve();
+    //         }
+    //     }
+    // }
 }
