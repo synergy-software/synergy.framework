@@ -29,6 +29,8 @@ Feature: Calculator
 
   Rule: Subtracting numbers
 
+    # tests os subtracting numbers
+    
     @Subtract
     Scenario: Subtract two numbers
       Given the first number is 50

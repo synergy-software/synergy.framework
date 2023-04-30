@@ -43,12 +43,7 @@ public static class FeatureGenerator
         code.AppendLine($"[GeneratedCode(\"{typeof(FeatureGenerator).Assembly.FullName}\", \"{typeof(FeatureGenerator).Assembly.GetName().Version.ToString()}\")]");
         code.AppendLine($"public partial class {className}");
         code.AppendLine("{");
-        // code.AppendLine("    [Fact]");
-        // code.AppendLine("    public void Generate()");
-        // code.AppendLine($"        => Behaviours<{featureClass}>.Generate({nameof(from)}: \"{from}\", this);");
 
-        // TODO: Support tags above the feature
-        
         string? scenarioMethod = null;
         bool includeScenario = ResetInclude();
         List<string>? tags = null;
@@ -61,15 +56,17 @@ public static class FeatureGenerator
         foreach (var line in gherkins)
         {
             lineNo++;
-            if (line.Contains("#"))
+            
+            var comment = Regex.Match(line, "\\s*#(.*)");
+            if (comment.Success)
             {
                 tags = null;
                 includeScenario = ResetInclude();
-                code.AppendLine(line.Replace("#", "//"));
+                //code.AppendLine(line.Replace("#", "//"));
                 continue;
             }
 
-            if (string.IsNullOrEmpty(line.Trim()))
+            if (string.IsNullOrWhiteSpace(line))
             {
                 tags = null;
                 includeScenario = ResetInclude();
