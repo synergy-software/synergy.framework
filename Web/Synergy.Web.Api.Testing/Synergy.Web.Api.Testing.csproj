@@ -16,6 +16,7 @@
     <PackageTags>Web API Testing</PackageTags>
     <Nullable>enable</Nullable>
     <LangVersion>8</LangVersion>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

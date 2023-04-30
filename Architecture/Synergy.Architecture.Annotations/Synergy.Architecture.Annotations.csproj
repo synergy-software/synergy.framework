@@ -14,6 +14,7 @@
         <PackageProjectUrl>https://github.com/synergy-software/synergy.framework</PackageProjectUrl>
         <PackageIcon>synergy.png</PackageIcon>
         <PackageTags>Diagrams as Code</PackageTags>
+        <AssemblyVersion>$(Version)</AssemblyVersion>
     </PropertyGroup>
     
     <ItemGroup>

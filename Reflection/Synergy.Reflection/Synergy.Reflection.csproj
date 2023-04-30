@@ -13,6 +13,7 @@
     <Description>Reflection metadata reading made easier</Description>
     <Copyright>Copyright © Synergy Marcin Celej 2019</Copyright>
     <PackageTags>Reflection Assembly Enum Class SLARCH</PackageTags>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
