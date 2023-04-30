@@ -2,6 +2,7 @@
 
 public abstract class Feature<TFeature> : IFeature
 {
+    public virtual TFeature Background() => Self;
     public virtual TFeature Given() => Self;
     public virtual TFeature When() => Self;
     public virtual TFeature Then() => Self;

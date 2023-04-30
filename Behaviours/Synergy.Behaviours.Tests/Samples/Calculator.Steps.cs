@@ -14,9 +14,16 @@ public partial class CalculatorFeature : Feature<CalculatorFeature>
             //exclude: new[] { "@Divide" }
         );
 
-        await Verifier.Verify(code, "cs").UseFileName("Calculator.Feature");
+        await Verifier
+              .Verify(code, "cs")
+              .UseFileName("Calculator.Feature");
     }
 
+    private CalculatorFeature UserOpenedCalculator()
+    {
+        return this;
+    }
+    
     private int _firstNumber;
 
     private CalculatorFeature TheFirstNumberIs50()

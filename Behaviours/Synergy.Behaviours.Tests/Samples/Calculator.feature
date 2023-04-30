@@ -7,8 +7,11 @@ Feature: Calculator
   Link to a feature: [Calculator](SpecFlowCalculator.Specs/Features/Calculator.feature)
   ***Further read***: **[Learn more about how to generate Living Documentation](https://docs.specflow.org/projects/specflow-livingdoc/en/latest/LivingDocGenerator/Generating-Documentation.html)**
   
+  Background: 
+    Given User opened calculator
+  
   Rule: Adding numbers
-
+    
     @Add
     Scenario: Add two numbers
       Given the first number is 50
