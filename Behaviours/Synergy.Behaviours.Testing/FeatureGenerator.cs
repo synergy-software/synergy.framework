@@ -30,6 +30,9 @@ public static class FeatureGenerator
         [CallerFilePath] string callerFilePath = ""
     )
     {
+        if (featureClass == null)
+            throw new ArgumentNullException(nameof(featureClass));
+        
         StringBuilder code = new StringBuilder();
         string className = featureClass.GetType().Name;
         var gherkinPath = Path.Combine(Path.GetDirectoryName(callerFilePath), from);
@@ -230,7 +233,7 @@ public static class FeatureGenerator
             if (scenarioMethod != null)
             {
                 if (withMoreover)
-                    code.AppendLine($"        .Moreover().Verify{scenarioMethod}();");
+                    code.AppendLine($"        .Moreover().After{scenarioMethod}();");
                 else
                     code.AppendLine($"            ;");
 
