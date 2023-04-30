@@ -5,61 +5,64 @@ using Synergy.Documentation.Code;
 
 namespace Synergy.Documentation.Todos;
 
+// TODO: Marcin Celej [from: Marcin Celej on: 30-04-2023]: Publish this library via nuget
+
 public static class TodoExplorer
 {
-    private static readonly Regex _csharpComment = new("\\/\\/\\s*TODO");
-    private static readonly Regex _gherkinComment = new("#\\s*TODO");
-    private static readonly Regex _txtComment = new("TODO");
-
-    public static string DebtFor(string name, CodeFolder from, [CallerFilePath] string currentPath = "")
+    private static readonly TodoPattern[] defaultPatterns =
     {
-        var debt = new StringBuilder();
-        
-        debt.AppendLine($"# Technical Debt for {name}");
-        debt.AppendLine();
+        new CsharpTodoPattern(),
+        new GherkinTodoPattern(),
+        new TextTodoPattern()
+    };
+
+    public static string DebtFor(
+        string name,
+        CodeFolder from,
+        [CallerFilePath] string currentPath = "",
+        params TodoPattern[] patterns
+    )
+    {
+        if (patterns.Length == 0)
+            patterns = defaultPatterns;
 
         int count = 0;
         var todos = new StringBuilder();
-        foreach (var filePath in TodoExplorer.GetFilesWithCode(from).OrderBy(f => f).ToList())
+        var files = TodoExplorer.GetFilesWithCode(from, patterns)
+                                .OrderBy(f => f.Path)
+                                .ToList();
+
+        foreach (var file in files)
         {
             var fileAdded = false;
-            var lines = File.ReadAllLines(filePath);
+            var lines = File.ReadAllLines(file.Path);
             foreach (var line in lines)
             {
-                // TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: Allow configuring file extensions with rules of finding TODOs inside
-                if (filePath.EndsWith("feature") && TodoExplorer._gherkinComment.Match(line).Success)
-                {
-                    fileAdded = AddFile(fileAdded, filePath);
-                    todos.AppendLine($"- {line.Trim().TrimStart('#').Trim()}");
-                    count++;
-                }
-                
-                if (filePath.EndsWith("cs") && TodoExplorer._csharpComment.Match(line).Success)
-                {
-                    fileAdded = AddFile(fileAdded, filePath);
-                    todos.AppendLine($"- {line.Trim().TrimStart('/').Trim()}");
-                    count++;
-                }
-                
-                if (filePath.EndsWith("txt") && TodoExplorer._txtComment.Match(line).Success)
-                {
-                    fileAdded = AddFile(fileAdded, filePath);
-                    todos.AppendLine($"- {line.Trim().TrimStart('-').Trim()}");
-                    count++;
-                }
+                Match match = file.Pattern.Regex.Match(line);
+                if (match.Success == false)
+                    continue;
+
+                fileAdded = AddFileHeader(fileAdded, file.Path);
+                var todo = file.Pattern.TodoExtractor(match);
+                todos.AppendLine($"- {todo.Trim()}");
+                count++;
             }
         }
 
+        var debt = new StringBuilder();
+        debt.AppendLine($"# Technical Debt for {name}");
+        debt.AppendLine();
         debt.AppendLine($"Total: {count}");
         debt.Append(todos);
         return debt.ToString();
 
-        bool AddFile(bool alreadyAdded, string filePath)
+        bool AddFileHeader(bool alreadyAdded, string filePath)
         {
             if (alreadyAdded == false)
             {
                 todos.AppendLine();
-                var relativePath = Path.GetRelativePath(Path.GetDirectoryName(currentPath), filePath).Replace("\\", "/");
+                var relativePath = Path.GetRelativePath(Path.GetDirectoryName(currentPath), filePath)
+                                       .Replace("\\", "/");
                 todos.AppendLine($"## [{Path.GetFileName(filePath)}]({relativePath})");
             }
 
@@ -67,23 +70,17 @@ public static class TodoExplorer
         }
     }
 
-    private static IEnumerable<string> GetFilesWithCode(CodeFolder from)
-        => TodoExplorer.GetFilesWithCodeDeep(from.Path);
+    private static IEnumerable<(string Path, TodoPattern Pattern)> GetFilesWithCode(CodeFolder from, TodoPattern[] patterns)
+        => TodoExplorer.GetFilesWithCodeDeep(from.Path, patterns);
 
-    private static IEnumerable<string> GetFilesWithCodeDeep(string from)
+    private static IEnumerable<(string Path, TodoPattern Pattern)> GetFilesWithCodeDeep(string from, TodoPattern[] patterns)
     {
-        var files =
-            Directory.GetFiles(from, "*.cs").Union(
-                Directory.GetFiles(from, "*.feature")
-            ).Union(
-                Directory.GetFiles(from, "*.txt")
-            );
-        
-        foreach (var filePath in files) 
-            yield return Path.GetFullPath(filePath);
+        foreach (TodoPattern pattern in patterns)
+        foreach (var filePath in Directory.GetFiles(from, $"*.{pattern.FileExtension}"))
+            yield return (Path.GetFullPath(filePath), pattern);
 
         foreach (var directory in Directory.GetDirectories(from))
-        foreach (var filePath in TodoExplorer.GetFilesWithCodeDeep(directory))
+        foreach (var filePath in TodoExplorer.GetFilesWithCodeDeep(directory, patterns))
             yield return filePath;
     }
 }
