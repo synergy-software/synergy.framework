@@ -15,7 +15,19 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Documentation\Synergy.Documentation\Synergy.Documentation.csproj" />
       <ProjectReference Include="..\Synergy.Behaviours.Testing\Synergy.Behaviours.Testing.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Todos\Todos.Technical.Debt.verified.md">
+        <ParentFile>Todos</ParentFile>
+        <DependentUpon>Todos.cs</DependentUpon>
+      </None>
+      <None Update="Todos\Todos.Technical.Debt.verified.md">
+        <ParentFile>Todos</ParentFile>
+        <DependentUpon>Todos.cs</DependentUpon>
+      </None>
     </ItemGroup>
 
 </Project>
