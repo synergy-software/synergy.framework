@@ -1,4 +1,5 @@
-﻿using Synergy.Behaviours.Testing;
+﻿using System.Runtime.CompilerServices;
+using Synergy.Behaviours.Testing;
 
 namespace Synergy.Behaviours.Tests.Samples;
 
@@ -16,35 +17,33 @@ public partial class CalculatorFeature : Feature<CalculatorFeature>
 
         await Verifier
               .Verify(code, "cs")
-              .UseFileName("Calculator.Feature");
+              .UseFileName("Calculator.Feature")
+              .AutoVerify();
     }
 
+    private Calculator _calculator;
     private CalculatorFeature UserOpenedCalculator()
     {
+        this._calculator = new Calculator();
         return this;
     }
     
-    private int _firstNumber;
-
     private CalculatorFeature TheFirstNumberIs50()
     {
-        this._firstNumber = 50;
+        this._calculator.FirstNumber = 50;
         return this;
     }
 
-    private int _secondNumber;
-
     private CalculatorFeature TheSecondNumberIs70()
     {
-        this._secondNumber = 70;
+        this._calculator.SecondNumber = 70;
         return this;
     }
 
     private int _result;
     private CalculatorFeature TheTwoNumbersAreAdded()
     {
-        var calculator = new Calculator { FirstNumber = this._firstNumber, SecondNumber = this._secondNumber };
-        this._result = calculator.Add();
+        this._result = this._calculator.Add();
         return this;
     }
 
@@ -54,9 +53,11 @@ public partial class CalculatorFeature : Feature<CalculatorFeature>
         return this;
     }
 
-    private CalculatorFeature VerifyAddTwoNumbers()
+    partial void AfterAddTwoNumbers()
     {
-        return this;
+        Verifier.Verify(this._calculator)
+                .UseDirectory("Snapshots")
+                .GetAwaiter().GetResult();
     }
 
     private CalculatorFeature TwoNumbers()

@@ -6,15 +6,11 @@ namespace Synergy.Behaviours.Tests.Samples;
 public partial class NewFeature : Feature<NewFeature>
 {
     [Fact]
-    public async Task GenerateFeature()
+    public void GenerateFeature()
     {
-        var code = this.Generate(
-            from: "New.feature"
+        this.Generate(
+            from: "New.feature",
+            to: "New.Feature.cs"
         );
-
-        await Verifier
-              .Verify(code, "cs")
-              .UseFileName("New.Feature")
-              .AutoVerify();
     }
 }

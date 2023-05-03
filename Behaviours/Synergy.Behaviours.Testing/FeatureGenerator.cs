@@ -6,17 +6,18 @@ namespace Synergy.Behaviours.Testing;
 
 public static class FeatureGenerator
 {
+    // TODO: Marcin Celej [from: Marcin Celej on: 03-05-2023]: Add way to generate non-fluent implementation of the methods
+    
     public static void Generate<TBehaviour>(
         this TBehaviour feature,
         string from,
         string to,
-        bool withMoreover = false,
         string[]? include = null,
         string[]? exclude = null,
         [CallerFilePath] string callerFilePath = ""
     )
     {
-        var code = feature.Generate(from, withMoreover, include, exclude, callerFilePath);
+        var code = feature.Generate(from, include, exclude, callerFilePath);
         var destinationFilePath = Path.Combine(Path.GetDirectoryName(callerFilePath), to);
         File.WriteAllText(destinationFilePath, code.ToString());
     }
@@ -24,7 +25,6 @@ public static class FeatureGenerator
     public static string Generate<TBehaviour>(
         this TBehaviour featureClass,
         string from,
-        bool withMoreover = false,
         string[]? include = null,
         string[]? exclude = null,
         [CallerFilePath] string callerFilePath = ""
@@ -238,10 +238,14 @@ public static class FeatureGenerator
         {
             if (scenarioMethod != null)
             {
-                if (withMoreover)
-                    code.AppendLine($"            .Moreover().After{scenarioMethod}();");
-                else
-                    code.AppendLine($"            ;");
+                code.AppendLine($"            .Moreover().After{scenarioMethod}();");
+                code.AppendLine();
+                code.AppendLine(
+                    $"    partial void After{scenarioMethod}(" +
+                    // "[CallerMemberName] string callerMemberName = \"\", " +
+                    // "[CallerFilePath] string callerFilePath = \"\"" +
+                    ");"
+                );
 
                 code.AppendLine();
             }
