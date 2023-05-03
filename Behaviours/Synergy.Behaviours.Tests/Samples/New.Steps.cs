@@ -2,7 +2,6 @@
 
 namespace Synergy.Behaviours.Tests.Samples;
 
-[UsesVerify]
 public partial class NewFeature : Feature<NewFeature>
 {
     [Fact]

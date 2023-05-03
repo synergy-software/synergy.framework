@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -7,7 +8,15 @@ namespace Synergy.Behaviours.Testing;
 public static class FeatureGenerator
 {
     // TODO: Marcin Celej [from: Marcin Celej on: 03-05-2023]: Add way to generate non-fluent implementation of the methods
-    
+
+    private const string Background = nameof(Feature<object>.Background);
+    private const string Given = nameof(Feature<object>.Given);
+    private const string When = nameof(Feature<object>.When);
+    private const string Then = nameof(Feature<object>.Then);
+    private const string And = nameof(Feature<object>.And);
+    private const string But = nameof(Feature<object>.But);
+    private const string Moreover = nameof(Feature<object>.Moreover);
+
     public static void Generate<TBehaviour>(
         this TBehaviour feature,
         string from,
@@ -32,6 +41,9 @@ public static class FeatureGenerator
     {
         if (featureClass == null)
             throw new ArgumentNullException(nameof(featureClass));
+        
+        if (from == null)
+            throw new ArgumentNullException(nameof(from));
 
         StringBuilder code = new StringBuilder();
         string className = featureClass.GetType()
@@ -46,7 +58,9 @@ public static class FeatureGenerator
         code.AppendLine($"namespace {featureClass.GetType().Namespace};");
         code.AppendLine();
         code.AppendLine(
-            $"[GeneratedCode(\"{typeof(FeatureGenerator).Assembly.FullName}\", \"{typeof(FeatureGenerator).Assembly.GetName().Version.ToString()}\")]");
+            $"[GeneratedCode(\"{typeof(FeatureGenerator).Assembly.FullName}\", " +
+            $"\"{typeof(FeatureGenerator).Assembly.GetName().Version.ToString()}\")]"
+        );
         code.AppendLine($"public partial class {className}");
         code.AppendLine("{");
 
@@ -164,7 +178,7 @@ public static class FeatureGenerator
                 if (tags != null)
                     code.AppendLine($"    // {String.Join(" ", tags)}");
                 code.AppendLine($"    public void {scenarioMethod}() // {line.Trim()}");
-                code.Append($"        => {nameof(Feature<object>.Background)}()");
+                code.Append($"        => {Background}()");
                 if (backgroundMethod == null)
                     code.AppendLine();
                 else
@@ -187,42 +201,42 @@ public static class FeatureGenerator
                     code.Append($"     ");
                 }
 
-                code.AppendLine($"{nameof(Feature<object>.Given)}().{FeatureGenerator.ToMethod(given.Groups[1].Value)}()  // {line.Trim()}");
+                code.AppendLine($"{Given}().{FeatureGenerator.ToMethod(given.Groups[1].Value)}()  // {line.Trim()}");
                 continue;
             }
 
             var and = Regex.Match(line, "\\s*And (.*)");
             if (and.Success)
             {
-                code.AppendLine($"                 .{nameof(Feature<object>.And)}().{FeatureGenerator.ToMethod(and.Groups[1].Value)}()  // {line.Trim()}");
+                code.AppendLine($"                 .{And}().{FeatureGenerator.ToMethod(and.Groups[1].Value)}()  // {line.Trim()}");
                 continue;
             }
 
             var asterisk = Regex.Match(line, "\\s*\\* (.*)");
             if (asterisk.Success)
             {
-                code.AppendLine($"                 .{nameof(Feature<object>.And)}().{FeatureGenerator.ToMethod(asterisk.Groups[1].Value)}()  // {line.Trim()}");
+                code.AppendLine($"                 .{And}().{FeatureGenerator.ToMethod(asterisk.Groups[1].Value)}()  // {line.Trim()}");
                 continue;
             }
 
             var but = Regex.Match(line, "\\s*But (.*)");
             if (but.Success)
             {
-                code.AppendLine($"                 .{nameof(Feature<object>.But)}().{FeatureGenerator.ToMethod(but.Groups[1].Value)}()  // {line.Trim()}");
+                code.AppendLine($"                 .{But}().{FeatureGenerator.ToMethod(but.Groups[1].Value)}()  // {line.Trim()}");
                 continue;
             }
 
             var when = Regex.Match(line, "\\s*When (.*)");
             if (when.Success)
             {
-                code.AppendLine($"                .{nameof(Feature<object>.When)}().{FeatureGenerator.ToMethod(when.Groups[1].Value)}()  // {line.Trim()}");
+                code.AppendLine($"                .{When}().{FeatureGenerator.ToMethod(when.Groups[1].Value)}()  // {line.Trim()}");
                 continue;
             }
 
             var then = Regex.Match(line, "\\s*Then (.*)");
             if (then.Success)
             {
-                code.AppendLine($"                .{nameof(Feature<object>.Then)}().{FeatureGenerator.ToMethod(then.Groups[1].Value)}() // {line.Trim()}");
+                code.AppendLine($"                .{Then}().{FeatureGenerator.ToMethod(then.Groups[1].Value)}() // {line.Trim()}");
                 continue;
             }
         }
@@ -238,7 +252,7 @@ public static class FeatureGenerator
         {
             if (scenarioMethod != null)
             {
-                code.AppendLine($"            .Moreover().After{scenarioMethod}();");
+                code.AppendLine($"            .{Moreover}().After{scenarioMethod}();");
                 code.AppendLine();
                 code.AppendLine(
                     $"    partial void After{scenarioMethod}(" +
@@ -285,7 +299,7 @@ public static class FeatureGenerator
         {
             $"Feature: {Path.GetFileNameWithoutExtension(gherkinPath)}",
             "",
-            "# TODO: Provide scenarios here, check the sample down here",
+            "# TODO: Provide scenarios here. Check the sample down here.",
             "",
             "#  Scenario: There can be only one",
             "#    Given there are 3 ninjas",
@@ -308,11 +322,11 @@ public static class FeatureGenerator
 
     private static string ToMethod(string sentence)
     {
+        sentence = Regex.Replace(sentence, "[^A-Za-z0-9_]", " ");
         var parts = sentence.Split(" ");
         var m = string.Concat(parts.Where(p => !string.IsNullOrEmpty(p))
                                    .Select(p => p.Substring(0, 1)
                                                  .ToUpperInvariant() + p.Substring(1)));
-        m = Regex.Replace(m, "[^A-Za-z0-9_]", "");
         return m;
     }
 
@@ -326,14 +340,14 @@ public static class FeatureGenerator
     //                 .ToArray();
     // }
 
-    private static bool StartsWithAny(this string line, params string[] starts)
-    {
-        foreach (string start in starts)
-        {
-            if (line.StartsWith(start, StringComparison.InvariantCultureIgnoreCase))
-                return true;
-        }
-
-        return false;
-    }
+    // private static bool StartsWithAny(this string line, params string[] starts)
+    // {
+    //     foreach (string start in starts)
+    //     {
+    //         if (line.StartsWith(start, StringComparison.InvariantCultureIgnoreCase))
+    //             return true;
+    //     }
+    //
+    //     return false;
+    // }
 }
