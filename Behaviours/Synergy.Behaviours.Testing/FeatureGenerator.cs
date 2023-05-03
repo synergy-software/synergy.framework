@@ -233,7 +233,7 @@ public static class FeatureGenerator
             if (scenarioMethod != null)
             {
                 if (withMoreover)
-                    code.AppendLine($"        .Moreover().After{scenarioMethod}();");
+                    code.AppendLine($"            .Moreover().After{scenarioMethod}();");
                 else
                     code.AppendLine($"            ;");
 
