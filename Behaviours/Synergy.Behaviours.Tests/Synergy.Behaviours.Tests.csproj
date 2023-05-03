@@ -37,6 +37,12 @@
       <Compile Update="Samples\Calculator.Steps.cs">
         <DependentUpon>Calculator.feature</DependentUpon>
       </Compile>
+      <Compile Update="Samples\New.Feature.verified.cs">
+        <DependentUpon>New.feature</DependentUpon>
+      </Compile>
+      <Compile Update="Samples\New.Steps.cs">
+        <DependentUpon>New.feature</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>
