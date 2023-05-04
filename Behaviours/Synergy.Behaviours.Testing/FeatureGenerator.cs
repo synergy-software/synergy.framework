@@ -28,7 +28,7 @@ public static class FeatureGenerator
     {
         var code = feature.Generate(from, include, exclude, callerFilePath);
         var destinationFilePath = Path.Combine(Path.GetDirectoryName(callerFilePath), to);
-        File.WriteAllText(destinationFilePath, code.ToString());
+        File.WriteAllText(destinationFilePath, code);
     }
 
     public static string Generate<TBehaviour>(
@@ -124,8 +124,8 @@ public static class FeatureGenerator
 
                 backgroundMethod = FeatureGenerator.ToMethod(ruleName ?? featureName ?? "Feature") + "Background";
                 backgroundStarted = backgroundMethod;
-                code.AppendLine($"    private {className} {backgroundMethod}() // {line.Trim()}");
-                code.Append($"        => ");
+                code.AppendLine($"    private void {backgroundMethod}() // {line.Trim()}");
+                code.AppendLine("    {");
                 continue;
             }
 
@@ -178,13 +178,12 @@ public static class FeatureGenerator
                 if (tags != null)
                     code.AppendLine($"    // {String.Join(" ", tags)}");
                 code.AppendLine($"    public void {scenarioMethod}() // {line.Trim()}");
-                code.Append($"        => {Background}()");
-                if (backgroundMethod == null)
-                    code.AppendLine();
-                else
-                {
-                    code.AppendLine($".{backgroundMethod}()");
-                }
+                code.AppendLine("    {");
+                var backgroundCall = "";
+                if (backgroundMethod != null)
+                    backgroundCall = $".{backgroundMethod}()";
+                code.AppendLine($"       {Background}(){backgroundCall};");
+                code.AppendLine();
 
                 continue;
             }
@@ -192,51 +191,51 @@ public static class FeatureGenerator
             var given = Regex.Match(line, "\\s*Given (.*)");
             if (given.Success)
             {
-                if (backgroundStarted == null)
-                {
-                    code.Append($"               .");
-                }
-                else
-                {
-                    code.Append($"     ");
-                }
+                // if (backgroundStarted == null)
+                // {
+                //     code.Append($"                ");
+                // }
+                // else
+                // {
+                //     code.Append($"     ");
+                // }
 
-                code.AppendLine($"{Given}().{FeatureGenerator.ToMethod(given.Groups[1].Value)}()  // {line.Trim()}");
+                code.AppendLine($"       {Given}().{FeatureGenerator.ToMethod(given.Groups[1].Value)}();  // {line.Trim()}");
                 continue;
             }
 
             var and = Regex.Match(line, "\\s*And (.*)");
             if (and.Success)
             {
-                code.AppendLine($"                 .{And}().{FeatureGenerator.ToMethod(and.Groups[1].Value)}()  // {line.Trim()}");
+                code.AppendLine($"         {And}().{FeatureGenerator.ToMethod(and.Groups[1].Value)}();  // {line.Trim()}");
                 continue;
             }
 
             var asterisk = Regex.Match(line, "\\s*\\* (.*)");
             if (asterisk.Success)
             {
-                code.AppendLine($"                 .{And}().{FeatureGenerator.ToMethod(asterisk.Groups[1].Value)}()  // {line.Trim()}");
+                code.AppendLine($"         {And}().{FeatureGenerator.ToMethod(asterisk.Groups[1].Value)}();  // {line.Trim()}");
                 continue;
             }
 
             var but = Regex.Match(line, "\\s*But (.*)");
             if (but.Success)
             {
-                code.AppendLine($"                 .{But}().{FeatureGenerator.ToMethod(but.Groups[1].Value)}()  // {line.Trim()}");
+                code.AppendLine($"         {But}().{FeatureGenerator.ToMethod(but.Groups[1].Value)}();  // {line.Trim()}");
                 continue;
             }
 
             var when = Regex.Match(line, "\\s*When (.*)");
             if (when.Success)
             {
-                code.AppendLine($"                .{When}().{FeatureGenerator.ToMethod(when.Groups[1].Value)}()  // {line.Trim()}");
+                code.AppendLine($"        {When}().{FeatureGenerator.ToMethod(when.Groups[1].Value)}();  // {line.Trim()}");
                 continue;
             }
 
             var then = Regex.Match(line, "\\s*Then (.*)");
             if (then.Success)
             {
-                code.AppendLine($"                .{Then}().{FeatureGenerator.ToMethod(then.Groups[1].Value)}() // {line.Trim()}");
+                code.AppendLine($"        {Then}().{FeatureGenerator.ToMethod(then.Groups[1].Value)}(); // {line.Trim()}");
                 continue;
             }
         }
@@ -252,7 +251,9 @@ public static class FeatureGenerator
         {
             if (scenarioMethod != null)
             {
-                code.AppendLine($"            .{Moreover}().After{scenarioMethod}();");
+                code.AppendLine();
+                code.AppendLine($"        {Moreover}().After{scenarioMethod}();");
+                code.AppendLine("    }");
                 code.AppendLine();
                 code.AppendLine(
                     $"    partial void After{scenarioMethod}(" +
@@ -271,7 +272,7 @@ public static class FeatureGenerator
         {
             if (backgroundStarted != null)
             {
-                code.AppendLine($"            ;");
+                code.AppendLine("    }");
                 code.AppendLine();
             }
 

@@ -6,34 +6,43 @@ namespace Synergy.Behaviours.Tests.Samples;
 [GeneratedCode("Synergy.Behaviours.Testing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "1.0.0.0")]
 public partial class CalculatorFeature
 {
-    private CalculatorFeature CalculatorBackground() // Background:
-        =>      Given().UserOpenedCalculator()  // Given User opened calculator
-            ;
+    private void CalculatorBackground() // Background:
+    {
+       Given().UserOpenedCalculator();  // Given User opened calculator
+    }
 
     // Rule: Adding numbers
 
     [Xunit.Fact]
     // @Add
     public void AddTwoNumbers() // Scenario: Add two numbers
-        => Background().CalculatorBackground()
-               .Given().TheFirstNumberIs50()  // Given the first number is 50
-                 .And().TheSecondNumberIs70()  // And the second number is 70
-                .When().TheTwoNumbersAreAdded()  // When the two numbers are added
-                .Then().TheResultShouldBe120() // Then the result should be 120
-            .Moreover().AfterAddTwoNumbers();
+    {
+       Background().CalculatorBackground();
+
+       Given().TheFirstNumberIs50();  // Given the first number is 50
+         And().TheSecondNumberIs70();  // And the second number is 70
+        When().TheTwoNumbersAreAdded();  // When the two numbers are added
+        Then().TheResultShouldBe120(); // Then the result should be 120
+
+        Moreover().AfterAddTwoNumbers();
+    }
 
     partial void AfterAddTwoNumbers();
 
     [Xunit.Fact]
     // @Add
     public void AddTwoNumbersInDifferentWay() // Scenario: Add two numbers in different way
-        => Background().CalculatorBackground()
-               .Given().TwoNumbers()  // Given Two numbers:
-                 .And().TheFirstNumberIs50()  // * the first number is 50
-                 .And().TheSecondNumberIs70()  // * the second number is 70
-                .When().TheTwoNumbersAreAdded()  // When the two numbers are added
-                .Then().TheResultShouldBe120() // Then the result should be 120
-            .Moreover().AfterAddTwoNumbersInDifferentWay();
+    {
+       Background().CalculatorBackground();
+
+       Given().TwoNumbers();  // Given Two numbers:
+         And().TheFirstNumberIs50();  // * the first number is 50
+         And().TheSecondNumberIs70();  // * the second number is 70
+        When().TheTwoNumbersAreAdded();  // When the two numbers are added
+        Then().TheResultShouldBe120(); // Then the result should be 120
+
+        Moreover().AfterAddTwoNumbersInDifferentWay();
+    }
 
     partial void AfterAddTwoNumbersInDifferentWay();
 
