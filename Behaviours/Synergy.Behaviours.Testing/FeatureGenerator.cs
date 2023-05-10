@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -15,6 +14,7 @@ public static class FeatureGenerator
     private const string But = nameof(Feature<object>.But);
     private const string Moreover = nameof(Feature<object>.Moreover);
 
+    // TODO: Marcin Celej [from: Marcin Celej on: 10-05-2023]: Add include / exclude as functions 
     public static void Generate<TBehaviour>(
         this TBehaviour feature,
         string from,

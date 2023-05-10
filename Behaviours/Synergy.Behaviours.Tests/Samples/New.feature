@@ -1,7 +1,5 @@
 Feature: New
 
-# TODO: Provide scenarios here, check the sample down here
-
 #  Scenario: There can be only one
 #    Given there are 3 ninjas
 #    And there are more than one ninja alive
