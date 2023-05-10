@@ -3,7 +3,7 @@
 Total: 2
 
 ## [FeatureGenerator.cs](../../Synergy.Behaviours.Testing/FeatureGenerator.cs)
-- TODO: Marcin Celej [from: Marcin Celej on: 03-05-2023]: Add way to generate non-fluent implementation of the methods
+- TODO: Marcin Celej [from: Marcin Celej on: 10-05-2023]: Support Scenario Outline along with Examples
 
 ## [New.feature](../Samples/New.feature)
 - TODO: Provide scenarios here, check the sample down here

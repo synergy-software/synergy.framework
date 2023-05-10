@@ -14,7 +14,7 @@ public partial class CalculatorFeature
     // Rule: Adding numbers
 
     [Xunit.Fact]
-    // @Add
+    // @Add @Verify
     public void AddTwoNumbers() // Scenario: Add two numbers
     {
        Background().CalculatorBackground();
@@ -27,7 +27,6 @@ public partial class CalculatorFeature
         Moreover().AfterAddTwoNumbers();
     }
 
-    partial void AfterAddTwoNumbers();
 
     [Xunit.Fact]
     // @Add
@@ -40,11 +39,8 @@ public partial class CalculatorFeature
          And().TheSecondNumberIs70();  // * the second number is 70
         When().TheTwoNumbersAreAdded();  // When the two numbers are added
         Then().TheResultShouldBe120(); // Then the result should be 120
-
-        Moreover().AfterAddTwoNumbersInDifferentWay();
     }
 
-    partial void AfterAddTwoNumbersInDifferentWay();
 
     // Rule: Subtracting numbers
 

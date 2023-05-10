@@ -7,8 +7,6 @@ namespace Synergy.Behaviours.Testing;
 
 public static class FeatureGenerator
 {
-    // TODO: Marcin Celej [from: Marcin Celej on: 03-05-2023]: Add way to generate non-fluent implementation of the methods
-
     private const string Background = nameof(Feature<object>.Background);
     private const string Given = nameof(Feature<object>.Given);
     private const string When = nameof(Feature<object>.When);
@@ -23,10 +21,17 @@ public static class FeatureGenerator
         string to,
         string[]? include = null,
         string[]? exclude = null,
+        Func<Scenario, bool>? generateAfter = null,
         [CallerFilePath] string callerFilePath = ""
     )
     {
-        var code = feature.Generate(from, include, exclude, callerFilePath);
+        var code = feature.Generate(
+            from,
+            include,
+            exclude,
+            generateAfter,
+            callerFilePath
+        );
         var destinationFilePath = Path.Combine(Path.GetDirectoryName(callerFilePath), to);
         File.WriteAllText(destinationFilePath, code);
     }
@@ -36,6 +41,7 @@ public static class FeatureGenerator
         string from,
         string[]? include = null,
         string[]? exclude = null,
+        Func<Scenario, bool>? generateAfter = null,
         [CallerFilePath] string callerFilePath = ""
     )
     {
@@ -64,7 +70,7 @@ public static class FeatureGenerator
         code.AppendLine($"public partial class {className}");
         code.AppendLine("{");
 
-        string? scenarioMethod = null;
+        Scenario? scenario = null;
         bool includeScenario = ResetInclude();
         List<string>? tags = null;
         int lineNo = 0;
@@ -129,6 +135,8 @@ public static class FeatureGenerator
                 continue;
             }
 
+            // TODO: Marcin Celej [from: Marcin Celej on: 10-05-2023]: Support Scenario Outline along with Examples  
+            
             var outline = Regex.Match(line, "\\s*Scenario (Outline|Template)\\: (.*)");
             if (outline.Success)
             {
@@ -166,18 +174,18 @@ public static class FeatureGenerator
             if (includeScenario == false && backgroundStarted == null)
                 continue;
 
-            var scenario = Regex.Match(line, "\\s*Scenario\\: (.*)");
-            if (scenario.Success)
+            var scenarioMatch = Regex.Match(line, "\\s*Scenario\\: (.*)");
+            if (scenarioMatch.Success)
             {
                 CloseBackground();
                 CloseScenario();
 
-                scenarioMethod = FeatureGenerator.ToMethod(scenario.Groups[1]
-                                                                   .Value);
+                scenario = new Scenario(scenarioMatch.Groups[1].Value, (tags ?? new List<string>(0)).AsReadOnly());
+                
                 code.AppendLine("    [Xunit.Fact]");
                 if (tags != null)
                     code.AppendLine($"    // {String.Join(" ", tags)}");
-                code.AppendLine($"    public void {scenarioMethod}() // {line.Trim()}");
+                code.AppendLine($"    public void {scenario.Method}() // {line.Trim()}");
                 code.AppendLine("    {");
                 var backgroundCall = "";
                 if (backgroundMethod != null)
@@ -249,23 +257,21 @@ public static class FeatureGenerator
 
         void CloseScenario()
         {
-            if (scenarioMethod != null)
+            if (scenario != null)
             {
-                code.AppendLine();
-                code.AppendLine($"        {Moreover}().After{scenarioMethod}();");
+                if (generateAfter != null && generateAfter(scenario))
+                {
+                    code.AppendLine();
+                    code.AppendLine($"        {Moreover}().After{scenario.Method}();");
+                }
+
                 code.AppendLine("    }");
                 code.AppendLine();
-                code.AppendLine(
-                    $"    partial void After{scenarioMethod}(" +
-                    // "[CallerMemberName] string callerMemberName = \"\", " +
-                    // "[CallerFilePath] string callerFilePath = \"\"" +
-                    ");"
-                );
 
                 code.AppendLine();
             }
 
-            scenarioMethod = null;
+            scenario = null;
         }
 
         void CloseBackground()
@@ -321,7 +327,7 @@ public static class FeatureGenerator
         return gherkins;
     }
 
-    private static string ToMethod(string sentence)
+    internal static string ToMethod(string sentence)
     {
         sentence = Regex.Replace(sentence, "[^A-Za-z0-9_]", " ");
         var parts = sentence.Split(" ");

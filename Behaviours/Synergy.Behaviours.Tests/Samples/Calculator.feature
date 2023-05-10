@@ -9,7 +9,7 @@ Feature: Calculator
   
   Rule: Adding numbers
     
-    @Add
+    @Add @Verify
     Scenario: Add two numbers
       Given the first number is 50
       And the second number is 70
