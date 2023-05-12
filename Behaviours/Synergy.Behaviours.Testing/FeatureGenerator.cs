@@ -128,7 +128,7 @@ public static class FeatureGenerator
             {
                 CloseScenario();
 
-                backgroundMethod = FeatureGenerator.ToMethod(ruleName ?? featureName ?? "Feature") + "Background";
+                backgroundMethod = Sentence.ToMethod(ruleName ?? featureName ?? "Feature") + "Background";
                 backgroundStarted = backgroundMethod;
                 code.AppendLine($"    private void {backgroundMethod}() // {line.Trim()}");
                 code.AppendLine("    {");
@@ -208,42 +208,42 @@ public static class FeatureGenerator
                 //     code.Append($"     ");
                 // }
 
-                code.AppendLine($"       {Given}().{FeatureGenerator.ToMethod(given.Groups[1].Value)}();  // {line.Trim()}");
+                code.AppendLine($"       {Given}().{Sentence.ToMethod(given.Groups[1].Value)}();  // {line.Trim()}");
                 continue;
             }
 
             var and = Regex.Match(line, "\\s*And (.*)");
             if (and.Success)
             {
-                code.AppendLine($"         {And}().{FeatureGenerator.ToMethod(and.Groups[1].Value)}();  // {line.Trim()}");
+                code.AppendLine($"         {And}().{Sentence.ToMethod(and.Groups[1].Value)}();  // {line.Trim()}");
                 continue;
             }
 
             var asterisk = Regex.Match(line, "\\s*\\* (.*)");
             if (asterisk.Success)
             {
-                code.AppendLine($"         {And}().{FeatureGenerator.ToMethod(asterisk.Groups[1].Value)}();  // {line.Trim()}");
+                code.AppendLine($"         {And}().{Sentence.ToMethod(asterisk.Groups[1].Value)}();  // {line.Trim()}");
                 continue;
             }
 
             var but = Regex.Match(line, "\\s*But (.*)");
             if (but.Success)
             {
-                code.AppendLine($"         {But}().{FeatureGenerator.ToMethod(but.Groups[1].Value)}();  // {line.Trim()}");
+                code.AppendLine($"         {But}().{Sentence.ToMethod(but.Groups[1].Value)}();  // {line.Trim()}");
                 continue;
             }
 
             var when = Regex.Match(line, "\\s*When (.*)");
             if (when.Success)
             {
-                code.AppendLine($"        {When}().{FeatureGenerator.ToMethod(when.Groups[1].Value)}();  // {line.Trim()}");
+                code.AppendLine($"        {When}().{Sentence.ToMethod(when.Groups[1].Value)}();  // {line.Trim()}");
                 continue;
             }
 
             var then = Regex.Match(line, "\\s*Then (.*)");
             if (then.Success)
             {
-                code.AppendLine($"        {Then}().{FeatureGenerator.ToMethod(then.Groups[1].Value)}(); // {line.Trim()}");
+                code.AppendLine($"        {Then}().{Sentence.ToMethod(then.Groups[1].Value)}(); // {line.Trim()}");
                 continue;
             }
         }
@@ -327,15 +327,7 @@ public static class FeatureGenerator
         return gherkins;
     }
 
-    internal static string ToMethod(string sentence)
-    {
-        sentence = Regex.Replace(sentence, "[^A-Za-z0-9_]", " ");
-        var parts = sentence.Split(" ");
-        var m = string.Concat(parts.Where(p => !string.IsNullOrEmpty(p))
-                                   .Select(p => p.Substring(0, 1)
-                                                 .ToUpperInvariant() + p.Substring(1)));
-        return m;
-    }
+
 
     // private static string[]? ReadTagsFrom(string line)
     // {

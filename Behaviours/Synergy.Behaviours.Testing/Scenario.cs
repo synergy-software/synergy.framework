@@ -5,7 +5,7 @@ namespace Synergy.Behaviours.Testing;
 public record Scenario(string Title, ReadOnlyCollection<string> Tags)
 {
     public string Method
-        => FeatureGenerator.ToMethod(this.Title);
+        => Sentence.ToMethod(this.Title);
     
     public bool IsTagged(string tag, params string[] tags)
     {
