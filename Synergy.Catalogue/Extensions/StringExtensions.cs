@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Synergy.Catalogue
 {
-#if INTERNAL_STRING_EXTENIONS
+#if INTERNAL_STRING_EXTENIONS || INTERNALS
     internal
 #else
     public
@@ -21,10 +21,10 @@ namespace Synergy.Catalogue
         /// </summary>
         public static string? TrimToNull(this string? text)
         {
-            if (text.IsNullOrWhiteSpace())
+            if (String.IsNullOrWhiteSpace(text))
                 return null;
 
-            return text?.Trim();
+            return text.Trim();
         }
 
         public static string Left(this string text, int length)
@@ -32,9 +32,9 @@ namespace Synergy.Catalogue
             return length > text.Length ? text : text.Substring(0, length);
         }
         
-        public static string CamelCaseToSentence(string input)
-        {
-            return Regex.Replace(input, "[a-z][A-Z]", m => $"{m.Value[0]} {char.ToLower(m.Value[1])}");
-        }
+        // public static string CamelCaseToSentence(string input)
+        // {
+        //     return Regex.Replace(input, "[a-z][A-Z]", m => $"{m.Value[0]} {char.ToLower(m.Value[1])}");
+        // }
     }
 }

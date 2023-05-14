@@ -114,5 +114,8 @@ namespace Synergy.Catalogue.Reflection
         {
             return $"{method.Name}({String.Join(", ", method.GetParameters().Select(p => p.ParameterType.GetFriendlyTypeName()))})";
         }
+        
+        public static bool IsRecord(this Type type)
+            => type.GetMethods(BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public).Any(m => m.Name == "<Clone>$");
     }
 }
