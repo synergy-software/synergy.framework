@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Synergy.Contracts.Requirements;
-using Synergy.Contracts.Test.Documentation;
+using Synergy.Documentation.Api;
 using Synergy.Documentation.Code;
 using Synergy.Markdowns;
 using VerifyXunit;
