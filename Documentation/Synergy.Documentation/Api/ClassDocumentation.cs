@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using System.Xml;
+using Synergy.Catalogue;
 using Synergy.Catalogue.Reflection;
 using Synergy.Contracts.Requirements;
-using Synergy.Convention.Testing;
 using Synergy.Markdowns;
 
-namespace Synergy.Contracts.Test.Documentation
+namespace Synergy.Documentation.Api
 {
     public class ClassDocumentation : Markdown.Document
     {
@@ -33,12 +33,14 @@ namespace Synergy.Contracts.Test.Documentation
             }
 
             var methods = type.GetMethods(BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Static)
-                              .Where(m => ApiDescription.NotIn(m.Name,
-                                  nameof(this.GetType),
-                                  nameof(this.ToString),
-                                  nameof(Equals),
-                                  nameof(object.ReferenceEquals),
-                                  nameof(this.GetHashCode)));
+                              .Where(m =>
+                                  m.Name.NotIn(
+                                      nameof(this.GetType),
+                                      nameof(this.ToString),
+                                      nameof(Equals),
+                                      nameof(object.ReferenceEquals),
+                                      nameof(this.GetHashCode))
+                              );
 
             if (methods.Any())
             {
