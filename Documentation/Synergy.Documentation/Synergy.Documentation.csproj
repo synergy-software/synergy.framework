@@ -21,7 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
       <ProjectReference Include="..\..\Markdown\Synergy.Markdowns\Synergy.Markdowns.csproj" />
     </ItemGroup>
 
