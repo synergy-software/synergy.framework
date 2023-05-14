@@ -6,7 +6,7 @@ Total: 4
 - TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: Add optional attributes when compilation constant CODE_ANALYSIS (or other) is present
 
 ## [ApiDescription.cs](../../Synergy.Architecture.Diagrams/Api/ApiDescription.cs)
-- TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: Duplicated class
+- TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: remove this class from here - check what it is used for
 
 ## [SequenceDiagramUrl.cs](../../Synergy.Architecture.Diagrams/Sequence/SequenceDiagramUrl.cs)
 - TODO:marcin (from:marcin on:19-03-2023): add here below support of HTTP request

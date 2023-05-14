@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 
 namespace Synergy.Architecture.Diagrams.Api
 {
-    // TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: Duplicated class
+    // TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: remove this class from here - check what it is used for
     
     public static class ApiDescription
     {
