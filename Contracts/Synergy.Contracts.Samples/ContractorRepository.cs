@@ -5,6 +5,8 @@ using Synergy.Contracts.Samples.Domain;
 
 namespace Synergy.Contracts.Samples
 {
+    // TODO: Marcin Celej [from: Marcin Celej on: 30-04-2023]: Remove this sample project
+    
     [UsedImplicitly]
     public class ContractorRepository : IContractorRepository
     {

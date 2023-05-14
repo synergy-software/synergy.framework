@@ -4,7 +4,7 @@ namespace Synergy.Contracts
 {
     static partial class Fail
     {
-        // TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: Use [CallerExpression] here
+        // TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: Use [CallerExpression] here - check https://andrewlock.net/exploring-dotnet-6-part-11-callerargumentexpression-and-throw-helpers/
         
         #region variable.FailIfNull(nameof(variable))
 
