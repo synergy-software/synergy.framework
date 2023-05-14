@@ -30,12 +30,18 @@ public static class FeatureGenerator
             include,
             exclude,
             generateAfter,
+            // ReSharper disable once ExplicitCallerInfoArgument
             callerFilePath
         );
-        var destinationFilePath = Path.Combine(Path.GetDirectoryName(callerFilePath), to);
+        var destinationFilePath = Path.Combine(PathFor(callerFilePath), to);
         File.WriteAllText(destinationFilePath, code);
     }
 
+    private static String PathFor(string callerFilePath)
+    {
+        return Path.GetDirectoryName(callerFilePath) ?? throw new ArgumentException("Improper path: " + callerFilePath, nameof(callerFilePath));
+    }
+    
     public static string Generate<TBehaviour>(
         this TBehaviour featureClass,
         string from,
@@ -54,7 +60,7 @@ public static class FeatureGenerator
         StringBuilder code = new StringBuilder();
         string className = featureClass.GetType()
                                        .Name;
-        var gherkinPath = Path.Combine(Path.GetDirectoryName(callerFilePath), from);
+        var gherkinPath = Path.Combine(PathFor(callerFilePath), from);
 
         string[] gherkins = FeatureGenerator.ReadAllLinesFrom(gherkinPath);
 
@@ -65,7 +71,7 @@ public static class FeatureGenerator
         code.AppendLine();
         code.AppendLine(
             $"[GeneratedCode(\"{typeof(FeatureGenerator).Assembly.FullName}\", " +
-            $"\"{typeof(FeatureGenerator).Assembly.GetName().Version.ToString()}\")]"
+            $"\"{typeof(FeatureGenerator).Assembly.GetName().Version?.ToString()}\")]"
         );
         code.AppendLine($"public partial class {className}");
         code.AppendLine("{");

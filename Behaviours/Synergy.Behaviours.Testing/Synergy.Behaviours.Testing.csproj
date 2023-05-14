@@ -18,15 +18,17 @@
         <AssemblyVersion>$(Version)</AssemblyVersion>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
     <ItemGroup>
-      <None Update="synergy.png">
-        <Pack>true</Pack>
-        <PackagePath></PackagePath>
-      </None>
-      <None Update="license.txt">
-        <Pack>true</Pack>
-        <PackagePath></PackagePath>
-      </None>
+        <None Include="synergy.png" Pack="true" PackagePath="" />
+        <None Include="license.txt" Pack="true" PackagePath="" />
     </ItemGroup>
 
 </Project>

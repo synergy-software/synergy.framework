@@ -2,8 +2,6 @@
 
 namespace Synergy.Behaviours.Testing;
 
-// TODO: Marcin Celej [from: Marcin Celej on: 12-05-2023]: Add Public API verification test to see what is exposed from this library
-
 internal static class Sentence
 {
     public static string ToMethod(string sentence)
