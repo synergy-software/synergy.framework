@@ -16,14 +16,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Update="license.txt">
-        <Pack>true</Pack>
-        <PackagePath></PackagePath>
-      </None>
-      <None Update="synergy.png">
-        <Pack>true</Pack>
-        <PackagePath></PackagePath>
-      </None>
+        <None Include="synergy.png" Pack="true" PackagePath="" />
+        <None Include="license.txt" Pack="true" PackagePath="" />
     </ItemGroup>
 
     <ItemGroup>
