@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using Synergy.Documentation.Code;
+using Synergy.Documentation.Todos.Patterns;
 
 namespace Synergy.Documentation.Todos;
 

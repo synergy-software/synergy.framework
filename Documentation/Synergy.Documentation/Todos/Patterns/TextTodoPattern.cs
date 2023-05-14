@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Synergy.Documentation.Todos;
+namespace Synergy.Documentation.Todos.Patterns;
 
 public record TextTodoPattern() : TodoPattern(
     "txt",
