@@ -26,8 +26,14 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Include="..\..\Synergy.Catalogue\Reflection\ReflectionExtensions.cs">
-        <Link>Api\ReflectionExtensions.cs</Link>
+        <Compile Include="..\..\Synergy.Catalogue\Extensions\StringExtensions.cs">
+          <Link>Extensions\StringExtensions.cs</Link>
+        </Compile>
+        <Compile Include="..\..\Synergy.Catalogue\Reflection\ReflectionExtensions.cs">
+            <Link>Extensions\ReflectionExtensions.cs</Link>
+        </Compile>
+      <Compile Include="..\..\Synergy.Catalogue\Extensions\EnumerableExtensions.cs">
+        <Link>Extensions\EnumerableExtensions.cs</Link>
       </Compile>
     </ItemGroup>
 

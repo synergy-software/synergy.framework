@@ -1,77 +1,146 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using JetBrains.Annotations;
+using Synergy.Catalogue;
+using Synergy.Catalogue.Reflection;
 
-namespace Synergy.Convention.Testing
+namespace Synergy.Documentation.Api
 {
-    // TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: Duplicated class
     public static class ApiDescription
     {
-        // TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: Update to newest version
-        
+        static readonly BindingFlags bindingFlags = BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public;
+
         public static string GenerateFor(Assembly assembly)
         {
-            StringBuilder description = new StringBuilder();
+            var description = new StringBuilder();
 
-            string assemblyName = assembly.GetName().Name;
+            var assemblyName = assembly.GetName().Name;
             description.AppendLine($"# {assemblyName}");
             description.AppendLine();
 
-            foreach (Type type in assembly.GetTypes())
+            return GenerateFor(assembly.GetTypes(), description, assemblyName);
+        }
+
+        public static string GenerateFor(IEnumerable<Type> types, StringBuilder? description = null, string? assemblyName = null)
+        {
+            description ??= new StringBuilder();
+
+            foreach (var type in types)
             {
                 if (type.IsPublic == false && type.IsNestedPublic == false)
                     continue;
 
-                var gType = type.IsEnum ? " (enum)" : (type.IsValueType ? " (struct)" : "");
-                var baseType = ApiDescription.GetBaseTypeName(type);
-                description.AppendLine($"## {type.FullName.Replace(assemblyName + ".", "")}{gType}{baseType}");
-                foreach (var property in type.GetProperties(BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public))
+                var shortNamespace = GetShortenNamespace(type, assemblyName);
+                var typeName = GetShortTypeName(type);
+                var baseType = GetParents(type);
+
+                description.AppendLine($"## {shortNamespace}{GetTypeName(type)}{typeName}{baseType}");
+
+                foreach (var property in type.GetProperties(bindingFlags).OrderBy(p => p.Name))
                 {
+                    if (property.DeclaringType == typeof(Exception) || property.DeclaringType == typeof(Attribute))
+                        continue;
+
                     description.AppendLine($" - {GetPropertyName(property)}: {GetTypeName(property)}{GetAttributes(property)} {GetAccessors(property)}");
                 }
 
-                foreach (var field in type.GetFields(BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public))
+                foreach (var field in type.GetFields(bindingFlags))
                 {
                     if (field.Name == "value__" && type.IsEnum)
                         continue;
-                    
-                    description.AppendLine($" - {ApiDescription.GetFieldName(field)}: {GetTypeName(field)}{GetAttributes(field)} (field)");
+
+                    if (type.IsEnum)
+                    {
+                        description.AppendLine($" - {field.Name} = {(int)Enum.Parse(type, field.Name)}");
+                    }
+                    else
+                    {
+                        description.AppendLine($" - {GetFieldName(field)}: {GetTypeName(field)}{GetAttributes(field)} (field)");
+                    }
                 }
 
                 if (type.IsEnum == false)
                 {
-                    foreach (var method in type.GetMethods(BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public))
+                    foreach (var constructor in type.GetConstructors(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public))
                     {
-                        if (method.IsSpecialName || method.DeclaringType == typeof(object) || method.DeclaringType == typeof(Exception))
+                        description.AppendLine($" - ctor({GetParametersOf(constructor)})");
+                    }
+
+                    foreach (var method in type.GetMethods(bindingFlags).OrderBy(m => m.Name))
+                    {
+                        if (method.IsSpecialName || method.DeclaringType.In(typeof(object), typeof(Exception), typeof(Attribute)))
                             continue;
-                        
+
                         if (type.IsValueType && method.Name.In(nameof(Equals), nameof(GetHashCode), nameof(ToString)))
                             continue;
 
-                        var generics = method.GetGenericArguments();
-                        var gD = generics.Length == 0 ? "" : "<" + String.Join(", ", generics.Select(g => g.Name)) + ">";
-                        description.AppendLine($" - {GetMethodName(method)}{gD}({GetParametersOf(method)}) : {GetTypeName(method)}{GetAttributes(method)}");
+                        if (method.GetCustomAttribute<CompilerGeneratedAttribute>() != null)
+                            continue;
+
+                        if (type.IsRecord() && method.Name.In(nameof(ToString), nameof(GetHashCode), nameof(Equals), "<Clone>$", "Deconstruct"))
+                            continue;
+
+                        var methodDescription = For(method);
+                        description.AppendLine($" - {methodDescription}");
                     }
                 }
 
                 description.AppendLine();
             }
-            
+
             return description.ToString();
+        }
+
+        public static string For(MethodInfo method, bool withAttributes = true)
+        {
+            var generics = method.GetGenericArguments();
+            var gD = generics.Length == 0 ? "" : "<" + String.Join(", ", generics.Select(g => GetTypeName(g))) + ">";
+            var attributes = withAttributes ? GetAttributes(method) : "";
+            var methodDescription = $"{GetMethodName(method)}{gD}({GetParametersOf(method, withAttributes)}) : {GetTypeName(method)}{attributes}";
+            return methodDescription;
+        }
+
+        private static string GetShortenNamespace(Type type, string? assemblyName)
+        {
+            if (assemblyName == null)
+                return type.Namespace + ".";
+            
+            var shortNamespace = type.Namespace.Replace(assemblyName, "").TrimStart('.');
+            if (shortNamespace.IsNullOrEmpty() == false)
+                shortNamespace += ".";
+            return shortNamespace;
+        }
+
+        private static string GetShortTypeName(Type type)
+        {
+            var typeName = type.IsEnum ? " (enum)" : (type.IsValueType ? " (struct)" : " (class)");
+            if (type.IsRecord())
+                typeName = " (record)";
+            if (typeof(Exception).IsAssignableFrom(type))
+                typeName = " (exception)";
+            if (typeof(Attribute).IsAssignableFrom(type))
+                typeName = " (attribute)";
+            if (type.IsAbstract)
+                typeName = " (abstract class)";
+            if (type.IsInterface)
+                typeName = " (interface)";
+            return typeName;
         }
 
         private static string GetAccessors(PropertyInfo property)
         {
             var canRead = property.GetGetMethod(false)?.IsPublic ?? false;
             var canWrite = property.GetSetMethod(false)?.IsPublic ?? false;
-            
+
             if (canRead && canWrite)
                 return "{ get; set; }";
-            
+
             if (canRead)
                 return "{ get; }";
-            
+
             if (canWrite)
                 return "{ set; }";
 
@@ -90,44 +159,47 @@ namespace Synergy.Convention.Testing
         {
             if (property.IsStatic())
                 return $"{property.DeclaringType.Name}.{property.Name}";
-            
+
             return property.Name;
         }
 
-        public static bool IsStatic(this PropertyInfo source, bool nonPublic = false) 
+        private static bool IsStatic(this PropertyInfo source, bool nonPublic = false)
             => source.GetAccessors(nonPublic).Any(x => x.IsStatic);
-        
-        [Pure] public static bool In<T>(this T value, params T[] values)
+
+        [Pure]
+        private static bool In<T>(this T value, params T[] values)
             => values.Contains(value);
-        
-        [Pure] public static bool NotIn<T>(this T value, params T[] values)
+
+        [Pure]
+        private static bool NotIn<T>(this T value, params T[] values)
             => value.In(values) == false;
-        
-        private static string GetMethodName(MethodInfo method)
+
+        internal static string GetMethodName(MethodInfo method)
         {
             if (method.IsStatic)
                 return $"{method.DeclaringType.Name}.{method.Name}";
-            
+
             return method.Name;
         }
 
-        private static string GetBaseTypeName(Type type)
+        private static string GetParents(Type type)
         {
-            if (type.BaseType == null)
+            List<string> parents = new List<string>();
+
+            if (type.BaseType != null && type.BaseType != typeof(object) && type.IsValueType == false)
+                parents.Add(GetTypeName(type.BaseType));
+
+            parents.AddRange(type.GetInterfaces().Select(i => GetTypeName(i)));
+
+            if (parents.Count == 0)
                 return "";
-            
-            if (type.BaseType == typeof(object))
-                return "";
-            
-            if (type.IsValueType)
-                return "";
-            
-            return " : " + type.BaseType.Name;
+
+            return " : " + String.Join(", ", parents);
         }
 
-        private static string GetParametersOf(MethodInfo method)
+        private static string GetParametersOf(ConstructorInfo constructor)
         {
-            var parameters = method.GetParameters();
+            var parameters = constructor.GetParameters();
             if (parameters.Any() == false)
                 return "";
 
@@ -146,66 +218,104 @@ namespace Synergy.Convention.Testing
             return description.ToString();
         }
 
+        private static string GetParametersOf(MethodInfo method, bool withAttributes = true)
+        {
+            var parameters = method.GetParameters();
+            if (parameters.Any() == false)
+                return "";
+
+            var last = parameters.Last();
+            StringBuilder description = new StringBuilder();
+            foreach (ParameterInfo parameter in parameters)
+            {
+                description.AppendLine();
+                var attributes = withAttributes ? GetAttributes(parameter) : "";
+                description.Append($"     {parameter.Name}: {GetTypeName(parameter)}{attributes}");
+                if (parameter != last)
+                    description.Append(",");
+            }
+
+            description.AppendLine();
+            description.Append("   ");
+            return description.ToString();
+        }
+
         private static string GetTypeName(PropertyInfo property)
         {
             var type = GetTypeName(property.PropertyType);
-            var nullable = property.GetCustomAttributes()
-                                   .Any(a => a.GetType()
-                                              .FullName == "System.Runtime.CompilerServices.NullableAttribute");
-            
+            var nullable = IsMarkedAsNullable(property);
             if (nullable)
-                return type +"?";
-            
+                return type + "?";
+
             return type;
         }
         
+        private static bool IsMarkedAsNullable(PropertyInfo p)
+            => new NullabilityInfoContext().Create(p).WriteState is NullabilityState.Nullable;
+
         private static string GetTypeName(FieldInfo field)
         {
             var type = GetTypeName(field.FieldType);
+            var nullable = IsMarkedAsNullable(field);
+            if (nullable)
+                return type + "?";
+            
             return type;
         }
         
-        private static string GetTypeName(MethodInfo method)
+        private static bool IsMarkedAsNullable(FieldInfo p)
+            => new NullabilityInfoContext().Create(p).WriteState is NullabilityState.Nullable;
+
+        public static string GetTypeName(MethodInfo method)
         {
             var type = GetTypeName(method.ReturnType);
-            var nullable = method.GetCustomAttributes()
-                                   .Any(a => a.GetType()
-                                              .FullName == "System.Runtime.CompilerServices.NullableContextAttribute");
-            
+            var nullable = IsMarkedAsNullable(method.ReturnParameter);
             if (nullable)
-                return type +"?";
-            
+                return type + "?";
+
             return type;
         }
-        
-        private static string GetTypeName(ParameterInfo parameter)
+
+        private static bool IsMarkedAsNullable(ParameterInfo p)
+            => new NullabilityInfoContext().Create(p).WriteState is NullabilityState.Nullable;
+
+        public static string GetTypeName(ParameterInfo parameter)
         {
             var type = GetTypeName(parameter.ParameterType);
-            var nullable = parameter.GetCustomAttributes()
-                                    .Any(a => a.GetType()
-                                               .FullName == "System.Runtime.CompilerServices.NullableAttribute");
-            
+            var nullable = IsMarkedAsNullable(parameter);
             var paramsArray = parameter.GetCustomAttribute<ParamArrayAttribute>();
-            
+
             if (paramsArray != null)
                 type = "params " + type;
-            
+
             var outAttribute = parameter.GetCustomAttribute<OutAttribute>();
-            
+
             if (outAttribute != null)
                 type = "out " + type;
-            
+
             if (nullable)
-                return type +"?";
-            
+                return type.TrimEnd('?') + "?";
+
             return type;
         }
-        
-        private static string GetTypeName(Type type)
+
+        public static string GetTypeName(Type type)
         {
+            if (Nullable.GetUnderlyingType(type) != null)
+            {
+                return $"{GetTypeName(Nullable.GetUnderlyingType(type))}?";
+            }
+
+            if (type.IsGenericType)
+            {
+                var arguments = type.GetGenericArguments();
+                return
+                    $"{type.Name.Substring(0, type.Name.IndexOf("`", StringComparison.Ordinal))}<{String.Join(", ", arguments.Select(a => GetTypeName(a)))}>";
+            }
+
             if (type == typeof(object))
                 return "object";
-            
+
             if (type == typeof(string))
                 return "string";
 
@@ -214,11 +324,20 @@ namespace Synergy.Convention.Testing
 
             if (type == typeof(long))
                 return "long";
-            
+
             if (type == typeof(bool))
                 return "bool";
-            
-            return type.Name;
+
+            if (type == typeof(void))
+                return "void";
+
+            if (type == typeof(decimal))
+                return "decimal";
+
+            if (type.FullName == null)
+                return type.Name;
+
+            return type.FullName.Substring(type.FullName.LastIndexOf('.') + 1);
         }
 
         private static string GetAttributes(MemberInfo member)
@@ -236,8 +355,10 @@ namespace Synergy.Convention.Testing
         private static string GetAttributes(IEnumerable<Attribute> enumerable)
         {
             var attributes = enumerable.Where(a => a.GetType().Name.StartsWith("__") == false)
-                                       .Select(a => a.GetType().Name.Replace("Attribute", ""))
-                                       .ToList();
+                .Where(a => a is not DebuggerStepThroughAttribute)
+                .Select(a => a.GetType().Name.Replace("Attribute", ""))
+                .ToList();
+
             if (attributes.Any() == false)
                 return "";
 
