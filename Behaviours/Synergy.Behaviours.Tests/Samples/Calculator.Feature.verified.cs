@@ -3,8 +3,8 @@ using System.CodeDom.Compiler;
 
 namespace Synergy.Behaviours.Tests.Samples;
 
-[GeneratedCode("Synergy.Behaviours.Testing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "1.0.0.0")]
-public partial class CalculatorFeature
+[GeneratedCode("Synergy.Behaviours.Testing", "1.0.0.0")]
+partial class CalculatorFeature
 {
     private void CalculatorBackground() // Background:
     {
@@ -27,7 +27,6 @@ public partial class CalculatorFeature
         Moreover().AfterAddTwoNumbers();
     }
 
-
     [Xunit.Fact]
     // @Add
     public void AddTwoNumbersInDifferentWay() // Scenario: Add two numbers in different way
@@ -40,7 +39,6 @@ public partial class CalculatorFeature
         When().TheTwoNumbersAreAdded();  // When the two numbers are added
         Then().TheResultShouldBe120(); // Then the result should be 120
     }
-
 
     // Rule: Subtracting numbers
 

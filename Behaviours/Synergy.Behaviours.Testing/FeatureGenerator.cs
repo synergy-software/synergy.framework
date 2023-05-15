@@ -70,10 +70,10 @@ public static class FeatureGenerator
         code.AppendLine($"namespace {featureClass.GetType().Namespace};");
         code.AppendLine();
         code.AppendLine(
-            $"[GeneratedCode(\"{typeof(FeatureGenerator).Assembly.FullName}\", " +
+            $"[GeneratedCode(\"{typeof(FeatureGenerator).Assembly.GetName().Name}\", " +
             $"\"{typeof(FeatureGenerator).Assembly.GetName().Version?.ToString()}\")]"
         );
-        code.AppendLine($"public partial class {className}");
+        code.AppendLine($"partial class {className}");
         code.AppendLine("{");
 
         Scenario? scenario = null;
@@ -114,6 +114,7 @@ public static class FeatureGenerator
                 continue;
             }
 
+            // TODO: Marcin Celej [from: Marcin Celej on: 15-05-2023]: check if tags above Rule will work
             var rule = Regex.Match(line, "\\s*Rule\\: (.*)");
             if (rule.Success)
             {
@@ -272,8 +273,6 @@ public static class FeatureGenerator
                 }
 
                 code.AppendLine("    }");
-                code.AppendLine();
-
                 code.AppendLine();
             }
 

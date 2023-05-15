@@ -3,7 +3,7 @@ using System.CodeDom.Compiler;
 
 namespace Synergy.Behaviours.Tests.Samples;
 
-[GeneratedCode("Synergy.Behaviours.Testing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "1.0.0.0")]
-public partial class NewFeature
+[GeneratedCode("Synergy.Behaviours.Testing", "1.0.0.0")]
+partial class NewFeature
 {
 }
