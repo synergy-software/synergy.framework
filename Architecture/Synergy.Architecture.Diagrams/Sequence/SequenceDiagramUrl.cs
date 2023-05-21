@@ -4,6 +4,8 @@ using System.Text.RegularExpressions;
 using PlantUml.Net;
 using Synergy.Architecture.Annotations.Diagrams.Sequence;
 using Synergy.Architecture.Diagrams.Api;
+using Synergy.Architecture.Diagrams.Documentation;
+using Synergy.Architecture.Diagrams.Extensions;
 using Synergy.Contracts;
 using Synergy.Reflection;
 

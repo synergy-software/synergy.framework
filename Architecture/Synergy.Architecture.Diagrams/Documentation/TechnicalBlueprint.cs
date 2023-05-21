@@ -2,7 +2,7 @@
 using Synergy.Architecture.Diagrams.Sequence;
 using Synergy.Contracts;
 
-namespace Synergy.Architecture.Diagrams;
+namespace Synergy.Architecture.Diagrams.Documentation;
 
 public class TechnicalBlueprint
 {

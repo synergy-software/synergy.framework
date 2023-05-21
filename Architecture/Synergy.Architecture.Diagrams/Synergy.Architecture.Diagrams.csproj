@@ -23,18 +23,18 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Include="..\..\Reflection\Synergy.Reflection\CustomAttributeExtensions.cs">
-        <Link>CustomAttributeExtensions.cs</Link>
-      </Compile>
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="PlantUml.Net" Version="1.4.80" />
     </ItemGroup>
 
     <ItemGroup>
         <None Include="synergy.png" Pack="true" PackagePath="" />
         <None Include="license.txt" Pack="true" PackagePath="" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="..\..\Reflection\Synergy.Reflection\CustomAttributeExtensions.cs">
+        <Link>Extensions\CustomAttributeExtensions.cs</Link>
+      </Compile>
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using Synergy.Architecture.Annotations.Diagrams.Sequence;
 using Synergy.Architecture.Diagrams;
+using Synergy.Architecture.Diagrams.Documentation;
 using Synergy.Documentation.Api;
 
 namespace Synergy.Architecture.Tests.Architecture.Public;

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Synergy.Architecture.Diagrams;
+using Synergy.Architecture.Diagrams.Documentation;
 using Synergy.Architecture.Diagrams.Sequence;
 using Synergy.Documentation.Code;
 using Synergy.Sample.Web.API.Controllers;

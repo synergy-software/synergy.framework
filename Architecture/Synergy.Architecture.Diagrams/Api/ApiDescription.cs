@@ -4,12 +4,13 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using JetBrains.Annotations;
+using Synergy.Architecture.Diagrams.Extensions;
 
 namespace Synergy.Architecture.Diagrams.Api
 {
     // TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: remove this class from here - check what it is used for
     
-    public static class ApiDescription
+    internal static class ApiDescription
     {
         static readonly BindingFlags bindingFlags = BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public;
 

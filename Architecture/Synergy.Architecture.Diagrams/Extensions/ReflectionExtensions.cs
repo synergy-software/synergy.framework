@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Synergy.Architecture.Diagrams;
+namespace Synergy.Architecture.Diagrams.Extensions;
 
 internal static class ReflectionExtensions
 {
@@ -23,7 +23,7 @@ internal static class ReflectionExtensions
     
     public static Attribute? GetCustomAttribute(this Type type, string attributeType)
         => type.GetCustomAttributes().FirstOrDefault(a => a.GetType().IsAssignableTo(attributeType));
-    
+
     public static Attribute? GetCustomAttribute(this MethodInfo method, string attributeType)
         => method.GetCustomAttributes().FirstOrDefault(a => a.GetType().IsAssignableTo(attributeType));
     

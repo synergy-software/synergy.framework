@@ -11,32 +11,6 @@
      type: Type
    ) : TAttribute[] [Extension]
 
-## TechnicalBlueprint (class)
- - ctor()
- - Add(
-     diagram: params SequenceDiagram[] [ParamArray]
-   ) : TechnicalBlueprint
- - Add(
-     diagram: IEnumerable<SequenceDiagram>
-   ) : TechnicalBlueprint
- - Intro(
-     markdown: string
-   ) : TechnicalBlueprint
- - Register<TComponent, TImplementation>() : TechnicalBlueprint [NullableContext]
- - Register(
-     interface: Type,
-     services: IServiceProvider
-   ) : TechnicalBlueprint
- - Register(
-     interface: Type,
-     implementation: Type
-   ) : TechnicalBlueprint
- - Render() : string
- - TechnicalBlueprint.Titled(
-     title: string
-   ) : TechnicalBlueprint
- - ToString() : string
-
 ## Sequence.SequenceDiagram (record) : IEquatable<SequenceDiagram>
  - Actor: SequenceDiagramActor [Nullable] { get; set; }
  - Components: TechnicalBlueprint+DiagramComponents? { get; set; }
@@ -110,30 +84,33 @@
  - GenerateDiagramContent() : StringBuilder
  - GenerateDiagramUrl() : string
 
-## Api.ApiDescription (abstract class)
- - ApiDescription.For(
-     method: MethodInfo,
-     withAttributes: bool [Optional]
-   ) : string
- - ApiDescription.GenerateFor(
-     assembly: Assembly
-   ) : string
- - ApiDescription.GenerateFor(
-     types: IEnumerable<Type>,
-     description: StringBuilder? [Nullable, Optional],
-     assemblyName: string? [Nullable, Optional]
-   ) : string
- - ApiDescription.GetTypeName(
-     method: MethodInfo
-   ) : string
- - ApiDescription.GetTypeName(
-     parameter: ParameterInfo
-   ) : string
- - ApiDescription.GetTypeName(
-     type: Type
-   ) : string
+## Documentation.TechnicalBlueprint (class)
+ - ctor()
+ - Add(
+     diagram: params SequenceDiagram[] [ParamArray]
+   ) : TechnicalBlueprint
+ - Add(
+     diagram: IEnumerable<SequenceDiagram>
+   ) : TechnicalBlueprint
+ - Intro(
+     markdown: string
+   ) : TechnicalBlueprint
+ - Register<TComponent, TImplementation>() : TechnicalBlueprint [NullableContext]
+ - Register(
+     interface: Type,
+     services: IServiceProvider
+   ) : TechnicalBlueprint
+ - Register(
+     interface: Type,
+     implementation: Type
+   ) : TechnicalBlueprint
+ - Render() : string
+ - TechnicalBlueprint.Titled(
+     title: string
+   ) : TechnicalBlueprint
+ - ToString() : string
 
-## TechnicalBlueprint+DiagramComponents (class)
+## Documentation.TechnicalBlueprint+DiagramComponents (class)
  - ctor()
  - Register<TComponent, TImplementation>() : void [NullableContext]
  - Register(

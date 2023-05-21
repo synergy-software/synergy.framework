@@ -127,9 +127,9 @@ namespace Synergy.Reflection
             Fail.IfArgumentNull(allAttributes, nameof(allAttributes));
 
             T[] attributes = allAttributes
-                .Where(a => a is T)
-                .Cast<T>()
-                .ToArray();
+                             .Where(a => a is T)
+                             .Cast<T>()
+                             .ToArray();
 
             Fail.IfCollectionContainsNull(attributes, $"Attributes collection on {name}");
 
