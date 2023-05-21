@@ -98,7 +98,7 @@ public record SequenceDiagram(
         diagrams.AppendLine();
         if (this.FooterText != null)
         {
-            diagrams.AppendLine(FooterText);
+            diagrams.AppendLine(FooterText.Replace("\\n", Environment.NewLine));
             diagrams.AppendLine();
         }
 

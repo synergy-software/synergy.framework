@@ -5,15 +5,18 @@ public class SequenceDiagramExternalCallAttribute : Attribute, SequenceDiagramEl
 {
     public string Type { get; }
     public string Method { get; }
+    public string? Result { get; }
+    
     public string? Note { get; set; }
     public SequenceDiagramArchetype Archetype { get; set; }
     public SequenceDiagramGroupType Group { get; set; }
     public string? GroupHeader { get; set; }
     
-    public SequenceDiagramExternalCallAttribute(string type, string method)
+    public SequenceDiagramExternalCallAttribute(string type, string method, string? result = null)
     {
         this.Type = type;
         this.Method = method;
         this.Archetype = SequenceDiagramArchetype.Participant;
+        this.Result = result;
     }
 }

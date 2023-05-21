@@ -22,10 +22,15 @@
         <ParentFile>Todos</ParentFile>
         <DependentUpon>Todos.cs</DependentUpon>
       </None>
+      <None Update="Architecture\Public\Api.of.Synergy.Behaviours.Testing.verified.md">
+        <ParentFile>Api</ParentFile>
+        <DependentUpon>Api.cs</DependentUpon>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\Documentation\Synergy.Documentation\Synergy.Documentation.csproj" />
+      <ProjectReference Include="..\Synergy.Architecture.Diagrams\Synergy.Architecture.Diagrams.csproj" />
     </ItemGroup>
 
 </Project>

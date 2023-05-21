@@ -2,8 +2,7 @@
 using System.Xml;
 using Synergy.Catalogue;
 using Synergy.Catalogue.Reflection;
-using Synergy.Contracts.Requirements;
-using Synergy.Markdowns;
+using Synergy.Documentation.Markup;
 
 namespace Synergy.Documentation.Api
 {
@@ -12,13 +11,13 @@ namespace Synergy.Documentation.Api
         public ClassDocumentation(Type type)
         {
             var docTypeName = $"{type.Namespace}.{type.Name}";
-            var docsFile = Path.ChangeExtension(typeof(Business).Assembly.Location, "xml");
+            var docsFile = Path.ChangeExtension(type.Assembly.Location, "xml");
             var xml = new XmlDocument();
             xml.Load(docsFile);
             var summary = xml.DocumentElement.SelectSingleNode($"//*[@name='T:{docTypeName}']/summary")
                              ?.InnerText.Trim();
 
-            this.Append(new Markdown.Header1(nameof(Business) + " class"))
+            this.Append(new Markdown.Header1(type + " class"))
                 .Append(new Markdown.Header2("Definition"))
                 .Append(new Markdown.Paragraph($"Namespace: {type.Namespace}<br/>")
                     .Line($"Assembly: {type.Assembly.GetName().Name}.dll"))
@@ -50,9 +49,9 @@ namespace Synergy.Documentation.Api
                 {
                     var methodNameInDocumentation = method.ToString();
                     methodNameInDocumentation = methodNameInDocumentation.Substring(methodNameInDocumentation.IndexOf(" ") + 1);
-                    var methodSummarry = xml.DocumentElement.SelectSingleNode($"//*[@name='M:{docTypeName}.{methodNameInDocumentation}']/summary")
+                    var methodSummary = xml.DocumentElement.SelectSingleNode($"//*[@name='M:{docTypeName}.{methodNameInDocumentation}']/summary")
                                             ?.InnerText.Trim();
-                    table.Append(method.GetFriendlyMethodName(), methodSummarry);
+                    table.Append(method.GetFriendlyMethodName(), methodSummary);
                 }
 
                 this.Append(table);

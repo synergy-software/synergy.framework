@@ -1,7 +1,7 @@
 ﻿using Synergy.Documentation.Code;
 using Synergy.Documentation.Todos;
 
-namespace Synergy.Web.Api.Tests.Todos;
+namespace Synergy.Web.Api.Tests.Architecture.Debt;
 
 [UsesVerify]
 public class Todos
@@ -10,8 +10,8 @@ public class Todos
     public async Task Generate()
     {
         var rootFolder = CodeFolder.Current()
-                                   .Up(2);
-        var technicalDebt = TodoExplorer.DebtFor("Synergy.Contracts", rootFolder);
+                                   .Up(3);
+        var technicalDebt = TodoExplorer.DebtFor("Synergy.Web.Api.Testing", rootFolder);
 
         await Verifier
               .Verify(technicalDebt, "md")

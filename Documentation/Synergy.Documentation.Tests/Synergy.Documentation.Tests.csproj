@@ -16,6 +16,10 @@
         <ParentFile>Api</ParentFile>
         <DependentUpon>Api.cs</DependentUpon>
       </None>
+      <None Update="Markdowns\MarkdownTests.CreateMarkdownDocument.approved.md">
+        <ParentExtension>.cs</ParentExtension>
+        <ParentFile>MarkdownTests</ParentFile>
+      </None>
     </ItemGroup>
 
     <ItemGroup>

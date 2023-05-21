@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Text;
 using Synergy.Catalogue;
 using Synergy.Contracts;
 
-namespace Synergy.Markdowns
+// TODO: Marcin Celej [from: Marcin Celej on: 21-05-2023]: Stop referencing Synergy.Contracts from Synergy.Documentation
+
+namespace Synergy.Documentation.Markup
 {
 #if INTERNAL_MARKDOWN
     internal
@@ -72,7 +72,7 @@ namespace Synergy.Markdowns
                                     .Trim();
             }
 
-            public override string ToString() => $"{new string('#', this.level)} {this.header}{NL}";
+            public override string ToString() => $"{new string('#', this.level)} {this.header}{Markdown.NL}";
         }
 
         public class Header1 : Header
@@ -140,10 +140,10 @@ namespace Synergy.Markdowns
             public Paragraph Line(string line)
             {
                 Fail.IfArgumentWhiteSpace(line, nameof(line));
-                return new Paragraph(this.text + NL + line);
+                return new Paragraph(this.text + Markdown.NL + line);
             }
             
-            public override string ToString() => $"{this.text}{NL}";
+            public override string ToString() => $"{this.text}{Markdown.NL}";
         }
 
         #endregion
@@ -173,7 +173,7 @@ namespace Synergy.Markdowns
                 return this;
             }
             
-            public override string ToString() => $"> {String.Join(NL + "> ", this.lines)}{NL}";
+            public override string ToString() => $"> {String.Join(Markdown.NL + "> ", this.lines)}{Markdown.NL}";
         }
 
         #endregion

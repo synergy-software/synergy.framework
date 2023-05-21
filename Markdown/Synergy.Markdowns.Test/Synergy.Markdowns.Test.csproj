@@ -8,10 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Update="MarkdownTests.CreateMarkdownDocument.approved.md">
-        <ParentExtension>.cs</ParentExtension>
-        <ParentFile>MarkdownTests</ParentFile>
-      </None>
       <None Update="Todos\Todos.Technical.Debt.verified.md">
         <ParentFile>Todos</ParentFile>
         <DependentUpon>Todos.cs</DependentUpon>

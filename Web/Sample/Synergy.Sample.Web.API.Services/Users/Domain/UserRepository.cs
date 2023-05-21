@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Synergy.Architecture.Annotations.Diagrams.Sequence;
 using Synergy.Contracts;
 using Synergy.Sample.Web.API.Services.Infrastructure.Annotations;
 
@@ -10,8 +11,9 @@ namespace Synergy.Sample.Web.API.Services.Users.Domain
     [CreatedImplicitly]
     public class UserRepository : IUserRepository
     {
-        private readonly List<User> users = new List<User>();
+        private readonly List<User> users = new();
 
+        [SequenceDiagramDatabaseCall("INSERT INTO Users (Id, Login) VALUES (@Id, @Login)")]
         public User CreateUser(Login login)
         {
             var user = new User(Guid.NewGuid().ToString().Replace("-", ""), login);

@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Synergy.Markdowns;
+using Synergy.Documentation.Markup;
 
 namespace Synergy.Catalogue.Reflection.Tests
 {

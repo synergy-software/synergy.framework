@@ -1,7 +1,6 @@
-﻿using VerifyXunit;
-using Xunit;
+﻿using Synergy.Documentation.Markup;
 
-namespace Synergy.Markdowns.Test
+namespace Synergy.Documentation.Tests.Markup
 {
     public class MarkdownTests
     {

@@ -33,13 +33,13 @@ namespace Synergy.Reflection
             }
 
             [NotNull, Pure]
-            public string GetEnumName(TEnum @enum)
+            public string GetEnumName([NotNull] TEnum @enum)
             {
                 return this.weak.GetEnumName(@enum.CastOrFail<Enum>());
             }
 
             [CanBeNull, Pure]
-            public string GetEnumDisplayName(TEnum @enum)
+            public string GetEnumDisplayName([NotNull] TEnum @enum)
             {
                 return this.weak.GetEnumDisplayName(@enum.CastOrFail<Enum>());
             }

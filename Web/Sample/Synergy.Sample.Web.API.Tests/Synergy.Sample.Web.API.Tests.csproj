@@ -2,9 +2,8 @@
 
   <PropertyGroup>
     <RootNamespace>Synergy.Sample.Web.API.Tests</RootNamespace>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
-    <LangVersion>8</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
@@ -16,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Architecture\Synergy.Architecture.Diagrams\Synergy.Architecture.Diagrams.csproj" />
     <ProjectReference Include="..\..\..\Contracts\Synergy.Convention.Testing\Synergy.Convention.Testing.csproj" />
+    <ProjectReference Include="..\..\..\Documentation\Synergy.Documentation\Synergy.Documentation.csproj" />
     <ProjectReference Include="..\..\Synergy.Web.Api.Testing\Synergy.Web.Api.Testing.csproj" />
     <ProjectReference Include="..\Synergy.Sample.Web.API.Services\Synergy.Sample.Web.API.Services.csproj" />
     <ProjectReference Include="..\Synergy.Sample.Web.API\Synergy.Sample.Web.API.csproj" />

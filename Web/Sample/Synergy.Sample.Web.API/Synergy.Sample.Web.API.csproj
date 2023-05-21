@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <RootNamespace>Synergy.Sample.Web.API</RootNamespace>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <LangVersion>8</LangVersion>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Architecture\Synergy.Architecture.Annotations\Synergy.Architecture.Annotations.csproj" />
     <ProjectReference Include="..\..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
     <ProjectReference Include="..\..\..\Reflection\Synergy.Reflection\Synergy.Reflection.csproj" />
     <ProjectReference Include="..\Synergy.Sample.Web.API.Services\Synergy.Sample.Web.API.Services.csproj" />

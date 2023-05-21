@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using PlantUml.Net;
 using Synergy.Architecture.Annotations.Diagrams.Sequence;
 using Synergy.Architecture.Diagrams.Api;
@@ -75,21 +76,27 @@ public record SequenceDiagramUrl(
 
     private string? GetHeader()
     {
-        return null;
+        var rootType = Components.Resolve(_type);
+        
+        if (!rootType.IsAssignableTo("Microsoft.AspNetCore.Mvc.ControllerBase")) 
+            return null;
 
-        // TODO:marcin (from:marcin on:19-03-2023): add here below support of HTTP request  
-        // var rootType = Components.Resolve(_type);
-        //
-        // if (!rootType.IsAssignableTo(typeof(ControllerBase))) 
-        //     return null;
-        //
-        // var httpMethodAttribute = _root.GetCustomAttributes().FirstOrDefault(a => a is HttpMethodAttribute) as HttpMethodAttribute;
-        // var httpRoute = rootType.GetCustomAttribute<RouteAttribute>()?.Template ?? "";
-        // httpRoute = httpRoute.Replace("{version:apiVersion}", "1");
-        // var httpMethod = httpMethodAttribute.OrFail(nameof(httpMethodAttribute)).HttpMethods.First();
-        // var template = httpMethodAttribute!.Template;
-        // var request = $"HTTP {httpMethod} {httpRoute}/{template}";
-        // return request;
+        var httpMethodAttribute = _root.GetCustomAttribute("Microsoft.AspNetCore.Mvc.Routing.HttpMethodAttribute");
+        if (httpMethodAttribute == null)
+            return null;
+
+        var httpRoute = "";
+        var routeAttribute = rootType.GetCustomAttribute("Microsoft.AspNetCore.Mvc.RouteAttribute");
+        if (routeAttribute != null)
+        {
+            httpRoute = routeAttribute.GetPropertyValue<string>("Template");
+        }
+        
+        httpRoute = httpRoute.Replace("{version:apiVersion}", "1");
+        var httpMethod = httpMethodAttribute.GetPropertyValue<IEnumerable<string>>("HttpMethods").First();
+        var template = httpMethodAttribute.GetPropertyValue<string>("Template");
+        var request = $"HTTP {httpMethod} {httpRoute}/{template}".TrimEnd('/');
+        return request;
     }
 
     private string GenerateSequences(string? request)
@@ -230,6 +237,9 @@ public record SequenceDiagramUrl(
         if (methodInfo == null)
         {
             diagram.AppendLine($"{sourceTypeName}->{currentTypeName}: {nextStep.Method}");
+            if (nextStep.Note != null)
+                diagram.AppendLine($"{nextStep.Note}");
+            
             return;
         }
 
@@ -300,6 +310,11 @@ public record SequenceDiagramUrl(
         var currentTypeName = this.AppendNode(nextStep.Type, nextStep.Archetype, SequenceDiagramUrl.unknownType);
         
         diagram.AppendLine($"{sourceTypeName}->{currentTypeName}: {nextStep.Method}");
+        if (nextStep.Result != null)
+        {
+            diagram.AppendLine($"{currentTypeName}->{sourceTypeName}: {nextStep.Result}");
+        }
+        
         if (nextStep.Note != null)
             diagram.AppendLine($"{nextStep.Note}");
     }
@@ -319,13 +334,7 @@ public record SequenceDiagramUrl(
     
     private string AppendNode(string fullName, SequenceDiagramArchetype archetype, Type? type)
     {
-        var name = fullName
-            .Replace('<', '_')
-            .Replace('>', '_')
-            .Replace(',', '_')
-            .Replace(' ', '_')
-            .Replace('`', '_')
-            .Replace("\\n", "_");
+        var name = Regex.Replace(fullName, "[^a-zA-Z]", "_");
 
         var found = this._nodes.FirstOrDefault(n => n.Name == name);
         if (found != null)

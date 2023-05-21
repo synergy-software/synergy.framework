@@ -9,19 +9,17 @@
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
       <DefineConstants>TRACE;INTERNALS</DefineConstants>
+      <DocumentationFile>bin\Debug\Synergy.Documentation.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
       <DefineConstants>TRACE;INTERNALS</DefineConstants>
+      <DocumentationFile>bin\Release\Synergy.Documentation.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
         <None Include="synergy.png" Pack="true" PackagePath="" />
         <None Include="license.txt" Pack="true" PackagePath="" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\..\Markdown\Synergy.Markdowns\Synergy.Markdowns.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -34,6 +32,10 @@
       <Compile Include="..\..\Synergy.Catalogue\Extensions\EnumerableExtensions.cs">
         <Link>Extensions\EnumerableExtensions.cs</Link>
       </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
     </ItemGroup>
 
 

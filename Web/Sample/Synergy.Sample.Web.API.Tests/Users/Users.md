@@ -58,6 +58,7 @@ Content-Length: 19
 ```
 POST  /api/v1/users
 Content-Type: application/json; charset=utf-8
+Content-Length: 40
 test: header
 {
   "Login": {
@@ -94,7 +95,7 @@ Content-Length: 129
 
 ### 2.2. Get created user pointed by "Location" header (1 request)
 
-### 2.2.2. Request to [Get user located at http://localhost/api/v1/users/df1dfaf89f464c6d956727902c72f29a]
+### 2.2.2. Request to [Get user located at http://localhost/api/v1/users/42dcb695c2c241b6aef90281aa2cf9d7]
 
 - Request
 ```
@@ -136,7 +137,7 @@ Content-Length: 129
 
 ### 3.1. Get user by id (1 request)
 
-### 3.1.1. Request to [Get user with id "df1dfaf89f464c6d956727902c72f29a"]
+### 3.1.1. Request to [Get user with id "42dcb695c2c241b6aef90281aa2cf9d7"]
 
 - Request
 ```
@@ -259,6 +260,7 @@ Content-Length: 152
 ```
 POST  /api/v1/users
 Content-Type: application/json; charset=utf-8
+Content-Length: 14
 test: header
 {
   "login": null
@@ -301,6 +303,7 @@ Content-Length: 351
 ```
 POST  /api/v1/users
 Content-Type: application/json; charset=utf-8
+Content-Length: 12
 test: header
 {
   "login": ""
@@ -343,6 +346,7 @@ Content-Length: 349
 ```
 POST  /api/v1/users
 Content-Type: application/json; charset=utf-8
+Content-Length: 14
 test: header
 {
   "login": "  "
@@ -387,7 +391,7 @@ Content-Length: 351
 
 ### 6.1. Delete user by id (1 request)
 
-### 6.1.1. Request to [Delete user with id "df1dfaf89f464c6d956727902c72f29a"]
+### 6.1.1. Request to [Delete user with id "42dcb695c2c241b6aef90281aa2cf9d7"]
 
 - Request
 ```
@@ -414,7 +418,7 @@ Content-Length: 2
 
 ### 6.2. Try to get the deleted user (1 request)
 
-### 6.2.2. Request to [Get user with id "df1dfaf89f464c6d956727902c72f29a"]
+### 6.2.2. Request to [Get user with id "42dcb695c2c241b6aef90281aa2cf9d7"]
 
 - Request
 ```

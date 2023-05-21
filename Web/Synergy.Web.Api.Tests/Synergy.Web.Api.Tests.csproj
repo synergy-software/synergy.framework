@@ -14,6 +14,7 @@
     
     <ItemGroup>
         <ProjectReference Include="..\..\Documentation\Synergy.Documentation\Synergy.Documentation.csproj" />
+        <ProjectReference Include="..\Synergy.Web.Api.Testing\Synergy.Web.Api.Testing.csproj" />
     </ItemGroup>
     
     <ItemGroup>
@@ -24,6 +25,10 @@
       <None Update="Todos\Todos.Technical.Debt.verified.md">
         <ParentFile>Todos</ParentFile>
         <DependentUpon>Todos.cs</DependentUpon>
+      </None>
+      <None Update="Architecture\Public\Api.of.Synergy.Documentation.verified.md">
+        <ParentFile>Api</ParentFile>
+        <DependentUpon>Api.cs</DependentUpon>
       </None>
     </ItemGroup>
     

@@ -9,8 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
-      <ProjectReference Include="..\Markdown\Synergy.Markdowns.Test\Synergy.Markdowns.Test.csproj" />
-      <ProjectReference Include="..\Markdown\Synergy.Markdowns\Synergy.Markdowns.csproj" />
+      <ProjectReference Include="..\Documentation\Synergy.Documentation\Synergy.Documentation.csproj" />
     </ItemGroup>
 
     <ItemGroup>

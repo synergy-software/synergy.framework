@@ -2,6 +2,7 @@
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Synergy.Architecture.Annotations.Diagrams.Sequence;
 using Synergy.Sample.Web.API.Services.Infrastructure.Commands;
 using Synergy.Sample.Web.API.Services.Infrastructure.Queries;
 using Synergy.Sample.Web.API.Services.Users.Commands.CreateUser;
@@ -68,7 +69,9 @@ namespace Synergy.Sample.Web.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [NotNull]
         //[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Create))]
+        [SequenceDiagramCall(typeof(ICreateUserCommandHandler), nameof(ICreateUserCommandHandler.Handle))]
         public ActionResult<CreateUserCommandResult> Create([FromRoute] string version, [FromBody] [NotNull] CreateUserCommand user)
         {
             var created = this._commandDispatcher.Dispatch<CreateUserCommand, ICreateUserCommandHandler, CreateUserCommandResult>(user);

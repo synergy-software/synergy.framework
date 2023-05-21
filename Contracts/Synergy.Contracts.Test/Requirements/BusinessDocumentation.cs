@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Synergy.Contracts.Requirements;
 using Synergy.Documentation.Api;
 using Synergy.Documentation.Code;
-using Synergy.Markdowns;
+using Synergy.Documentation.Markup;
 using VerifyXunit;
 using Xunit;
 

@@ -1,4 +1,5 @@
-﻿using Synergy.Sample.Web.API.Services.Infrastructure.Annotations;
+﻿using Synergy.Architecture.Annotations.Diagrams.Sequence;
+using Synergy.Sample.Web.API.Services.Infrastructure.Annotations;
 using Synergy.Sample.Web.API.Services.Infrastructure.Commands;
 using Synergy.Sample.Web.API.Services.Users.Domain;
 
@@ -14,6 +15,8 @@ namespace Synergy.Sample.Web.API.Services.Users.Commands.CreateUser
             this._userRepository = userRepository;
         }
 
+        [SequenceDiagramCall(typeof(IUserRepository), nameof(IUserRepository.CreateUser))]
+        [SequenceDiagramActivation(typeof(CreateUserCommandResult))]
         public CreateUserCommandResult Handle(CreateUserCommand command)
         {
             // TODO: Add validation (bad-request) mechanism - maybe use data annotations?
