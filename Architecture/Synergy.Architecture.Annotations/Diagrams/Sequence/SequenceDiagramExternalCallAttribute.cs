@@ -1,5 +1,8 @@
-﻿namespace Synergy.Architecture.Annotations.Diagrams.Sequence;
+﻿using System.Diagnostics;
 
+namespace Synergy.Architecture.Annotations.Diagrams.Sequence;
+
+[Conditional("CODE_ANALYSIS")]
 [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
 public class SequenceDiagramExternalCallAttribute : Attribute, SequenceDiagramElement, SequenceDiagramGroup
 {

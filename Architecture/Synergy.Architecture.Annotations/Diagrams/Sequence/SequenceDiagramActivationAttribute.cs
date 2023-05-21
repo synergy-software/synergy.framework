@@ -1,7 +1,9 @@
-﻿namespace Synergy.Architecture.Annotations.Diagrams.Sequence;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
-// TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: Add optional attributes when compilation constant CODE_ANALYSIS (or other) is present
+namespace Synergy.Architecture.Annotations.Diagrams.Sequence;
 
+[Conditional("CODE_ANALYSIS")]
 [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
 public class SequenceDiagramActivationAttribute : Attribute, SequenceDiagramElement, SequenceDiagramGroup
 {
