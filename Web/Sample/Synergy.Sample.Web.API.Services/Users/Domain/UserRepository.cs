@@ -13,12 +13,28 @@ namespace Synergy.Sample.Web.API.Services.Users.Domain
     {
         private readonly List<User> users = new();
 
+        [SequenceDiagramActivation(typeof(UserRepository))]
+        [SequenceDiagramSelfCall(nameof(UserRepository.InstantiateUserEntity))]
         [SequenceDiagramDatabaseCall("INSERT INTO Users (Id, Login) VALUES (@Id, @Login)")]
+        [SequenceDiagramDeactivation(typeof(UserRepository))]
         public User CreateUser(Login login)
         {
-            var user = new User(Guid.NewGuid().ToString().Replace("-", ""), login);
+            var user = UserRepository.InstantiateUserEntity(login);
             this.users.Add(user);
             return user;
+        }
+
+        [SequenceDiagramActivation(typeof(UserRepository))]
+        [SequenceDiagramActivation(typeof(User))]
+        [SequenceDiagramDeactivation(typeof(UserRepository))]
+        private static User InstantiateUserEntity(Login login)
+        {
+            return new User(
+                Guid.NewGuid()
+                    .ToString()
+                    .Replace("-", ""),
+                login
+            );
         }
 
         public User? FindUserBy(string userId)

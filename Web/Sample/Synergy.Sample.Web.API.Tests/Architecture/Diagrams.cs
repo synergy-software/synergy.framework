@@ -25,6 +25,7 @@ public class Diagrams
                         .Register<ICreateUserCommandHandler, CreateUserCommandHandler>()
                         .Register<IUserRepository, UserRepository>()
                         .Add(Create())
+                        .Add(Read())
             ;
 
         File.WriteAllText(SequenceDiagrams.FilePath, blueprint.Render());
@@ -46,5 +47,12 @@ public class Diagrams
                      .Footer("This diagram shows the full path of user creation.\\n" +
                              "To see what happens next - check the next diagrams below."
                      );
+    }
+    
+    private static IEnumerable<SequenceDiagram> Read()
+    {
+        yield return SequenceDiagram
+                     .From(Actors.Browser)
+                     .Calling<UsersController>(c => c.GetUsers());
     }
 }
