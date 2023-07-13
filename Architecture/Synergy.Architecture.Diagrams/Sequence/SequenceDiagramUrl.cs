@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
 using PlantUml.Net;
 using Synergy.Architecture.Annotations.Diagrams.Sequence;
 using Synergy.Architecture.Diagrams.Api;
@@ -18,8 +17,9 @@ public record SequenceDiagramUrl(
     TechnicalBlueprint.DiagramComponents Components
     )
 {
-    private Type _type => _root.DeclaringType.OrFail(nameof(_root.DeclaringType));
-    private readonly List<SequenceDiagramNode> _nodes = new() { new(_actor.Name, _actor.Name, _actor.Archetype, _actor.Note, _actor.Colour) };
+    private Type _type => _root.DeclaringType ?? throw new ArgumentNullException(nameof(_root.DeclaringType));
+
+    private readonly List<SequenceDiagramNode> _nodes = new() { new(_actor.CodeName, _actor.Name, _actor.Archetype, _actor.Note, _actor.Colour) };
     private const Type? unknownType = null;
 
     public override string ToString()
@@ -61,12 +61,12 @@ public record SequenceDiagramUrl(
                 colour = $" #{node.Colour}";
             
             var @as = "";
-            if (node.Name != node.FullName)
+            if (node.CodeName != node.FullName)
                 @as = $" as \"{node.FullName}\"";
-            diagram.AppendLine($"{node.Archetype.ToString().ToLowerInvariant()} {node.Name}{@as}{colour}");
+            diagram.AppendLine($"{node.Archetype.ToString().ToLowerInvariant()} {node.CodeName}{@as}{colour}");
             if (node.Note != null)
             {
-                diagram.AppendLine($"/ note over {node.Name}: {node.Note}");
+                diagram.AppendLine($"/ note over {node.CodeName}: {node.Note}");
             }
         }
 
@@ -108,9 +108,9 @@ public record SequenceDiagramUrl(
         var diagram = new StringBuilder();
         
         if(request != null)
-            diagram.AppendLine($"{_actor.Name}->{rootTypeName}: [{_root.Name}()] {request}");
+            diagram.AppendLine($"{_actor.CodeName}->{rootTypeName}: [{_root.Name}()] {request}");
         else
-            diagram.AppendLine($"{_actor.Name}->{rootTypeName}: {_root.Name}({SequenceDiagramUrl.GetArguments(_root.GetParameters())})");
+            diagram.AppendLine($"{_actor.CodeName}->{rootTypeName}: {_root.Name}({SequenceDiagramUrl.GetArguments(_root.GetParameters())})");
  
         var note =_root.GetCustomAttributesBasedOn<SequenceDiagramNoteAttribute>().FirstOrDefault()?.Note;
         if (note != null)
@@ -121,7 +121,7 @@ public record SequenceDiagramUrl(
         if (request != null)
             diagram.AppendLine($"Browser<--{rootTypeName}: HTTP/1.1 200 OK");
         else
-            diagram.AppendLine($"{_actor.Name}<--{rootTypeName}");
+            diagram.AppendLine($"{_actor.CodeName}<--{rootTypeName}");
         
         return diagram.ToString();
     }
@@ -159,6 +159,7 @@ public record SequenceDiagramUrl(
             }
             else if (activeGroup != null)
             {
+                // TODO: Marcin Celej [from: Marcin Celej on: 12-07-2023]: does not work properly for loop after loop
                 diagram.AppendLine("end");
                 activeGroup = null;
             }
@@ -229,6 +230,7 @@ public record SequenceDiagramUrl(
 
     private void InsertSelfCall(SequenceDiagramSelfCallAttribute nextStep, StringBuilder diagram, Type sourceType, string sourceTypeName)
     {
+        // TODO: Marcin Celej [from: Marcin Celej on: 06-07-2023]: Allow to inline self call
         var currentType = sourceType;
         var currentTypeName= this.AppendNode(sourceTypeName, SequenceDiagramArchetype.Participant, currentType);
 
@@ -274,6 +276,7 @@ public record SequenceDiagramUrl(
         if (currentTypeName != sourceTypeName)
         {
             diagram.AppendLine($"create {currentTypeName}");
+            // TODO: Marcin Celej [from: Marcin Celej on: 06-07-2023]: Add configuration setting to generate only 'new' word here without exact ctor mentioned here - to simplify diagram
             diagram.AppendLine($"{sourceTypeName}->{currentTypeName}: {@throw}new {currentTypeName}({arguments})");
         }
 
@@ -335,11 +338,11 @@ public record SequenceDiagramUrl(
     
     private string AppendNode(string fullName, SequenceDiagramArchetype archetype, Type? type)
     {
-        var name = Regex.Replace(fullName, "[^a-zA-Z]", "_");
+        var codeName = fullName.CodeName();
 
-        var found = this._nodes.FirstOrDefault(n => n.Name == name);
+        var found = this._nodes.FirstOrDefault(n => n.CodeName == codeName);
         if (found != null)
-            return found.Name;
+            return found.CodeName;
         
         string? colour = null;
         string? note = null;
@@ -356,10 +359,16 @@ public record SequenceDiagramUrl(
             }
         }
         
-        this._nodes.Add(new SequenceDiagramNode(name, fullName, archetype, note, colour));
+        this._nodes.Add(new SequenceDiagramNode(codeName, fullName, archetype, note, colour));
 
-        return name;
+        return codeName;
     } 
 }
 
-internal record SequenceDiagramNode(string Name, string FullName, SequenceDiagramArchetype Archetype, string? Note, string? Colour);
+internal record SequenceDiagramNode(
+    string CodeName,
+    string FullName,
+    SequenceDiagramArchetype Archetype,
+    string? Note,
+    string? Colour
+    );

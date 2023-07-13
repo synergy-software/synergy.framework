@@ -7,4 +7,7 @@ public record SequenceDiagramActor(
     SequenceDiagramArchetype Archetype = SequenceDiagramArchetype.Actor,
     string? Note = null,
     string? Colour = null
-);
+)
+{
+    internal string CodeName => this.Name.CodeName();
+}

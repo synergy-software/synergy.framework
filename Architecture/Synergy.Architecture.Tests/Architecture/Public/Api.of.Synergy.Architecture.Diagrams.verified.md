@@ -1,16 +1,5 @@
 ﻿# Synergy.Architecture.Diagrams
 
-## Synergy.Reflection.CustomAttributeExtensions (abstract class)
- - CustomAttributeExtensions.GetCustomAttributesBasedOn<TAttribute>(
-     element: MemberInfo
-   ) : TAttribute[] [Extension]
- - CustomAttributeExtensions.GetCustomAttributesBasedOn<TAttribute>(
-     parameter: ParameterInfo
-   ) : TAttribute[] [Extension]
- - CustomAttributeExtensions.GetCustomAttributesBasedOn<TAttribute>(
-     type: Type
-   ) : TAttribute[] [Extension]
-
 ## Sequence.SequenceDiagram (record) : IEquatable<SequenceDiagram>
  - Actor: SequenceDiagramActor [Nullable] { get; set; }
  - Components: TechnicalBlueprint+DiagramComponents? { get; set; }
@@ -87,15 +76,15 @@
 ## Documentation.TechnicalBlueprint (class)
  - ctor()
  - Add(
-     diagram: params SequenceDiagram[] [ParamArray]
+     diagrams: params SequenceDiagram[] [ParamArray]
    ) : TechnicalBlueprint
  - Add(
-     diagram: IEnumerable<SequenceDiagram>
+     diagrams: IEnumerable<SequenceDiagram>
    ) : TechnicalBlueprint
  - Intro(
      markdown: string
    ) : TechnicalBlueprint
- - Register<TComponent, TImplementation>() : TechnicalBlueprint [NullableContext]
+ - Register<TComponent, TImplementation>() : TechnicalBlueprint
  - Register(
      interface: Type,
      services: IServiceProvider
