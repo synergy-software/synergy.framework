@@ -24,6 +24,7 @@ public class TechnicalBlueprint
     }
 
     public TechnicalBlueprint Register<TComponent, TImplementation>()
+        where TImplementation : TComponent
     {
         this._components.Register<TComponent, TImplementation>();
         return this;
@@ -31,8 +32,9 @@ public class TechnicalBlueprint
 
     public TechnicalBlueprint Register(Type @interface, IServiceProvider services)
     {
-        var implementation = services.GetService(@interface).OrFail(@interface.Name).GetType();
-        this.Register(@interface, implementation);
+        var implementation = services.GetService(@interface) ?? throw new Exception($"There is no {@interface} among registered {nameof(services)}");
+        var implementationType = implementation.GetType();
+        this.Register(@interface, implementationType);
         return this;
     }
 
