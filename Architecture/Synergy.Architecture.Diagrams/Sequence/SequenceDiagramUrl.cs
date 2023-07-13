@@ -153,13 +153,15 @@ public record SequenceDiagramUrl(
 
                 if(group != activeGroup)
                 {
+                    if (activeGroup != null && group.StartsWith("else") == false)
+                        diagram.AppendLine("end");
+                    
                     diagram.AppendLine(group);
                 }
                 activeGroup = group;
             }
             else if (activeGroup != null)
             {
-                // TODO: Marcin Celej [from: Marcin Celej on: 12-07-2023]: does not work properly for loop after loop
                 diagram.AppendLine("end");
                 activeGroup = null;
             }

@@ -1,6 +1,6 @@
 ﻿# Technical Debt for Synergy.Contracts
 
-Total: 6
+Total: 9
 
 ## [SequenceDiagramDeactivationAttribute.cs](../../../Synergy.Architecture.Annotations/Diagrams/Sequence/SequenceDiagramDeactivationAttribute.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 21-05-2023]: Use this attribute in some sample
@@ -17,5 +17,9 @@ Total: 6
 ## [ApiDescription.cs](../../../Synergy.Architecture.Diagrams/Api/ApiDescription.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: remove this class from here - check what it is used for
 
-## [SequenceDiagramSamples.cs](../../Samples/SequenceDiagramSamples.cs)
-- TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: provide samples here
+## [TechnicalBlueprint.cs](../../../Synergy.Architecture.Diagrams/Documentation/TechnicalBlueprint.cs)
+- TODO: Marcin Celej [from: Marcin Celej on: 12-06-2023]: Hide this class as it should be internal component store
+
+## [SequenceDiagramUrl.cs](../../../Synergy.Architecture.Diagrams/Sequence/SequenceDiagramUrl.cs)
+- TODO: Marcin Celej [from: Marcin Celej on: 06-07-2023]: Allow to inline self call
+- TODO: Marcin Celej [from: Marcin Celej on: 06-07-2023]: Add configuration setting to generate only 'new' word here without exact ctor mentioned here - to simplify diagram
