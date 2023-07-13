@@ -3,7 +3,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
-using JetBrains.Annotations;
 using Synergy.Architecture.Diagrams.Extensions;
 
 namespace Synergy.Architecture.Diagrams.Api
@@ -167,11 +166,9 @@ namespace Synergy.Architecture.Diagrams.Api
         private static bool IsStatic(this PropertyInfo source, bool nonPublic = false)
             => source.GetAccessors(nonPublic).Any(x => x.IsStatic);
 
-        [Pure]
         private static bool In<T>(this T value, params T[] values)
             => values.Contains(value);
 
-        [Pure]
         private static bool NotIn<T>(this T value, params T[] values)
             => value.In(values) == false;
 

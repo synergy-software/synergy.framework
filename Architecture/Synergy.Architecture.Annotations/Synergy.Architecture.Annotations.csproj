@@ -21,9 +21,5 @@
         <None Include="synergy.png" Pack="true" PackagePath="" />
         <None Include="license.txt" Pack="true" PackagePath="" />
     </ItemGroup>
-    
-    <ItemGroup>
-      <Folder Include="Diagrams" />
-    </ItemGroup>
 
 </Project>
