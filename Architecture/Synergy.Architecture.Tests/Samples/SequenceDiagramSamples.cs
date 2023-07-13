@@ -27,7 +27,7 @@ public class SequenceDiagramSamples
     private IEnumerable<SequenceDiagram> IfElseDiagrams()
     {
         yield return SequenceDiagram
-                     .From(new SequenceDiagramActor("Some actor", Note: "very hand some"))
+                     .From(new SequenceDiagramActor("Some Actor", Note: "very hand some"))
                      .Calling<SequenceDiagramSamples>(c => c.IfElse())
                      .Footer("This diagram shows if-else."
                      );
@@ -38,28 +38,28 @@ public class SequenceDiagramSamples
     [SequenceDiagramExternalCall("Firefox", "https://www.google.com", Group = SequenceDiagramGroupType.Else, GroupHeader = "otherwise")]
     private void IfElse()
     {
-    }    
-    
+    }
+
     private IEnumerable<SequenceDiagram> LoopAfterLoopDiagram()
     {
         yield return SequenceDiagram
-                     .From(new SequenceDiagramActor("Some actor", Note: "very hand some"))
+                     .From(new SequenceDiagramActor("Upset Actor", Note: "very upset", Colour: "red"))
                      .Calling<SequenceDiagramSamples>(c => c.LoopAfterLoop())
                      .Footer("This diagram shows loop placed after another loop."
                      );
     }
 
     [SequenceDiagramExternalCall("Chrome", "https://www.google.com", Group = Loop, GroupHeader = "Looping until something happens")]
-    [SequenceDiagramExternalCall("Firefox", "https://www.foogle.com", Group =Loop, GroupHeader = "Looping until something happens")]
-    [SequenceDiagramExternalCall("Firefox", "https://www.google.com", Group =Loop, GroupHeader = "This should be different loop")]
+    [SequenceDiagramExternalCall("Firefox", "https://www.foogle.com", Group = Loop, GroupHeader = "Looping until something happens")]
+    [SequenceDiagramExternalCall("Firefox", "https://www.google.com", Group = Loop, GroupHeader = "This should be different loop")]
     private void LoopAfterLoop()
     {
     }
-    
+
     private IEnumerable<SequenceDiagram> DatabaseDiagrams()
     {
         yield return SequenceDiagram
-                     .From(new SequenceDiagramActor("Some actor", Note: "very hand some"))
+                     .From(new SequenceDiagramActor("Some\\nactor", Archetype:SequenceDiagramArchetype.Participant))
                      .Calling<SequenceDiagramSamples>(c => c.Database())
                      .Footer("This diagram shows standard database operations."
                      );
