@@ -1,29 +1,29 @@
 ﻿// ReSharper disable RedundantUsingDirective
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reflection;
-using JetBrains.Annotations;
-using Synergy.Contracts;
 
 namespace Synergy.Reflection
 {
     /// <summary>
     /// Extension methods for retrieval of custom attributes.
     /// </summary>
-    public static class CustomAttributeExtensions
+#if INTERNALS
+    internal
+#else
+    public
+#endif
+    static class CustomAttributeExtensions
     {
         /// <summary>
         /// Gets all attributes inherited from attribute type &lt;T>.
         /// This method searches not only attributes directly assigned to a member but also to all interfaces implemented by it.
         /// </summary>
-        [NotNull]
-        [Pure]
-        [ItemNotNull]
-        public static TAttribute[] GetCustomAttributesBasedOn<TAttribute>([NotNull] this MemberInfo element) where TAttribute : Attribute
+        public static TAttribute[] GetCustomAttributesBasedOn<TAttribute>(this MemberInfo element) where TAttribute : Attribute
         {
-            Fail.IfArgumentNull(element, nameof(element));
-            Fail.IfArgumentNull(element.DeclaringType, nameof(element.DeclaringType));
+            element = element ?? throw new ArgumentNullException(nameof(element));
 
             object[] memberAttributes = element.GetCustomAttributes(inherit: true);
             MemberInfo[] interfaceMembers = CustomAttributeExtensions.GetInterfaceMembersImplementedBy(element);
@@ -36,23 +36,20 @@ namespace Synergy.Reflection
             return attributes;
         }
 
-        [NotNull]
-        [Pure]
-        [ItemNotNull]
-        public static TAttribute[] GetCustomAttributesBasedOn<TAttribute>([NotNull] this ParameterInfo parameter) where TAttribute : Attribute
+        public static TAttribute[] GetCustomAttributesBasedOn<TAttribute>(this ParameterInfo parameter) where TAttribute : Attribute
         {
-            Fail.IfArgumentNull(parameter, nameof(parameter));
-            //Fail.IfArgumentNull(parameter.DeclaringType, nameof(parameter.DeclaringType));
+            parameter = parameter ?? throw new ArgumentNullException(nameof(parameter));
 
             object[] memberAttributes = parameter.GetCustomAttributes(inherit: true);
             MemberInfo[] interfaceMembers = CustomAttributeExtensions.GetInterfaceMembersImplementedBy(parameter.Member);
 
-            ParameterInfo[] methodArguments = parameter.Member.CastOrFail<MethodInfo>().GetParameters();
+            var paremeterMember = (MethodInfo)parameter.Member;
+            ParameterInfo[] methodArguments = paremeterMember.GetParameters();
             var parameterIndex = Array.IndexOf(methodArguments, parameter);
-            object[] interfaceAttributes = interfaceMembers.SelectMany(m => m.CastOrFail<MethodInfo>()
-                                                                             .GetParameters()[parameterIndex]
-                                                                             //.FailIfNull("Method {0}.{1}() should have argument {2}", m.DeclaringType, m.Name, parameter.Name)
-                                                                             .GetCustomAttributes(inherit: true))
+            object[] interfaceAttributes = interfaceMembers.SelectMany(m => ((MethodInfo)m)
+                                                                                         .GetParameters()[parameterIndex]
+                                                                                         //.FailIfNull("Method {0}.{1}() should have argument {2}", m.DeclaringType, m.Name, parameter.Name)
+                                                                                         .GetCustomAttributes(inherit: true))
                                                            .ToArray();
 
             IEnumerable<object> allAttributes = memberAttributes.Union(interfaceAttributes);
@@ -61,13 +58,12 @@ namespace Synergy.Reflection
             return attributes;
         }
 
-        [NotNull, Pure]
-        private static MemberInfo[] GetInterfaceMembersImplementedBy([NotNull] MemberInfo member)
+        [Pure]
+        private static MemberInfo[] GetInterfaceMembersImplementedBy(MemberInfo member)
         {
-            Fail.IfArgumentNull(member, nameof(member));
-            Fail.IfArgumentNull(member.DeclaringType, nameof(member.DeclaringType));
+            member = member ?? throw new ArgumentNullException(nameof(member));
 
-            Type elementType = member.DeclaringType;
+            Type elementType = member.DeclaringType ?? throw new InvalidOperationException($"Member {member.Name} has no declaring type.");
             Type[] interfaces = elementType.GetInterfaces();
 
             var property = member as PropertyInfo;
@@ -80,9 +76,9 @@ namespace Synergy.Reflection
             }
 
             if (elementType.IsInterface)
-                return new MemberInfo[0];
+                return Array.Empty<MemberInfo>();
 
-            var method = member.CastOrFail<MethodInfo>();
+            var method = (MethodInfo)member;
             var interfaceMethods = new List<MethodInfo>();
             foreach (Type @interface in interfaces)
             {
@@ -103,12 +99,10 @@ namespace Synergy.Reflection
         /// Gets all attributes inherited from attribute type &lt;T>.
         /// This method searches not only attributes directly assigned to a member but also to all interfaces implemented by it.
         /// </summary>
-        [NotNull]
         [Pure]
-        [ItemNotNull]
-        public static TAttribute[] GetCustomAttributesBasedOn<TAttribute>([NotNull] this Type type) where TAttribute : Attribute
+        public static TAttribute[] GetCustomAttributesBasedOn<TAttribute>(this Type type) where TAttribute : Attribute
         {
-            Fail.IfArgumentNull(type, nameof(type));
+            type = type ?? throw new ArgumentNullException(nameof(type));
 
             object[] typeAttributes = type.GetCustomAttributes(inherit: true);
             IEnumerable<object> attributesFromInterfaces = type.GetInterfaces()
@@ -119,19 +113,15 @@ namespace Synergy.Reflection
             return attributes;
         }
 
-        [NotNull]
         [Pure]
-        [ItemNotNull]
-        private static T[] GetInheritedAttributes<T>([NotNull] IEnumerable<object> allAttributes, string name) where T : Attribute
+        private static T[] GetInheritedAttributes<T>(IEnumerable<object> allAttributes, string name) where T : Attribute
         {
-            Fail.IfArgumentNull(allAttributes, nameof(allAttributes));
+            allAttributes = allAttributes ?? throw new ArgumentNullException(nameof(allAttributes));
 
             T[] attributes = allAttributes
                              .Where(a => a is T)
                              .Cast<T>()
                              .ToArray();
-
-            Fail.IfCollectionContainsNull(attributes, $"Attributes collection on {name}");
 
             return attributes;
         }
