@@ -6,7 +6,6 @@ using Synergy.Architecture.Annotations.Diagrams.Sequence;
 using Synergy.Architecture.Diagrams.Api;
 using Synergy.Architecture.Diagrams.Documentation;
 using Synergy.Architecture.Diagrams.Extensions;
-using Synergy.Contracts;
 using Synergy.Reflection;
 
 namespace Synergy.Architecture.Diagrams.Sequence;
@@ -209,7 +208,7 @@ public record SequenceDiagramUrl(
             return;
         }
 
-        var method = methodInfo.OrFail($"{currentTypeName}.{nextStep.Method}")!;
+        var method = methodInfo ?? throw new Exception($"There is no {currentTypeName}.{nextStep.Method}()");
         var arguments = SequenceDiagramUrl.GetArguments(method.GetParameters());
         diagram.AppendLine($"{sourceTypeName}->{currentTypeName}: {nextStep.Method}({arguments})");
 
@@ -245,7 +244,7 @@ public record SequenceDiagramUrl(
             return;
         }
 
-        var method = methodInfo.OrFail($"{currentTypeName}.{nextStep.Method}")!;
+        var method = methodInfo ?? throw new Exception($"There is no {currentTypeName}.{nextStep.Method}()");
         var arguments = SequenceDiagramUrl.GetArguments(method.GetParameters());
         diagram.AppendLine($"{sourceTypeName}->{currentTypeName}: {nextStep.Method}({arguments})");
 

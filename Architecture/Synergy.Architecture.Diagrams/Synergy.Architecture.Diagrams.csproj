@@ -17,8 +17,15 @@
         <AssemblyVersion>$(Version)</AssemblyVersion>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DefineConstants>TRACE;INTERNALS</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DefineConstants>TRACE;INTERNALS</DefineConstants>
+    </PropertyGroup>
+
     <ItemGroup>
-      <ProjectReference Include="..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
       <ProjectReference Include="..\Synergy.Architecture.Annotations\Synergy.Architecture.Annotations.csproj" />
     </ItemGroup>
 

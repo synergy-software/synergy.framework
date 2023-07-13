@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using Synergy.Architecture.Diagrams.Sequence;
-using Synergy.Contracts;
 
 namespace Synergy.Architecture.Diagrams.Documentation;
 
@@ -44,15 +43,15 @@ public class TechnicalBlueprint
         return this;
     }
 
-    public TechnicalBlueprint Add(params SequenceDiagram[] diagram)
+    public TechnicalBlueprint Add(params SequenceDiagram[] diagrams)
     {
-        this.diagrams.AddRange(diagram.OrFail(nameof(diagram)));
+        this.diagrams.AddRange(diagrams ?? throw new ArgumentNullException(nameof(diagrams)));
         return this;
     }
 
-    public TechnicalBlueprint Add(IEnumerable<SequenceDiagram> diagram)
+    public TechnicalBlueprint Add(IEnumerable<SequenceDiagram> diagrams)
     {
-        this.diagrams.AddRange(diagram.OrFail(nameof(diagram)));
+        this.diagrams.AddRange(diagrams ?? throw new ArgumentNullException(nameof(diagrams)));
         return this;
     }
 
@@ -79,7 +78,8 @@ public class TechnicalBlueprint
 
     public override string ToString()
         => this.Render();
-    
+
+    // TODO: Marcin Celej [from: Marcin Celej on: 12-06-2023]: Hide this class as it should be internal component store
     public class DiagramComponents
     {
         private readonly List<Component> _components = new();
@@ -93,7 +93,7 @@ public class TechnicalBlueprint
 
         public Type Resolve(Type origin)
         {
-            Fail.IfArgumentNull(origin, nameof(origin));
+            origin = origin ?? throw new ArgumentNullException(nameof(origin));
             var resolved = this._components.FirstOrDefault(c => c.Interface == origin);
 
             return resolved?.Implementation ?? origin;

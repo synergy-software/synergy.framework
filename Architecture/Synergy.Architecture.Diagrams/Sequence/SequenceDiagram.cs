@@ -4,7 +4,6 @@ using System.Text;
 using Synergy.Architecture.Annotations.Diagrams.Sequence;
 using Synergy.Architecture.Diagrams.Api;
 using Synergy.Architecture.Diagrams.Documentation;
-using Synergy.Contracts;
 using Synergy.Reflection;
 
 namespace Synergy.Architecture.Diagrams.Sequence;
@@ -39,7 +38,7 @@ public record SequenceDiagram(
 
     public SequenceDiagram Calling<T>(Expression<Action<T>> call)
     {
-        var calling = (call.Body as MethodCallExpression).FailIfNull(Violation.Of("This is not a method call"));
+        var calling = (call.Body as MethodCallExpression) ?? throw new Exception("This is not a method call");
         return this.Calling(calling.Method);
     }
 
@@ -53,13 +52,13 @@ public record SequenceDiagram(
         else
             method = type.GetMethod(methodName, flags);
 
-        method.FailIfNull(Violation.Of("No method {0}.{1}()", type.Name, methodName));
+        method = method ?? throw new Exception($"No method {type.Name}.{methodName}()");
 
         return this.Calling(method!);
     }
 
     public SequenceDiagram Calling(MethodInfo method)
-        => this with { Method = method.OrFail(nameof(method)) };
+        => this with { Method = method ?? throw new ArgumentNullException(nameof(method)) };
 
     public SequenceDiagram Footer(string footer)
         => this with { FooterText = footer };
@@ -74,7 +73,7 @@ public record SequenceDiagram(
     {
         var diagrams = new StringBuilder();
         var method = Method;
-        var type = Components.Resolve(method.DeclaringType.OrFail(nameof(method.DeclaringType)));
+        var type = Components.Resolve(method.DeclaringType ?? throw new ArgumentNullException(nameof(method.DeclaringType)));
         var finish = FinishOn.ToList();
         var arguments = String.Join(", ",
             method.GetParameters()
