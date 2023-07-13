@@ -1,6 +1,6 @@
 ﻿# Technical Debt for Synergy.Contracts
 
-Total: 9
+Total: 8
 
 ## [SequenceDiagramDeactivationAttribute.cs](../../../Synergy.Architecture.Annotations/Diagrams/Sequence/SequenceDiagramDeactivationAttribute.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 21-05-2023]: Use this attribute in some sample

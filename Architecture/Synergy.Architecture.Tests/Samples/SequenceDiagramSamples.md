@@ -73,3 +73,38 @@ Some_actor<--SequenceDiagramSamples
 This diagram shows loop placed after another loop.
 
 
+##  SequenceDiagramSamples.Database()
+
+**Root type:** `SequenceDiagramSamples` (from: `Synergy.Architecture.Tests`)
+
+**Root method:**
+```
+    Database() : void
+```
+
+![Sequence Diagram for SequenceDiagramSamples.Database()](http://www.plantuml.com/plantuml/png/Z59DJm8n5Bnlil_XXPEQBDw94b3MI0AIiAiU234F-e36tUtQzn3zRHxyIVu5t_8L3f1mQJlDp7IcxT_FRui5lIppB0putHObUip14vUkOEeJCyxfZZAtQdllLY1-IM4mSqx8Gxgm3CRYlDBmmgqOrAqmw0qO59mW4xYIF8fLkteOY9LCzGbzBAcOKcUZJJ0lC-9wPwkvk0m3AioMZ5Dn7XANqzjcYGor2i8QriBW6WhD0-wJ3daDKFmD2mq4hBjXeEN4Jcs9XS3n266mpxqBesdtbb7pkAm1Xz6FSwBcZjE09Ex5zobSmSDmq8THLoWVm-jZF8mLc37SGilgNjTe-qp0pg22O1nnLHNeoxB0DyavXtMVadYOwfGETaUzj7lFSGBrkZu9PLgs6ixogcACKfnaDDOMQMLn8hW-uE7LtKJHgIjlANNz0Vy1003__mC0)
+<!--
+@startuml
+skinparam responseMessageBelowArrow true
+footer This diagram shows standard database operations.
+title
+SequenceDiagramSamples.Database()
+endtitle
+actor Some_actor as "Some actor"
+/ note over Some_actor: very hand some
+participant SequenceDiagramSamples
+database Database
+Some_actor->SequenceDiagramSamples: Database()
+SequenceDiagramSamples->Database: SELECT * FROM [Item] WHERE [Id] = @itemId
+alt if item does not exist yet
+SequenceDiagramSamples->Database: INSERT INTO [Item] VALUES ...
+else else
+SequenceDiagramSamples->Database: Item [Table] SET ... WHERE [Id] = @itemId
+end
+Some_actor<--SequenceDiagramSamples
+@enduml
+-->
+
+This diagram shows standard database operations.
+
+
