@@ -73,37 +73,67 @@ UpsetActor<--SequenceDiagramSamples
 This diagram shows loop placed after another loop.
 
 
-##  SequenceDiagramSamples.Database()
+##  SequenceDiagramSamples.Upsert()
 
 **Root type:** `SequenceDiagramSamples` (from: `Synergy.Architecture.Tests`)
 
 **Root method:**
 ```
-    Database() : void
+    Upsert() : void
 ```
 
-![Sequence Diagram for SequenceDiagramSamples.Database()](http://www.plantuml.com/plantuml/png/Z5BDJW8n4BvlikymuQGckmz0bA2oHXAGX5trW1m6Ea1ZjrqxGz1dy-0Z-GfsaJN4GCAbpTTyVvts-_Ehou9UrgM98txLjaAF9NZYobcc8J7Zacx8kCsrzsu3ujSKHmldX3mKAysWD2vh3Q_SXY6uMOLUWKB16JA1gyYZw62Nnf5eCK6VqzkQx9nwlzeSoyeGfxsTvkmyZiYg7JbK4ZtN5Lg1t9M4St4UaA5LenUxnQr_l8C1SVJNgeaANHhBf7DOrORzNeSvIQVXj27F1jbj0HTmDnuDOT8NAgVmV9-Dim3K5AwWgyDPNyKH6W6zW1g2SiHWdG2zQnRu83abhF-GP-CYRCMeYNgw7ZncEQHfc3UPSDTwESchhZ4fS6Pe6cvHr1P7YeVNsPlSPP8S6tWtCBUVwmS00F__0m00)
+![Sequence Diagram for SequenceDiagramSamples.Upsert()](http://www.plantuml.com/plantuml/png/Z9B1JW8n48Rlc-mxJ3YfoUu342MWh944nD053yfXf0CqxhPhPmZwR1vy95_1Be8Q0mcNjd_ppzU_qtw-VxHPqCkgBEA8dusjq6C9dhXobcb0pBYWIohSkkEzMuFu5SNHt3aX3_dIC6Y3Yxg6bsxD46XMezUWKV09cS1Lv55CmALn94QAKA_ePKLsHjtlMeLbLH2duuh9oybf797LMsi896PcAhG2ofM4Ct4UaA5HgqUxqOr_lhtuEFh9rDqkGf8TCcdjhsh2RwhzZgIrmpL1PVtiAeSpk1uD1_3G4ogdS7-JZR8Wz1Gke6t2Na_74HO2PWwr1Es8mJe1UZKiy4Pop66zMvMDyZ3bmzrHaqv_d2b8qz1hAi9Dw-4OrlYksydha1kColAQSI1vU9m_ZJjFaaFzRWVdvcTz0G00__y30000)
 <!--
 @startuml
 skinparam responseMessageBelowArrow true
 footer This diagram shows standard database operations.
 title
-SequenceDiagramSamples.Database()
+SequenceDiagramSamples.Upsert()
 endtitle
 participant Someactor as "Some\nactor"
 participant SequenceDiagramSamples
 database Database
-Someactor->SequenceDiagramSamples: Database()
+Someactor->SequenceDiagramSamples: Upsert()
 SequenceDiagramSamples->Database: SELECT * FROM [Item] WHERE [Id] = @itemId
 alt if item does not exist yet
 SequenceDiagramSamples->Database: INSERT INTO [Item] VALUES ...
 else else
-SequenceDiagramSamples->Database: Item [Table] SET ... WHERE [Id] = @itemId
+SequenceDiagramSamples->Database: UPDATE [Item] SET ... WHERE [Id] = @itemId
 end
 Someactor<--SequenceDiagramSamples
 @enduml
 -->
 
 This diagram shows standard database operations.
+
+
+##  SequenceDiagramSamples.OverrideMessageAndResult()
+
+**Root type:** `SequenceDiagramSamples` (from: `Synergy.Architecture.Tests`)
+
+**Root method:**
+```
+    OverrideMessageAndResult() : void
+```
+
+![Sequence Diagram for SequenceDiagramSamples.OverrideMessageAndResult()](http://www.plantuml.com/plantuml/png/V97FIiD048VlWRp3q9CUaXQFGKhh7nH42gOtzR0aqsHninDd9ou-cmSVoLTmaxIWadfP66Q_Rtwp-_NnkNAYMBh6n95xqRPLh1fWT2rPX_VedAhm0WtvDJDv4EumZdP4WWpRMZiejQfwnjNa7OG3X83Ua5cN2Cre06NBtjePWHqn49VQAdw7nnnVExG5NesQIsNCSnf7eiM4GN-wkMfQWoxTxFNxV6jRFWpkazCuGblkuOAiC1d8gK5LI1Yh7CpwwiaEzIoEmhwY2zqgAp0zxFUTMpGjSWXsS2RBQIo3_q9ECybor6TmSxs5MgHrsNpklKyheifWMb1pZ3rFaWDyjbZ0vkv7nj0xjjigFDVm-Ty0003__mC0)
+<!--
+@startuml
+skinparam responseMessageBelowArrow true
+footer This diagram shows how to override message and result for ordinary [SequenceDiagramCall].
+title
+SequenceDiagramSamples.OverrideMessageAndResult()
+endtitle
+control Someactor as "Some\nactor"
+participant SequenceDiagramSamples
+participant Helper
+Someactor->SequenceDiagramSamples: OverrideMessageAndResult()
+SequenceDiagramSamples->Helper: GET https://www.google.com
+SequenceDiagramSamples<--Helper: 200 OK
+Someactor<--SequenceDiagramSamples
+@enduml
+-->
+
+This diagram shows how to override message and result for ordinary [SequenceDiagramCall].
 
 

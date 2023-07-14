@@ -43,6 +43,7 @@ public record SequenceDiagramUrl(
 
         var diagram = new StringBuilder();
         diagram.AppendLine("@startuml");
+        // TODO: Marcin Celej [from: Marcin Celej on: 13-07-2023]: add configuration setting to: autoactivate on
         diagram.AppendLine("skinparam responseMessageBelowArrow true");
         if (header != null)
             diagram.AppendLine($"header {header}");
@@ -119,7 +120,7 @@ public record SequenceDiagramUrl(
         diagram.Append(this.NextLevel(rootType, rootTypeName, _root));
         
         if (request != null)
-            diagram.AppendLine($"Browser<--{rootTypeName}: HTTP/1.1 200 OK");
+            diagram.AppendLine($"{_actor.CodeName}<--{rootTypeName}: HTTP/1.1 200 OK");
         else
             diagram.AppendLine($"{_actor.CodeName}<--{rootTypeName}");
         
@@ -205,15 +206,17 @@ public record SequenceDiagramUrl(
         var methodInfo = currentType.GetMethod(nextStep.Method,
             BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
 
+        var message = nextStep.Message ?? nextStep.Method;
         if (methodInfo == null)
         {
-            diagram.AppendLine($"{sourceTypeName}->{currentTypeName}: {nextStep.Method}");
+            diagram.AppendLine($"{sourceTypeName}->{currentTypeName}: {message}");
             return;
         }
 
         var method = methodInfo ?? throw new Exception($"There is no {currentTypeName}.{nextStep.Method}()");
         var arguments = SequenceDiagramUrl.GetArguments(method.GetParameters());
-        diagram.AppendLine($"{sourceTypeName}->{currentTypeName}: {nextStep.Method}({arguments})");
+        message = nextStep.Message ?? $"{nextStep.Method}({arguments})";
+        diagram.AppendLine($"{sourceTypeName}->{currentTypeName}: {message}");
 
         var note = nextStep.Note ?? method.GetCustomAttributesBasedOn<SequenceDiagramNoteAttribute>().FirstOrDefault()?.Note;
         if (note != null)
@@ -227,7 +230,10 @@ public record SequenceDiagramUrl(
         diagram.Append(this.NextLevel(currentType, currentTypeName, method));
 
         if (currentTypeName != sourceTypeName)
-            diagram.AppendLine($"{sourceTypeName}<--{currentTypeName}: {ApiDescription.GetTypeName(method)}");
+        {
+            var result = nextStep.Result ?? ApiDescription.GetTypeName(method);
+            diagram.AppendLine($"{sourceTypeName}<--{currentTypeName}: {result}");
+        }
     }
 
     private void InsertSelfCall(SequenceDiagramSelfCallAttribute nextStep, StringBuilder diagram, Type sourceType, string sourceTypeName)
@@ -310,17 +316,21 @@ public record SequenceDiagramUrl(
             diagram.AppendLine($"{nextStep.Note}");
     }
 
-    private void InsertExternalCall(SequenceDiagramExternalCallAttribute nextStep, StringBuilder diagram, Type sourceType,
-        string sourceTypeName)
+    private void InsertExternalCall(
+        SequenceDiagramExternalCallAttribute nextStep,
+        StringBuilder diagram,
+        Type sourceType,
+        string sourceTypeName
+    )
     {
         var currentTypeName = this.AppendNode(nextStep.Type, nextStep.Archetype, SequenceDiagramUrl.unknownType);
-        
+
         diagram.AppendLine($"{sourceTypeName}->{currentTypeName}: {nextStep.Method}");
         if (nextStep.Result != null)
         {
             diagram.AppendLine($"{currentTypeName}->{sourceTypeName}: {nextStep.Result}");
         }
-        
+
         if (nextStep.Note != null)
             diagram.AppendLine($"{nextStep.Note}");
     }

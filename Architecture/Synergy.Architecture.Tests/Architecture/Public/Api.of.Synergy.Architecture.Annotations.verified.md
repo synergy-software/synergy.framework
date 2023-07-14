@@ -24,8 +24,10 @@
  - Archetype: SequenceDiagramArchetype { get; set; }
  - Group: SequenceDiagramGroupType { get; set; }
  - GroupHeader: string? { get; set; }
+ - Message: string? { get; set; }
  - Method: string [Nullable] { get; }
  - Note: string? { get; set; }
+ - Result: string? { get; set; }
  - Type: Type [Nullable] { get; }
  - ctor(
      type: Type,

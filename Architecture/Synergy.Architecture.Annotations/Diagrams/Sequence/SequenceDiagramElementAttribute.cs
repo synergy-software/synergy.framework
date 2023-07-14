@@ -8,6 +8,7 @@ namespace Synergy.Architecture.Annotations.Diagrams.Sequence;
 [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
 public class SequenceDiagramElementAttribute : Attribute, SequenceDiagramElement
 {
+    // TODO: Marcin Celej [from: Marcin Celej on: 14-07-2023]: Add Name here to allow custom name of participant
     public string? Note { get; set; }
     public SequenceDiagramArchetype Archetype { get; set; }
     public string? Colour { get; set; }

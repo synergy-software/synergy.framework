@@ -19,6 +19,7 @@ public class SequenceDiagramSamples
                         .Add(this.IfElseDiagrams())
                         .Add(this.LoopAfterLoopDiagram())
                         .Add(this.DatabaseDiagrams())
+                        .Add(this.OverrideMessageAndResultDiagrams())
             ;
 
         await File.WriteAllTextAsync(SequenceDiagrams.FilePath, blueprint.Render());
@@ -60,15 +61,38 @@ public class SequenceDiagramSamples
     {
         yield return SequenceDiagram
                      .From(new SequenceDiagramActor("Some\\nactor", Archetype:SequenceDiagramArchetype.Participant))
-                     .Calling<SequenceDiagramSamples>(c => c.Database())
+                     .Calling<SequenceDiagramSamples>(c => c.Upsert())
                      .Footer("This diagram shows standard database operations."
                      );
     }
 
     [SequenceDiagramDatabaseCall($"SELECT * FROM [Item] WHERE [Id] = @itemId")]
     [SequenceDiagramDatabaseCall($"INSERT INTO [Item] VALUES ...", Group = Alt, GroupHeader = "if item does not exist yet")]
-    [SequenceDiagramDatabaseCall($"Item [Table] SET ... WHERE [Id] = @itemId", Group = Else, GroupHeader = "else")]
-    private void Database()
+    [SequenceDiagramDatabaseCall($"UPDATE [Item] SET ... WHERE [Id] = @itemId", Group = Else, GroupHeader = "else")]
+    private void Upsert()
+    {
+    }
+    
+    private IEnumerable<SequenceDiagram> OverrideMessageAndResultDiagrams()
+    {
+        yield return SequenceDiagram
+                     .From(new SequenceDiagramActor("Some\\nactor", Archetype:SequenceDiagramArchetype.Control))
+                     .Calling<SequenceDiagramSamples>(c => c.OverrideMessageAndResult())
+                     .Footer("This diagram shows how to override message and result for ordinary [SequenceDiagramCall]."
+                     );
+    }
+
+    [SequenceDiagramCall(typeof(Helper), nameof(Helper.SomeStaticMethod), 
+        Message = "GET https://www.google.com",
+        Result = "200 OK")]
+    private void OverrideMessageAndResult()
+    {
+    }
+}
+
+internal class Helper
+{
+    public static void SomeStaticMethod()
     {
     }
 }

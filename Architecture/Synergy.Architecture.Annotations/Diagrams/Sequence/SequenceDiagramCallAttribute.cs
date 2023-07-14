@@ -12,6 +12,8 @@ public class SequenceDiagramCallAttribute : Attribute, SequenceDiagramElement, S
     public SequenceDiagramArchetype Archetype { get; set; }
     public SequenceDiagramGroupType Group { get; set; }
     public string? GroupHeader { get; set; }
+    public string? Message { get; set; }
+    public string? Result { get; set; }
     
     public SequenceDiagramCallAttribute(Type type, string method)
     {
