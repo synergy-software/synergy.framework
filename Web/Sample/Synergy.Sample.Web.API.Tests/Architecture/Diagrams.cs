@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Synergy.Architecture.Diagrams;
 using Synergy.Architecture.Diagrams.Documentation;
 using Synergy.Architecture.Diagrams.Sequence;
 using Synergy.Documentation.Code;
@@ -28,7 +27,7 @@ public class Diagrams
                         .Add(Read())
             ;
 
-        File.WriteAllText(SequenceDiagrams.FilePath, blueprint.Render());
+        await File.WriteAllTextAsync(Diagrams.SequenceDiagrams.FilePath, blueprint.Render());
 
         //
         // WARN: Temporarily removed using Verify due to problem with PlantUml which generates different link to image on server side even thought the diagram content is the same
