@@ -17,7 +17,6 @@ public class CodeFile
 
     public CodeFile(string filePath)
     {
-        // TODO: Marcin Celej [from: Marcin Celej on: 26-07-2023]: fix contract check here
         FilePath = filePath.OrFailIfWhiteSpace(nameof(filePath));
     }
 
