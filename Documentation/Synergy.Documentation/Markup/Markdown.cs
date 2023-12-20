@@ -2,6 +2,7 @@
 using System.Text;
 using Synergy.Catalogue;
 using Synergy.Contracts;
+using Synergy.Documentation.Code;
 
 // TODO: Marcin Celej [from: Marcin Celej on: 21-05-2023]: Stop referencing Synergy.Contracts from Synergy.Documentation
 
@@ -12,24 +13,26 @@ namespace Synergy.Documentation.Markup
 #else
     public
 #endif
-    class Markdown
+        class Markdown
     {
         // ReSharper disable once InconsistentNaming
         private static readonly string NL = Environment.NewLine;
-        
-        public interface IElement{}
-        
+
+        public interface IElement
+        {
+        }
+
         public class Document : IEnumerable<IElement>
         {
             private readonly List<IElement> elements = new();
-            
+
             public Document Append(IElement element)
             {
                 Fail.IfArgumentNull(element, nameof(element));
                 this.elements.Add(element);
                 return this;
             }
-            
+
             public Document Append(IEnumerable<IElement> newElements)
             {
                 Fail.IfArgumentNull(newElements, nameof(newElements));
@@ -45,21 +48,21 @@ namespace Synergy.Documentation.Markup
                 {
                     markdown.AppendLine(element.ToString());
                 }
-                
+
                 return markdown.ToString();
             }
 
             /// <inheritdoc />
-            public IEnumerator<IElement> GetEnumerator() 
+            public IEnumerator<IElement> GetEnumerator()
                 => this.elements.GetEnumerator();
 
             /// <inheritdoc />
-            IEnumerator IEnumerable.GetEnumerator() 
+            IEnumerator IEnumerable.GetEnumerator()
                 => this.GetEnumerator();
         }
-        
+
         #region Headers
-        
+
         public abstract class Header : IElement
         {
             private readonly int level;
@@ -88,18 +91,18 @@ namespace Synergy.Documentation.Markup
             {
             }
         }
-        
+
         public class Header3 : Header
         {
             public Header3(string header) : base(3, header)
             {
             }
         }
-        
+
         #endregion
 
         #region Code
-        
+
         public class Code : IElement
         {
             private readonly string? language;
@@ -114,7 +117,7 @@ namespace Synergy.Documentation.Markup
             public Code Line(string line)
             {
                 Fail.IfNull(line, nameof(line));
-                
+
                 if (this.text == null)
                     return new Code(line, this.language);
                 return new Code(this.text + Markdown.NL + line, this.language);
@@ -124,7 +127,7 @@ namespace Synergy.Documentation.Markup
                                                  $"{this.text}{Markdown.NL}" +
                                                  $"```{Markdown.NL}";
         }
-        
+
         #endregion
 
         #region Paragraph
@@ -142,7 +145,7 @@ namespace Synergy.Documentation.Markup
                 Fail.IfArgumentWhiteSpace(line, nameof(line));
                 return new Paragraph(this.text + Markdown.NL + line);
             }
-            
+
             public override string ToString() => $"{this.text}{Markdown.NL}";
         }
 
@@ -158,7 +161,7 @@ namespace Synergy.Documentation.Markup
             {
                 if (text == null)
                     this.lines = new List<string>();
-                
+
                 this.lines = new List<string>()
                 {
                     text.OrFail(nameof(text))
@@ -172,7 +175,7 @@ namespace Synergy.Documentation.Markup
                                    .Trim());
                 return this;
             }
-            
+
             public override string ToString() => $"> {String.Join(Markdown.NL + "> ", this.lines)}{Markdown.NL}";
         }
 
@@ -203,12 +206,14 @@ namespace Synergy.Documentation.Markup
                 {
                     table.Append($"| {header.Trim()} ");
                 }
+
                 table.AppendLine("|");
-            
+
                 foreach (var header in this.headers)
                 {
                     table.Append($"|{new string('-', header.Length + 2)}");
                 }
+
                 table.AppendLine("|");
 
                 foreach (var row in this.rows)
@@ -217,13 +222,13 @@ namespace Synergy.Documentation.Markup
                     {
                         table.Append($"| {cell?.Trim()} ");
                     }
+
                     table.AppendLine("|");
                 }
 
                 return table.ToString();
             }
         }
-        
 
         #endregion
     }
