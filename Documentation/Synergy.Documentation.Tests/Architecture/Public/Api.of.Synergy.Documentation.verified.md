@@ -181,3 +181,13 @@
    ) : void
  - ToString() : string
 
+## Markup.Markdown+Image (class) : Markdown+IElement
+ - ctor(
+     filePath: CodeFile,
+     alternateText: string? [Nullable, Optional]
+   )
+ - RelativeTo(
+     file: CodeFile
+   ) : Markdown+Image
+ - ToString() : string
+

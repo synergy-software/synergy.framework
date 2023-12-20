@@ -231,5 +231,27 @@ namespace Synergy.Documentation.Markup
         }
 
         #endregion
+
+        #region Image
+
+        public class Image : IElement
+        {
+            private readonly CodeFile _filePath;
+            private readonly string _alternateText;
+
+            public Image(CodeFile filePath, string? alternateText = null)
+            {
+                _filePath = filePath;
+                _alternateText = alternateText ?? filePath.FileName;
+            }
+
+            public override string ToString()
+                => $"![{_alternateText}]({_filePath.ToString().Replace(" ", "%20")}){Markdown.NL}";
+
+            public Image RelativeTo(CodeFile file)
+                => new(_filePath.RelativeTo(file.Folder), _alternateText);
+        }
+
+        #endregion
     }
 }
