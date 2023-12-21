@@ -89,7 +89,7 @@ public static class FeatureGenerator
         {
             lineNo++;
 
-            var comment = Regex.Match(line, "\\s*#(.*)");
+            var comment = Regex.Match(line, "^\\s*#(.*)");
             if (comment.Success)
             {
                 tags = null;
@@ -106,7 +106,7 @@ public static class FeatureGenerator
                 continue;
             }
 
-            var feature = Regex.Match(line, "\\s*Feature\\: (.*)");
+            var feature = Regex.Match(line, "^\\s*Feature\\: (.*)");
             if (feature.Success)
             {
                 featureName = feature.Groups[1]
@@ -115,7 +115,7 @@ public static class FeatureGenerator
             }
 
             // TODO: Marcin Celej [from: Marcin Celej on: 15-05-2023]: check if tags above Rule will work
-            var rule = Regex.Match(line, "\\s*Rule\\: (.*)");
+            var rule = Regex.Match(line, "^\\s*Rule\\: (.*)");
             if (rule.Success)
             {
                 CloseBackground();
@@ -130,7 +130,7 @@ public static class FeatureGenerator
                 continue;
             }
 
-            var background = Regex.Match(line, "\\s*Background\\:");
+            var background = Regex.Match(line, "^\\s*Background\\:");
             if (background.Success)
             {
                 CloseScenario();
@@ -144,13 +144,13 @@ public static class FeatureGenerator
 
             // TODO: Marcin Celej [from: Marcin Celej on: 10-05-2023]: Support Scenario Outline along with Examples  
             
-            var outline = Regex.Match(line, "\\s*Scenario (Outline|Template)\\: (.*)");
+            var outline = Regex.Match(line, "^\\s*Scenario (Outline|Template)\\: (.*)");
             if (outline.Success)
             {
                 throw new NotSupportedException($"Scenario Outline keyword is not supported\nLine {lineNo}: {line.Trim()}");
             }
 
-            var example = Regex.Match(line, "\\s*(Examples|Scenarios)\\: (.*)");
+            var example = Regex.Match(line, "^\\s*(Examples|Scenarios)\\: (.*)");
             if (example.Success)
             {
                 throw new NotSupportedException($"Examples keyword is not supported\nLine {lineNo}: {line.Trim()}");
@@ -181,7 +181,7 @@ public static class FeatureGenerator
             if (includeScenario == false && backgroundStarted == null)
                 continue;
 
-            var scenarioMatch = Regex.Match(line, "\\s*Scenario\\: (.*)");
+            var scenarioMatch = Regex.Match(line, "^\\s*Scenario\\: (.*)");
             if (scenarioMatch.Success)
             {
                 CloseBackground();
@@ -203,7 +203,7 @@ public static class FeatureGenerator
                 continue;
             }
 
-            var given = Regex.Match(line, "\\s*Given (.*)");
+            var given = Regex.Match(line, "^\\s*Given (.*)");
             if (given.Success)
             {
                 // if (backgroundStarted == null)
@@ -219,35 +219,35 @@ public static class FeatureGenerator
                 continue;
             }
 
-            var and = Regex.Match(line, "\\s*And (.*)");
+            var and = Regex.Match(line, "^\\s*And (.*)");
             if (and.Success)
             {
                 code.AppendLine($"         {And}().{Sentence.ToMethod(and.Groups[1].Value)}();  // {line.Trim()}");
                 continue;
             }
 
-            var asterisk = Regex.Match(line, "\\s*\\* (.*)");
+            var asterisk = Regex.Match(line, "^\\s*\\* (.*)");
             if (asterisk.Success)
             {
                 code.AppendLine($"         {And}().{Sentence.ToMethod(asterisk.Groups[1].Value)}();  // {line.Trim()}");
                 continue;
             }
 
-            var but = Regex.Match(line, "\\s*But (.*)");
+            var but = Regex.Match(line, "^\\s*But (.*)");
             if (but.Success)
             {
                 code.AppendLine($"         {But}().{Sentence.ToMethod(but.Groups[1].Value)}();  // {line.Trim()}");
                 continue;
             }
 
-            var when = Regex.Match(line, "\\s*When (.*)");
+            var when = Regex.Match(line, "^\\s*When (.*)");
             if (when.Success)
             {
                 code.AppendLine($"        {When}().{Sentence.ToMethod(when.Groups[1].Value)}();  // {line.Trim()}");
                 continue;
             }
 
-            var then = Regex.Match(line, "\\s*Then (.*)");
+            var then = Regex.Match(line, "^\\s*Then (.*)");
             if (then.Success)
             {
                 code.AppendLine($"        {Then}().{Sentence.ToMethod(then.Groups[1].Value)}(); // {line.Trim()}");
