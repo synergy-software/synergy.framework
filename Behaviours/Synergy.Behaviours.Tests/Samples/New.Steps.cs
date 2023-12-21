@@ -4,12 +4,10 @@ namespace Synergy.Behaviours.Tests.Samples;
 
 public partial class NewFeature : Feature<NewFeature>
 {
-    [Fact]
-    public void GenerateFeature()
-    {
+    [Fact(DisplayName = "!!!!")]
+    public void GenerateFeature() =>
         this.Generate(
             from: "New.feature",
             to: "New.Feature.cs"
         );
-    }
 }

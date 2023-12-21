@@ -5,7 +5,7 @@ namespace Synergy.Behaviours.Tests.Samples;
 [UsesVerify]
 public partial class CalculatorFeature : Feature<CalculatorFeature>
 {
-    [Fact]
+    [Fact(DisplayName = "!!!!")]
     public async Task GenerateFeature()
     {
         var code = this.Generate(

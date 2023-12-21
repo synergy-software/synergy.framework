@@ -1,0 +1,4 @@
+﻿{
+  FirstNumber: 50,
+  SecondNumber: 25
+}
