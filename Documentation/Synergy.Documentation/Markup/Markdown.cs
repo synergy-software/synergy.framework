@@ -253,5 +253,27 @@ namespace Synergy.Documentation.Markup
         }
 
         #endregion
+        
+        #region Link
+        
+        public class Link
+        {
+            private readonly CodeFile _filePath;
+            private readonly string _alternateText;
+
+            public Link(CodeFile filePath, string? text = null)
+            {
+                _filePath = filePath;
+                _alternateText = text ?? filePath.FileName;
+            }
+
+            public override string ToString()
+                => $"[{_alternateText}]({_filePath.ToString().Replace(" ", "%20")})";
+
+            public Link RelativeTo(CodeFile file) 
+                => new(_filePath.RelativeTo(file.Folder), _alternateText);
+        }
+        
+        #endregion
     }
 }
