@@ -12,29 +12,29 @@
      name: string [CanBeNull, Optional]
    ) : T? [Extension, CanBeNull, AssertionMethod, ContractAnnotation]
  - Fail.Because(
-     message: Violation
-   ) : DesignByContractViolationException [NotNull, Pure]
- - Fail.Because(
      message: string [NotNull, NotNull]
    ) : DesignByContractViolationException [NotNull, Pure, StringFormatMethod]
- - Fail.Because<T1>(
+ - Fail.Because(
      message: string [NotNull, NotNull],
-     arg1: T1?
+     args: params Object[] [ParamArray, NotNull, NotNull]
    ) : DesignByContractViolationException [NotNull, Pure, StringFormatMethod]
- - Fail.Because<T1, T2>(
-     message: string [NotNull, NotNull],
-     arg1: T1?,
-     arg2: T2?
-   ) : DesignByContractViolationException [NotNull, Pure, StringFormatMethod]
+ - Fail.Because(
+     message: Violation
+   ) : DesignByContractViolationException [NotNull, Pure]
  - Fail.Because<T1, T2, T3>(
      message: string [NotNull, NotNull],
      arg1: T1?,
      arg2: T2?,
      arg3: T3?
    ) : DesignByContractViolationException [NotNull, Pure, StringFormatMethod]
- - Fail.Because(
+ - Fail.Because<T1, T2>(
      message: string [NotNull, NotNull],
-     args: params Object[] [ParamArray, NotNull, NotNull]
+     arg1: T1?,
+     arg2: T2?
+   ) : DesignByContractViolationException [NotNull, Pure, StringFormatMethod]
+ - Fail.Because<T1>(
+     message: string [NotNull, NotNull],
+     arg1: T1?
    ) : DesignByContractViolationException [NotNull, Pure, StringFormatMethod]
  - Fail.BecauseEnumOutOfRange<T>(
      value: T
@@ -59,29 +59,29 @@
      name: string [NotNull, NotNull]
    ) : T? [Extension, NotNull]
  - Fail.FailIfNotDate(
-     date: DateTime? [CanBeNull],
-     name: string
-   ) : DateTime?? [Extension, CanBeNull, AssertionMethod]
- - Fail.FailIfNotDate(
      date: DateTime,
      name: string
    ) : DateTime [Extension, AssertionMethod]
- - Fail.FailIfNull<T>(
-     value: T? [CanBeNull, AssertionCondition, NoEnumeration],
-     name: string [NotNull, NotNull]
-   ) : T? [Extension, NotNull, AssertionMethod, ContractAnnotation]
+ - Fail.FailIfNotDate(
+     date: DateTime? [CanBeNull],
+     name: string
+   ) : DateTime? [Extension, CanBeNull, AssertionMethod]
  - Fail.FailIfNull<T>(
      value: T? [CanBeNull, AssertionCondition, NoEnumeration],
      message: Violation
    ) : T? [Extension, NotNull, AssertionMethod, ContractAnnotation]
- - Fail.IfArgumentEmpty(
-     value: Guid,
-     argumentName: string [NotNull]
-   ) : void [AssertionMethod]
+ - Fail.FailIfNull<T>(
+     value: T? [CanBeNull, AssertionCondition, NoEnumeration],
+     name: string [NotNull, NotNull]
+   ) : T? [Extension, NotNull, AssertionMethod, ContractAnnotation]
  - Fail.IfArgumentEmpty(
      argumentValue: string [CanBeNull, AssertionCondition],
      argumentName: string [NotNull, NotNull]
    ) : void [AssertionMethod, ContractAnnotation]
+ - Fail.IfArgumentEmpty(
+     value: Guid,
+     argumentName: string [NotNull]
+   ) : void [AssertionMethod]
  - Fail.IfArgumentEqual<TExpected, TActual>(
      unexpected: TExpected? [CanBeNull],
      argumentValue: TActual? [CanBeNull],
@@ -127,11 +127,11 @@
    ) : void [AssertionMethod]
  - Fail.IfEmpty(
      value: string [CanBeNull, AssertionCondition],
-     name: string [NotNull, NotNull]
+     message: Violation
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfEmpty(
      value: string [CanBeNull, AssertionCondition],
-     message: Violation
+     name: string [NotNull, NotNull]
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfEnumNotDefined<T>(
      value: object [NotNull, NotNull]
@@ -142,12 +142,12 @@
  - Fail.IfEqual<TExpected, TActual>(
      unexpected: TExpected? [CanBeNull],
      actual: TActual? [CanBeNull],
-     name: string [NotNull, NotNull]
+     message: Violation
    ) : void [AssertionMethod]
  - Fail.IfEqual<TExpected, TActual>(
      unexpected: TExpected? [CanBeNull],
      actual: TActual? [CanBeNull],
-     message: Violation
+     name: string [NotNull, NotNull]
    ) : void [AssertionMethod]
  - Fail.IfFalse(
      value: bool [AssertionCondition],
@@ -164,10 +164,15 @@
    ) : void [AssertionMethod]
  - Fail.IfNotDate(
      date: DateTime? [CanBeNull],
-     name: string
+     message: Violation
    ) : void [AssertionMethod]
  - Fail.IfNotDate(
      date: DateTime? [CanBeNull],
+     name: string
+   ) : void [AssertionMethod]
+ - Fail.IfNotEqual<TExpected, TActual>(
+     expected: TExpected? [CanBeNull],
+     actual: TActual? [CanBeNull],
      message: Violation
    ) : void [AssertionMethod]
  - Fail.IfNotEqual<TExpected, TActual>(
@@ -175,26 +180,21 @@
      actual: TActual? [CanBeNull],
      name: string [NotNull, NotNull]
    ) : void [AssertionMethod]
- - Fail.IfNotEqual<TExpected, TActual>(
-     expected: TExpected? [CanBeNull],
-     actual: TActual? [CanBeNull],
-     message: Violation
-   ) : void [AssertionMethod]
- - Fail.IfNotNull<T>(
-     value: T? [CanBeNull, NoEnumeration],
-     name: string [NotNull, NotNull]
-   ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfNotNull<T>(
      value: T? [CanBeNull, NoEnumeration],
      message: Violation
    ) : void [AssertionMethod, ContractAnnotation]
- - Fail.IfNull<T>(
-     value: T? [CanBeNull, AssertionCondition],
+ - Fail.IfNotNull<T>(
+     value: T? [CanBeNull, NoEnumeration],
      name: string [NotNull, NotNull]
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfNull<T>(
      value: T? [CanBeNull, AssertionCondition],
      message: Violation
+   ) : void [AssertionMethod, ContractAnnotation]
+ - Fail.IfNull<T>(
+     value: T? [CanBeNull, AssertionCondition],
+     name: string [NotNull, NotNull]
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfNullOrNotCastable<T>(
      value: object [CanBeNull, NoEnumeration]
@@ -219,11 +219,11 @@
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfWhitespace(
      value: string [CanBeNull, AssertionCondition],
-     name: string [NotNull, NotNull]
+     message: Violation
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfWhitespace(
      value: string [CanBeNull, AssertionCondition],
-     message: Violation
+     name: string [NotNull, NotNull]
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.NotNull<T>(
      value: T? [CanBeNull, AssertionCondition, NoEnumeration],
@@ -255,16 +255,6 @@
      name: string [NotNull, NotNull, CallerArgumentExpression, Optional]
    ) : string [Extension, NotNull, AssertionMethod, ContractAnnotation]
 
-## Violation (struct)
- - ctor(
-     message: string [NotNull, NotNull],
-     args: params Object[] [ParamArray, NotNull, NotNull]
-   )
- - Violation.Of(
-     message: string [NotNull, NotNull],
-     args: params Object[] [ParamArray, NotNull, NotNull]
-   ) : Violation [StringFormatMethod]
-
 ## Requirements.Business (abstract class)
  - Business.Requires(
      condition: bool
@@ -277,12 +267,8 @@
      expression: string? [CallerArgumentExpression, Optional]
    ) : Business+Precondition [NullableContext, MustUseReturnValue]
 
-## Requirements.BusinessRuleViolationException (exception) : Exception, ISerializable
- - Requirement: Business+Requirement { get; }
- - ctor(
-     message: string,
-     requirement: Business+Requirement
-   )
+## Requirements.Business+IPrecondition (interface)
+ - Met: bool { get; }
 
 ## Requirements.Business+Precondition (struct) : Business+IPrecondition
  - Comment: string [CanBeNull] { get; }
@@ -303,8 +289,20 @@
      condition: Func<bool>
    ) : Business+Requirement [MustUseReturnValue]
 
-## Requirements.Business+IPrecondition (interface)
- - Met: bool { get; }
+## Requirements.Business+Principle (struct)
+ - Description: string { get; }
+ - ctor(
+     description: string
+   )
+ - Requires(
+     condition: bool
+   ) : Business+Requirement [MustUseReturnValue]
+ - Throws(
+     exception: Exception
+   ) : void
+ - When(
+     preCondition: bool
+   ) : Business+Precondition [MustUseReturnValue]
 
 ## Requirements.Business+Requirement (struct)
  - Comment: string [CanBeNull] { get; }
@@ -323,24 +321,26 @@
      comment: string [CanBeNull, Optional]
    )
  - Throws(
+     exception: Exception
+   ) : void
+ - Throws(
      message: string
    ) : void
- - Throws(
-     exception: Exception
-   ) : void
 
-## Requirements.Business+Principle (struct)
- - Description: string { get; }
+## Requirements.BusinessRuleViolationException (exception) : Exception, ISerializable
+ - Requirement: Business+Requirement { get; }
  - ctor(
-     description: string
+     message: string,
+     requirement: Business+Requirement
    )
- - Requires(
-     condition: bool
-   ) : Business+Requirement [MustUseReturnValue]
- - Throws(
-     exception: Exception
-   ) : void
- - When(
-     preCondition: bool
-   ) : Business+Precondition [MustUseReturnValue]
+
+## Violation (struct)
+ - ctor(
+     message: string [NotNull, NotNull],
+     args: params Object[] [ParamArray, NotNull, NotNull]
+   )
+ - Violation.Of(
+     message: string [NotNull, NotNull],
+     args: params Object[] [ParamArray, NotNull, NotNull]
+   ) : Violation [StringFormatMethod]
 

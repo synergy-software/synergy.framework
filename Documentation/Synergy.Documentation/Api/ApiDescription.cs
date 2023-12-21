@@ -20,19 +20,25 @@ namespace Synergy.Documentation.Api
             var assemblyName = assembly.GetName().Name;
             description.AppendLine($"# {assemblyName}");
             description.AppendLine();
-
-            return GenerateFor(assembly.GetTypes(), description, assemblyName);
+            
+            var publicTypes = assembly
+                .GetTypes()
+                .Where(type => type.IsPublic || type.IsNestedPublic)
+                .OrderBy(t => t.FullName);
+            
+            return GenerateFor(publicTypes, description, assemblyName);
         }
 
-        public static string GenerateFor(IEnumerable<Type> types, StringBuilder? description = null, string? assemblyName = null)
+        public static string GenerateFor(
+            IEnumerable<Type> types, 
+            StringBuilder? description = null, 
+            string? assemblyName = null
+            )
         {
             description ??= new StringBuilder();
 
             foreach (var type in types)
             {
-                if (type.IsPublic == false && type.IsNestedPublic == false)
-                    continue;
-
                 var shortNamespace = GetShortenNamespace(type, assemblyName);
                 var typeName = GetShortTypeName(type);
                 var baseType = GetParents(type);
@@ -69,22 +75,9 @@ namespace Synergy.Documentation.Api
                         description.AppendLine($" - ctor({GetParametersOf(constructor)})");
                     }
 
-                    foreach (var method in type.GetMethods(bindingFlags).OrderBy(m => m.Name))
+                    foreach (var method in GetMethods(type).OrderBy(m => m))
                     {
-                        if (method.IsSpecialName || method.DeclaringType.In(typeof(object), typeof(Exception), typeof(Attribute)))
-                            continue;
-
-                        if (type.IsValueType && method.Name.In(nameof(Equals), nameof(GetHashCode), nameof(ToString)))
-                            continue;
-
-                        if (method.GetCustomAttribute<CompilerGeneratedAttribute>() != null)
-                            continue;
-
-                        if (type.IsRecord() && method.Name.In(nameof(ToString), nameof(GetHashCode), nameof(Equals), "<Clone>$", "Deconstruct"))
-                            continue;
-
-                        var methodDescription = For(method);
-                        description.AppendLine($" - {methodDescription}");
+                        description.AppendLine($" - {method}");
                     }
                 }
 
@@ -94,6 +87,26 @@ namespace Synergy.Documentation.Api
             return description.ToString();
         }
 
+        private static IEnumerable<string> GetMethods(Type type)
+        {
+            foreach (var method in type.GetMethods(bindingFlags).OrderBy(m => m.Name))
+            {
+                if (method.IsSpecialName || method.DeclaringType.In(typeof(object), typeof(Exception), typeof(Attribute)))
+                    continue;
+
+                if (type.IsValueType && method.Name.In(nameof(Equals), nameof(GetHashCode), nameof(ToString)))
+                    continue;
+
+                if (method.GetCustomAttribute<CompilerGeneratedAttribute>() != null)
+                    continue;
+
+                if (type.IsRecord() && method.Name.In(nameof(ToString), nameof(GetHashCode), nameof(Equals), "<Clone>$", "Deconstruct"))
+                    continue;
+
+                yield return For(method);
+            }
+        }
+        
         public static string For(MethodInfo method, bool withAttributes = true)
         {
             var generics = method.GetGenericArguments();
@@ -174,7 +187,7 @@ namespace Synergy.Documentation.Api
         private static bool NotIn<T>(this T value, params T[] values)
             => value.In(values) == false;
 
-        internal static string GetMethodName(MethodInfo method)
+        private static string GetMethodName(MethodInfo method)
         {
             if (method.IsStatic)
                 return $"{method.DeclaringType.Name}.{method.Name}";
@@ -225,8 +238,8 @@ namespace Synergy.Documentation.Api
                 return "";
 
             var last = parameters.Last();
-            StringBuilder description = new StringBuilder();
-            foreach (ParameterInfo parameter in parameters)
+            var description = new StringBuilder();
+            foreach (var parameter in parameters)
             {
                 description.AppendLine();
                 var attributes = withAttributes ? GetAttributes(parameter) : "";
@@ -245,7 +258,7 @@ namespace Synergy.Documentation.Api
             var type = GetTypeName(property.PropertyType);
             var nullable = IsMarkedAsNullable(property);
             if (nullable)
-                return type + "?";
+                return type.TrimEnd('?') + "?";
 
             return type;
         }
@@ -258,7 +271,7 @@ namespace Synergy.Documentation.Api
             var type = GetTypeName(field.FieldType);
             var nullable = IsMarkedAsNullable(field);
             if (nullable)
-                return type + "?";
+                return type.TrimEnd('?') + "?";
             
             return type;
         }
@@ -271,7 +284,7 @@ namespace Synergy.Documentation.Api
             var type = GetTypeName(method.ReturnType);
             var nullable = IsMarkedAsNullable(method.ReturnParameter);
             if (nullable)
-                return type + "?";
+                return type.TrimEnd('?') + "?";
 
             return type;
         }
@@ -301,9 +314,10 @@ namespace Synergy.Documentation.Api
 
         public static string GetTypeName(Type type)
         {
-            if (Nullable.GetUnderlyingType(type) != null)
+            var underlyingType = Nullable.GetUnderlyingType(type);
+            if (underlyingType != null)
             {
-                return $"{GetTypeName(Nullable.GetUnderlyingType(type))}?";
+                return $"{GetTypeName(underlyingType)}?";
             }
 
             if (type.IsGenericType)
@@ -354,7 +368,8 @@ namespace Synergy.Documentation.Api
 
         private static string GetAttributes(IEnumerable<Attribute> enumerable)
         {
-            var attributes = enumerable.Where(a => a.GetType().Name.StartsWith("__") == false)
+            var attributes = enumerable
+                .Where(a => a.GetType().Name.StartsWith("__") == false)
                 .Where(a => a is not DebuggerStepThroughAttribute)
                 .Select(a => a.GetType().Name.Replace("Attribute", ""))
                 .ToList();

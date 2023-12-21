@@ -1,5 +1,42 @@
 ﻿# Synergy.Architecture.Diagrams
 
+## Documentation.TechnicalBlueprint (class)
+ - ctor()
+ - Add(
+     diagrams: IEnumerable<SequenceDiagram>
+   ) : TechnicalBlueprint
+ - Add(
+     diagrams: params SequenceDiagram[] [ParamArray]
+   ) : TechnicalBlueprint
+ - Intro(
+     markdown: string
+   ) : TechnicalBlueprint
+ - Register(
+     interface: Type,
+     implementation: Type
+   ) : TechnicalBlueprint
+ - Register(
+     interface: Type,
+     services: IServiceProvider
+   ) : TechnicalBlueprint
+ - Register<TComponent, TImplementation>() : TechnicalBlueprint
+ - Render() : string
+ - TechnicalBlueprint.Titled(
+     title: string
+   ) : TechnicalBlueprint
+ - ToString() : string
+
+## Documentation.TechnicalBlueprint+DiagramComponents (class)
+ - ctor()
+ - Register(
+     interface: Type,
+     implementation: Type
+   ) : void
+ - Register<TComponent, TImplementation>() : void [NullableContext]
+ - Resolve(
+     origin: Type
+   ) : Type
+
 ## Sequence.SequenceDiagram (record) : IEquatable<SequenceDiagram>
  - Actor: SequenceDiagramActor [Nullable] { get; set; }
  - Components: TechnicalBlueprint+DiagramComponents? { get; set; }
@@ -15,20 +52,20 @@
      Components: TechnicalBlueprint+DiagramComponents? [Optional],
      TitleText: string? [Optional]
    )
- - Calling<T>(
-     methodName: string,
-     arguments: params Type[] [ParamArray]
-   ) : SequenceDiagram [NullableContext]
- - Calling<T>(
-     call: Expression<Action<T>>
+ - Calling(
+     method: MethodInfo
    ) : SequenceDiagram [NullableContext]
  - Calling(
      type: Type,
      methodName: string,
      arguments: params Type[] [ParamArray]
    ) : SequenceDiagram [NullableContext]
- - Calling(
-     method: MethodInfo
+ - Calling<T>(
+     call: Expression<Action<T>>
+   ) : SequenceDiagram [NullableContext]
+ - Calling<T>(
+     methodName: string,
+     arguments: params Type[] [ParamArray]
    ) : SequenceDiagram [NullableContext]
  - CutOff(
      types: params Type[] [ParamArray]
@@ -36,11 +73,11 @@
  - Footer(
      footer: string
    ) : SequenceDiagram [NullableContext]
- - SequenceDiagram.From<T>() : SequenceDiagram [NullableContext]
+ - Render() : string [NullableContext]
  - SequenceDiagram.From(
      actor: SequenceDiagramActor
    ) : SequenceDiagram [NullableContext]
- - Render() : string [NullableContext]
+ - SequenceDiagram.From<T>() : SequenceDiagram [NullableContext]
  - Title(
      title: string
    ) : SequenceDiagram [NullableContext]
@@ -72,41 +109,4 @@
    )
  - GenerateDiagramContent() : StringBuilder
  - GenerateDiagramUrl() : string
-
-## Documentation.TechnicalBlueprint (class)
- - ctor()
- - Add(
-     diagrams: params SequenceDiagram[] [ParamArray]
-   ) : TechnicalBlueprint
- - Add(
-     diagrams: IEnumerable<SequenceDiagram>
-   ) : TechnicalBlueprint
- - Intro(
-     markdown: string
-   ) : TechnicalBlueprint
- - Register<TComponent, TImplementation>() : TechnicalBlueprint
- - Register(
-     interface: Type,
-     services: IServiceProvider
-   ) : TechnicalBlueprint
- - Register(
-     interface: Type,
-     implementation: Type
-   ) : TechnicalBlueprint
- - Render() : string
- - TechnicalBlueprint.Titled(
-     title: string
-   ) : TechnicalBlueprint
- - ToString() : string
-
-## Documentation.TechnicalBlueprint+DiagramComponents (class)
- - ctor()
- - Register<TComponent, TImplementation>() : void [NullableContext]
- - Register(
-     interface: Type,
-     implementation: Type
-   ) : void
- - Resolve(
-     origin: Type
-   ) : Type
 

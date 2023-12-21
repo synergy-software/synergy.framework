@@ -1,38 +1,40 @@
 ﻿# Synergy.Documentation
 
-## Todos.TodoExplorer (abstract class)
- - TodoExplorer.DebtFor(
-     name: string,
-     from: CodeFolder,
-     currentPath: string [CallerFilePath, Optional],
-     patterns: params TodoPattern[] [ParamArray]
+## Api.ApiDescription (abstract class)
+ - ApiDescription.For(
+     method: MethodInfo,
+     withAttributes: bool [Optional]
+   ) : string
+ - ApiDescription.GenerateFor(
+     assembly: Assembly
+   ) : string
+ - ApiDescription.GenerateFor(
+     types: IEnumerable<Type>,
+     description: StringBuilder? [Nullable, Optional],
+     assemblyName: string? [Nullable, Optional]
+   ) : string
+ - ApiDescription.GetTypeName(
+     method: MethodInfo
+   ) : string
+ - ApiDescription.GetTypeName(
+     parameter: ParameterInfo
+   ) : string
+ - ApiDescription.GetTypeName(
+     type: Type
    ) : string
 
-## Todos.Patterns.CsharpTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<CsharpTodoPattern>
- - FileExtension: string { get; set; }
- - Regex: Regex { get; set; }
- - TodoExtractor: Func<Match, string> { get; set; }
- - ctor()
-
-## Todos.Patterns.GherkinTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<GherkinTodoPattern>
- - FileExtension: string { get; set; }
- - Regex: Regex { get; set; }
- - TodoExtractor: Func<Match, string> { get; set; }
- - ctor()
-
-## Todos.Patterns.TextTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<TextTodoPattern>
- - FileExtension: string { get; set; }
- - Regex: Regex { get; set; }
- - TodoExtractor: Func<Match, string> { get; set; }
- - ctor()
-
-## Todos.Patterns.TodoPattern (abstract class) : IEquatable<TodoPattern>
- - FileExtension: string { get; set; }
- - Regex: Regex { get; set; }
- - TodoExtractor: Func<Match, string> { get; set; }
-
-## Markup.Markdown (class)
- - ctor()
+## Api.ClassDocumentation (class) : Markdown+Document, IEnumerable<Markdown+IElement>, IEnumerable
+ - ctor(
+     type: Type
+   )
+ - Append(
+     element: Markdown+IElement
+   ) : Markdown+Document
+ - Append(
+     newElements: IEnumerable<Markdown+IElement>
+   ) : Markdown+Document
+ - GetEnumerator() : IEnumerator<Markdown+IElement>
+ - ToString() : string
 
 ## Code.ClassReader (class)
  - ctor()
@@ -74,43 +76,18 @@
      jumps: int [Optional]
    ) : CodeFolder
 
-## Api.ApiDescription (abstract class)
- - ApiDescription.For(
-     method: MethodInfo,
-     withAttributes: bool [Optional]
-   ) : string
- - ApiDescription.GenerateFor(
-     assembly: Assembly
-   ) : string
- - ApiDescription.GenerateFor(
-     types: IEnumerable<Type>,
-     description: StringBuilder? [Nullable, Optional],
-     assemblyName: string? [Nullable, Optional]
-   ) : string
- - ApiDescription.GetTypeName(
-     method: MethodInfo
-   ) : string
- - ApiDescription.GetTypeName(
-     parameter: ParameterInfo
-   ) : string
- - ApiDescription.GetTypeName(
-     type: Type
-   ) : string
+## Markup.Markdown (class)
+ - ctor()
 
-## Api.ClassDocumentation (class) : Markdown+Document, IEnumerable<Markdown+IElement>, IEnumerable
+## Markup.Markdown+Code (class) : Markdown+IElement
  - ctor(
-     type: Type
+     text: string? [Optional],
+     language: string? [Optional]
    )
- - Append(
-     element: Markdown+IElement
-   ) : Markdown+Document
- - Append(
-     newElements: IEnumerable<Markdown+IElement>
-   ) : Markdown+Document
- - GetEnumerator() : IEnumerator<Markdown+IElement>
- - ToString() : string
-
-## Markup.Markdown+IElement (interface)
+ - Line(
+     line: string
+   ) : Markdown+Code [NullableContext]
+ - ToString() : string [NullableContext]
 
 ## Markup.Markdown+Document (class) : IEnumerable<Markdown+IElement>, IEnumerable
  - ctor()
@@ -144,15 +121,27 @@
    )
  - ToString() : string
 
-## Markup.Markdown+Code (class) : Markdown+IElement
+## Markup.Markdown+IElement (interface)
+
+## Markup.Markdown+Image (class) : Markdown+IElement
  - ctor(
-     text: string? [Optional],
-     language: string? [Optional]
+     filePath: CodeFile,
+     alternateText: string? [Nullable, Optional]
    )
- - Line(
-     line: string
-   ) : Markdown+Code [NullableContext]
- - ToString() : string [NullableContext]
+ - RelativeTo(
+     file: CodeFile
+   ) : Markdown+Image
+ - ToString() : string
+
+## Markup.Markdown+Link (class)
+ - ctor(
+     filePath: CodeFile,
+     text: string? [Nullable, Optional]
+   )
+ - RelativeTo(
+     file: CodeFile
+   ) : Markdown+Link
+ - ToString() : string
 
 ## Markup.Markdown+Paragraph (class) : Markdown+IElement
  - ctor(
@@ -181,13 +170,34 @@
    ) : void
  - ToString() : string
 
-## Markup.Markdown+Image (class) : Markdown+IElement
- - ctor(
-     filePath: CodeFile,
-     alternateText: string? [Nullable, Optional]
-   )
- - RelativeTo(
-     file: CodeFile
-   ) : Markdown+Image
- - ToString() : string
+## Todos.Patterns.CsharpTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<CsharpTodoPattern>
+ - FileExtension: string { get; set; }
+ - Regex: Regex { get; set; }
+ - TodoExtractor: Func<Match, string> { get; set; }
+ - ctor()
+
+## Todos.Patterns.GherkinTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<GherkinTodoPattern>
+ - FileExtension: string { get; set; }
+ - Regex: Regex { get; set; }
+ - TodoExtractor: Func<Match, string> { get; set; }
+ - ctor()
+
+## Todos.Patterns.TextTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<TextTodoPattern>
+ - FileExtension: string { get; set; }
+ - Regex: Regex { get; set; }
+ - TodoExtractor: Func<Match, string> { get; set; }
+ - ctor()
+
+## Todos.Patterns.TodoPattern (abstract class) : IEquatable<TodoPattern>
+ - FileExtension: string { get; set; }
+ - Regex: Regex { get; set; }
+ - TodoExtractor: Func<Match, string> { get; set; }
+
+## Todos.TodoExplorer (abstract class)
+ - TodoExplorer.DebtFor(
+     name: string,
+     from: CodeFolder,
+     currentPath: string [CallerFilePath, Optional],
+     patterns: params TodoPattern[] [ParamArray]
+   ) : string
 
