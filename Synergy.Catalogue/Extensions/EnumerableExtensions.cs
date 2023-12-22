@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.ObjectModel;
-using Synergy.Contracts;
 
 namespace Synergy.Catalogue
 {
@@ -12,10 +11,10 @@ namespace Synergy.Catalogue
         static class EnumerableExtensions
     {
         public static bool IsEmpty<T>(IEnumerable<T> collection)
-            => collection.OrFail(nameof(collection)).Any() == false;
+            => collection.Any() == false;
         
         public static bool IsNotEmpty<T>(IEnumerable<T> collection)
-            => collection.OrFail(nameof(collection)).Any();
+            => collection.Any();
         
         public static bool In<T>(this T value, params T[] values)
             => values.Contains(value);
@@ -45,8 +44,8 @@ namespace Synergy.Catalogue
         }
         
         public static List<TDestination> ConvertAll<TSource, TDestination>(this IEnumerable<TSource> source, Func<TSource, TDestination> converter) 
-            => source.OrFail(nameof(source))
-                     .Select(converter.OrFail(nameof(converter)))
+            => source
+                     .Select(converter)
                      .ToList(source.ExpectedCapacity());
 
         private static int ExpectedCapacity<TSource>(this IEnumerable<TSource> source)

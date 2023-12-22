@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using Synergy.Contracts;
 
 namespace Synergy.Documentation.Code;
 
@@ -17,7 +16,7 @@ public class CodeFile
 
     public CodeFile(string filePath)
     {
-        FilePath = filePath.OrFailIfWhiteSpace(nameof(filePath));
+        FilePath = filePath;
     }
 
     public CodeFolder Folder

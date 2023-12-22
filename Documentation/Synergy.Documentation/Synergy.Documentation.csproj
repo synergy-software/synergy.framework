@@ -47,9 +47,4 @@
       </Compile>
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
-    </ItemGroup>
-
-
 </Project>

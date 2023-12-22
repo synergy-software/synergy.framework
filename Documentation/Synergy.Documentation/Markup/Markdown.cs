@@ -1,10 +1,7 @@
 ﻿using System.Collections;
 using System.Text;
 using Synergy.Catalogue;
-using Synergy.Contracts;
 using Synergy.Documentation.Code;
-
-// TODO: Marcin Celej [from: Marcin Celej on: 21-05-2023]: Stop referencing Synergy.Contracts from Synergy.Documentation
 
 namespace Synergy.Documentation.Markup
 {
@@ -28,14 +25,12 @@ namespace Synergy.Documentation.Markup
 
             public Document Append(IElement element)
             {
-                Fail.IfArgumentNull(element, nameof(element));
                 this.elements.Add(element);
                 return this;
             }
 
             public Document Append(IEnumerable<IElement> newElements)
             {
-                Fail.IfArgumentNull(newElements, nameof(newElements));
                 this.elements.AddRange(newElements);
                 return this;
             }
@@ -71,8 +66,7 @@ namespace Synergy.Documentation.Markup
             protected Header(int level, string header)
             {
                 this.level = level;
-                this.header = header.OrFail(nameof(header))
-                                    .Trim();
+                this.header = header.Trim();
             }
 
             public override string ToString() => $"{new string('#', this.level)} {this.header}{Markdown.NL}";
@@ -116,8 +110,6 @@ namespace Synergy.Documentation.Markup
 
             public Code Line(string line)
             {
-                Fail.IfNull(line, nameof(line));
-
                 if (this.text == null)
                     return new Code(line, this.language);
                 return new Code(this.text + Markdown.NL + line, this.language);
@@ -137,12 +129,10 @@ namespace Synergy.Documentation.Markup
             private readonly string text;
 
             public Paragraph(string text)
-                => this.text = text.OrFail(nameof(text))
-                                   .Trim();
+                => this.text = text.Trim();
 
             public Paragraph Line(string line)
             {
-                Fail.IfArgumentWhiteSpace(line, nameof(line));
                 return new Paragraph(this.text + Markdown.NL + line);
             }
 
@@ -164,15 +154,13 @@ namespace Synergy.Documentation.Markup
 
                 this.lines = new List<string>()
                 {
-                    text.OrFail(nameof(text))
-                        .Trim()
+                    text.Trim()
                 };
             }
 
             public Quote Line(string line)
             {
-                this.lines.Add(line.OrFail(nameof(line))
-                                   .Trim());
+                this.lines.Add(line.Trim());
                 return this;
             }
 
