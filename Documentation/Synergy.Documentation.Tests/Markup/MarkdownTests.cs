@@ -17,6 +17,9 @@ namespace Synergy.Documentation.Tests.Markup
                 .Append(SampleTable())
                 .Append(new Markdown.Quote("some quote"));
 
+            // TODO: Marcin Celej [from: Marcin Celej on: 23-12-2023]: Add image test here
+            // TODO: Marcin Celej [from: Marcin Celej on: 23-12-2023]: Add link test here
+
             Verifier.Verify(markdown.ToString(), "md");
 
             Markdown.Table SampleTable()
