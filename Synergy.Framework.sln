@@ -48,6 +48,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.Architecture.Annotations", "Architecture\Synergy.Architecture.Annotations\Synergy.Architecture.Annotations.csproj", "{C651C9B0-C152-401C-9BC8-671C051A4564}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{DF83B560-73BF-453F-B51E-D22A58BCF2C3}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\README.md = Documentation\README.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.Documentation.Tests", "Documentation\Synergy.Documentation.Tests\Synergy.Documentation.Tests.csproj", "{7EC1D861-5A09-4518-8A9D-F69CD5D05743}"
 EndProject
