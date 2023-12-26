@@ -9,7 +9,7 @@
         <Title>Synergy.Documentation - support for various docs generation</Title>
         <Authors>Synergy Marcin Celej</Authors>
         <PackageLicenseFile>license.txt</PackageLicenseFile>
-        <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/wiki</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/tree/master/Documentation/README.md</PackageProjectUrl>
         <PackageIcon>synergy.png</PackageIcon>
         <Description>support for various docs generation</Description>
         <Copyright>Copyright © Synergy Marcin Celej 2023</Copyright>
