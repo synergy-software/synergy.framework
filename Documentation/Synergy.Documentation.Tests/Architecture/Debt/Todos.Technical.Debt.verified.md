@@ -1,6 +1,13 @@
-﻿# Technical Debt for Synergy.Contracts
+﻿# Technical Debt for Synergy.Documentation
 
-Total: 6
+Total: 9
+
+## [Relations.cs](../Dependencies/Relations.cs)
+- TODO: Marcin Celej [from: Marcin Celej on: 26-12-2023]: Doe not work for Markdown.Document
+
+## [MarkdownTests.cs](../../Markup/MarkdownTests.cs)
+- TODO: Marcin Celej [from: Marcin Celej on: 23-12-2023]: Add image test here
+- TODO: Marcin Celej [from: Marcin Celej on: 23-12-2023]: Add link test here
 
 ## [!Init.cs](../../../Synergy.Documentation/!Init.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 14-05-2023]: remove reference to Synergy.Contracts
@@ -11,11 +18,9 @@ Total: 6
 ## [CodeFolder.cs](../../../Synergy.Documentation/Code/CodeFolder.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 14-05-2023]: Rename to SourceFolder
 
-## [Markdown.cs](../../../Synergy.Documentation/Markup/Markdown.cs)
-- TODO: Marcin Celej [from: Marcin Celej on: 21-05-2023]: Stop referencing Synergy.Contracts from Synergy.Documentation
-
 ## [TodoPattern.cs](../../../Synergy.Documentation/Todos/Patterns/TodoPattern.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 14-04-2023]: Add way to exclude some files from the scan - by path
 
 ## [TodoExplorer.cs](../../../Synergy.Documentation/Todos/TodoExplorer.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 30-04-2023]: Publish this library via nuget
+- TODO: Marcin Celej [from: Marcin Celej on: 26-12-2023]: Introduce md todo pattern

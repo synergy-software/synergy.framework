@@ -1,7 +1,7 @@
 ﻿using Synergy.Documentation.Code;
 using Synergy.Documentation.Todos;
 
-namespace Synergy.Documentation.Tests.Architecture;
+namespace Synergy.Documentation.Tests.Architecture.Debt;
 
 [UsesVerify]
 public class Todos
@@ -11,7 +11,7 @@ public class Todos
     {
         var rootFolder = CodeFolder.Current()
                                    .Up(3);
-        var technicalDebt = TodoExplorer.DebtFor("Synergy.Contracts", rootFolder);
+        var technicalDebt = TodoExplorer.DebtFor("Synergy.Documentation", rootFolder);
 
         await Verifier
               .Verify(technicalDebt, "md")
