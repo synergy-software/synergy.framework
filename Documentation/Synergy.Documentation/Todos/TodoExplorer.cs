@@ -15,6 +15,7 @@ public static class TodoExplorer
         new CsharpTodoPattern(),
         new GherkinTodoPattern(),
         new TextTodoPattern()
+        // TODO: Marcin Celej [from: Marcin Celej on: 26-12-2023]: Introduce md todo pattern
     };
 
     public static string DebtFor(
