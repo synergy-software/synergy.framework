@@ -36,6 +36,15 @@
  - GetEnumerator() : IEnumerator<Markdown+IElement>
  - ToString() : string
 
+## Api.Dependencies (class)
+ - ctor()
+ - Dependencies.Of(
+     root: Type
+   ) : List<Type>
+ - DependsOn(
+     type: Type
+   ) : IEnumerable<Type> [IteratorStateMachine]
+
 ## Code.ClassReader (class)
  - ctor()
  - ClassReader.ReadMethodBody(
