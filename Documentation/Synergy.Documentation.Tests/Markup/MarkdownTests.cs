@@ -2,10 +2,11 @@
 
 namespace Synergy.Documentation.Tests.Markup
 {
+    [UsesVerify]
     public class MarkdownTests
     {
         [Fact]
-        public void CreateMarkdownDocument()
+        public async Task CreateMarkdownDocument()
         {
             var markdown = new Markdown.Document();
             markdown
@@ -20,7 +21,7 @@ namespace Synergy.Documentation.Tests.Markup
             // TODO: Marcin Celej [from: Marcin Celej on: 23-12-2023]: Add image test here
             // TODO: Marcin Celej [from: Marcin Celej on: 23-12-2023]: Add link test here
 
-            Verifier.Verify(markdown.ToString(), "md");
+            await Verifier.Verify(markdown.ToString(), "md");
 
             Markdown.Table SampleTable()
             {
