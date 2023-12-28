@@ -20,6 +20,14 @@
         <ParentExtension>.cs</ParentExtension>
         <ParentFile>MarkdownTests</ParentFile>
       </None>
+      <None Update="Architecture\Public\Package.of.Verify.Xunit.verified.md">
+        <ParentFile>Package</ParentFile>
+        <DependentUpon>Package.cs</DependentUpon>
+      </None>
+      <None Update="Architecture\Public\Package.of.xunit.core.verified.md">
+        <ParentFile>Package</ParentFile>
+        <DependentUpon>Package.cs</DependentUpon>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
