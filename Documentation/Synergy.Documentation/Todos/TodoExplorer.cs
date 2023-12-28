@@ -6,8 +6,6 @@ using Synergy.Documentation.Todos.Patterns;
 
 namespace Synergy.Documentation.Todos;
 
-// TODO: Marcin Celej [from: Marcin Celej on: 30-04-2023]: Publish this library via nuget
-
 public static class TodoExplorer
 {
     private static readonly TodoPattern[] defaultPatterns =
@@ -15,7 +13,7 @@ public static class TodoExplorer
         new CsharpTodoPattern(),
         new GherkinTodoPattern(),
         new TextTodoPattern()
-        // TODO: Marcin Celej [from: Marcin Celej on: 26-12-2023]: Introduce md todo pattern
+        // TODO: Marcin Celej [from: Marcin Celej on: 26-12-2023]: Introduce md todo pattern: [//]: # (TODO Convert this markdown to docs as code)
     };
 
     public static string DebtFor(
