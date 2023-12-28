@@ -152,6 +152,21 @@
      settings: VerifySettings? [Nullable, Optional],
      sourceFile: string [CallerFilePath, Optional]
    ) : SettingsTask
+ - Verifier.UseProjectRelativeDirectory(
+     directory: string
+   ) : void
+ - Verifier.Verify(
+     archive: ZipArchive,
+     include: Func<ZipArchiveEntry, bool>? [Nullable, Optional],
+     settings: VerifySettings? [Nullable, Optional],
+     info: object? [Nullable, Optional],
+     fileScrubber: FileScrubber? [Nullable, Optional],
+     sourceFile: string [CallerFilePath, Optional]
+   ) : SettingsTask
+ - Verifier.Verify(
+     settings: VerifySettings? [Nullable, Optional],
+     sourceFile: string [CallerFilePath, Optional]
+   ) : SettingsTask
  - Verifier.Verify(
      target: Byte[]? [Nullable],
      extension: string,
@@ -238,6 +253,11 @@
    ) : SettingsTask
  - Verifier.Verify(
      targets: IEnumerable<Target>,
+     settings: VerifySettings? [Nullable, Optional],
+     sourceFile: string [CallerFilePath, Optional]
+   ) : SettingsTask
+ - Verifier.Verify<T>(
+     target: Func<Task<T>>,
      settings: VerifySettings? [Nullable, Optional],
      sourceFile: string [CallerFilePath, Optional]
    ) : SettingsTask
@@ -374,6 +394,22 @@
      settings: VerifySettings? [Nullable, Optional],
      sourceFile: string [CallerFilePath, Optional]
    ) : SettingsTask
+ - Verifier.VerifyZip(
+     path: string,
+     include: Func<ZipArchiveEntry, bool>? [Nullable, Optional],
+     settings: VerifySettings? [Nullable, Optional],
+     info: object? [Nullable, Optional],
+     fileScrubber: FileScrubber? [Nullable, Optional],
+     sourceFile: string [CallerFilePath, Optional]
+   ) : SettingsTask
+ - Verifier.VerifyZip(
+     stream: Stream,
+     include: Func<ZipArchiveEntry, bool>? [Nullable, Optional],
+     settings: VerifySettings? [Nullable, Optional],
+     info: object? [Nullable, Optional],
+     fileScrubber: FileScrubber? [Nullable, Optional],
+     sourceFile: string [CallerFilePath, Optional]
+   ) : SettingsTask
 
 ## VerifyXunit.VerifyBase (abstract class)
  - ctor(
@@ -396,6 +432,13 @@
      target: Func<ValueTask>,
      settings: VerifySettings? [Nullable, Optional]
    ) : SettingsTask
+ - Verify(
+     archive: ZipArchive [Nullable],
+     include: Func<ZipArchiveEntry, bool>? [Nullable, Optional],
+     settings: VerifySettings? [Optional],
+     info: object? [Optional],
+     fileScrubber: FileScrubber? [Optional]
+   ) : SettingsTask [NullableContext]
  - Verify(
      target: Byte[]?,
      extension: string [Nullable],
@@ -467,6 +510,10 @@
      settings: VerifySettings? [Nullable, Optional]
    ) : SettingsTask
  - Verify<T>(
+     target: Func<Task<T>>,
+     settings: VerifySettings? [Nullable, Optional]
+   ) : SettingsTask
+ - Verify<T>(
      target: IAsyncEnumerable<T>,
      settings: VerifySettings? [Nullable, Optional]
    ) : SettingsTask
@@ -502,7 +549,8 @@
      pattern: string? [Optional],
      options: EnumerationOptions? [Optional],
      settings: VerifySettings? [Optional],
-     info: object? [Optional]
+     info: object? [Optional],
+     fileScrubber: FileScrubber? [Optional]
    ) : SettingsTask [NullableContext]
  - VerifyDirectory(
      path: string [Nullable],
@@ -510,7 +558,8 @@
      pattern: string? [Optional],
      options: EnumerationOptions? [Optional],
      settings: VerifySettings? [Optional],
-     info: object? [Optional]
+     info: object? [Optional],
+     fileScrubber: FileScrubber? [Optional]
    ) : SettingsTask [NullableContext]
  - VerifyFile(
      path: FileInfo,
@@ -574,4 +623,18 @@
      target: ValueTask<string> [Nullable],
      settings: VerifySettings? [Nullable, Optional]
    ) : SettingsTask
+ - VerifyZip(
+     path: string [Nullable],
+     include: Func<ZipArchiveEntry, bool>? [Nullable, Optional],
+     settings: VerifySettings? [Optional],
+     info: object? [Optional],
+     fileScrubber: FileScrubber? [Optional]
+   ) : SettingsTask [NullableContext]
+ - VerifyZip(
+     stream: Stream [Nullable],
+     include: Func<ZipArchiveEntry, bool>? [Nullable, Optional],
+     settings: VerifySettings? [Optional],
+     info: object? [Optional],
+     fileScrubber: FileScrubber? [Optional]
+   ) : SettingsTask [NullableContext]
 
