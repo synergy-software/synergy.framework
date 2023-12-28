@@ -63,7 +63,7 @@
         },
         "responses": {
           "201": {
-            "description": "Success",
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
@@ -97,8 +97,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "nullable": true
+              "type": "string"
             }
           }
         ],
@@ -125,8 +124,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "nullable": true
+              "type": "string"
             }
           }
         ],
@@ -147,45 +145,6 @@
   },
   "components": {
     "schemas": {
-      "Login": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "UserReadModel": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "login": {
-            "$ref": "#/components/schemas/Login"
-          }
-        },
-        "additionalProperties": false
-      },
-      "GetUsersQueryResult": {
-        "type": "object",
-        "properties": {
-          "users": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/UserReadModel"
-            },
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
       "CreateUserCommand": {
         "required": [
           "login"
@@ -203,6 +162,42 @@
         "properties": {
           "user": {
             "$ref": "#/components/schemas/UserReadModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeleteUserCommandResult": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "GetUserQueryResult": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UserReadModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetUsersQueryResult": {
+        "type": "object",
+        "properties": {
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserReadModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -232,22 +227,19 @@
             "nullable": true
           }
         },
-        "additionalProperties": {
-          "type": "object",
-          "additionalProperties": false
-        }
+        "additionalProperties": {}
       },
-      "GetUserQueryResult": {
+      "UserReadModel": {
         "type": "object",
         "properties": {
-          "user": {
-            "$ref": "#/components/schemas/UserReadModel"
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "login": {
+            "$ref": "#/components/schemas/Login"
           }
         },
-        "additionalProperties": false
-      },
-      "DeleteUserCommandResult": {
-        "type": "object",
         "additionalProperties": false
       }
     }
