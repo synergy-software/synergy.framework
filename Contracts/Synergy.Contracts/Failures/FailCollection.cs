@@ -9,6 +9,7 @@ namespace Synergy.Contracts
     static partial class Fail
     {
         // TODO:mace (from:mace @ 22-10-2016) public static void IfCollectionDoesNotContain<T>([CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] IEnumerable<T> collection,) 
+        // TODO: Marcin Celej [from: Marcin Celej on: 29-05-2023]: Fail.IfCollectionContainsDuplicates
 
         #region Fail.IfCollectionEmpty()
 

@@ -1,6 +1,6 @@
 ﻿# Technical Debt for Synergy.Contracts
 
-Total: 14
+Total: 15
 
 ## [ContractorRepository.cs](../../../Synergy.Contracts.Samples/ContractorRepository.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 30-04-2023]: Remove this sample project
@@ -21,6 +21,7 @@ Total: 14
 
 ## [FailCollection.cs](../../../Synergy.Contracts/Failures/FailCollection.cs)
 - TODO:mace (from:mace @ 22-10-2016) public static void IfCollectionDoesNotContain<T>([CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] IEnumerable<T> collection,)
+- TODO: Marcin Celej [from: Marcin Celej on: 29-05-2023]: Fail.IfCollectionContainsDuplicates
 
 ## [FailEquality.cs](../../../Synergy.Contracts/Failures/FailEquality.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: Add variable.OrFailIfEqual(sth)
