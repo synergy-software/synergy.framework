@@ -6,7 +6,8 @@
      withAttributes: bool [Optional]
    ) : string
  - ApiDescription.GenerateFor(
-     assembly: Assembly
+     assembly: Assembly,
+     includeAssemblyVersion: bool [Optional]
    ) : string
  - ApiDescription.GenerateFor(
      types: IEnumerable<Type>,

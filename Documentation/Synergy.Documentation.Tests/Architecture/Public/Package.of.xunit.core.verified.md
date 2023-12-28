@@ -1,4 +1,4 @@
-﻿# xunit.core
+﻿# xunit.core 2.4.2.0
 
 ## Xunit.AssemblyTraitAttribute (attribute) : Attribute, ITraitAttribute
  - ctor(

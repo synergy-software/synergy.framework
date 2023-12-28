@@ -1,4 +1,4 @@
-﻿# Verify.Xunit
+﻿# Verify.Xunit 1.0.0.0
 
 ## VerifyXunit.DerivePathInfo (class) : MulticastDelegate, ICloneable, ISerializable
  - Method: MethodInfo { get; }

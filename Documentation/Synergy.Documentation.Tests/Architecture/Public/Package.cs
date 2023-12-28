@@ -14,7 +14,7 @@ public class Package
         var assembly = type.Assembly;
 
         // ACT
-        var publicApi = ApiDescription.GenerateFor(assembly);
+        var publicApi = ApiDescription.GenerateFor(assembly, includeAssemblyVersion: true);
 
         // ASSERT
         await Verifier.Verify(publicApi, "md")

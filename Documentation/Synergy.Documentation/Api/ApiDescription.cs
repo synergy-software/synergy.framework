@@ -12,11 +12,14 @@ namespace Synergy.Documentation.Api
     {
         static readonly BindingFlags bindingFlags = BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public;
 
-        public static string GenerateFor(Assembly assembly)
+        public static string GenerateFor(Assembly assembly, bool includeAssemblyVersion = false)
         {
             var description = new StringBuilder();
 
             var assemblyName = assembly.GetName().Name;
+            if (includeAssemblyVersion)
+                assemblyName += " " + assembly.GetName().Version;
+            
             description.AppendLine($"# {assemblyName}");
             description.AppendLine();
             
