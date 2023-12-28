@@ -25,7 +25,7 @@
     <ProjectReference Include="..\Synergy.Documentation\Synergy.Documentation.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2021.3.0" />
+    <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Requirements" />
