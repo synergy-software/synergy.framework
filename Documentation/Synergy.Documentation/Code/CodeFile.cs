@@ -4,7 +4,7 @@ namespace Synergy.Documentation.Code;
 
 public class CodeFile
 {
-    public static CodeFolder Current([CallerFilePath] string path = "")
+    public static CodeFile Current([CallerFilePath] string path = "")
         => new(path);
     
     public string FilePath { get; }
