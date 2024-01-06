@@ -17,6 +17,7 @@ public class Api
     {
         var assembly = typeof(ApiDescription).Assembly;
         var publicApi = ApiDescription.GenerateFor(assembly);
+        
         await Verifier.Verify(publicApi, "md")
                       .UseMethodName("of." + assembly.GetName().Name);
     }
@@ -38,15 +39,19 @@ When you consume some external library - you can enlist its public API and see h
 To manage technical debt, we use the following tool:
 
 ```csharp
+using Synergy.Documentation.Code;
+using Synergy.Documentation.Todos;
+
+namespace Synergy.Documentation.Tests.Architecture.Debt;
+
 [UsesVerify]
 public class Todos
 {
     [Fact]
     public async Task Generate()
     {
-        var rootFolder = CodeFolder.Current()
-                                   .Up(3);
-        var technicalDebt = TodoExplorer.DebtFor("Synergy.Contracts", rootFolder);
+        var rootFolder = CodeFolder.Current().Up(3);
+        var technicalDebt = TodoExplorer.DebtFor("Synergy.Documentation", rootFolder);
 
         await Verifier
               .Verify(technicalDebt, "md")
@@ -72,21 +77,21 @@ Moreover, it is much easier to spot new technical debt during the code review.
 To document dependencies of a specific class, we use the following tool:
 
 ```csharp
+using Synergy.Documentation.Api;
+using Synergy.Documentation.Markup;
+
+namespace Synergy.Documentation.Tests.Architecture.Dependencies;
+
 [UsesVerify]
 public class Relations
 {
     [Theory]
     [InlineData(typeof(Markdown))]
-    [InlineData(typeof(Markdown.Document))]
     public async Task Generate(Type type)
     {
-        // ARRANGE
-        var dependencies = Synergy.Documentation.Api.Dependencies.Of(type);
-
-        // ACT
+        var dependencies = Synergy.Documentation.Api.Dependencies.Of(type, includeNested: true);
         var publicApi = ApiDescription.GenerateFor(dependencies);
 
-        // ASSERT
         await Verifier.Verify(publicApi, "md")
                       .UseMethodName("of." + type.Name);
     }

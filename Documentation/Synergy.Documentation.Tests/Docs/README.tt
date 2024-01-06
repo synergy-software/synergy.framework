@@ -25,21 +25,7 @@ When you consume some external library - you can enlist its public API and see h
 To manage technical debt, we use the following tool:
 
 ```csharp
-[UsesVerify]
-public class Todos
-{
-    [Fact]
-    public async Task Generate()
-    {
-        var rootFolder = CodeFolder.Current()
-                                   .Up(3);
-        var technicalDebt = TodoExplorer.DebtFor("Synergy.Contracts", rootFolder);
-
-        await Verifier
-              .Verify(technicalDebt, "md")
-              .UseMethodName("Technical.Debt");
-    }
-}
+<#= this.Todos.ReadAllText() #>
 ```
 
 For sample code, please check: <#= this.TodosLink #>
@@ -59,25 +45,7 @@ Moreover, it is much easier to spot new technical debt during the code review.
 To document dependencies of a specific class, we use the following tool:
 
 ```csharp
-[UsesVerify]
-public class Relations
-{
-    [Theory]
-    [InlineData(typeof(Markdown))]
-    [InlineData(typeof(Markdown.Document))]
-    public async Task Generate(Type type)
-    {
-        // ARRANGE
-        var dependencies = Synergy.Documentation.Api.Dependencies.Of(type);
-
-        // ACT
-        var publicApi = ApiDescription.GenerateFor(dependencies);
-
-        // ASSERT
-        await Verifier.Verify(publicApi, "md")
-                      .UseMethodName("of." + type.Name);
-    }
-}
+<#= this.Relations.ReadAllText() #>
 ```
 
 For sample code, please check: <#= this.RelationsLink #>

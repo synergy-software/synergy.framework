@@ -1,6 +1,6 @@
 ﻿using Synergy.Documentation.Api;
 
-namespace Synergy.Documentation.Tests.Architecture.Dependencies;
+namespace Synergy.Documentation.Tests.Architecture.Public;
 
 [UsesVerify]
 public class Package
@@ -10,13 +10,9 @@ public class Package
     [InlineData(typeof(TheoryAttribute))]
     public async Task Generate(Type type)
     {
-        // ARRANGE
         var assembly = type.Assembly;
-
-        // ACT
         var publicApi = ApiDescription.GenerateFor(assembly, includeAssemblyVersion: true);
 
-        // ASSERT
         await Verifier.Verify(publicApi, "md")
                       .UseMethodName("of." + assembly.GetName().Name);
     }

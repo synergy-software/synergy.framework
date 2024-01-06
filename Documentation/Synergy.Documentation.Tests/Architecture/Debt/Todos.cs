@@ -9,8 +9,7 @@ public class Todos
     [Fact]
     public async Task Generate()
     {
-        var rootFolder = CodeFolder.Current()
-                                   .Up(3);
+        var rootFolder = CodeFolder.Current().Up(3);
         var technicalDebt = TodoExplorer.DebtFor("Synergy.Documentation", rootFolder);
 
         await Verifier

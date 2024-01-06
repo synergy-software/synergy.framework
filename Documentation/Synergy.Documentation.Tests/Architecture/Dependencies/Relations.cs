@@ -8,16 +8,12 @@ public class Relations
 {
     [Theory]
     [InlineData(typeof(Markdown))]
-    public async Task Generate(params Type[] type)
+    public async Task Generate(Type type)
     {
-        // ARRANGE
-        var dependencies = Synergy.Documentation.Api.Dependencies.Of(type.First(), includeNested: true);
-
-        // ACT
+        var dependencies = Synergy.Documentation.Api.Dependencies.Of(type, includeNested: true);
         var publicApi = ApiDescription.GenerateFor(dependencies);
 
-        // ASSERT
         await Verifier.Verify(publicApi, "md")
-                      .UseMethodName("of." + type.First().Name);
+                      .UseMethodName("of." + type.Name);
     }
 }

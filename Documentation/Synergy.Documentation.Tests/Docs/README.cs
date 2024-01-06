@@ -60,30 +60,44 @@ namespace Synergy.Documentation.Tests.Docs
             
             #line default
             #line hidden
-            this.Write(".\r\n\r\n## Managing technical debt\r\n\r\nTo manage technical debt, we use the following tool:\r\n\r\n```csharp\r\n[UsesVerify]\r\npublic class Todos\r\n{\r\n    [Fact]\r\n    public async Task Generate()\r\n    {\r\n        var rootFolder = CodeFolder.Current()\r\n                                   .Up(3);\r\n        var technicalDebt = TodoExplorer.DebtFor(\"Synergy.Contracts\", rootFolder);\r\n\r\n        await Verifier\r\n              .Verify(technicalDebt, \"md\")\r\n              .UseMethodName(\"Technical.Debt\");\r\n    }\r\n}\r\n```\r\n\r\nFor sample code, please check: ");
+            this.Write(".\r\n\r\n## Managing technical debt\r\n\r\nTo manage technical debt, we use the following tool:\r\n\r\n```csharp\r\n");
             
-            #line 45 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 28 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Todos.ReadAllText()));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n```\r\n\r\nFor sample code, please check: ");
+            
+            #line 31 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TodosLink));
             
             #line default
             #line hidden
             this.Write("\r\n\r\nTo see the results, please check: ");
             
-            #line 47 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 33 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TodosDebtLink));
             
             #line default
             #line hidden
-            this.Write("\r\n\r\n**Note:** \r\n\r\nBasic idea of using this test is to have a list of all technical debt in the project.\r\nEach time developer adds a new technical debt, he should re-run this test otherwise it will fail on the CI.\r\nWhen all tech debt for the project is materialized in single file - we can start working on it.\r\nIt also helps to keep track of all tech debt in the project.\r\nMoreover, it is much easier to spot new technical debt during the code review.\r\n\r\n## Enlisting dependencies of a class\r\n\r\nTo document dependencies of a specific class, we use the following tool:\r\n\r\n```csharp\r\n[UsesVerify]\r\npublic class Relations\r\n{\r\n    [Theory]\r\n    [InlineData(typeof(Markdown))]\r\n    [InlineData(typeof(Markdown.Document))]\r\n    public async Task Generate(Type type)\r\n    {\r\n        // ARRANGE\r\n        var dependencies = Synergy.Documentation.Api.Dependencies.Of(type);\r\n\r\n        // ACT\r\n        var publicApi = ApiDescription.GenerateFor(dependencies);\r\n\r\n        // ASSERT\r\n        await Verifier.Verify(publicApi, \"md\")\r\n                      .UseMethodName(\"of.\" + type.Name);\r\n    }\r\n}\r\n```\r\n\r\nFor sample code, please check: ");
+            this.Write("\r\n\r\n**Note:** \r\n\r\nBasic idea of using this test is to have a list of all technical debt in the project.\r\nEach time developer adds a new technical debt, he should re-run this test otherwise it will fail on the CI.\r\nWhen all tech debt for the project is materialized in single file - we can start working on it.\r\nIt also helps to keep track of all tech debt in the project.\r\nMoreover, it is much easier to spot new technical debt during the code review.\r\n\r\n## Enlisting dependencies of a class\r\n\r\nTo document dependencies of a specific class, we use the following tool:\r\n\r\n```csharp\r\n");
             
-            #line 83 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 48 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.Relations.ReadAllText()));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n```\r\n\r\nFor sample code, please check: ");
+            
+            #line 51 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.RelationsLink));
             
             #line default
             #line hidden
             this.Write("\r\n\r\nTo see the results, please check: ");
             
-            #line 85 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 53 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.RelationsOfMarkdownLink));
             
             #line default

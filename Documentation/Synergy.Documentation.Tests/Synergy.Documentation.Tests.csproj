@@ -51,6 +51,9 @@
         <DesignTime>True</DesignTime>
         <DependentUpon>README.tt</DependentUpon>
       </Compile>
+      <Compile Update="Docs\README.Generate.cs">
+        <DependentUpon>README.tt</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>
