@@ -55,9 +55,9 @@ public class Todos
 }
 ```
 
-For sample code, please check: [Todos.cs](Synergy.Documentation.Tests/Architecture/Debt/Todos.cs)
+For sample code, please check: <#= this.TodosLink #>
 
-To see the results, please check: [Todos.Technical.Debt.verified.md](Synergy.Documentation.Tests/Architecture/Debt/Todos.Technical.Debt.verified.md)
+To see the results, please check: <#= this.TodosDebtLink #>
 
 **Note:** 
 

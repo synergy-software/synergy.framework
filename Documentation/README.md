@@ -95,8 +95,6 @@ For sample code, please check: [Relations.cs](Synergy.Documentation.Tests/Archit
 
 To see the results, please check: [Relations.of.Markdown.verified.md](Synergy.Documentation.Tests/Architecture/Dependencies/Relations.of.Markdown.verified.md)
 
-[//]: # (TODO Write the documentation of Dependencies genaretor)
-
 ## Generating markdown files from code - Docs as Code
 
 TBC
