@@ -52,6 +52,12 @@ For sample code, please check: <#= this.RelationsLink #>
 
 To see the results, please check: <#= this.RelationsOfMarkdownLink #>
 
+## Comments in code
+
+TBC
+
+[//]: # (TODO Write the documentation of Note class usage)
+
 ## Generating markdown files from code - Docs as Code
 
 TBC
