@@ -14,8 +14,6 @@ public class Relations
         // ARRANGE
         var dependencies = Synergy.Documentation.Api.Dependencies.Of(type);
 
-
-        // TODO: Marcin Celej [from: Marcin Celej on: 26-12-2023]: Doe not work for Markdown.Document
         // ACT
         var publicApi = ApiDescription.GenerateFor(dependencies);
 

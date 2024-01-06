@@ -67,5 +67,41 @@ When all tech debt for the project is materialized in single file - we can start
 It also helps to keep track of all tech debt in the project.
 Moreover, it is much easier to spot new technical debt during the code review.
 
+## Enlisting dependencies of a class
 
+To document dependencies of a specific class, we use the following tool:
+
+```csharp
+[UsesVerify]
+public class Relations
+{
+    [Theory]
+    [InlineData(typeof(Markdown))]
+    [InlineData(typeof(Markdown.Document))]
+    public async Task Generate(Type type)
+    {
+        // ARRANGE
+        var dependencies = Synergy.Documentation.Api.Dependencies.Of(type);
+
+        // ACT
+        var publicApi = ApiDescription.GenerateFor(dependencies);
+
+        // ASSERT
+        await Verifier.Verify(publicApi, "md")
+                      .UseMethodName("of." + type.Name);
+    }
+}
+```
+
+For sample code, please check: [Relations.cs](Synergy.Documentation.Tests/Architecture/Dependencies/Relations.cs)
+
+To see the results, please check: [Relations.of.Document.verified.md](Synergy.Documentation.Tests/Architecture/Dependencies/Relations.of.Document.verified.md)
+
+[//]: # (TODO Write the documentation of Dependencies genaretor)
+
+## Generating markdown files from code - Docs as Code
+
+TBC
+
+[//]: # (TODO Write the documentation of Markdown class usage)
 
