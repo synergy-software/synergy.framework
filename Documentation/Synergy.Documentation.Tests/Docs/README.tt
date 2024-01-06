@@ -1,3 +1,5 @@
+<#@ template language="C#" #>
+<#@output extension=".md"#>
 # Synergy.Documentation nuget package
 
 ## Enlisting Public API
@@ -91,11 +93,9 @@ public class Relations
 }
 ```
 
-For sample code, please check: [Relations.cs](Synergy.Documentation.Tests/Architecture/Dependencies/Relations.cs)
+For sample code, please check: <#= this.RelationsLink #>
 
-To see the results, please check: [Relations.of.Markdown.verified.md](Synergy.Documentation.Tests/Architecture/Dependencies/Relations.of.Markdown.verified.md)
-
-[//]: # (TODO Write the documentation of Dependencies genaretor)
+To see the results, please check: <#= this.RelationsOfMarkdownLink #>
 
 ## Generating markdown files from code - Docs as Code
 

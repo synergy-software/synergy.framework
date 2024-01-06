@@ -28,6 +28,10 @@
         <ParentFile>Package</ParentFile>
         <DependentUpon>Package.cs</DependentUpon>
       </None>
+      <None Update="Docs\README.tt">
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+        <LastGenOutput>README.cs</LastGenOutput>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
@@ -39,6 +43,14 @@
       <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
       <PackageReference Include="Verify.Xunit" Version="22.11.1" />
       <PackageReference Include="xunit" Version="2.6.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Docs\README.cs">
+        <AutoGen>True</AutoGen>
+        <DesignTime>True</DesignTime>
+        <DependentUpon>README.tt</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>
