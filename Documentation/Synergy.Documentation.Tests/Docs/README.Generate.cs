@@ -1,5 +1,7 @@
 ﻿using Synergy.Documentation.Code;
 using Synergy.Documentation.Markup;
+using Synergy.Documentation.Tests.Architecture.Dependencies;
+using Synergy.Documentation.Tests.Architecture.Public;
 
 namespace Synergy.Documentation.Tests.Docs;
 
@@ -9,26 +11,26 @@ partial class README
     private readonly CodeFolder architectureFolder = CodeFolder.Current().Up().Sub("Architecture");
 
     // TODO: Marcin Celej [from: Marcin Celej on: 06-01-2024]: Add here reading file path through [SourceFile] from Synergy.Documentation.Annotations
-    private CodeFile Api => this.architectureFolder.Sub("Public").File("Api.cs");
-    private Markdown.Link ApiLink => Markdown.Link.To(Api).RelativeFrom(readmeFile);
+    private CodeFile ApiFile => CodeFile.For<Architecture.Public.Api>();
+    private Markdown.Link ApiLink => Markdown.Link.To(this.ApiFile).RelativeFrom(readmeFile);
     
     private CodeFile ApiForSynergyDocs => this.architectureFolder.Sub("Public").File("Api.of.Synergy.Documentation.verified.md");
-    private Markdown.Link ApiForSynergyDocsLink => Markdown.Link.To(ApiForSynergyDocs).RelativeFrom(readmeFile);
+    private Markdown.Link ApiForSynergyDocsLink => Markdown.Link.To(this.ApiForSynergyDocs).RelativeFrom(readmeFile);
     
-    private CodeFile Package => this.architectureFolder.Sub("Public").File("Package.cs");
-    private Markdown.Link PackageLink => Markdown.Link.To(Package).RelativeFrom(readmeFile);
+    private CodeFile PackageFile => CodeFile.For<Package>();
+    private Markdown.Link PackageLink => Markdown.Link.To(this.PackageFile).RelativeFrom(readmeFile);
     
-    private CodeFile Todos => this.architectureFolder.Sub("Debt").File("Todos.cs");
-    private Markdown.Link TodosLink => Markdown.Link.To(Todos).RelativeFrom(README.readmeFile);
+    private CodeFile TodosFile => CodeFile.For<Architecture.Debt.Todos>();
+    private Markdown.Link TodosLink => Markdown.Link.To(this.TodosFile).RelativeFrom(README.readmeFile);
 
     private CodeFile TodosDebt => this.architectureFolder.Sub("Debt").File("Todos.Technical.Debt.verified.md");
-    private Markdown.Link TodosDebtLink => Markdown.Link.To(TodosDebt).RelativeFrom(README.readmeFile);
+    private Markdown.Link TodosDebtLink => Markdown.Link.To(this.TodosDebt).RelativeFrom(README.readmeFile);
     
-    private CodeFile Relations => this.architectureFolder.Sub("Dependencies").File("Relations.cs");
-    private Markdown.Link RelationsLink => Markdown.Link.To(Relations).RelativeFrom(README.readmeFile);
+    private CodeFile RelationsFile => CodeFile.For<Relations>();
+    private Markdown.Link RelationsLink => Markdown.Link.To(this.RelationsFile).RelativeFrom(README.readmeFile);
 
     private CodeFile RelationsOfMarkdown => this.architectureFolder.Sub("Dependencies").File("Relations.of.Markdown.verified.md");
-    private Markdown.Link RelationsOfMarkdownLink => Markdown.Link.To(RelationsOfMarkdown).RelativeFrom(README.readmeFile);
+    private Markdown.Link RelationsOfMarkdownLink => Markdown.Link.To(this.RelationsOfMarkdown).RelativeFrom(README.readmeFile);
     
     [Fact]
     public void Generate()

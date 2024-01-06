@@ -1,9 +1,11 @@
-﻿using Synergy.Documentation.Api;
+﻿using Synergy.Documentation.Annotations;
+using Synergy.Documentation.Api;
 using Synergy.Documentation.Markup;
 
 namespace Synergy.Documentation.Tests.Architecture.Dependencies;
 
 [UsesVerify]
+[CodeFilePath]
 public class Relations
 {
     [Theory]

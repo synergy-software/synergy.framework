@@ -7,6 +7,14 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DefineConstants>TRACE;DOCUMENTATION</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DefineConstants>TRACE;DOCUMENTATION</DefineConstants>
+    </PropertyGroup>
+
     <ItemGroup>
       <None Update="Todos\Todos.Technical.Debt.verified.md">
         <ParentFile>Todos</ParentFile>
@@ -36,6 +44,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
+      <ProjectReference Include="..\Synergy.Documentation.Annotations\Synergy.Documentation.Annotations.csproj" />
       <ProjectReference Include="..\Synergy.Documentation\Synergy.Documentation.csproj" />
     </ItemGroup>
 

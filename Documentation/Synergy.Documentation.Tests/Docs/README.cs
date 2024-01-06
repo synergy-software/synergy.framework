@@ -28,7 +28,7 @@ namespace Synergy.Documentation.Tests.Docs
             this.Write("# Synergy.Documentation nuget package\r\n\r\n## Enlisting Public API\r\n\r\nTo enlist public API, we use the following tool:\r\n\r\n```csharp\r\n");
             
             #line 10 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Api.ReadAllText()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.ApiFile.ReadAllText()));
             
             #line default
             #line hidden
@@ -63,7 +63,7 @@ namespace Synergy.Documentation.Tests.Docs
             this.Write(".\r\n\r\n## Managing technical debt\r\n\r\nTo manage technical debt, we use the following tool:\r\n\r\n```csharp\r\n");
             
             #line 28 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Todos.ReadAllText()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.TodosFile.ReadAllText()));
             
             #line default
             #line hidden
@@ -84,7 +84,7 @@ namespace Synergy.Documentation.Tests.Docs
             this.Write("\r\n\r\n**Note:** \r\n\r\nBasic idea of using this test is to have a list of all technical debt in the project.\r\nEach time developer adds a new technical debt, he should re-run this test otherwise it will fail on the CI.\r\nWhen all tech debt for the project is materialized in single file - we can start working on it.\r\nIt also helps to keep track of all tech debt in the project.\r\nMoreover, it is much easier to spot new technical debt during the code review.\r\n\r\n## Enlisting dependencies of a class\r\n\r\nTo document dependencies of a specific class, we use the following tool:\r\n\r\n```csharp\r\n");
             
             #line 48 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(this.Relations.ReadAllText()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.RelationsFile.ReadAllText()));
             
             #line default
             #line hidden

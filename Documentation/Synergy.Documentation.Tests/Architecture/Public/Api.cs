@@ -1,8 +1,10 @@
-﻿using Synergy.Documentation.Api;
+﻿using Synergy.Documentation.Annotations;
+using Synergy.Documentation.Api;
 
 namespace Synergy.Documentation.Tests.Architecture.Public;
 
 [UsesVerify]
+[CodeFilePath]
 public class Api
 {
     [Fact]

@@ -1,9 +1,11 @@
-﻿using Synergy.Documentation.Code;
+﻿using Synergy.Documentation.Annotations;
+using Synergy.Documentation.Code;
 using Synergy.Documentation.Todos;
 
 namespace Synergy.Documentation.Tests.Architecture.Debt;
 
 [UsesVerify]
+[CodeFilePath]
 public class Todos
 {
     [Fact]

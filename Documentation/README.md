@@ -5,11 +5,13 @@
 To enlist public API, we use the following tool:
 
 ```csharp
+using Synergy.Documentation.Annotations;
 using Synergy.Documentation.Api;
 
 namespace Synergy.Documentation.Tests.Architecture.Public;
 
 [UsesVerify]
+[CodeFilePath]
 public class Api
 {
     [Fact]
@@ -39,12 +41,14 @@ When you consume some external library - you can enlist its public API and see h
 To manage technical debt, we use the following tool:
 
 ```csharp
+using Synergy.Documentation.Annotations;
 using Synergy.Documentation.Code;
 using Synergy.Documentation.Todos;
 
 namespace Synergy.Documentation.Tests.Architecture.Debt;
 
 [UsesVerify]
+[CodeFilePath]
 public class Todos
 {
     [Fact]
@@ -77,12 +81,14 @@ Moreover, it is much easier to spot new technical debt during the code review.
 To document dependencies of a specific class, we use the following tool:
 
 ```csharp
+using Synergy.Documentation.Annotations;
 using Synergy.Documentation.Api;
 using Synergy.Documentation.Markup;
 
 namespace Synergy.Documentation.Tests.Architecture.Dependencies;
 
 [UsesVerify]
+[CodeFilePath]
 public class Relations
 {
     [Theory]
