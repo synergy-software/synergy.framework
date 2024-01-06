@@ -249,6 +249,9 @@ namespace Synergy.Documentation.Markup
             private readonly CodeFile _filePath;
             private readonly string _alternateText;
 
+            public static Link To(CodeFile filePath, string? text = null)
+                => new(filePath, text);
+            
             public Link(CodeFile filePath, string? text = null)
             {
                 _filePath = filePath;
@@ -258,7 +261,7 @@ namespace Synergy.Documentation.Markup
             public override string ToString()
                 => $"[{_alternateText}]({_filePath.ToString().Replace("\\", "/").Replace(" ", "%20")})";
 
-            public Link RelativeTo(CodeFile file) 
+            public Link From(CodeFile file) 
                 => new(_filePath.RelativeTo(file.Folder), _alternateText);
         }
         

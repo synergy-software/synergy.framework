@@ -87,8 +87,12 @@
      filePath: CodeFile,
      text: string? [Nullable, Optional]
    )
- - RelativeTo(
+ - From(
      file: CodeFile
+   ) : Markdown+Link
+ - Link.To(
+     filePath: CodeFile,
+     text: string? [Nullable, Optional]
    ) : Markdown+Link
  - ToString() : string
 
