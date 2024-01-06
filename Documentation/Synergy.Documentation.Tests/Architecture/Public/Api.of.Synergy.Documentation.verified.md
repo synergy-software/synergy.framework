@@ -81,6 +81,9 @@
  - File(
      fileName: string
    ) : CodeFile
+ - Sub(
+     subfolder: string
+   ) : CodeFolder
  - ToString() : string
  - Up(
      jumps: int [Optional]

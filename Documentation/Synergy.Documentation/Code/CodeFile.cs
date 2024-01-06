@@ -2,8 +2,6 @@
 
 namespace Synergy.Documentation.Code;
 
-// TODO: Marcin Celej [from: Marcin Celej on: 14-05-2023]: rename to SourceFile
-
 public class CodeFile
 {
     public static CodeFolder Current([CallerFilePath] string path = "")

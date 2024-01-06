@@ -1,6 +1,9 @@
 ﻿# Technical Debt for Synergy.Documentation
 
-Total: 7
+Total: 6
+
+## [README.Generate.cs](../../Docs/README.Generate.cs)
+- TODO: Marcin Celej [from: Marcin Celej on: 06-01-2024]: Add here reading file path through from [SourceFile] from Synergy.Documentation.Annotations
 
 ## [MarkdownTests.cs](../../Markup/MarkdownTests.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 23-12-2023]: Add image test here
@@ -8,12 +11,6 @@ Total: 7
 
 ## [!Init.cs](../../../Synergy.Documentation/!Init.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 14-05-2023]: remove reference to Synergy.Contracts
-
-## [CodeFile.cs](../../../Synergy.Documentation/Code/CodeFile.cs)
-- TODO: Marcin Celej [from: Marcin Celej on: 14-05-2023]: rename to SourceFile
-
-## [CodeFolder.cs](../../../Synergy.Documentation/Code/CodeFolder.cs)
-- TODO: Marcin Celej [from: Marcin Celej on: 14-05-2023]: Rename to SourceFolder
 
 ## [TodoPattern.cs](../../../Synergy.Documentation/Todos/Patterns/TodoPattern.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 14-04-2023]: Add way to exclude some files from the scan - by path
