@@ -142,7 +142,7 @@
      filePath: CodeFile,
      alternateText: string? [Nullable, Optional]
    )
- - RelativeTo(
+ - RelativeFrom(
      file: CodeFile
    ) : Markdown+Image
  - ToString() : string
