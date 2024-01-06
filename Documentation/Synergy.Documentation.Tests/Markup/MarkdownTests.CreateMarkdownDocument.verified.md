@@ -16,4 +16,6 @@ var code = new PieceOfCode();
 
 > some quote
 
+![synergy.png](synergy.png)
+
 [README.md](../../README.md)

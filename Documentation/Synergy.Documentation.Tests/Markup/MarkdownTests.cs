@@ -9,6 +9,7 @@ public class MarkdownTests
 {
     private static readonly CodeFile currentFile = CodeFile.Current();
     private static readonly CodeFile readmeFile = CodeFolder.Current().Up(2).File($"{nameof(README)}.md");
+    private static readonly CodeFile synergyPng = CodeFolder.Current().File("synergy.png");
     
     [Fact]
     public async Task CreateMarkdownDocument()
@@ -22,9 +23,8 @@ public class MarkdownTests
             .Append(new Markdown.Code("var code = new PieceOfCode();"))
             .Append(SampleTable())
             .Append(new Markdown.Quote("some quote"))
+            .Append(new Markdown.Image(MarkdownTests.synergyPng).RelativeFrom(currentFile))
             .Append(new Markdown.Link(readmeFile).RelativeFrom(currentFile));
-
-        // TODO: Marcin Celej [from: Marcin Celej on: 23-12-2023]: Add image test here
 
         await Verifier.Verify(markdown.ToString(), "md");
 
