@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <RunCodeAnalysis>false</RunCodeAnalysis>
+        <IsPackable>true</IsPackable>
+        <PackageVersion>$(Version)</PackageVersion>
+        <Title>Synergy.Documentation.Annotations - support for various docs generation</Title>
+        <Authors>Synergy Marcin Celej</Authors>
+        <PackageLicenseFile>license.txt</PackageLicenseFile>
+        <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/tree/master/Documentation/README.md</PackageProjectUrl>
+        <PackageIcon>synergy.png</PackageIcon>
+        <Description>support for various docs generation</Description>
+        <Copyright>Copyright © Synergy Marcin Celej 2024</Copyright>
+        <PackageTags>Docs As Code</PackageTags>
+        <LangVersion>10</LangVersion>
+        <Nullable>enable</Nullable>
+        <AssemblyVersion>$(Version)</AssemblyVersion>
+        <ImplicitUsings>true</ImplicitUsings>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <DefineConstants>TRACE;INTERNALS</DefineConstants>
+        <DocumentationFile>bin\Debug\Synergy.Documentation.Annotations.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DefineConstants>TRACE;INTERNALS</DefineConstants>
+        <DocumentationFile>bin\Release\Synergy.Documentation.Annotations.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Update="license.txt">
+        <Pack>true</Pack>
+      </None>
+      <None Update="synergy.png">
+        <Pack>true</Pack>
+      </None>
+    </ItemGroup>
+
+</Project>
