@@ -261,7 +261,7 @@ namespace Synergy.Documentation.Markup
             public override string ToString()
                 => $"[{_alternateText}]({_filePath.ToString().Replace("\\", "/").Replace(" ", "%20")})";
 
-            public Link From(CodeFile file) 
+            public Link RelativeFrom(CodeFile file) 
                 => new(_filePath.RelativeTo(file.Folder), _alternateText);
         }
         

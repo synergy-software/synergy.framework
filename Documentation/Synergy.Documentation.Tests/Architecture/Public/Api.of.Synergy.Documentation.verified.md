@@ -151,12 +151,12 @@
      filePath: CodeFile,
      text: string? [Nullable, Optional]
    )
- - From(
-     file: CodeFile
-   ) : Markdown+Link
  - Link.To(
      filePath: CodeFile,
      text: string? [Nullable, Optional]
+   ) : Markdown+Link
+ - RelativeFrom(
+     file: CodeFile
    ) : Markdown+Link
  - ToString() : string
 
