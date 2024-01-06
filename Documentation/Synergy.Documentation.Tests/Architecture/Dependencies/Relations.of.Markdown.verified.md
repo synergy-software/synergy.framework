@@ -82,7 +82,7 @@
    ) : Markdown+Image
  - ToString() : string
 
-## Synergy.Documentation.Markup.Markdown+Link (class)
+## Synergy.Documentation.Markup.Markdown+Link (class) : Markdown+IElement
  - ctor(
      filePath: CodeFile,
      text: string? [Nullable, Optional]

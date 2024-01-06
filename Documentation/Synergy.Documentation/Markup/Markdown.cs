@@ -244,7 +244,7 @@ namespace Synergy.Documentation.Markup
         
         #region Link
         
-        public class Link
+        public class Link : IElement
         {
             private readonly CodeFile _filePath;
             private readonly string _alternateText;

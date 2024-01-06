@@ -147,7 +147,7 @@
    ) : Markdown+Image
  - ToString() : string
 
-## Markup.Markdown+Link (class)
+## Markup.Markdown+Link (class) : Markdown+IElement
  - ctor(
      filePath: CodeFile,
      text: string? [Nullable, Optional]
