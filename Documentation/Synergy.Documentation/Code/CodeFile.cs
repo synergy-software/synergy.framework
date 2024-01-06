@@ -30,4 +30,7 @@ public class CodeFile
 
     public CodeFile RelativeTo(CodeFolder folder)
         => new(Path.GetRelativePath(folder.Path, FilePath));
+    
+    public string ReadAllText()
+        => File.ReadAllText(FilePath);
 }

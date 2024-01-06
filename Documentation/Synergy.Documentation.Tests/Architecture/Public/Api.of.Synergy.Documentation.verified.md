@@ -65,6 +65,7 @@
  - CodeFile.Current(
      path: string [CallerFilePath, Optional]
    ) : CodeFolder
+ - ReadAllText() : string
  - RelativeTo(
      folder: CodeFolder
    ) : CodeFile
