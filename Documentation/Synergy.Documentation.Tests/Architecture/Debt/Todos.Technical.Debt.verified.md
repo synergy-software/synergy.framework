@@ -3,7 +3,7 @@
 Total: 6
 
 ## [README.Generate.cs](../../Docs/README.Generate.cs)
-- TODO: Marcin Celej [from: Marcin Celej on: 06-01-2024]: Add here reading file path through from [SourceFile] from Synergy.Documentation.Annotations
+- TODO: Marcin Celej [from: Marcin Celej on: 06-01-2024]: Add here reading file path through [SourceFile] from Synergy.Documentation.Annotations
 
 ## [MarkdownTests.cs](../../Markup/MarkdownTests.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 23-12-2023]: Add image test here

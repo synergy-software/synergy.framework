@@ -23,15 +23,15 @@ public class Api
 }
 ```
 
-For sample code, please check: [Api.cs](Synergy.Documentation.Tests/Architecture/Public/Api.cs)
+For sample code, please check: <#= this.ApiLink #>
 
-To see the results, please check: [Api.of.Synergy.Documentation.verified.md](Synergy.Documentation.Tests/Architecture/Public/Api.of.Synergy.Documentation.verified.md)
+To see the results, please check: <#= this.ApiForSynergyDocsLink #>
 
 **Note:**
 
-When you expose your public API, you should be aware how it looks like from the outside - [Api.cs](Synergy.Documentation.Tests/Architecture/Public/Api.cs).
+When you expose your public API, you should be aware how it looks like from the outside - <#= this.ApiLink #>.
 
-When you consume some external library - you can enlist its public API and see how it looks like - [Package.cs](Synergy.Documentation.Tests/Architecture/Public/Package.cs).
+When you consume some external library - you can enlist its public API and see how it looks like - <#= this.PackageLink #>.
 
 ## Managing technical debt
 

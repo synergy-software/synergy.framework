@@ -25,7 +25,35 @@ namespace Synergy.Documentation.Tests.Docs
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("# Synergy.Documentation nuget package\r\n\r\n## Enlisting Public API\r\n\r\nTo enlist public API, we use the following tool:\r\n\r\n```csharp\r\n[UsesVerify]\r\npublic class Api\r\n{\r\n    [Fact]\r\n    public async Task Generate()\r\n    {\r\n        var assembly = typeof(ApiDescription).Assembly;\r\n\r\n        var publicApi = ApiDescription.GenerateFor(assembly);\r\n\r\n        await Verifier.Verify(publicApi, \"md\")\r\n                      .UseMethodName(\"of.\" + assembly.GetName().Name);\r\n    }\r\n}\r\n```\r\n\r\nFor sample code, please check: [Api.cs](Synergy.Documentation.Tests/Architecture/Public/Api.cs)\r\n\r\nTo see the results, please check: [Api.of.Synergy.Documentation.verified.md](Synergy.Documentation.Tests/Architecture/Public/Api.of.Synergy.Documentation.verified.md)\r\n\r\n**Note:**\r\n\r\nWhen you expose your public API, you should be aware how it looks like from the outside - [Api.cs](Synergy.Documentation.Tests/Architecture/Public/Api.cs).\r\n\r\nWhen you consume some external library - you can enlist its public API and see how it looks like - [Package.cs](Synergy.Documentation.Tests/Architecture/Public/Package.cs).\r\n\r\n## Managing technical debt\r\n\r\nTo manage technical debt, we use the following tool:\r\n\r\n```csharp\r\n[UsesVerify]\r\npublic class Todos\r\n{\r\n    [Fact]\r\n    public async Task Generate()\r\n    {\r\n        var rootFolder = CodeFolder.Current()\r\n                                   .Up(3);\r\n        var technicalDebt = TodoExplorer.DebtFor(\"Synergy.Contracts\", rootFolder);\r\n\r\n        await Verifier\r\n              .Verify(technicalDebt, \"md\")\r\n              .UseMethodName(\"Technical.Debt\");\r\n    }\r\n}\r\n```\r\n\r\nFor sample code, please check: ");
+            this.Write("# Synergy.Documentation nuget package\r\n\r\n## Enlisting Public API\r\n\r\nTo enlist public API, we use the following tool:\r\n\r\n```csharp\r\n[UsesVerify]\r\npublic class Api\r\n{\r\n    [Fact]\r\n    public async Task Generate()\r\n    {\r\n        var assembly = typeof(ApiDescription).Assembly;\r\n\r\n        var publicApi = ApiDescription.GenerateFor(assembly);\r\n\r\n        await Verifier.Verify(publicApi, \"md\")\r\n                      .UseMethodName(\"of.\" + assembly.GetName().Name);\r\n    }\r\n}\r\n```\r\n\r\nFor sample code, please check: ");
+            
+            #line 26 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.ApiLink));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\r\nTo see the results, please check: ");
+            
+            #line 28 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.ApiForSynergyDocsLink));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\r\n**Note:**\r\n\r\nWhen you expose your public API, you should be aware how it looks like from the outside - ");
+            
+            #line 32 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.ApiLink));
+            
+            #line default
+            #line hidden
+            this.Write(".\r\n\r\nWhen you consume some external library - you can enlist its public API and see how it looks like - ");
+            
+            #line 34 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(this.PackageLink));
+            
+            #line default
+            #line hidden
+            this.Write(".\r\n\r\n## Managing technical debt\r\n\r\nTo manage technical debt, we use the following tool:\r\n\r\n```csharp\r\n[UsesVerify]\r\npublic class Todos\r\n{\r\n    [Fact]\r\n    public async Task Generate()\r\n    {\r\n        var rootFolder = CodeFolder.Current()\r\n                                   .Up(3);\r\n        var technicalDebt = TodoExplorer.DebtFor(\"Synergy.Contracts\", rootFolder);\r\n\r\n        await Verifier\r\n              .Verify(technicalDebt, \"md\")\r\n              .UseMethodName(\"Technical.Debt\");\r\n    }\r\n}\r\n```\r\n\r\nFor sample code, please check: ");
             
             #line 58 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TodosLink));
