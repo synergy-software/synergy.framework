@@ -1,13 +1,12 @@
 ﻿# Technical Debt for Synergy.Documentation
 
-Total: 6
+Total: 5
 
 ## [README.Generate.cs](../../Docs/README.Generate.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 06-01-2024]: Add here reading file path through [SourceFile] from Synergy.Documentation.Annotations
 
 ## [MarkdownTests.cs](../../Markup/MarkdownTests.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 23-12-2023]: Add image test here
-- TODO: Marcin Celej [from: Marcin Celej on: 23-12-2023]: Add link test here
 
 ## [!Init.cs](../../../Synergy.Documentation/!Init.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 14-05-2023]: remove reference to Synergy.Contracts
