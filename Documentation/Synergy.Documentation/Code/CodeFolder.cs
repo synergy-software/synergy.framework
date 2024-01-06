@@ -26,4 +26,7 @@ public class CodeFolder
     
     public CodeFolder Up(int jumps = 1)
         => new(System.IO.Path.Combine(this.Path, string.Join("/", Enumerable.Repeat("..", jumps))));
+
+    public CodeFolder Sub(string subfolder)
+        => new(System.IO.Path.Combine(Path, subfolder));
 }
