@@ -8,13 +8,11 @@ namespace Synergy.Documentation.Tests.Docs;
 partial class README
 {
     private static readonly CodeFile readmeFile = CodeFolder.Current().Up(2).File($"{nameof(README)}.md");
-    private readonly CodeFolder architectureFolder = CodeFolder.Current().Up().Sub("Architecture");
 
-    // TODO: Marcin Celej [from: Marcin Celej on: 06-01-2024]: Add here reading file path through [SourceFile] from Synergy.Documentation.Annotations
     private CodeFile ApiFile => CodeFile.For<Architecture.Public.Api>();
     private Markdown.Link ApiLink => Markdown.Link.To(this.ApiFile).RelativeFrom(readmeFile);
     
-    private CodeFile ApiForSynergyDocs => this.architectureFolder.Sub("Public").File("Api.of.Synergy.Documentation.verified.md");
+    private CodeFile ApiForSynergyDocs => this.ApiFile.Folder.File("Api.of.Synergy.Documentation.verified.md");
     private Markdown.Link ApiForSynergyDocsLink => Markdown.Link.To(this.ApiForSynergyDocs).RelativeFrom(readmeFile);
     
     private CodeFile PackageFile => CodeFile.For<Package>();
@@ -23,13 +21,13 @@ partial class README
     private CodeFile TodosFile => CodeFile.For<Architecture.Debt.Todos>();
     private Markdown.Link TodosLink => Markdown.Link.To(this.TodosFile).RelativeFrom(README.readmeFile);
 
-    private CodeFile TodosDebt => this.architectureFolder.Sub("Debt").File("Todos.Technical.Debt.verified.md");
+    private CodeFile TodosDebt => this.TodosFile.Folder.File("Todos.Technical.Debt.verified.md");
     private Markdown.Link TodosDebtLink => Markdown.Link.To(this.TodosDebt).RelativeFrom(README.readmeFile);
     
     private CodeFile RelationsFile => CodeFile.For<Relations>();
     private Markdown.Link RelationsLink => Markdown.Link.To(this.RelationsFile).RelativeFrom(README.readmeFile);
 
-    private CodeFile RelationsOfMarkdown => this.architectureFolder.Sub("Dependencies").File("Relations.of.Markdown.verified.md");
+    private CodeFile RelationsOfMarkdown => this.RelationsFile.Folder.File("Relations.of.Markdown.verified.md");
     private Markdown.Link RelationsOfMarkdownLink => Markdown.Link.To(this.RelationsOfMarkdown).RelativeFrom(README.readmeFile);
     
     [Fact]
