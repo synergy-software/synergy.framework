@@ -38,10 +38,13 @@
  - ToString() : string
 
 ## Api.Dependencies (class)
- - ctor()
  - Dependencies.Of(
-     root: Type
+     root: Type,
+     includeNested: bool [Optional]
    ) : List<Type>
+ - DependenciesOf(
+     type: Type
+   ) : IEnumerable<Type> [IteratorStateMachine]
 
 ## Code.ClassReader (class)
  - ctor()

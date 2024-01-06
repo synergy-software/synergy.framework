@@ -95,7 +95,7 @@ public class Relations
 
 For sample code, please check: [Relations.cs](Synergy.Documentation.Tests/Architecture/Dependencies/Relations.cs)
 
-To see the results, please check: [Relations.of.Document.verified.md](Synergy.Documentation.Tests/Architecture/Dependencies/Relations.of.Document.verified.md)
+To see the results, please check: [Relations.of.Markdown.verified.md](Synergy.Documentation.Tests/Architecture/Dependencies/Relations.of.Markdown.verified.md)
 
 [//]: # (TODO Write the documentation of Dependencies genaretor)
 

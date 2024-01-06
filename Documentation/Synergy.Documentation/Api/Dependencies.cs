@@ -6,19 +6,41 @@ namespace Synergy.Documentation.Api;
 
 public class Dependencies
 {
-    public static List<Type> Of(Type root)
+    private readonly bool includeNested;
+
+    public static List<Type> Of(Type root, bool includeNested = false)
     {
-        return new Dependencies().DependenciesOf(root)
-                                 .ToList();
+        return new Dependencies(includeNested)
+               .DependenciesOf(root)
+               .ToList();
     }
 
     private readonly List<Type> visited = new(100);
-    
-    private IEnumerable<Type> DependenciesOf(Type type)
+
+    private Dependencies(bool includeNested)
     {
-        return this.DependenciesOf(type, 0);
+        this.includeNested = includeNested;
     }
-    
+
+    public IEnumerable<Type> DependenciesOf(Type type)
+    {
+        var roots = new List<Type>();
+        roots.Add(type);
+        
+        if (this.includeNested)
+        {
+            roots.AddRange(type.GetNestedTypes(BindingFlags.Public));
+        }
+
+        foreach (Type root in roots)
+        {
+            foreach (var dependency in this.DependenciesOf(root, 0))
+            {
+                yield return dependency;
+            }
+        }
+    }
+
     private IEnumerable<Type> DependenciesOf(Type type, int level)
     {
         var underlyingType = Nullable.GetUnderlyingType(type);
@@ -36,14 +58,15 @@ public class Dependencies
             this.visited.Add(type);
             yield return type;
         }
-        
+
         if (type.IsArray)
         {
             type = type.GetElementType();
         }
         else if (type.IsAssignableTo(typeof(IEnumerable)))
         {
-            if (type.GetGenericArguments().Length == 0)
+            if (type.GetGenericArguments()
+                    .Length == 0)
                 yield break;
 
             type = type.GetGenericArguments()
@@ -64,7 +87,7 @@ public class Dependencies
 
         foreach (var property in this.GetPropertiesOf(type))
         {
-            foreach (var dependency in this.DependenciesOf(property.PropertyType))
+            foreach (var dependency in this.DependenciesOf(property.PropertyType, level + 1))
             {
                 yield return dependency;
             }

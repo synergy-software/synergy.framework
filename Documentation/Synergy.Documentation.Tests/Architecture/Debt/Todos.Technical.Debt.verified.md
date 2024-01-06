@@ -1,9 +1,6 @@
 ﻿# Technical Debt for Synergy.Documentation
 
-Total: 8
-
-## [Relations.cs](../Dependencies/Relations.cs)
-- TODO: Marcin Celej [from: Marcin Celej on: 26-12-2023]: Doe not work for Markdown.Document
+Total: 7
 
 ## [MarkdownTests.cs](../../Markup/MarkdownTests.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 23-12-2023]: Add image test here
