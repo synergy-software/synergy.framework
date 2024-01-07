@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <!-- TODO: Add more target frameworks: -->
         <TargetFramework>net6.0</TargetFramework>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <RunCodeAnalysis>false</RunCodeAnalysis>
@@ -31,12 +32,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Update="license.txt">
-        <Pack>true</Pack>
-      </None>
-      <None Update="synergy.png">
-        <Pack>true</Pack>
-      </None>
+        <None Include="synergy.png" Pack="true" PackagePath="" />
+        <None Include="license.txt" Pack="true" PackagePath="" />
     </ItemGroup>
 
 </Project>

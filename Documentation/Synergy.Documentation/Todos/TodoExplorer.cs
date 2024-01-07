@@ -14,6 +14,7 @@ public static class TodoExplorer
         new GherkinTodoPattern(),
         new TextTodoPattern()
         // TODO: Marcin Celej [from: Marcin Celej on: 26-12-2023]: Introduce md todo pattern: [//]: # (TODO Convert this markdown to docs as code)
+        // TODO: Marcin Celej [from: Marcin Celej on: 06-01-2024]: Introduce .csproj pattern
     };
 
     public static string DebtFor(
