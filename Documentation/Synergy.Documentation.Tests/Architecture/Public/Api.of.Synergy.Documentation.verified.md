@@ -195,6 +195,12 @@
  - TodoExtractor: Func<Match, string> { get; set; }
  - ctor()
 
+## Todos.Patterns.CsprojTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<CsprojTodoPattern>
+ - FileExtension: string { get; set; }
+ - Regex: Regex { get; set; }
+ - TodoExtractor: Func<Match, string> { get; set; }
+ - ctor()
+
 ## Todos.Patterns.GherkinTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<GherkinTodoPattern>
  - FileExtension: string { get; set; }
  - Regex: Regex { get; set; }
