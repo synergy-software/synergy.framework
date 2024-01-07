@@ -1,4 +1,4 @@
-﻿# xunit.core 2.6.4.0
+﻿# xunit.core 2.6.5.0
 
 ## Xunit.AssemblyTraitAttribute (attribute) : Attribute, ITraitAttribute
  - ctor(
@@ -331,17 +331,28 @@
  - Timeout: int { get; set; }
  - ctor()
 
-## Xunit.TheoryData (abstract class) : IEnumerable<Object[]>, IEnumerable
+## Xunit.TheoryData (abstract class) : IReadOnlyCollection<Object[]>, IEnumerable<Object[]>, IEnumerable
+ - Count: int { get; }
  - GetEnumerator() : IEnumerator<Object[]>
 
-## Xunit.TheoryData<T> (class) : TheoryData, IEnumerable<Object[]>, IEnumerable
- - ctor()
+## Xunit.TheoryData<T> (class) : TheoryData, IReadOnlyCollection<Object[]>, IEnumerable<Object[]>, IEnumerable
+ - Count: int { get; }
+ - ctor(
+     values: IEnumerable<T>
+   )
+ - ctor(
+     values: params T[] [ParamArray]
+   )
  - Add(
      p: T
    ) : void
+ - AddRange(
+     values: params T[] [ParamArray]
+   ) : void
  - GetEnumerator() : IEnumerator<Object[]>
 
-## Xunit.TheoryData<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> (class) : TheoryData, IEnumerable<Object[]>, IEnumerable
+## Xunit.TheoryData<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> (class) : TheoryData, IReadOnlyCollection<Object[]>, IEnumerable<Object[]>, IEnumerable
+ - Count: int { get; }
  - ctor()
  - Add(
      p1: T1,
@@ -357,7 +368,8 @@
    ) : void
  - GetEnumerator() : IEnumerator<Object[]>
 
-## Xunit.TheoryData<T1, T2> (class) : TheoryData, IEnumerable<Object[]>, IEnumerable
+## Xunit.TheoryData<T1, T2> (class) : TheoryData, IReadOnlyCollection<Object[]>, IEnumerable<Object[]>, IEnumerable
+ - Count: int { get; }
  - ctor()
  - Add(
      p1: T1,
@@ -365,7 +377,8 @@
    ) : void
  - GetEnumerator() : IEnumerator<Object[]>
 
-## Xunit.TheoryData<T1, T2, T3> (class) : TheoryData, IEnumerable<Object[]>, IEnumerable
+## Xunit.TheoryData<T1, T2, T3> (class) : TheoryData, IReadOnlyCollection<Object[]>, IEnumerable<Object[]>, IEnumerable
+ - Count: int { get; }
  - ctor()
  - Add(
      p1: T1,
@@ -374,7 +387,8 @@
    ) : void
  - GetEnumerator() : IEnumerator<Object[]>
 
-## Xunit.TheoryData<T1, T2, T3, T4> (class) : TheoryData, IEnumerable<Object[]>, IEnumerable
+## Xunit.TheoryData<T1, T2, T3, T4> (class) : TheoryData, IReadOnlyCollection<Object[]>, IEnumerable<Object[]>, IEnumerable
+ - Count: int { get; }
  - ctor()
  - Add(
      p1: T1,
@@ -384,7 +398,8 @@
    ) : void
  - GetEnumerator() : IEnumerator<Object[]>
 
-## Xunit.TheoryData<T1, T2, T3, T4, T5> (class) : TheoryData, IEnumerable<Object[]>, IEnumerable
+## Xunit.TheoryData<T1, T2, T3, T4, T5> (class) : TheoryData, IReadOnlyCollection<Object[]>, IEnumerable<Object[]>, IEnumerable
+ - Count: int { get; }
  - ctor()
  - Add(
      p1: T1,
@@ -395,7 +410,8 @@
    ) : void
  - GetEnumerator() : IEnumerator<Object[]>
 
-## Xunit.TheoryData<T1, T2, T3, T4, T5, T6> (class) : TheoryData, IEnumerable<Object[]>, IEnumerable
+## Xunit.TheoryData<T1, T2, T3, T4, T5, T6> (class) : TheoryData, IReadOnlyCollection<Object[]>, IEnumerable<Object[]>, IEnumerable
+ - Count: int { get; }
  - ctor()
  - Add(
      p1: T1,
@@ -407,7 +423,8 @@
    ) : void
  - GetEnumerator() : IEnumerator<Object[]>
 
-## Xunit.TheoryData<T1, T2, T3, T4, T5, T6, T7> (class) : TheoryData, IEnumerable<Object[]>, IEnumerable
+## Xunit.TheoryData<T1, T2, T3, T4, T5, T6, T7> (class) : TheoryData, IReadOnlyCollection<Object[]>, IEnumerable<Object[]>, IEnumerable
+ - Count: int { get; }
  - ctor()
  - Add(
      p1: T1,
@@ -420,7 +437,8 @@
    ) : void
  - GetEnumerator() : IEnumerator<Object[]>
 
-## Xunit.TheoryData<T1, T2, T3, T4, T5, T6, T7, T8> (class) : TheoryData, IEnumerable<Object[]>, IEnumerable
+## Xunit.TheoryData<T1, T2, T3, T4, T5, T6, T7, T8> (class) : TheoryData, IReadOnlyCollection<Object[]>, IEnumerable<Object[]>, IEnumerable
+ - Count: int { get; }
  - ctor()
  - Add(
      p1: T1,
@@ -434,7 +452,8 @@
    ) : void
  - GetEnumerator() : IEnumerator<Object[]>
 
-## Xunit.TheoryData<T1, T2, T3, T4, T5, T6, T7, T8, T9> (class) : TheoryData, IEnumerable<Object[]>, IEnumerable
+## Xunit.TheoryData<T1, T2, T3, T4, T5, T6, T7, T8, T9> (class) : TheoryData, IReadOnlyCollection<Object[]>, IEnumerable<Object[]>, IEnumerable
+ - Count: int { get; }
  - ctor()
  - Add(
      p1: T1,
