@@ -1,4 +1,4 @@
-﻿#if !(NETSTANDARD2_1 || NETCOREAPP3_1)
+﻿#if !(NETSTANDARD2_1)
 
 namespace System.Diagnostics.CodeAnalysis
 {
@@ -10,7 +10,7 @@ namespace System.Diagnostics.CodeAnalysis
 
 #endif
 
-#if !NET6_0
+#if !(NET6_0_OR_GREATER)
 
 namespace System.Runtime.CompilerServices
 {

@@ -1,15 +1,12 @@
 ﻿# Technical Debt for Synergy.Contracts
 
-Total: 15
+Total: 14
 
 ## [ContractorRepository.cs](../../../Synergy.Contracts.Samples/ContractorRepository.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 30-04-2023]: Remove this sample project
 
 ## [BusinessDocumentation.cs](../../Requirements/BusinessDocumentation.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: check that and probably convert docs int tt
-
-## [!Init.cs](../../../Synergy.Contracts/!Init.cs)
-- TODO: Marcin Celej [from: Marcin Celej on: 14-05-2023]: Stop supporting netcoreapp2.1;netcoreapp3.1;
 
 ## [FailBoolean.cs](../../../Synergy.Contracts/Failures/FailBoolean.cs)
 - TODO:mace (from:mace @ 22-10-2016): variable.FailIfFalse(message)
