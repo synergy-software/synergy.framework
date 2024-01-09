@@ -73,6 +73,7 @@ public static class FeatureGenerator
             $"[GeneratedCode(\"{typeof(FeatureGenerator).Assembly.GetName().Name}\", " +
             $"\"{typeof(FeatureGenerator).Assembly.GetName().Version?.ToString()}\")]"
         );
+        // TODO: Marcin Celej [from: Marcin Celej on: 09-01-2024]: Introduce here [Xunit.Trait("Category", featureName)]
         code.AppendLine($"partial class {className}");
         code.AppendLine("{");
 
