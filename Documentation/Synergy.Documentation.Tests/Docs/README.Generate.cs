@@ -5,6 +5,8 @@ using Synergy.Documentation.Tests.Architecture.Public;
 
 namespace Synergy.Documentation.Tests.Docs;
 
+// TODO: Marcin Celej [from: Marcin Celej on: 09-01-2024]: Extract this to a separate project Synergy.Documentation.Docs with all needed samples inside
+
 partial class README
 {
     private static readonly CodeFile readmeFile = CodeFolder.Current().Up(2).File($"{nameof(README)}.md");
