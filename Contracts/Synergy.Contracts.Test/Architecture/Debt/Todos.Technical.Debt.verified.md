@@ -2,7 +2,7 @@
 
 Total: 14
 
-## [ContractorRepository.cs](../../../Synergy.Contracts.Samples/ContractorRepository.cs)
+## [ContractorRepository.cs](../../Failures/Doubles/ContractorRepository.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 30-04-2023]: Remove this sample project
 
 ## [BusinessDocumentation.cs](../../Requirements/BusinessDocumentation.cs)
