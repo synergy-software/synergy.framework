@@ -13,7 +13,7 @@ partial class CalculatorFeature
 
     // Rule: Adding numbers
 
-    [Xunit.Fact]
+    [Xunit.Fact(DisplayName = "Scenario: Add two numbers")]
     // @Add @Verify
     public void AddTwoNumbers() // Scenario: Add two numbers
     {
@@ -27,9 +27,9 @@ partial class CalculatorFeature
         Moreover().AfterAddTwoNumbers();
     }
 
-    [Xunit.Fact]
+    [Xunit.Fact(DisplayName = "Scenario: Add two numbers in \"different\" way")]
     // @Add
-    public void AddTwoNumbersInDifferentWay() // Scenario: Add two numbers in different way
+    public void AddTwoNumbersInDifferentWay() // Scenario: Add two numbers in "different" way
     {
        Background().CalculatorBackground();
 

@@ -188,8 +188,8 @@ public static class FeatureGenerator
                 CloseScenario();
 
                 scenario = new Scenario(scenarioMatch.Groups[1].Value, (tags ?? new List<string>(0)).AsReadOnly());
-                
-                code.AppendLine("    [Xunit.Fact]");
+
+                code.AppendLine("    [Xunit.Fact(DisplayName = \"Scenario: " + scenario.Title.Replace("\"", "\\\"") + "\")]");
                 if (tags != null)
                     code.AppendLine($"    // {String.Join(" ", tags)}");
                 code.AppendLine($"    public void {scenario.Method}() // {line.Trim()}");

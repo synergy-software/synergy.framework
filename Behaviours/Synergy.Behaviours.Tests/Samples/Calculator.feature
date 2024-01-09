@@ -17,7 +17,7 @@ Feature: Calculator
       Then the result should be 120
 
     @Add
-    Scenario: Add two numbers in different way
+    Scenario: Add two numbers in "different" way
       Given Two numbers:
       * the first number is 50
       * the second number is 70
