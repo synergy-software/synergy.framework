@@ -34,7 +34,8 @@
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
-    <PackageReference Include="NUnit" Version="3.14.0" />
+    <!-- TODO: Remobve NUnit and replace it with xunit -->
+    <PackageReference Include="NUnit" Version="4.0.1" />
     <PackageReference Include="Verify.Xunit" Version="22.11.4" />
     <PackageReference Include="xunit" Version="2.6.5" />
     <Reference Include="System.Runtime, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
