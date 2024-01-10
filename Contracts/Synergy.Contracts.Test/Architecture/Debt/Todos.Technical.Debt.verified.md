@@ -1,9 +1,6 @@
 ﻿# Technical Debt for Synergy.Contracts
 
-Total: 15
-
-## [ContractorRepository.cs](../../Failures/Doubles/ContractorRepository.cs)
-- TODO: Marcin Celej [from: Marcin Celej on: 30-04-2023]: Remove this sample project
+Total: 14
 
 ## [BusinessDocumentation.cs](../../Requirements/BusinessDocumentation.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: check that and probably convert docs int tt
