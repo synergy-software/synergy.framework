@@ -20,6 +20,18 @@ When you expose your public API, you should be aware how it looks like from the 
 
 When you consume some external library - you can enlist its public API and see how it looks like - <#= this.PackageLink #>.
 
+## Enlisting dependencies of a class
+
+To document dependencies of a specific class, we use the following tool:
+
+```csharp
+<#= this.RelationsFile.ReadAllText() #>
+```
+
+For sample code, please check: <#= this.RelationsLink #>
+
+To see the results, please check: <#= this.RelationsOfMarkdownLink #>
+
 ## Managing technical debt
 
 To manage technical debt, we use the following tool:
@@ -39,18 +51,6 @@ Each time developer adds a new technical debt, he should re-run this test otherw
 When all tech debt for the project is materialized in single file - we can start working on it.
 It also helps to keep track of all tech debt in the project.
 Moreover, it is much easier to spot new technical debt during the code review.
-
-## Enlisting dependencies of a class
-
-To document dependencies of a specific class, we use the following tool:
-
-```csharp
-<#= this.RelationsFile.ReadAllText() #>
-```
-
-For sample code, please check: <#= this.RelationsLink #>
-
-To see the results, please check: <#= this.RelationsOfMarkdownLink #>
 
 ## Comments in code
 
