@@ -190,6 +190,7 @@ public static class FeatureGenerator
 
                 scenario = new Scenario(scenarioMatch.Groups[1].Value, (tags ?? new List<string>(0)).AsReadOnly());
 
+                //code.AppendLine("    [Xunit.Trait(\"Category\", \"" + featureName + "\")]");
                 code.AppendLine("    [Xunit.Fact(DisplayName = \"Scenario: " + scenario.Title.Replace("\"", "\\\"") + "\")]");
                 if (tags != null)
                     code.AppendLine($"    // {String.Join(" ", tags)}");

@@ -1,9 +1,6 @@
 ﻿# Technical Debt for Synergy.Contracts
 
-Total: 5
-
-## [!Init.cs](../../../Synergy.Behaviours.Testing/!Init.cs)
-- TODO: Marcin Celej [from: Marcin Celej on: 14-05-2023]: Support net7.0
+Total: 4
 
 ## [FeatureGenerator.cs](../../../Synergy.Behaviours.Testing/FeatureGenerator.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 10-05-2023]: Add include / exclude as functions
