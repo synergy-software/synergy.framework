@@ -35,6 +35,10 @@
      source: T?,
      reason: string
    ) : T? [Extension]
+ - Note.Reference<T>(
+     source: T?,
+     link: string
+   ) : T? [Extension]
  - Note.Then<T>(
      source: T?,
      reason: string

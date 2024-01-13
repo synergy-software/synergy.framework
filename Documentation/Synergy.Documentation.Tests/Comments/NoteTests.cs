@@ -19,7 +19,8 @@ public class NoteTests
             .But("I want to show you how to use them")
             .Therefore("I want to show you how to use them")
             .Otherwise("I want to show you how to use them")
-            .Moreover("I want to show you how to use them");
+            .Moreover("I want to show you how to use them")
+            .Reference("https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/");
     }
     
     [Fact]

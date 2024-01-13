@@ -8,3 +8,5 @@
 Click the image above to view the procject [Code Topology](http://htmlpreview.github.io/?https://github.com/synergy-software/synergy.framework/blob/master/docs/CodeTopologyReport.html)
 
 [Design by contract programming](https://github.com/synergy-software/synergy.framework/wiki/Contracts)
+
+[Docs As Code](Documentation/README.md)

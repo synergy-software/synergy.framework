@@ -1,6 +1,6 @@
 # Synergy.Documentation nuget package
 
-Here is the documentation of the Synergy.Documentation and Synergy.Documentation.Annotations nuget packages.
+Here is the documentation of the `Synergy.Documentation` and `Synergy.Documentation.Annotations` nuget packages.
 They were created to help developers to document their code in a simple way.
 It is based on the idea of [Docs as Code](https://www.writethedocs.org/guide/docs-as-code/).
 
@@ -145,7 +145,8 @@ public class NoteTests
             .But("I want to show you how to use them")
             .Therefore("I want to show you how to use them")
             .Otherwise("I want to show you how to use them")
-            .Moreover("I want to show you how to use them");
+            .Moreover("I want to show you how to use them")
+            .Reference("https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/");
     }
     
     [Fact]

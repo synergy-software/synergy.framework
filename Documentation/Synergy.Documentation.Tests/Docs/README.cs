@@ -25,7 +25,7 @@ namespace Synergy.Documentation.Tests.Docs
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("# Synergy.Documentation nuget package\r\n\r\nHere is the documentation of the Synergy.Documentation and Synergy.Documentation.Annotations nuget packages.\r\nThey were created to help developers to document their code in a simple way.\r\nIt is based on the idea of [Docs as Code](https://www.writethedocs.org/guide/docs-as-code/).\r\n\r\n## Enlisting Public API\r\n\r\nTo enlist public API, we use the following tool:\r\n\r\n```csharp\r\n");
+            this.Write("# Synergy.Documentation nuget package\r\n\r\nHere is the documentation of the `Synergy.Documentation` and `Synergy.Documentation.Annotations` nuget packages.\r\nThey were created to help developers to document their code in a simple way.\r\nIt is based on the idea of [Docs as Code](https://www.writethedocs.org/guide/docs-as-code/).\r\n\r\n## Enlisting Public API\r\n\r\nTo enlist public API, we use the following tool:\r\n\r\n```csharp\r\n");
             
             #line 14 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.ApiFile.ReadAllText()));

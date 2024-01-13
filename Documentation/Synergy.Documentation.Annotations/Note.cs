@@ -31,4 +31,7 @@ public static class Note
 
     public static T Moreover<T>(this T source, string reason)
         => source;
+    
+    public static T Reference<T>(this T source, string link)
+        => source;
 }
