@@ -1,0 +1,1 @@
+[//]: # (TODO Introduce docs for generating Sequence Diagrams from code)

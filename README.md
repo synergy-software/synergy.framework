@@ -9,4 +9,6 @@ Click the image above to view the procject [Code Topology](http://htmlpreview.gi
 
 [Design by contract programming](https://github.com/synergy-software/synergy.framework/wiki/Contracts)
 
+[Architecture Diagrams  as Code](Architecture/README.md)
+
 [Docs As Code](Documentation/README.md)
