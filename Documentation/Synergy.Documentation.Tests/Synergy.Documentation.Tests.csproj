@@ -63,6 +63,9 @@
       <Compile Update="Docs\README.Generate.cs">
         <DependentUpon>README.tt</DependentUpon>
       </Compile>
+      <Compile Include="..\..\Synergy.Catalogue\Extensions\EnumerableExtensions.cs">
+        <Link>Extensions\EnumerableExtensions.cs</Link>
+      </Compile>
     </ItemGroup>
 
 </Project>

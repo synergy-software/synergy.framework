@@ -1,5 +1,9 @@
 # Synergy.Documentation nuget package
 
+Here is the documentation of the Synergy.Documentation and Synergy.Documentation.Annotations nuget packages.
+They were created to help developers to document their code in a simple way.
+It is based on the idea of [Docs as Code](https://www.writethedocs.org/guide/docs-as-code/).
+
 ## Enlisting Public API
 
 To enlist public API, we use the following tool:
@@ -110,11 +114,77 @@ When all tech debt for the project is materialized in single file - we can start
 It also helps to keep track of all tech debt in the project.
 Moreover, it is much easier to spot new technical debt during the code review.
 
-## Comments in code
+## Comments as code
 
-TBC
+You probably wonder why we use this approach instead of using standard comments.
+For sure you heard that comments in code are bad because nobody reads them.
+Actually they are invisible for developer.
 
-[//]: # (TODO Write the documentation of Note class usage)
+To make them visible, we need to convert them into code.
+To use comments as code approach, we use the following tool:
+
+```csharp
+using Synergy.Catalogue;
+using Synergy.Documentation.Annotations;
+
+namespace Synergy.Documentation.Tests.Comments;
+
+[CodeFilePath]
+public class NoteTests
+{
+    [Fact]
+    public void ShowOff()
+    {
+        this.Comment("Here you have full sample of comments as code")
+            .Because("I want to show you how to use them")
+            .DoNothing("because this is just a comment")
+            .Because("I want to show you how to use them")
+            .DoNotThrowException("because this is just a comment")
+            .Because("I want to show you how to use them")
+            .Then("I want to show you how to use them")
+            .But("I want to show you how to use them")
+            .Therefore("I want to show you how to use them")
+            .Otherwise("I want to show you how to use them")
+            .Moreover("I want to show you how to use them");
+    }
+    
+    [Fact]
+    public void CommentsTests()
+    {
+        try
+        {
+            var list = new List<string>(10.Because("we do not waste memory when we know exact size of the list"));
+
+            if (list.IsEmpty())
+                this.DoNothing("because we do not have any items in the list");
+        }
+        catch
+        {
+            this.DoNotThrowException("when something bad happens here")
+                .Because("this code should always work")
+                .Therefore("we should log the exception at least");
+        }
+    }
+}
+```
+
+For sample code, please check: [NoteTests.cs](Synergy.Documentation.Tests/Comments/NoteTests.cs)
+
+**Notes:** 
+
+- Do not use this approach to comment something obvious. Do not use ANY comment in such case.
+- Use this approach to comment something that is important and you want to explain it to the reader.
+
+To learn more how to write good comments, please check: [Best practices for writing code comments](https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/):
+> - Rule 1: Comments should not duplicate the code.
+> - Rule 2: Good comments do not excuse unclear code.
+> - Rule 3: If you can't write a clear comment, there may be a problem with the code.
+> - Rule 4: Comments should dispel confusion, not cause it.
+> - Rule 5: Explain unidiomatic code in comments.
+> - Rule 6: Provide links to the original source of copied code.
+> - Rule 7: Include links to external references where they will be most helpful.
+> - Rule 8: Add comments when fixing bugs.
+> - Rule 9: Use comments to mark incomplete implementations.
 
 ## Generating markdown files from code - Docs as Code
 

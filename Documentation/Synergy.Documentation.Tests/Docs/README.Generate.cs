@@ -2,6 +2,7 @@
 using Synergy.Documentation.Markup;
 using Synergy.Documentation.Tests.Architecture.Dependencies;
 using Synergy.Documentation.Tests.Architecture.Public;
+using Synergy.Documentation.Tests.Comments;
 
 namespace Synergy.Documentation.Tests.Docs;
 
@@ -31,6 +32,9 @@ partial class README
 
     private CodeFile RelationsOfMarkdown => this.RelationsFile.Folder.File("Relations.of.Markdown.verified.md");
     private Markdown.Link RelationsOfMarkdownLink => Markdown.Link.To(this.RelationsOfMarkdown).RelativeFrom(README.readmeFile);
+    
+    private CodeFile NoteTestsFile => CodeFile.For<NoteTests>();
+    private Markdown.Link NoteTestsLink => Markdown.Link.To(this.NoteTestsFile).RelativeFrom(README.readmeFile);
     
     [Fact]
     public void Generate()

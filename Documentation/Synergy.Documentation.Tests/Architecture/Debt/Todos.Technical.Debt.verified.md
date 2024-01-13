@@ -1,9 +1,6 @@
 ﻿# Technical Debt for Synergy.Documentation
 
-Total: 5
-
-## [NoteTests.cs](../../Comments/NoteTests.cs)
-- TODO: Marcin Celej [from: Marcin Celej on: 08-01-2024]: Add tests for Note class
+Total: 4
 
 ## [README.Generate.cs](../../Docs/README.Generate.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 09-01-2024]: Extract this to a separate project Synergy.Documentation.Docs with all needed samples inside

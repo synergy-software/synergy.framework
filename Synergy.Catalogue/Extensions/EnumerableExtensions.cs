@@ -10,10 +10,10 @@ namespace Synergy.Catalogue
 #endif
         static class EnumerableExtensions
     {
-        public static bool IsEmpty<T>(IEnumerable<T> collection)
+        public static bool IsEmpty<T>(this IEnumerable<T> collection)
             => collection.Any() == false;
         
-        public static bool IsNotEmpty<T>(IEnumerable<T> collection)
+        public static bool IsNotEmpty<T>(this IEnumerable<T> collection)
             => collection.Any();
         
         public static bool In<T>(this T value, params T[] values)
