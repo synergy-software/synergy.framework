@@ -36,8 +36,8 @@ public class CodeFile
     public override string ToString()
         => FilePath;
 
-    // public CodeFile RelativeTo(CodeFile file) 
-    //     => new(Path.GetRelativePath(file.FilePath, FilePath));
+    public CodeFile ChangeExtension(string extension) 
+        => new (Path.ChangeExtension(FilePath, extension));
 
     public CodeFile RelativeTo(CodeFolder folder)
         => new(Path.GetRelativePath(folder.Path, FilePath));

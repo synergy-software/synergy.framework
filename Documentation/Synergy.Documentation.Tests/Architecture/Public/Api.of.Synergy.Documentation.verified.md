@@ -62,6 +62,9 @@
  - ctor(
      filePath: string
    )
+ - ChangeExtension(
+     extension: string
+   ) : CodeFile
  - CodeFile.Current(
      path: string [CallerFilePath, Optional]
    ) : CodeFile
