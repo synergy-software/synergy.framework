@@ -1,8 +1,10 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using DiffEngine;
 using NUnit.Framework;
 using VerifyTests;
 
+[assembly: ExcludeFromCodeCoverage]
 [assembly: Parallelizable(ParallelScope.Fixtures)]
 
 namespace Synergy.Contracts.Test;

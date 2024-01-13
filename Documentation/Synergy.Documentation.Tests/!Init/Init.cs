@@ -1,5 +1,8 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using DiffEngine;
+
+[assembly: ExcludeFromCodeCoverage]
 
 namespace Synergy.Documentation.Tests;
 
