@@ -1,11 +1,13 @@
 ﻿using Synergy.Architecture.Annotations.Diagrams.Sequence;
 using Synergy.Architecture.Diagrams.Documentation;
 using Synergy.Architecture.Diagrams.Sequence;
+using Synergy.Documentation.Annotations;
 using Synergy.Documentation.Code;
 using static Synergy.Architecture.Annotations.Diagrams.Sequence.SequenceDiagramGroupType;
 
 namespace Synergy.Architecture.Tests.Samples;
 
+[CodeFilePath]
 public class SequenceDiagramSamples
 {
     public static CodeFile SequenceDiagrams => CodeFolder.Current()

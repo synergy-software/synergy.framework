@@ -8,11 +8,11 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+      <DefineConstants>TRACE;CODE_ANALYSIS;DOCUMENTATION</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+      <DefineConstants>TRACE;CODE_ANALYSIS;DOCUMENTATION</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup>
@@ -34,11 +34,26 @@
         <ParentFile>Api</ParentFile>
         <DependentUpon>Api.cs</DependentUpon>
       </None>
+        <None Update="Docs\README.tt">
+            <Generator>TextTemplatingFilePreprocessor</Generator>
+            <LastGenOutput>README.cs</LastGenOutput>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\Documentation\Synergy.Documentation\Synergy.Documentation.csproj" />
       <ProjectReference Include="..\Synergy.Architecture.Diagrams\Synergy.Architecture.Diagrams.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Docs\README.Generate.cs">
+        <DependentUpon>README.tt</DependentUpon>
+      </Compile>
+      <Compile Update="Docs\README.cs">
+        <AutoGen>True</AutoGen>
+        <DesignTime>True</DesignTime>
+        <DependentUpon>README.tt</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

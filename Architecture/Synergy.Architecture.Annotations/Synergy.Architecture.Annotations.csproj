@@ -11,7 +11,7 @@
         <PackageLicenseFile>license.txt</PackageLicenseFile>
         <Description>Architecture testing annotations</Description>
         <Copyright>Copyright © Synergy Marcin Celej 2023</Copyright>
-        <PackageProjectUrl>https://github.com/synergy-software/synergy.framework</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/tree/master/Architecture/README.md</PackageProjectUrl>
         <PackageIcon>synergy.png</PackageIcon>
         <PackageTags>Diagrams as Code</PackageTags>
         <AssemblyVersion>$(Version)</AssemblyVersion>

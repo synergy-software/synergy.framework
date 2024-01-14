@@ -1,6 +1,6 @@
 ﻿# Technical Debt for Synergy.Contracts
 
-Total: 10
+Total: 11
 
 ## [SequenceDiagramDeactivationAttribute.cs](../../../Synergy.Architecture.Annotations/Diagrams/Sequence/SequenceDiagramDeactivationAttribute.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 21-05-2023]: Use this attribute in some sample
@@ -25,3 +25,6 @@ Total: 10
 - TODO: Marcin Celej [from: Marcin Celej on: 13-07-2023]: add configuration setting to: autoactivate on
 - TODO: Marcin Celej [from: Marcin Celej on: 06-07-2023]: Allow to inline self call
 - TODO: Marcin Celej [from: Marcin Celej on: 06-07-2023]: Add configuration setting to generate only 'new' word here without exact ctor mentioned here - to simplify diagram
+
+## [README.Generate.cs](../../Docs/README.Generate.cs)
+- TODO: Marcin Celej [from: Marcin Celej on: 09-01-2024]: Extract this to a separate project Synergy.Documentation.Docs with all needed samples inside
