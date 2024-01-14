@@ -1,10 +1,15 @@
 <#@ template language="C#" #>
 <#@output extension=".md"#>
-# Synergy.Documentation nuget package
+# Synergy.Documentation nuget packages
 
 Here is the documentation of the `Synergy.Documentation` and `Synergy.Documentation.Annotations` nuget packages.
 They were created to help developers to document their code in a simple way.
 It is based on the idea of [Docs as Code](https://www.writethedocs.org/guide/docs-as-code/).
+But it goes a bit above it.
+
+Find packages on nuget: 
+- [Synergy.Documentation](https://www.nuget.org/packages/Synergy.Documentation/)
+- [Synergy.Documentation.Annotations](https://www.nuget.org/packages/Synergy.Documentation.Annotations/)
 
 ## Enlisting Public API
 
