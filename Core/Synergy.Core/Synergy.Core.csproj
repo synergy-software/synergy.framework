@@ -3,7 +3,7 @@
     <TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RunCodeAnalysis>false</RunCodeAnalysis>
-    <IsPackable>true</IsPackable>
+    <IsPackable>false</IsPackable>
     <PackageVersion>$(Version)</PackageVersion>
     <Title>Synergy.Core - Synergy Layered Application Architecture (SLARCH) support using Windsor Castle</Title>
     <Authors>Synergy Marcin Celej</Authors>
