@@ -8,9 +8,105 @@ Find packages on nuget:
 - [Synergy.Architecture.Diagrams](https://www.nuget.org/packages/Synergy.Architecture.Diagrams/)
 - [Synergy.Architecture.Annotations](https://www.nuget.org/packages/Synergy.Architecture.Annotations/)
 
-## Enlisting Public API
+## Generating Sequence Diagrams from code
 
-To enlist public API, we use the following tool:
+To generate sequence diagrams from code, we use the following tool:
+
+```csharp
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using Synergy.Architecture.Diagrams.Documentation;
+using Synergy.Architecture.Diagrams.Sequence;
+using Synergy.Documentation.Code;
+using Synergy.Sample.Web.API.Controllers;
+using Synergy.Sample.Web.API.Services.Users.Commands.CreateUser;
+using Synergy.Sample.Web.API.Services.Users.Domain;
+using Synergy.Sample.Web.API.Services.Users.Queries.GetUser;
+using Synergy.Sample.Web.API.Services.Users.Queries.GetUsers;
+using Xunit;
+
+namespace Synergy.Sample.Web.API.Tests.Architecture;
+
+public class Diagrams
+{
+    public static CodeFile CodeFile => CodeFile.Current();
+    public static CodeFile SequenceDiagrams => CodeFolder.Current()
+                                                         .File("Diagrams.of.Sequence.for.Sample.md");
+
+    [Fact]
+    public async Task Sequence()
+    {
+        var blueprint = TechnicalBlueprint
+                        .Titled("Sequence diagrams for Sample Web API management")
+                        .Register<ICreateUserCommandHandler, CreateUserCommandHandler>()
+                        .Register<IGetUsersQueryHandler, GetUsersQueryHandler>()
+                        .Register<IGetUserQueryHandler, GetUserQueryHandler>()
+                        .Register<IUserRepository, UserRepository>()
+                        .Add(Create())
+                        .Add(Read())
+            ;
+
+        await File.WriteAllTextAsync(Diagrams.SequenceDiagrams.FilePath, blueprint.Render());
+
+        //
+        // WARN: Temporarily removed using Verify due to problem with PlantUml which generates different link to image on server side even thought the diagram content is the same
+        //
+
+        // await Verify(blueprint.Render())
+        //     .UseFileName(RequisitionSequenceDiagrams.FileNameWithoutExtension)
+        //     .UseExtension(RequisitionSequenceDiagrams.Extension);
+    }
+
+    private static IEnumerable<SequenceDiagram> Create()
+    {
+        yield return SequenceDiagram
+                     .From(Actors.Browser)
+                     .Calling<UsersController>(c => c.Create(null!, null!))
+                     .Footer("This diagram shows the full path of user creation.\\n" +
+                             "To see what happens next - check the next diagrams below."
+                     );
+    }
+    
+    private static IEnumerable<SequenceDiagram> Read()
+    {
+        yield return SequenceDiagram
+                     .From(Actors.Browser)
+                     .Calling<UsersController>(c => c.GetUsers());
+        
+        yield return SequenceDiagram
+                     .From(Actors.Browser)
+                     .Calling<UsersController>(c => c.GetUser(null!));
+    }
+}
+```
+
+For sample code, please check: [Diagrams.cs](../Web/Sample/Synergy.Sample.Web.API.Tests/Architecture/Diagrams.cs)
+
+To see the results, please check: [Diagrams.of.Sequence.for.Sample.md](../Web/Sample/Synergy.Sample.Web.API.Tests/Architecture/Diagrams.of.Sequence.for.Sample.md)
+
+**Note:**
+
+To make it working in your project, you need to decorate your code with the following attributes:
+
+- [SequenceDiagramActivation]
+- [SequenceDiagramCall]
+- [SequenceDiagramDatabaseCall]
+- [SequenceDiagramDeactivation]
+- [SequenceDiagramElement]
+- [SequenceDiagramExternalActivation]
+- [SequenceDiagramExternalCall]
+- [SequenceDiagramNote]
+- [SequenceDiagramSelfCall]
+
+For sample code, please check:
+
+- [GetUserQueryHandler.cs](../Web/Sample/Synergy.Sample.Web.API.Services/Users/Queries/GetUser/GetUserQueryHandler.cs)
+- [UserRepository.cs](../Web/Sample/Synergy.Sample.Web.API.Services/Users/Domain/UserRepository.cs)
+
+### Sample
+
+Check also the following sample ([SequenceDiagramSamples.cs](Synergy.Architecture.Tests/Samples/SequenceDiagramSamples.cs)):
 
 ```csharp
 using Synergy.Architecture.Annotations.Diagrams.Sequence;
@@ -115,10 +211,5 @@ internal class Helper
 }
 ```
 
-For sample code, please check: [SequenceDiagramSamples.cs](Synergy.Architecture.Tests/Samples/SequenceDiagramSamples.cs)
-
-To see the results, please check: [SequenceDiagramSamples.md](Synergy.Architecture.Tests/Samples/SequenceDiagramSamples.md)
-
-**Note:**
-
+This above test produces: [SequenceDiagramSamples.md](Synergy.Architecture.Tests/Samples/SequenceDiagramSamples.md)
 

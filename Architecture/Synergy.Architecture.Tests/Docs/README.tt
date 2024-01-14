@@ -1,5 +1,8 @@
 <#@ template language="C#" #>
 <#@output extension=".md"#>
+<#@ import namespace="Synergy.Sample.Web.API.Services.Users.Domain" #>
+<#@ import namespace="Synergy.Documentation.Markup" #>
+<#@ import namespace="Synergy.Sample.Web.API.Services.Users.Queries.GetUser" #>
 # Synergy.Architecture nuget packages
 
 Here is the documentation of the `Synergy.Architecture.Diagrams` and `Synergy.Architecture.Annotations` nuget packages.
@@ -10,18 +13,36 @@ Find packages on nuget:
 - [Synergy.Architecture.Diagrams](https://www.nuget.org/packages/Synergy.Architecture.Diagrams/)
 - [Synergy.Architecture.Annotations](https://www.nuget.org/packages/Synergy.Architecture.Annotations/)
 
-## Enlisting Public API
+## Generating Sequence Diagrams from code
 
-To enlist public API, we use the following tool:
+To generate sequence diagrams from code, we use the following tool:
+
+```csharp
+<#= this.RealSequenceDiagramsFile.ReadAllText() #>
+```
+
+For sample code, please check: <#= this.RealSequenceDiagramsLink #>
+
+To see the results, please check: <#= this.RealDiagramsLink #>
+
+**Note:**
+
+To make it working in your project, you need to decorate your code with the following attributes:
+
+<#= this.AttributesList #>
+
+For sample code, please check:
+
+- <#= Markdown.Link.To(GetUserQueryHandler.CodeFile).RelativeFrom(readmeFile) #>
+- <#= Markdown.Link.To(UserRepository.CodeFile).RelativeFrom(readmeFile) #>
+
+### Sample
+
+Check also the following sample (<#= this.SampleSequenceDiagramsLink #>):
 
 ```csharp
 <#= this.SampleSequenceDiagramsFile.ReadAllText() #>
 ```
 
-For sample code, please check: <#= this.SampleSequenceDiagramsLink #>
-
-To see the results, please check: <#= this.SequenceDiagramsLink #>
-
-**Note:**
-
+This above test produces: <#= this.SequenceDiagramsLink #>
 

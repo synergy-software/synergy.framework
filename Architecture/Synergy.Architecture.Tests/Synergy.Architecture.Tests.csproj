@@ -42,6 +42,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Documentation\Synergy.Documentation\Synergy.Documentation.csproj" />
+      <ProjectReference Include="..\..\Web\Sample\Synergy.Sample.Web.API.Tests\Synergy.Sample.Web.API.Tests.csproj" />
       <ProjectReference Include="..\Synergy.Architecture.Diagrams\Synergy.Architecture.Diagrams.csproj" />
     </ItemGroup>
 

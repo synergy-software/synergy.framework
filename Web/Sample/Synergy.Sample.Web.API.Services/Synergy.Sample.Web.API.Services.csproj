@@ -25,6 +25,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Architecture\Synergy.Architecture.Annotations\Synergy.Architecture.Annotations.csproj" />
     <ProjectReference Include="..\..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\Documentation\Synergy.Documentation.Annotations\Synergy.Documentation.Annotations.csproj" />
+    <ProjectReference Include="..\..\..\Documentation\Synergy.Documentation\Synergy.Documentation.csproj" />
   </ItemGroup>
 
 </Project>

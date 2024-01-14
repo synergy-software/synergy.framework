@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Synergy.Architecture.Annotations.Diagrams.Sequence;
 using Synergy.Contracts;
+using Synergy.Documentation.Code;
 using Synergy.Sample.Web.API.Services.Infrastructure.Annotations;
 
 namespace Synergy.Sample.Web.API.Services.Users.Domain
@@ -11,11 +12,13 @@ namespace Synergy.Sample.Web.API.Services.Users.Domain
     [CreatedImplicitly]
     public class UserRepository : IUserRepository
     {
+        public static CodeFile CodeFile => CodeFile.Current();
+
         private readonly List<User> users = new();
 
         [SequenceDiagramActivation(typeof(UserRepository))]
         [SequenceDiagramSelfCall(nameof(UserRepository.InstantiateUserEntity))]
-        [SequenceDiagramDatabaseCall("INSERT INTO Users (Id, Login) VALUES (@Id, @Login)")]
+        [SequenceDiagramDatabaseCall("INSERT INTO [Users] (Id, Login) VALUES (@Id, @Login)")]
         [SequenceDiagramDeactivation(typeof(UserRepository))]
         public User CreateUser(Login login)
         {
@@ -43,6 +46,7 @@ namespace Synergy.Sample.Web.API.Services.Users.Domain
             return user;
         }
 
+        [SequenceDiagramDatabaseCall("SELECT * FROM [Users] WHERE [Id]=@userId")]
         private User GetUserBy(string userId)
         {
             var user = this.FindUserBy(userId);
@@ -50,12 +54,14 @@ namespace Synergy.Sample.Web.API.Services.Users.Domain
             return user!;
         }
 
+        [SequenceDiagramDatabaseCall("DELETE FROM [Users] WHERE [Id]=@userId")]
         public void DeleteUser(string userId)
         {
             var user = this.GetUserBy(userId);
             this.users.Remove(user);
         }
 
+        [SequenceDiagramDatabaseCall("SELECT * FROM [Users]")]
         public ReadOnlyCollection<User> GetAllUsers()
         {
             return this.users.AsReadOnly();

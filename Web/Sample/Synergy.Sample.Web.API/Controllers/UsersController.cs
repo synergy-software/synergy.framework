@@ -32,6 +32,7 @@ namespace Synergy.Sample.Web.API.Controllers
         /// </summary>
         [HttpGet]
         [NotNull]
+        [SequenceDiagramCall(typeof(IGetUsersQueryHandler), nameof(IGetUsersQueryHandler.Handle))]
         public GetUsersQueryResult GetUsers()
         {
             return this._queryDispatcher.Dispatch<GetUsersQuery, IGetUsersQueryHandler, GetUsersQueryResult>(new GetUsersQuery());
@@ -42,8 +43,9 @@ namespace Synergy.Sample.Web.API.Controllers
         /// </summary>
         /// <param name="userId">Identifier of the user</param>
         /// <returns>User details</returns>
-        [HttpGet("{userId}", Name = nameof(UsersController.GetUser))]
         [NotNull]
+        [HttpGet("{userId}", Name = nameof(UsersController.GetUser))]
+        [SequenceDiagramCall(typeof(IGetUserQueryHandler), nameof(IGetUserQueryHandler.Handle))]
         public GetUserQueryResult GetUser([NotNull] string userId)
         {
             return this._queryDispatcher.Dispatch<GetUserQuery, IGetUserQueryHandler, GetUserQueryResult>(new GetUserQuery(userId));

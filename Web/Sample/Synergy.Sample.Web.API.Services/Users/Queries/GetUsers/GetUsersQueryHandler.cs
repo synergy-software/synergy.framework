@@ -1,4 +1,5 @@
-﻿using Synergy.Sample.Web.API.Services.Infrastructure.Annotations;
+﻿using Synergy.Architecture.Annotations.Diagrams.Sequence;
+using Synergy.Sample.Web.API.Services.Infrastructure.Annotations;
 using Synergy.Sample.Web.API.Services.Infrastructure.Queries;
 using Synergy.Sample.Web.API.Services.Users.Domain;
 
@@ -14,6 +15,8 @@ namespace Synergy.Sample.Web.API.Services.Users.Queries.GetUsers
             this._userRepository = userRepository;
         }
 
+        [SequenceDiagramCall(typeof(IUserRepository), nameof(IUserRepository.GetAllUsers))]
+        [SequenceDiagramActivation(typeof(GetUsersQueryResult))]
         public GetUsersQueryResult Handle(GetUsersQuery query)
         {
             var users = this._userRepository.GetAllUsers();

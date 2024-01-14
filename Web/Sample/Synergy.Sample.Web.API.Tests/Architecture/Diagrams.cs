@@ -7,12 +7,15 @@ using Synergy.Documentation.Code;
 using Synergy.Sample.Web.API.Controllers;
 using Synergy.Sample.Web.API.Services.Users.Commands.CreateUser;
 using Synergy.Sample.Web.API.Services.Users.Domain;
+using Synergy.Sample.Web.API.Services.Users.Queries.GetUser;
+using Synergy.Sample.Web.API.Services.Users.Queries.GetUsers;
 using Xunit;
 
 namespace Synergy.Sample.Web.API.Tests.Architecture;
 
 public class Diagrams
 {
+    public static CodeFile CodeFile => CodeFile.Current();
     public static CodeFile SequenceDiagrams => CodeFolder.Current()
                                                          .File("Diagrams.of.Sequence.for.Sample.md");
 
@@ -22,6 +25,8 @@ public class Diagrams
         var blueprint = TechnicalBlueprint
                         .Titled("Sequence diagrams for Sample Web API management")
                         .Register<ICreateUserCommandHandler, CreateUserCommandHandler>()
+                        .Register<IGetUsersQueryHandler, GetUsersQueryHandler>()
+                        .Register<IGetUserQueryHandler, GetUserQueryHandler>()
                         .Register<IUserRepository, UserRepository>()
                         .Add(Create())
                         .Add(Read())
@@ -53,5 +58,9 @@ public class Diagrams
         yield return SequenceDiagram
                      .From(Actors.Browser)
                      .Calling<UsersController>(c => c.GetUsers());
+        
+        yield return SequenceDiagram
+                     .From(Actors.Browser)
+                     .Calling<UsersController>(c => c.GetUser(null!));
     }
 }
