@@ -6,7 +6,7 @@ Total: 14
 - TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: check that and probably convert docs int tt
 
 ## [Synergy.Contracts.Test.csproj](../../Synergy.Contracts.Test.csproj)
-- TODO: Remobve NUnit and replace it with xunit
+- TODO: Remove NUnit and replace it with xunit
 
 ## [FailBoolean.cs](../../../Synergy.Contracts/Failures/FailBoolean.cs)
 - TODO:mace (from:mace @ 22-10-2016): variable.FailIfFalse(message)
