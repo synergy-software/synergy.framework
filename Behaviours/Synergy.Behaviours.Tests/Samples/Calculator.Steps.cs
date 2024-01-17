@@ -37,6 +37,8 @@ public partial class CalculatorFeature : Feature<CalculatorFeature>
     }
 
     private int _result;
+    private string[]? _scenario;
+
     private void TheTwoNumbersAreAdded()
     {
         this._result = this._calculator.Add();
@@ -51,10 +53,16 @@ public partial class CalculatorFeature : Feature<CalculatorFeature>
     {
         Verifier.Verify(this._calculator)
                 .UseDirectory("Snapshots")
+                .AppendValue("verifies", this._scenario!)
                 .GetAwaiter().GetResult();
     }
 
     private void TwoNumbers()
     {
+    }
+
+    partial void CurrentScenario(params string[] scenario)
+    {
+        _scenario = scenario;
     }
 }

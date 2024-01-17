@@ -68,6 +68,7 @@
 
 ## Gherkin.Scenario (record) : IEquatable<Scenario>
  - Line: Line { get; set; }
+ - Lines: String[] { get; }
  - Rule: Rule? [Nullable] { get; set; }
  - Steps: List<Step> { get; set; }
  - Tags: List<string> { get; set; }

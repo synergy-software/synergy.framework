@@ -6,4 +6,5 @@ namespace Synergy.Behaviours.Tests.Samples;
 [GeneratedCode("Synergy.Behaviours.Testing", "1.0.0.0")]
 partial class NewFeature // Feature: New
 {
+    partial void CurrentScenario(params string[] scenario);
 }

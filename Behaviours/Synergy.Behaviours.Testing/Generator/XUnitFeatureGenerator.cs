@@ -9,6 +9,7 @@ internal class XUnitFeatureGenerator
 {
     private readonly Func<Scenario, bool> include;
     private readonly Func<Scenario, bool> generateAfter;
+    private readonly bool currentScenario = true;
 
     public XUnitFeatureGenerator(
         Func<Scenario, bool>? include,
@@ -59,6 +60,9 @@ internal class XUnitFeatureGenerator
             this.Generate(code, scenario, backgroundMethod);
         }
 
+        if (this.currentScenario)
+            code.AppendLine("    partial void CurrentScenario(params string[] scenario);");
+        
         code.AppendLine("}");
 
         return code;
@@ -102,7 +106,15 @@ internal class XUnitFeatureGenerator
         string methodName = Sentence.ToMethod(scenario.Title);
         code.AppendLine($"    public void {methodName}() // {scenarioOriginalTitle}");
         code.AppendLine("    {");
-        
+
+        if (this.currentScenario)
+        {
+            code.AppendLine($"       CurrentScenario(");
+            code.AppendLine($"           \"{string.Join($"\",{Environment.NewLine}           \"", scenario.Lines.Select(line => line.Replace("\"", "\\\"")))}\"");
+            code.AppendLine($"       );");
+            code.AppendLine();
+        }
+
         if (backgroundMethod != null)
             code.AppendLine($"       Background().{backgroundMethod}();");
         else
@@ -116,7 +128,7 @@ internal class XUnitFeatureGenerator
             code.AppendLine();
             code.AppendLine($"        Moreover().After{methodName}();");
         }
-        
+
         code.AppendLine("    }");
         code.AppendLine();
     }

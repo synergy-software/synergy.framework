@@ -18,6 +18,14 @@ partial class CalculatorFeature // Feature: Calculator
     [Xunit.Fact(DisplayName = "Scenario: Add two numbers")]
     public void AddTwoNumbers() // Scenario: Add two numbers
     {
+       CurrentScenario(
+           "    Scenario: Add two numbers",
+           "      Given the first number is 50",
+           "      And the second number is 70",
+           "      When the two numbers are added",
+           "      Then the result should be 120"
+       );
+
        Background().CalculatorBackground();
 
        Given().TheFirstNumberIs50();     // Given the first number is 50
@@ -32,6 +40,15 @@ partial class CalculatorFeature // Feature: Calculator
     [Xunit.Fact(DisplayName = "Example: Add two numbers in \"different\" way")]
     public void AddTwoNumbersInDifferentWay() // Example: Add two numbers in "different" way
     {
+       CurrentScenario(
+           "    Example: Add two numbers in \"different\" way",
+           "      Given Two numbers:",
+           "      * the first number is 50",
+           "      * the second number is 70",
+           "      When the two numbers are added",
+           "      Then the result should be 120"
+       );
+
        Background().CalculatorBackground();
 
        Given().TwoNumbers();             // Given Two numbers:
@@ -41,4 +58,5 @@ partial class CalculatorFeature // Feature: Calculator
         Then().TheResultShouldBe120();   // Then the result should be 120
     }
 
+    partial void CurrentScenario(params string[] scenario);
 }
