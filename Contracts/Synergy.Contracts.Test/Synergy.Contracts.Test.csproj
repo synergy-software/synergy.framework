@@ -37,7 +37,7 @@
     <!-- TODO: Remove NUnit and replace it with xunit -->
     <PackageReference Include="NUnit" Version="4.0.1" />
     <PackageReference Include="Verify.Xunit" Version="22.11.5" />
-    <PackageReference Include="xunit" Version="2.6.5" />
+    <PackageReference Include="xunit" Version="2.6.6" />
     <Reference Include="System.Runtime, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   </ItemGroup>
   <ItemGroup>
