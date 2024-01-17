@@ -20,25 +20,25 @@ partial class CalculatorFeature // Feature: Calculator
     {
        Background().CalculatorBackground();
 
-       Given().TheFirstNumberIs50();  // Given the first number is 50
-         And().TheSecondNumberIs70();  // And the second number is 70
+       Given().TheFirstNumberIs50();     // Given the first number is 50
+         And().TheSecondNumberIs70();    // And the second number is 70
         When().TheTwoNumbersAreAdded();  // When the two numbers are added
-        Then().TheResultShouldBe120();  // Then the result should be 120
+        Then().TheResultShouldBe120();   // Then the result should be 120
 
         Moreover().AfterAddTwoNumbers();
     }
 
     // @Add
-    [Xunit.Fact(DisplayName = "Scenario: Add two numbers in \"different\" way")]
-    public void AddTwoNumbersInDifferentWay() // Scenario: Add two numbers in "different" way
+    [Xunit.Fact(DisplayName = "Example: Add two numbers in \"different\" way")]
+    public void AddTwoNumbersInDifferentWay() // Example: Add two numbers in "different" way
     {
        Background().CalculatorBackground();
 
-       Given().TwoNumbers();  // Given Two numbers:
-         And().TheFirstNumberIs50();  // * the first number is 50
-         And().TheSecondNumberIs70();  // * the second number is 70
+       Given().TwoNumbers();             // Given Two numbers:
+         And().TheFirstNumberIs50();     // * the first number is 50
+         And().TheSecondNumberIs70();    // * the second number is 70
         When().TheTwoNumbersAreAdded();  // When the two numbers are added
-        Then().TheResultShouldBe120();  // Then the result should be 120
+        Then().TheResultShouldBe120();   // Then the result should be 120
     }
 
 }

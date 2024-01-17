@@ -99,7 +99,6 @@ internal class XUnitFeatureGenerator
 
         string scenarioOriginalTitle = scenario.Line.Text.Trim();
         code.AppendLine($"    [Xunit.Fact(DisplayName = \"{scenarioOriginalTitle.Replace("\"", "\\\"")}\")]");
-        // TODO: Marcin Celej [from: Marcin Celej on: 16-01-2024]: Align the comment on right side
         string methodName = Sentence.ToMethod(scenario.Title);
         code.AppendLine($"    public void {methodName}() // {scenarioOriginalTitle}");
         code.AppendLine("    {");
@@ -127,10 +126,13 @@ internal class XUnitFeatureGenerator
     
     private void GenerateSteps(StringBuilder code, List<Step> steps)
     {
+        var max = steps.Max(step => GetStepType(step).Length + Sentence.ToMethod(step.Text).Length) + 2;
         foreach (var step in steps)
         {
-            // TODO: Marcin Celej [from: Marcin Celej on: 16-01-2024]: Align the comments on right side
-            code.AppendLine($"       {GetStepType(step)}().{Sentence.ToMethod(step.Text)}();  // {step.Line.Text.Trim()}");
+            string stepType = GetStepType(step);
+            string method = Sentence.ToMethod(step.Text);
+            var spaces = new string(' ', max - stepType.Length - method.Length);
+            code.AppendLine($"       {stepType}().{method}();{spaces}// {step.Line.Text.Trim()}");
         }
 
         string GetStepType(Step step)
