@@ -4,7 +4,7 @@ Feature: Calculator
   ![Calculator](https://specflow.org/wp-content/uploads/2020/09/calculator.png)
   Simple calculator for performing calculations on **two** numbers
   
-  Background: 
+  Background:
     Given User opened calculator
   
   Rule: Adding numbers
@@ -24,12 +24,13 @@ Feature: Calculator
       When the two numbers are added
       Then the result should be 120
 
+  @Subtracting
   Rule: Subtracting numbers
 
     # tests os subtracting numbers
     
     @Subtract
-    Scenario: Subtract two numbers
+    Example: Subtract two numbers
       Given the first number is 50
       And the second number is 25
       When the two numbers are subtracted

@@ -10,8 +10,7 @@ public partial class CalculatorFeature : Feature<CalculatorFeature>
     {
         var code = this.Generate(
             from: "Calculator.feature",
-            include: new[] { "@Add" },
-            //exclude: new[] { "@Divide" },
+            include: scenario => scenario.IsTagged("Add"),
             generateAfter: scenario => scenario.IsTagged("verify")
         );
 

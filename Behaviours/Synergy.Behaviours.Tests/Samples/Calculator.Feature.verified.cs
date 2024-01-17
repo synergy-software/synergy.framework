@@ -3,8 +3,9 @@ using System.CodeDom.Compiler;
 
 namespace Synergy.Behaviours.Tests.Samples;
 
+// @tag
 [GeneratedCode("Synergy.Behaviours.Testing", "1.0.0.0")]
-partial class CalculatorFeature
+partial class CalculatorFeature // Feature: Calculator
 {
     private void CalculatorBackground() // Background:
     {
@@ -13,8 +14,8 @@ partial class CalculatorFeature
 
     // Rule: Adding numbers
 
-    [Xunit.Fact(DisplayName = "Scenario: Add two numbers")]
     // @Add @Verify
+    [Xunit.Fact(DisplayName = "Scenario: Add two numbers")]
     public void AddTwoNumbers() // Scenario: Add two numbers
     {
        Background().CalculatorBackground();
@@ -22,13 +23,13 @@ partial class CalculatorFeature
        Given().TheFirstNumberIs50();  // Given the first number is 50
          And().TheSecondNumberIs70();  // And the second number is 70
         When().TheTwoNumbersAreAdded();  // When the two numbers are added
-        Then().TheResultShouldBe120(); // Then the result should be 120
+        Then().TheResultShouldBe120();  // Then the result should be 120
 
         Moreover().AfterAddTwoNumbers();
     }
 
-    [Xunit.Fact(DisplayName = "Scenario: Add two numbers in \"different\" way")]
     // @Add
+    [Xunit.Fact(DisplayName = "Scenario: Add two numbers in \"different\" way")]
     public void AddTwoNumbersInDifferentWay() // Scenario: Add two numbers in "different" way
     {
        Background().CalculatorBackground();
@@ -37,13 +38,7 @@ partial class CalculatorFeature
          And().TheFirstNumberIs50();  // * the first number is 50
          And().TheSecondNumberIs70();  // * the second number is 70
         When().TheTwoNumbersAreAdded();  // When the two numbers are added
-        Then().TheResultShouldBe120(); // Then the result should be 120
+        Then().TheResultShouldBe120();  // Then the result should be 120
     }
-
-    // Rule: Subtracting numbers
-
-    // Rule: Dividing numbers
-
-    // Rule: Multiplying numbers
 
 }

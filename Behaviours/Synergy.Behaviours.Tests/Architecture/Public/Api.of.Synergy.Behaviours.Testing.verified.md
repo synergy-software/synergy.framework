@@ -14,32 +14,85 @@
      feature: TBehaviour?,
      from: string,
      to: string,
-     include: String[]? [Nullable, Optional],
-     exclude: String[]? [Nullable, Optional],
+     include: Func<Scenario, bool>? [Nullable, Optional],
      generateAfter: Func<Scenario, bool>? [Nullable, Optional],
      callerFilePath: string [CallerFilePath, Optional]
    ) : void [Extension]
  - FeatureGenerator.Generate<TBehaviour>(
      featureClass: TBehaviour?,
      from: string,
-     include: String[]? [Nullable, Optional],
-     exclude: String[]? [Nullable, Optional],
+     include: Func<Scenario, bool>? [Nullable, Optional],
      generateAfter: Func<Scenario, bool>? [Nullable, Optional],
      callerFilePath: string [CallerFilePath, Optional]
    ) : string [Extension]
 
-## IFeature (interface)
+## Gherkin.Background (record) : IEquatable<Background>
+ - Line: Line { get; set; }
+ - Steps: List<Step> { get; set; }
+ - ctor(
+     Steps: List<Step>,
+     Line: Line
+   )
 
-## Scenario (record) : IEquatable<Scenario>
- - Method: string { get; }
- - Tags: ReadOnlyCollection<string> { get; set; }
+## Gherkin.Feature (record) : IEquatable<Feature>
+ - Background: Background? [Nullable] { get; set; }
+ - Line: Line { get; set; }
+ - Scenarios: List<Scenario> { get; set; }
+ - Tags: List<string> { get; set; }
  - Title: string { get; set; }
  - ctor(
      Title: string,
-     Tags: ReadOnlyCollection<string>
+     Tags: List<string>,
+     Background: Background? [Nullable],
+     Scenarios: List<Scenario>,
+     Line: Line
+   )
+
+## Gherkin.Line (record) : IEquatable<Line>
+ - Number: int { get; set; }
+ - Text: string { get; set; }
+ - ctor(
+     Number: int,
+     Text: string
+   )
+
+## Gherkin.Rule (record) : IEquatable<Rule>
+ - Background: Background? [Nullable] { get; set; }
+ - Line: Line { get; set; }
+ - Title: string { get; set; }
+ - ctor(
+     Title: string,
+     Background: Background? [Nullable],
+     Line: Line
+   )
+
+## Gherkin.Scenario (record) : IEquatable<Scenario>
+ - Line: Line { get; set; }
+ - Rule: Rule? [Nullable] { get; set; }
+ - Steps: List<Step> { get; set; }
+ - Tags: List<string> { get; set; }
+ - Title: string { get; set; }
+ - ctor(
+     Title: string,
+     Tags: List<string>,
+     Steps: List<Step>,
+     Rule: Rule? [Nullable],
+     Line: Line
    )
  - IsTagged(
      tag: string,
      tags: params String[] [ParamArray]
    ) : bool
+
+## Gherkin.Step (record) : IEquatable<Step>
+ - Line: Line { get; set; }
+ - Text: string { get; set; }
+ - Type: string { get; set; }
+ - ctor(
+     Type: string,
+     Text: string,
+     Line: Line
+   )
+
+## IFeature (interface)
 

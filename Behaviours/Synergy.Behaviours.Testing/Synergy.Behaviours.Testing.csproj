@@ -20,15 +20,23 @@
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+      <DefineConstants>TRACE;INTERNALS</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+      <DefineConstants>TRACE;INTERNALS</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup>
         <None Include="synergy.png" Pack="true" PackagePath="" />
         <None Include="license.txt" Pack="true" PackagePath="" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="..\..\Synergy.Catalogue\Extensions\EnumerableExtensions.cs">
+        <Link>Extensions\EnumerableExtensions.cs</Link>
+      </Compile>
     </ItemGroup>
 
 </Project>

@@ -4,6 +4,6 @@ using System.CodeDom.Compiler;
 namespace Synergy.Behaviours.Tests.Samples;
 
 [GeneratedCode("Synergy.Behaviours.Testing", "1.0.0.0")]
-partial class NewFeature
+partial class NewFeature // Feature: New
 {
 }
