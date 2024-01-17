@@ -3,7 +3,7 @@ using System.CodeDom.Compiler;
 
 namespace Synergy.Behaviours.Tests.Samples;
 
-// @tag
+[Xunit.Trait("Category", "tag")] // @tag
 [GeneratedCode("Synergy.Behaviours.Testing", "1.0.0.0")]
 partial class CalculatorFeature // Feature: Calculator
 {
@@ -14,7 +14,8 @@ partial class CalculatorFeature // Feature: Calculator
 
     // Rule: Adding numbers
 
-    // @Add @Verify
+    [Xunit.Trait("Category", "Add")] // @Add
+    [Xunit.Trait("Category", "Verify")] // @Verify
     [Xunit.Fact(DisplayName = "Scenario: Add two numbers")]
     public void AddTwoNumbers() // Scenario: Add two numbers
     {
@@ -36,7 +37,7 @@ partial class CalculatorFeature // Feature: Calculator
         Moreover().AfterAddTwoNumbers();
     }
 
-    // @Add
+    [Xunit.Trait("Category", "Add")] // @Add
     [Xunit.Fact(DisplayName = "Example: Add two numbers in \"different\" way")]
     public void AddTwoNumbersInDifferentWay() // Example: Add two numbers in "different" way
     {

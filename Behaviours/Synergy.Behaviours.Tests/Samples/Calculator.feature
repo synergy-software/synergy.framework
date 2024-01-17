@@ -3,12 +3,12 @@ Feature: Calculator
 
   ![Calculator](https://specflow.org/wp-content/uploads/2020/09/calculator.png)
   Simple calculator for performing calculations on **two** numbers
-  
+
   Background:
     Given User opened calculator
-  
+
   Rule: Adding numbers
-    
+
     @Add @Verify
     Scenario: Add two numbers
       Given the first number is 50
@@ -24,11 +24,21 @@ Feature: Calculator
       When the two numbers are added
       Then the result should be 120
 
-  @Subtracting
-  Rule: Subtracting numbers
+#    @Add
+#    Scenario Outline: Add many numbers
+#      Given the first number is <first>
+#      And the second number is <second>
+#      When the two numbers are added
+#      Then the result should be <result>
+#      Examples:
+#        | first | second | result |
+#        | 0     | 70     | 70     |
+
+    @Subtracting
+    Rule: Subtracting numbers
 
     # tests os subtracting numbers
-    
+
     @Subtract
     Example: Subtract two numbers
       Given the first number is 50
@@ -53,7 +63,7 @@ Feature: Calculator
       Then the result should be 0
 
   Rule: Multiplying numbers
-    
+
     @Multiply
     Scenario: Multiply two numbers
       Given the first number is 5

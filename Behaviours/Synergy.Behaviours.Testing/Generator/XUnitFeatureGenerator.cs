@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using Synergy.Behaviours.Testing.Gherkin;
-using Synergy.Catalogue;
 using Feature = Synergy.Behaviours.Testing.Gherkin.Feature;
 
 namespace Synergy.Behaviours.Testing.Generator;
@@ -31,13 +30,11 @@ internal class XUnitFeatureGenerator
         code.AppendLine();
         code.AppendLine($"namespace {featureClass.GetType().Namespace};");
         code.AppendLine();
-        if (feature.Tags.IsNotEmpty())
-            code.AppendLine($"// {this.GenerateTags(feature.Tags)}");
+        this.GenerateTraits(code, feature.Tags);
         code.AppendLine(
             $"[GeneratedCode(\"{typeof(FeatureGenerator).Assembly.GetName().Name}\", " +
             $"\"{typeof(FeatureGenerator).Assembly.GetName().Version?.ToString()}\")]"
         );
-        // TODO: Marcin Celej [from: Marcin Celej on: 09-01-2024]: Introduce here [Xunit.Trait("Category", featureName)]
         code.AppendLine($"partial class {featureClass.GetType().Name} // {feature.Line.Text.Trim()}");
         code.AppendLine("{");
         var backgroundMethod = this.GenerateBackground(code, feature);
@@ -67,7 +64,15 @@ internal class XUnitFeatureGenerator
 
         return code;
     }
-    
+
+    private void GenerateTraits(StringBuilder code, List<string> tags, string indent = "")
+    {
+        foreach (string tag in tags)
+        {
+            code.AppendLine($"{indent}[Xunit.Trait(\"Category\", \"{tag}\")] // @{tag}");
+        }
+    }
+
     private string? GenerateBackground(StringBuilder code, Feature feature)
     {
         Background? background = feature.Background;
@@ -98,9 +103,7 @@ internal class XUnitFeatureGenerator
 
     private void Generate(StringBuilder code, Scenario scenario, string? backgroundMethod)
     {
-        if (scenario.Tags.IsNotEmpty())
-            code.AppendLine($"    // {this.GenerateTags(scenario.Tags)}");
-
+        this.GenerateTraits(code, scenario.Tags, "    ");
         string scenarioOriginalTitle = scenario.Line.Text.Trim();
         code.AppendLine($"    [Xunit.Fact(DisplayName = \"{scenarioOriginalTitle.Replace("\"", "\\\"")}\")]");
         string methodName = Sentence.ToMethod(scenario.Title);
@@ -132,9 +135,6 @@ internal class XUnitFeatureGenerator
         code.AppendLine("    }");
         code.AppendLine();
     }
-
-    private string GenerateTags(List<string> tags)
-        => $"@{string.Join(" @", tags)}";
     
     private void GenerateSteps(StringBuilder code, List<Step> steps)
     {
