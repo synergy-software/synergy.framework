@@ -25,16 +25,16 @@ namespace Synergy.Web.Api.Testing.Json
             this.Append(ignore.Nodes);
             return this;
         }
-
-        public static Ignore ResponseBody(params string[] nodes)
+        
+        public static Ignore RequestBody(params string[] nodes)
         {
             var ignore = new Ignore();
             if (nodes.Any() == false)
-                ignore.Append(new[] {"$.response.body"});
-            ignore.Append(nodes.Select(node=> $"$.response.body.{node}"));
+                ignore.Append(new[] {"$.request.body"});
+            ignore.Append(nodes.Select(node=> $"$.request.body.{node}"));
             return ignore;
         }
-
+        
         public static Ignore RequestMethod()
         {
             return new Ignore("$.request.method");
@@ -45,6 +45,15 @@ namespace Synergy.Web.Api.Testing.Json
             return new Ignore("$.request.description");
         }
 
+        public static Ignore ResponseBody(params string[] nodes)
+        {
+            var ignore = new Ignore();
+            if (nodes.Any() == false)
+                ignore.Append(new[] {"$.response.body"});
+            ignore.Append(nodes.Select(node=> $"$.response.body.{node}"));
+            return ignore;
+        }
+        
         public static Ignore ResponseLocationHeader()
         {
             return new Ignore("$.response.headers.Location");

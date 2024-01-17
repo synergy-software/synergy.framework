@@ -68,6 +68,7 @@ namespace Synergy.Sample.Web.API.Tests.Users
                 .ShouldBe(ApiConventionFor.CreateResource())
                 .ShouldBe(
                     this.EqualToPattern("/Patterns/S02_E01_CreateUser.json")
+                        .Ignore(Ignore.RequestBody("Login"))
                         .Ignore(Ignore.ResponseLocationHeader())
                         .Ignore(Ignore.ResponseBody("user.id"))
                         .Expected("Manual: User is created and its details are returned"))

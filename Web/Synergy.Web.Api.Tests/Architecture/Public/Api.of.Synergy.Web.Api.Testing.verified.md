@@ -282,6 +282,9 @@
  - Append(
      ignores: IEnumerable<string>
    ) : void
+ - Ignore.RequestBody(
+     nodes: params String[] [ParamArray]
+   ) : Ignore
  - Ignore.RequestDescription() : Ignore
  - Ignore.RequestMethod() : Ignore
  - Ignore.ResponseBody(
