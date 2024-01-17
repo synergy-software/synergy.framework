@@ -53,6 +53,8 @@ internal static class GherkinParser
                 continue;
             }
             
+            // TODO: Marcin Celej [from: Marcin Celej on: 10-05-2023]: Support Scenario Outline/Template along with Examples  
+            
             throw new Exception("Unsupported token at line " + token.Line.Number + ": " + token.Line.Text.Trim());
         }
 

@@ -22,7 +22,7 @@ internal static class GherkinTokenizer
                 yield return new GherkinToken("#", match.Groups[2].Value, line);
             }
 
-            Regex featureRegex = new Regex("^\\s*?(Feature|Rule|Background|Scenario|Example):\\s*?(.*)$", RegexOptions.Multiline);
+            Regex featureRegex = new Regex("^\\s*?(Feature|Rule|Background|Scenario|Example|Scenario Outline|Scenario Template|Examples):\\s*?(.*)$", RegexOptions.Multiline);
             if (featureRegex.IsMatch(line.Text))
             {
                 var match = featureRegex.Match(line.Text);
@@ -35,8 +35,6 @@ internal static class GherkinTokenizer
                 var match = sentenceRegex.Match(line.Text);
                 yield return new GherkinToken(match.Groups[1].Value, match.Groups[2].Value, line);
             }
-            
-            // TODO: Marcin Celej [from: Marcin Celej on: 10-05-2023]: Support Scenario Outline along with Examples  
         }
     }
 
