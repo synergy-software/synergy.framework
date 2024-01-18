@@ -111,14 +111,7 @@ internal class XUnitFeatureGenerator
         string displayName = scenarioOriginalTitle.Replace("\"", "\\\"");
         if (scenario is ScenarioOutline)
         {
-            Examples examples = ((ScenarioOutline) scenario).Examples;
-            arguments = "string " + string.Join(", string ", examples.Header.Values.Select(argument => Sentence.ToArgument(argument)));
-            code.AppendLine($"    [Xunit.Theory(DisplayName = \"{displayName}\")]");
-            
-            foreach (var row in examples.Rows)
-            {
-                code.AppendLine($"    [Xunit.InlineData(\"{string.Join("\", \"", row.Values)}\")]");
-            }
+            arguments = GenerateScenarioOutlineAsXunitTheory();
         }
         else
         {
@@ -151,6 +144,20 @@ internal class XUnitFeatureGenerator
 
         code.AppendLine("    }");
         code.AppendLine();
+
+        string GenerateScenarioOutlineAsXunitTheory()
+        {
+            Examples examples = ((ScenarioOutline) scenario).Examples;
+            arguments = "string " + string.Join(", string ", examples.Header.Values.Select(argument => Sentence.ToArgument(argument)));
+            code.AppendLine($"    [Xunit.Theory(DisplayName = \"{displayName}\")]");
+            
+            foreach (var row in examples.Rows)
+            {
+                code.AppendLine($"    [Xunit.InlineData(\"{string.Join("\", \"", row.Values)}\")]");
+            }
+
+            return arguments;
+        }
     }
     
     private void GenerateSteps(StringBuilder code, List<Step> steps)
