@@ -29,7 +29,7 @@ internal static class GherkinTokenizer
                 yield return new GherkinToken(match.Groups[1].Value, match.Groups[2].Value, line);
             }
 
-            Regex sentenceRegex = new Regex("^\\s*?(Given|When|Then|And|But|\\*)\\s+?(.+)$", RegexOptions.Multiline);
+            Regex sentenceRegex = new Regex("^\\s*?(Given|When|Then|And|But|\\*|\\|)\\s+?(.+)$", RegexOptions.Multiline);
             if (sentenceRegex.IsMatch(line.Text))
             {
                 var match = sentenceRegex.Match(line.Text);
