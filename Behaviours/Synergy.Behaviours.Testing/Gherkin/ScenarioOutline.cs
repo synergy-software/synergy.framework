@@ -15,15 +15,18 @@ public record ScenarioOutline(
     Line
 )
 {
-    public new static string[] Keywords { get; } = { "Scenario Outline", "Scenario Template" };
+    public new static string[] Keywords = { "Scenario Outline", "Scenario Template" };
 
     /// <inheritdoc />
     public override string[] Lines
     {
         get
         {
-            var lines = new List<string>(base.Lines);
-            // TODO: Marcin Celej [from: Marcin Celej on: 18-01-2024]: add here Examples section when there is deicated class for header and row
+            var lines = new List<string>();
+            lines.AddRange(base.Lines);
+            lines.Add(this.Examples.Line.Text);
+            lines.Add(this.Examples.Header.Line.Text);
+            lines.AddRange(this.Examples.Rows.Select(row => row.Line.Text));
             return lines.ToArray();
         }
     }

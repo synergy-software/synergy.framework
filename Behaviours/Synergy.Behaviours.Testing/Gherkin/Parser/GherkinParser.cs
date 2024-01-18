@@ -180,10 +180,9 @@ internal static class GherkinParser
 
     private static Examples ParseExamples(GherkinToken token, Stack<GherkinToken> stack)
     {
-        // TODO: Marcin Celej [from: Marcin Celej on: 18-01-2024]: Introduce class for header and row
         var headerToken = stack.Pop();
         var header = ParseRow(headerToken);
-        var examples = new Examples(header, new List<List<string>>(), token.Line);
+        var examples = new Examples(header, new List<Examples.Row>(), token.Line);
 
         while (stack.Any())
         {
@@ -191,7 +190,7 @@ internal static class GherkinParser
             if (stepToken.Type == Comment.Keyword)
                 continue;
 
-            if (stepToken.Type == "|")
+            if (stepToken.Type == Examples.Row.Keyword)
             {
                 var row = ParseRow(stepToken);
                 examples.Rows.Add(row);
@@ -204,9 +203,10 @@ internal static class GherkinParser
         
         return examples;
 
-        List<string> ParseRow(GherkinToken theToken)
+        Examples.Row ParseRow(GherkinToken theToken)
         {
-            return theToken.Value.Trim('|').Split('|').Select(x => x.Trim()).ToList();
+            List<string> values = theToken.Value.Trim('|').Split('|').Select(x => x.Trim()).ToList();
+            return new Examples.Row(values, theToken.Line);
         }
     }
 }

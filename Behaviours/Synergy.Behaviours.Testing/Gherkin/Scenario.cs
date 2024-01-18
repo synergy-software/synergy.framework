@@ -8,7 +8,7 @@ public record Scenario(
     Line Line
 )
 {
-    public static string[] Keywords { get; } = { "Scenario", "Example" };
+    public static string[] Keywords = { "Scenario", "Example" };
 
     public bool IsTagged(string tag, params string[] tags)
     {

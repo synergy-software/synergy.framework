@@ -104,9 +104,6 @@ internal class XUnitFeatureGenerator
 
     private void Generate(StringBuilder code, Scenario scenario, string? backgroundMethod)
     {
-        // if (scenario is ScenarioOutline)
-        //     throw new NotImplementedException("Scenario Outline is not supported yet.");
-        
         this.GenerateTraits(code, scenario.Tags, "    ");
         string scenarioOriginalTitle = scenario.Line.Text.Trim();
         string methodName = Sentence.ToMethod(scenario.Title);
@@ -115,12 +112,12 @@ internal class XUnitFeatureGenerator
         if (scenario is ScenarioOutline)
         {
             Examples examples = ((ScenarioOutline) scenario).Examples;
-            arguments = "string " + string.Join(", string ", examples.Header.Select(argument => Sentence.ToArgument(argument)));
+            arguments = "string " + string.Join(", string ", examples.Header.Values.Select(argument => Sentence.ToArgument(argument)));
             code.AppendLine($"    [Xunit.Theory(DisplayName = \"{displayName}\")]");
             
             foreach (var row in examples.Rows)
             {
-                code.AppendLine($"    [Xunit.InlineData(\"{string.Join("\", \"", row)}\")]");
+                code.AppendLine($"    [Xunit.InlineData(\"{string.Join("\", \"", row.Values)}\")]");
             }
         }
         else

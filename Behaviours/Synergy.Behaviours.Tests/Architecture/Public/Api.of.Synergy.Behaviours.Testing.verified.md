@@ -40,13 +40,22 @@
  - ctor()
 
 ## Gherkin.Examples (record) : IEquatable<Examples>
- - Header: List<string> { get; set; }
+ - Header: Examples+Row { get; set; }
  - Line: Line { get; set; }
- - Rows: List<List<string>> { get; set; }
+ - Rows: List<Examples+Row> { get; set; }
  - Examples.Keyword: string (field)
  - ctor(
-     Header: List<string>,
-     Rows: List<List<string>>,
+     Header: Examples+Row,
+     Rows: List<Examples+Row>,
+     Line: Line
+   )
+
+## Gherkin.Examples+Row (record) : IEquatable<Examples+Row>
+ - Line: Line { get; set; }
+ - Values: List<string> { get; set; }
+ - Row.Keyword: string (field)
+ - ctor(
+     Values: List<string>,
      Line: Line
    )
 
@@ -85,13 +94,13 @@
    )
 
 ## Gherkin.Scenario (record) : IEquatable<Scenario>
- - Scenario.Keywords: String[] { get; }
  - Line: Line { get; set; }
  - Lines: String[] { get; }
  - Rule: Rule? [Nullable] { get; set; }
  - Steps: List<Step> { get; set; }
  - Tags: List<string> { get; set; }
  - Title: string { get; set; }
+ - Scenario.Keywords: String[] (field)
  - ctor(
      Title: string,
      Tags: List<string>,
@@ -106,13 +115,14 @@
 
 ## Gherkin.ScenarioOutline (record) : Scenario, IEquatable<Scenario>, IEquatable<ScenarioOutline>
  - Examples: Examples { get; set; }
- - ScenarioOutline.Keywords: String[] { get; }
  - Line: Line { get; set; }
  - Lines: String[] { get; }
  - Rule: Rule? [Nullable] { get; set; }
  - Steps: List<Step> { get; set; }
  - Tags: List<string> { get; set; }
  - Title: string { get; set; }
+ - ScenarioOutline.Keywords: String[] (field)
+ - Scenario.Keywords: String[] (field)
  - ctor(
      Title: string,
      Tags: List<string>,

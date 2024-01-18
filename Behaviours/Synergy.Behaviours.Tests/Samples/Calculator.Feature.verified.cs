@@ -70,7 +70,11 @@ partial class CalculatorFeature // Feature: Calculator
            "      Given the first number is <first no>",
            "      And the second number is <second>",
            "      When the two numbers are added",
-           "      Then the result should be <result>"
+           "      Then the result should be <result>",
+           "      Examples:",
+           "        | first no | second | result |",
+           "        | 0        | 70     | 70     |",
+           "        | 50       | 70     | 120    |"
        );
 
        Background().CalculatorBackground();
