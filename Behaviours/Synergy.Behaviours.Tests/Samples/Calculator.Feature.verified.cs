@@ -63,11 +63,11 @@ partial class CalculatorFeature // Feature: Calculator
     [Xunit.Theory(DisplayName = "Scenario Outline: Add many numbers")]
     [Xunit.InlineData("0", "70", "70")]
     [Xunit.InlineData("50", "70", "120")]
-    public void AddManyNumbers(string first, string second, string result) // Scenario Outline: Add many numbers
+    public void AddManyNumbers(string firstNo, string second, string result) // Scenario Outline: Add many numbers
     {
        CurrentScenario(
            "    Scenario Outline: Add many numbers",
-           "      Given the first number is <first>",
+           "      Given the first number is <first no>",
            "      And the second number is <second>",
            "      When the two numbers are added",
            "      Then the result should be <result>"
@@ -75,7 +75,7 @@ partial class CalculatorFeature // Feature: Calculator
 
        Background().CalculatorBackground();
 
-       Given().TheFirstNumberIs(first);    // Given the first number is <first>
+       Given().TheFirstNumberIs(firstNo);  // Given the first number is <first no>
          And().TheSecondNumberIs(second);  // And the second number is <second>
         When().TheTwoNumbersAreAdded();    // When the two numbers are added
         Then().TheResultShouldBe(result);  // Then the result should be <result>

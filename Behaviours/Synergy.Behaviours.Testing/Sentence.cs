@@ -16,6 +16,13 @@ internal static class Sentence
         return method;
     }
 
+    public static string ToArgument(string sentence)
+    {
+        var method = ToMethod(sentence);
+        return method.Substring(0, 1)
+                     .ToLowerInvariant() + method.Substring(1);
+    }
+
     public static string FromMethod(string text)
         => Regex.Replace(
                     text,

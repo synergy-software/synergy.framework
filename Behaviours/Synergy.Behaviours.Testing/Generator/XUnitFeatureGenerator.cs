@@ -114,9 +114,8 @@ internal class XUnitFeatureGenerator
         string displayName = scenarioOriginalTitle.Replace("\"", "\\\"");
         if (scenario is ScenarioOutline)
         {
-            // TODO: Marcin Celej [from: Marcin Celej on: 18-01-2024]: convert the arguments to parameters by making the name camelCase
             Examples examples = ((ScenarioOutline) scenario).Examples;
-            arguments = "string " + string.Join(", string ", examples.Header);
+            arguments = "string " + string.Join(", string ", examples.Header.Select(argument => Sentence.ToArgument(argument)));
             code.AppendLine($"    [Xunit.Theory(DisplayName = \"{displayName}\")]");
             
             foreach (var row in examples.Rows)
@@ -176,8 +175,7 @@ internal class XUnitFeatureGenerator
             string stepType = GetStepType(theStep);
             string stepText = theStep.Text;
             string methodName = Sentence.ToMethod(argumentsRegex.Replace(stepText, ""));
-            // TODO: Marcin Celej [from: Marcin Celej on: 18-01-2024]: convert the arguments to parameters by making the name camelCase
-            var arguments = argumentsRegex.Matches(stepText).Select(match => match.Groups[1].Value).ToArray();
+            var arguments = argumentsRegex.Matches(stepText).Select(match => Sentence.ToArgument(match.Groups[1].Value)).ToArray();
             return $"{stepType}().{methodName}({string.Join(", ", arguments)})";
         }
         

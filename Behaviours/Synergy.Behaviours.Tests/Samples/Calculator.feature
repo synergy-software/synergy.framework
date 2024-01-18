@@ -26,14 +26,14 @@ Feature: Calculator
 
     @Add
     Scenario Outline: Add many numbers
-      Given the first number is <first>
+      Given the first number is <first no>
       And the second number is <second>
       When the two numbers are added
       Then the result should be <result>
       Examples:
-        | first | second | result |
-        | 0     | 70     | 70     |
-        | 50    | 70     | 120    |
+        | first no | second | result |
+        | 0        | 70     | 70     |
+        | 50       | 70     | 120    |
 
     @Subtracting
     Rule: Subtracting numbers
@@ -47,15 +47,15 @@ Feature: Calculator
       When the two numbers are subtracted
       Then the result should be 25
 
-#    @Subtract
-#    Scenario Template: : Subtract two numbers
-#      Given the first number is <first>
-#      And the second number is <second>
-#      When the two numbers are subtracted
-#      Then the result should be <result>
-#        Examples:
-#        | first | second | result |
-#        | 0     | 70     | 70     |
+    @Subtract
+    Scenario Template: : Subtract two numbers
+      Given the first number is <first>
+      And the second number is <second>
+      When the two numbers are subtracted
+      Then the result should be <result>
+        Examples:
+        | first | second | result |
+        | 0     | 70     | 70     |
 
   Rule: Dividing numbers
 
