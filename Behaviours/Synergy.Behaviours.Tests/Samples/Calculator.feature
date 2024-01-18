@@ -24,15 +24,16 @@ Feature: Calculator
       When the two numbers are added
       Then the result should be 120
 
-#    @Add
-#    Scenario Outline: Add many numbers
-#      Given the first number is <first>
-#      And the second number is <second>
-#      When the two numbers are added
-#      Then the result should be <result>
-#      Examples:
-#        | first | second | result |
-#        | 0     | 70     | 70     |
+    @Add
+    Scenario Outline: Add many numbers
+      Given the first number is <first>
+      And the second number is <second>
+      When the two numbers are added
+      Then the result should be <result>
+      Examples:
+        | first | second | result |
+        | 0     | 70     | 70     |
+        | 50    | 70     | 120    |
 
     @Subtracting
     Rule: Subtracting numbers
@@ -55,7 +56,7 @@ Feature: Calculator
 #        Examples:
 #        | first | second | result |
 #        | 0     | 70     | 70     |
-  
+
   Rule: Dividing numbers
 
     @Divide

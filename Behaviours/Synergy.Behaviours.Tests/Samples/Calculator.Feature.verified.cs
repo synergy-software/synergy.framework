@@ -59,5 +59,27 @@ partial class CalculatorFeature // Feature: Calculator
         Then().TheResultShouldBe120();   // Then the result should be 120
     }
 
+    [Xunit.Trait("Category", "Add")] // @Add
+    [Xunit.Theory(DisplayName = "Scenario Outline: Add many numbers")]
+    [Xunit.InlineData("0", "70", "70")]
+    [Xunit.InlineData("50", "70", "120")]
+    public void AddManyNumbers(string first, string second, string result) // Scenario Outline: Add many numbers
+    {
+       CurrentScenario(
+           "    Scenario Outline: Add many numbers",
+           "      Given the first number is <first>",
+           "      And the second number is <second>",
+           "      When the two numbers are added",
+           "      Then the result should be <result>"
+       );
+
+       Background().CalculatorBackground();
+
+       Given().TheFirstNumberIs(first);    // Given the first number is <first>
+         And().TheSecondNumberIs(second);  // And the second number is <second>
+        When().TheTwoNumbersAreAdded();    // When the two numbers are added
+        Then().TheResultShouldBe(result);  // Then the result should be <result>
+    }
+
     partial void CurrentScenario(params string[] scenario);
 }

@@ -29,8 +29,24 @@
 ## Gherkin.Background (record) : IEquatable<Background>
  - Line: Line { get; set; }
  - Steps: List<Step> { get; set; }
+ - Background.Keyword: string (field)
  - ctor(
      Steps: List<Step>,
+     Line: Line
+   )
+
+## Gherkin.Comment (record) : IEquatable<Comment>
+ - Comment.Keyword: string (field)
+ - ctor()
+
+## Gherkin.Examples (record) : IEquatable<Examples>
+ - Header: List<string> { get; set; }
+ - Line: Line { get; set; }
+ - Rows: List<List<string>> { get; set; }
+ - Examples.Keyword: string (field)
+ - ctor(
+     Header: List<string>,
+     Rows: List<List<string>>,
      Line: Line
    )
 
@@ -40,6 +56,7 @@
  - Scenarios: List<Scenario> { get; set; }
  - Tags: List<string> { get; set; }
  - Title: string { get; set; }
+ - Feature.Keyword: string (field)
  - ctor(
      Title: string,
      Tags: List<string>,
@@ -60,6 +77,7 @@
  - Background: Background? [Nullable] { get; set; }
  - Line: Line { get; set; }
  - Title: string { get; set; }
+ - Rule.Keyword: string (field)
  - ctor(
      Title: string,
      Background: Background? [Nullable],
@@ -67,6 +85,7 @@
    )
 
 ## Gherkin.Scenario (record) : IEquatable<Scenario>
+ - Scenario.Keywords: String[] { get; }
  - Line: Line { get; set; }
  - Lines: String[] { get; }
  - Rule: Rule? [Nullable] { get; set; }
@@ -85,7 +104,30 @@
      tags: params String[] [ParamArray]
    ) : bool
 
+## Gherkin.ScenarioOutline (record) : Scenario, IEquatable<Scenario>, IEquatable<ScenarioOutline>
+ - Examples: Examples { get; set; }
+ - ScenarioOutline.Keywords: String[] { get; }
+ - Line: Line { get; set; }
+ - Lines: String[] { get; }
+ - Rule: Rule? [Nullable] { get; set; }
+ - Steps: List<Step> { get; set; }
+ - Tags: List<string> { get; set; }
+ - Title: string { get; set; }
+ - ctor(
+     Title: string,
+     Tags: List<string>,
+     Steps: List<Step>,
+     Rule: Rule? [Nullable],
+     Examples: Examples,
+     Line: Line
+   )
+ - IsTagged(
+     tag: string,
+     tags: params String[] [ParamArray]
+   ) : bool
+
 ## Gherkin.Step (record) : IEquatable<Step>
+ - Step.Keywords: String[] { get; }
  - Line: Line { get; set; }
  - Text: string { get; set; }
  - Type: string { get; set; }
@@ -94,6 +136,10 @@
      Text: string,
      Line: Line
    )
+
+## Gherkin.Tag (record) : IEquatable<Tag>
+ - Tag.Keyword: string (field)
+ - ctor()
 
 ## IFeature (interface)
 

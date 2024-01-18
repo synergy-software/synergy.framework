@@ -53,9 +53,15 @@ internal static class GherkinParser
                 continue;
             }
             
-            // TODO: Marcin Celej [from: Marcin Celej on: 10-05-2023]: Support Scenario Outline/Template along with Examples  
+            if (token.Type.In(ScenarioOutline.Keywords))
+            {
+                var scenario = GherkinParser.ParseScenarioOutline(token, tags, stack, currentRule);
+                feature.Scenarios.Add(scenario);
+                tags = new List<string>();
+                continue;
+            }
             
-            throw new Exception("Unsupported token at line " + token.Line.Number + ": " + token.Line.Text.Trim());
+            throw new Exception($"Unsupported token at line {token.Line.Number}: {token.Line.Text.Trim()}");
         }
 
         return feature;
@@ -81,6 +87,8 @@ internal static class GherkinParser
                 feature = feature with { Title = token.Value, Line = token.Line };
                 break;
             }
+
+            // TODO: Marcin Celej [from: Marcin Celej on: 18-01-2024]: Parse description lines after Feature: line 
         }
 
         return feature;
@@ -139,7 +147,7 @@ internal static class GherkinParser
     
     private static Scenario ParseScenarioOutline(GherkinToken token, List<string> tags, Stack<GherkinToken> stack, Rule? rule)
     {
-        var scenario = new Scenario(token.Value, tags, new List<Step>(), rule, token.Line);
+        var scenario = new ScenarioOutline(token.Value, tags, new List<Step>(), rule, null!, token.Line);
         while (stack.Any())
         {
             var stepToken = stack.Pop();
@@ -153,10 +161,52 @@ internal static class GherkinParser
                 continue;
             }
 
+            if (stepToken.Type == Examples.Keyword)
+            {
+                var examples = ParseExamples(stepToken, stack);
+                scenario = scenario with { Examples = examples };
+                continue;
+            }
+            
             stack.Push(stepToken);
             break;
         }
+        
+        if (scenario.Examples == null)
+            throw new Exception($"Scenario Outline must have Examples section. Line: {token.Line.Number}: {token.Line.Text.Trim()}");
 
         return scenario;
+    }
+
+    private static Examples ParseExamples(GherkinToken token, Stack<GherkinToken> stack)
+    {
+        // TODO: Marcin Celej [from: Marcin Celej on: 18-01-2024]: Introduce class for header and row
+        var headerToken = stack.Pop();
+        var header = ParseRow(headerToken);
+        var examples = new Examples(header, new List<List<string>>(), token.Line);
+
+        while (stack.Any())
+        {
+            var stepToken = stack.Pop();
+            if (stepToken.Type == Comment.Keyword)
+                continue;
+
+            if (stepToken.Type == "|")
+            {
+                var row = ParseRow(stepToken);
+                examples.Rows.Add(row);
+                continue;
+            }
+            
+            stack.Push(stepToken);
+            break;
+        }
+        
+        return examples;
+
+        List<string> ParseRow(GherkinToken theToken)
+        {
+            return theToken.Value.Trim('|').Split('|').Select(x => x.Trim()).ToList();
+        }
     }
 }

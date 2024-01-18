@@ -65,4 +65,19 @@ public partial class CalculatorFeature : Feature<CalculatorFeature>
     {
         _scenario = scenario;
     }
+
+    private void TheFirstNumberIs(string first)
+    {
+        this._calculator.FirstNumber = Convert.ToInt32(first);
+    }
+
+    private void TheSecondNumberIs(string second)
+    {
+        this._calculator.SecondNumber = Convert.ToInt32(second);
+    }
+
+    private void TheResultShouldBe(string result)
+    {
+        Assert.Equal(Convert.ToInt32(result), this._result);
+    }
 }

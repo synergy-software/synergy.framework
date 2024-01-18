@@ -21,7 +21,7 @@ public record Scenario(
     private bool IsTagged(string tag)
         => this.Tags.Any(t => t.TrimStart('@').Equals(tag.TrimStart('@'), StringComparison.InvariantCultureIgnoreCase));
 
-    public string[] Lines
+    public virtual string[] Lines
     {
         get
         {
