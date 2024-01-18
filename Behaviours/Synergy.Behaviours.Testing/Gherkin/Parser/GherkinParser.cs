@@ -16,16 +16,16 @@ internal static class GherkinParser
         while (stack.Any())
         {
             var token = stack.Pop();
-            if (token.Type == "#")
+            if (token.Type == Comment.Keyword)
                 continue;
 
-            if (token.Type == "@")
+            if (token.Type == Tag.Keyword)
             {
                 tags.Add(token.Value);
                 continue;
             }
 
-            if (token.Type == "Scenario" || token.Type == "Example")
+            if (token.Type.In(Scenario.Keywords))
             {
                 var scenario = GherkinParser.ParseScenario(token, tags, stack, currentRule);
                 feature.Scenarios.Add(scenario);
@@ -33,7 +33,7 @@ internal static class GherkinParser
                 continue;
             }
 
-            if (token.Type == "Background")
+            if (token.Type == Background.Keyword)
             {
                 var background = GherkinParser.ParseBackground(token, stack);
                 
@@ -46,7 +46,7 @@ internal static class GherkinParser
                 continue;
             }
 
-            if (token.Type == "Rule")
+            if (token.Type == Rule.Keyword)
             {
                 currentRule = GherkinParser.ParseRule(token);
                 tags = new List<string>();
@@ -67,16 +67,16 @@ internal static class GherkinParser
         while (stack.Any())
         {
             var token = stack.Pop();
-            if (token.Type == "#")
+            if (token.Type == Comment.Keyword)
                 continue;
 
-            if (token.Type == "@")
+            if (token.Type == Tag.Keyword)
             {
                 feature.Tags.Add(token.Value);
                 continue;
             }
 
-            if (token.Type == "Feature")
+            if (token.Type == Feature.Keyword)
             {
                 feature = feature with { Title = token.Value, Line = token.Line };
                 break;
@@ -85,29 +85,6 @@ internal static class GherkinParser
 
         return feature;
     }
-
-    private static Scenario ParseScenario(GherkinToken token, List<string> tags, Stack<GherkinToken> stack, Rule? rule)
-    {
-        var scenario = new Scenario(token.Value, tags, new List<Step>(), rule, token.Line);
-        while (stack.Any())
-        {
-            var stepToken = stack.Pop();
-            if (stepToken.Type == "#")
-                continue;
-
-            if (stepToken.Type.In("Given", "When", "Then", "And", "But", "*"))
-            {
-                var step = new Step(stepToken.Type, stepToken.Value, stepToken.Line);
-                scenario.Steps.Add(step);
-                continue;
-            }
-
-            stack.Push(stepToken);
-            break;
-        }
-
-        return scenario;
-    }
     
     private static Background ParseBackground(GherkinToken token, Stack<GherkinToken> stack)
     {
@@ -115,7 +92,7 @@ internal static class GherkinParser
         while (stack.Any())
         {
             var stepToken = stack.Pop();
-            if (stepToken.Type == "#")
+            if (stepToken.Type == Comment.Keyword)
                 continue;
 
             if (stepToken.Type.In("Given", "And", "But", "*"))
@@ -134,4 +111,52 @@ internal static class GherkinParser
 
     private static Rule ParseRule(GherkinToken token) 
         => new(token.Value, null, token.Line);
+    
+    
+    private static Scenario ParseScenario(GherkinToken token, List<string> tags, Stack<GherkinToken> stack, Rule? rule)
+    {
+        var scenario = new Scenario(token.Value, tags, new List<Step>(), rule, token.Line);
+        while (stack.Any())
+        {
+            var stepToken = stack.Pop();
+            if (stepToken.Type == Comment.Keyword)
+                continue;
+
+            if (stepToken.Type.In(Step.Keywords))
+            {
+                var step = new Step(stepToken.Type, stepToken.Value, stepToken.Line);
+                scenario.Steps.Add(step);
+                continue;
+            }
+
+            stack.Push(stepToken);
+            break;
+        }
+
+        return scenario;
+    }
+    
+    
+    private static Scenario ParseScenarioOutline(GherkinToken token, List<string> tags, Stack<GherkinToken> stack, Rule? rule)
+    {
+        var scenario = new Scenario(token.Value, tags, new List<Step>(), rule, token.Line);
+        while (stack.Any())
+        {
+            var stepToken = stack.Pop();
+            if (stepToken.Type == Comment.Keyword)
+                continue;
+
+            if (stepToken.Type.In(Step.Keywords))
+            {
+                var step = new Step(stepToken.Type, stepToken.Value, stepToken.Line);
+                scenario.Steps.Add(step);
+                continue;
+            }
+
+            stack.Push(stepToken);
+            break;
+        }
+
+        return scenario;
+    }
 }

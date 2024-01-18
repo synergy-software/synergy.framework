@@ -6,4 +6,7 @@ public record Feature(
     Background? Background,
     List<Scenario> Scenarios,
     Line Line
-);
+)
+{
+    public const string Keyword = "Feature";
+}

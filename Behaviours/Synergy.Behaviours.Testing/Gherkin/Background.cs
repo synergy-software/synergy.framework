@@ -3,4 +3,7 @@
 public record Background(
     List<Step> Steps,
     Line Line
-);
+)
+{
+    public const string Keyword = "Background";
+}
