@@ -34,6 +34,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.Documentation", "Documentation\Synergy.Documentation\Synergy.Documentation.csproj", "{C2D8A794-86EC-48F5-A7ED-B7B6746757DA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Behaviours", "Behaviours", "{06C9B7C0-23DF-4716-B632-DFB7DE7447A4}"
+	ProjectSection(SolutionItems) = preProject
+		Behaviours\README.md = Behaviours\README.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synergy.Behaviours.Testing", "Behaviours\Synergy.Behaviours.Testing\Synergy.Behaviours.Testing.csproj", "{266B20E2-5F87-48F3-8DF6-40FCCB584070}"
 EndProject
