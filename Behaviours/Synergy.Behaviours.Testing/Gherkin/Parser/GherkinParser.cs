@@ -61,7 +61,7 @@ internal static class GherkinParser
                 continue;
             }
             
-            throw new Exception($"Unsupported token at line {token.Line.Number}: {token.Line.Text.Trim()}");
+            throw new Exception($"Unsupported token ({token.Type}) at line {token.Line.Number}: {token.Line.Text.Trim()}");
         }
 
         return feature;

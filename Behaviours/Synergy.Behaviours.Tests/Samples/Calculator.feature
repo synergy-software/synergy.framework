@@ -81,3 +81,12 @@ Feature: Calculator
       And the second number is 50
       When the two numbers are multiplied
       Then the result should be 250
+
+    @Multiply
+    Scenario: Multiply two numbers and send the result
+      Given the first number is 5
+      And the second number is 50
+      When the two numbers are multiplied
+      Then the result should be 250
+      And the result should be sent to the email test@results.com
+      

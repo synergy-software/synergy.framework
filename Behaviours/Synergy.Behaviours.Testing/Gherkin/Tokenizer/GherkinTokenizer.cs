@@ -11,9 +11,13 @@ internal static class GherkinTokenizer
             if (string.IsNullOrWhiteSpace(line.Text))
                 continue;
 
-            Regex tagsRegex = new Regex("@(\\S+)+");
-            foreach (Match tag in tagsRegex.Matches(line.Text))
-                yield return new GherkinToken("@", tag.Groups[1].Value, line);
+            Regex tagsLineRegex = new Regex("^\\s*@");
+            if (tagsLineRegex.IsMatch(line.Text))
+            {
+                Regex tagsRegex = new Regex("@(\\S+)+");
+                foreach (Match tag in tagsRegex.Matches(line.Text))
+                    yield return new GherkinToken("@", tag.Groups[1].Value, line);
+            }
 
             Regex commentRegex = new Regex("^\\s*#(.*)");
             if (commentRegex.IsMatch(line.Text))
