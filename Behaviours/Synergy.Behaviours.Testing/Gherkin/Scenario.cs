@@ -21,14 +21,14 @@ public record Scenario(
     private bool IsTagged(string tag)
         => this.Tags.Any(t => t.TrimStart('@').Equals(tag.TrimStart('@'), StringComparison.InvariantCultureIgnoreCase));
 
-    public virtual string[] Lines
+    internal virtual List<string> Lines
     {
         get
         {
             var lines = new List<string>(1 + this.Steps.Count);
             lines.Add(this.Line.Text);
             lines.AddRange(this.Steps.Select(step => step.Line.Text));
-            return lines.ToArray();
+            return lines;
         }
     }
 }

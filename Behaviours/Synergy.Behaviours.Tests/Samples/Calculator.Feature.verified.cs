@@ -20,11 +20,11 @@ partial class CalculatorFeature // Feature: Calculator
     public void AddTwoNumbers() // Scenario: Add two numbers
     {
        CurrentScenario(
-           "    Scenario: Add two numbers",
-           "      Given the first number is 50",
-           "      And the second number is 70",
-           "      When the two numbers are added",
-           "      Then the result should be 120"
+           $"    Scenario: Add two numbers",
+           $"      Given the first number is 50",
+           $"      And the second number is 70",
+           $"      When the two numbers are added",
+           $"      Then the result should be 120"
        );
 
        Background().CalculatorBackground();
@@ -42,12 +42,12 @@ partial class CalculatorFeature // Feature: Calculator
     public void AddTwoNumbersInDifferentWay() // Example: Add two numbers in "different" way
     {
        CurrentScenario(
-           "    Example: Add two numbers in \"different\" way",
-           "      Given Two numbers:",
-           "      * the first number is 50",
-           "      * the second number is 70",
-           "      When the two numbers are added",
-           "      Then the result should be 120"
+           $"    Example: Add two numbers in \"different\" way",
+           $"      Given Two numbers:",
+           $"      * the first number is 50",
+           $"      * the second number is 70",
+           $"      When the two numbers are added",
+           $"      Then the result should be 120"
        );
 
        Background().CalculatorBackground();
@@ -66,15 +66,13 @@ partial class CalculatorFeature // Feature: Calculator
     public void AddManyNumbers(string firstNo, string second, string result) // Scenario Outline: Add many numbers
     {
        CurrentScenario(
-           "    Scenario Outline: Add many numbers",
-           "      Given the first number is <first no>",
-           "      And the second number is <second>",
-           "      When the two numbers are added",
-           "      Then the result should be <result>",
-           "      Examples:",
-           "        | first no | second | result |",
-           "        | 0        | 70     | 70     |",
-           "        | 50       | 70     | 120    |"
+           $"    Scenario Outline: Add many numbers",
+           $"      Given the first number is <{firstNo}>",
+           $"      And the second number is <{second}>",
+           $"      When the two numbers are added",
+           $"      Then the result should be <{result}>",
+           $"      Examples:",
+           $"        | {firstNo} | {second} | {result} |"
        );
 
        Background().CalculatorBackground();

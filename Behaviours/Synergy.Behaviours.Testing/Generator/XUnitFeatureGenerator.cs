@@ -122,10 +122,7 @@ internal class XUnitFeatureGenerator
 
         if (this.currentScenario)
         {
-            code.AppendLine($"       CurrentScenario(");
-            code.AppendLine($"           \"{string.Join($"\",{Environment.NewLine}           \"", scenario.Lines.Select(line => line.Replace("\"", "\\\"")))}\"");
-            code.AppendLine($"       );");
-            code.AppendLine();
+            XUnitFeatureGenerator.GenerateCurrentScenario(code, scenario);
         }
 
         if (backgroundMethod != null)
@@ -159,7 +156,17 @@ internal class XUnitFeatureGenerator
             return arguments;
         }
     }
-    
+
+    private static void GenerateCurrentScenario(StringBuilder code, Scenario scenario)
+    {
+        var currentScenario = string.Join($"\",{Environment.NewLine}           $\"", scenario.Lines.Select(line => line.Replace("\"", "\\\"")));
+            
+        code.AppendLine($"       CurrentScenario(");
+        code.AppendLine($"           $\"{currentScenario}\"");
+        code.AppendLine($"       );");
+        code.AppendLine();
+    }
+
     private void GenerateSteps(StringBuilder code, List<Step> steps)
     {
         var argumentsRegex = new Regex("<(.*?)>");

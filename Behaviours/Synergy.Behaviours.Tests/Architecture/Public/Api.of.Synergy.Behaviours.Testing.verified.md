@@ -95,7 +95,6 @@
 
 ## Gherkin.Scenario (record) : IEquatable<Scenario>
  - Line: Line { get; set; }
- - Lines: String[] { get; }
  - Rule: Rule? [Nullable] { get; set; }
  - Steps: List<Step> { get; set; }
  - Tags: List<string> { get; set; }
@@ -116,7 +115,6 @@
 ## Gherkin.ScenarioOutline (record) : Scenario, IEquatable<Scenario>, IEquatable<ScenarioOutline>
  - Examples: Examples { get; set; }
  - Line: Line { get; set; }
- - Lines: String[] { get; }
  - Rule: Rule? [Nullable] { get; set; }
  - Steps: List<Step> { get; set; }
  - Tags: List<string> { get; set; }

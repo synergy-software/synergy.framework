@@ -18,16 +18,27 @@ public record ScenarioOutline(
     public new static string[] Keywords = { "Scenario Outline", "Scenario Template" };
 
     /// <inheritdoc />
-    public override string[] Lines
+    internal override List<string> Lines
     {
         get
         {
             var lines = new List<string>();
-            lines.AddRange(base.Lines);
+
+            foreach (var line in base.Lines)
+            {
+                var tweakedLine = line;
+                foreach (var argument in this.Examples.Header.Values)
+                {
+                    var argumentName = Sentence.ToArgument(argument);
+                    tweakedLine = tweakedLine.Replace($"<{argument}>", "<{" + argumentName + "}>");
+                }
+
+                lines.Add(tweakedLine);
+            }
+
             lines.Add(this.Examples.Line.Text);
-            lines.Add(this.Examples.Header.Line.Text);
-            lines.AddRange(this.Examples.Rows.Select(row => row.Line.Text));
-            return lines.ToArray();
+            lines.Add("        | {" + string.Join("} | {", this.Examples.Header.Values.Select(argument => Sentence.ToArgument(argument))) + "} |");
+            return lines;
         }
     }
 }
