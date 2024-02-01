@@ -67,19 +67,19 @@ partial class CalculatorFeature // Feature: Calculator
     {
        CurrentScenario(
            $"    Scenario Outline: Add many numbers",
-           $"      Given the first number is <{firstNo}>",
-           $"      And the second number is <{second}>",
-           $"      When the two numbers are added",
-           $"      Then the result should be <{result}>",
+           $"      Given the first number is <{{firstNo}}>",
+           $"      And the second number is <{{second}}>",
+           $"      When the two {{numbers}} are added",
+           $"      Then the result should be <{{result}}>",
            $"      Examples:",
-           $"        | {firstNo} | {second} | {result} |"
+           $"        | {{firstNo}} | {{second}} | {{result}} |"
        );
 
        Background().CalculatorBackground();
 
        Given().TheFirstNumberIs(firstNo);  // Given the first number is <first no>
          And().TheSecondNumberIs(second);  // And the second number is <second>
-        When().TheTwoNumbersAreAdded();    // When the two numbers are added
+        When().TheTwoNumbersAreAdded();    // When the two {numbers} are added
         Then().TheResultShouldBe(result);  // Then the result should be <result>
     }
 

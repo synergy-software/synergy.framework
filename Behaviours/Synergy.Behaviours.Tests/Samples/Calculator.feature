@@ -28,7 +28,7 @@ Feature: Calculator
     Scenario Outline: Add many numbers
       Given the first number is <first no>
       And the second number is <second>
-      When the two numbers are added
+      When the two {numbers} are added
       Then the result should be <result>
       Examples:
         | first no | second | result |
@@ -48,7 +48,7 @@ Feature: Calculator
       Then the result should be 25
 
     @Subtract
-    Scenario Template: : Subtract two numbers
+    Scenario Template: Subtract two numbers
       Given the first number is <first>
       And the second number is <second>
       When the two numbers are subtracted

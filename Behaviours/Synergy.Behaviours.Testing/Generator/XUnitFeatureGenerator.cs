@@ -159,12 +159,18 @@ internal class XUnitFeatureGenerator
 
     private static void GenerateCurrentScenario(StringBuilder code, Scenario scenario)
     {
-        var currentScenario = string.Join($"\",{Environment.NewLine}           $\"", scenario.Lines.Select(line => line.Replace("\"", "\\\"")));
-            
+        var currentScenario = string.Join($"\",{Environment.NewLine}           $\"", scenario.Lines.Select(line => Quote(line)));
+
         code.AppendLine($"       CurrentScenario(");
         code.AppendLine($"           $\"{currentScenario}\"");
         code.AppendLine($"       );");
         code.AppendLine();
+
+        string Quote(string line)
+            => line
+               .Replace("\"", "\\\"")
+               .Replace("{", "{{")
+               .Replace("}", "}}");
     }
 
     private void GenerateSteps(StringBuilder code, List<Step> steps)
