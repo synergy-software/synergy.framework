@@ -235,7 +235,7 @@
    ) : T? [Extension, NotNull, AssertionMethod, ContractAnnotation]
  - Fail.OrFail<T>(
      value: T?,
-     name: string [Nullable, NotNull, NotNull]
+     name: string? [Nullable, CallerArgumentExpression, Optional]
    ) : T [NullableContext, Extension, ContractAnnotation]
  - Fail.OrFailIfCollectionEmpty<T>(
      collection: T [CanBeNull, AssertionCondition],

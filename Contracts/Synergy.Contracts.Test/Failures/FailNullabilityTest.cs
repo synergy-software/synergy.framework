@@ -145,6 +145,21 @@ namespace Synergy.Contracts.Test.Failures
             // ASSERT
             Assert.That(exception.Message, Is.EqualTo("'thisMustBeNull' is null; and it shouldn't be;"));
         }
+        
+        [Test]
+        public void NullableOrFailCallerArgumentExpression()
+        {
+            // ARRANGE
+            int? thisMustBeNull = null; 
+            
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                // ReSharper disable once ExpressionIsAlwaysNull
+                () => thisMustBeNull.OrFail());
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("'thisMustBeNull' is null; and it shouldn't be;"));
+        }
 
         [Test]
         public void NullableOrFailSuccess()
@@ -154,6 +169,7 @@ namespace Synergy.Contracts.Test.Failures
 
             // ACT
             thisCannotBeNull.OrFail(nameof(thisCannotBeNull));
+            thisCannotBeNull.OrFail();
         }
 
         #endregion

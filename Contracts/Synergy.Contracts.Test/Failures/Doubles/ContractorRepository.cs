@@ -29,7 +29,7 @@ namespace Synergy.Contracts.Samples
         {
             paramaters.OrFail();
             paramaters.EstablishedBetween.FailIfNull(Violation.Of("'{0}' is null and it shouldn't be", nameof(paramaters.EstablishedBetween)));
-            paramaters.EstablishedBetween.Max.OrFail(nameof(paramaters.EstablishedBetween.Max));
+            paramaters.EstablishedBetween.Max.OrFail();
 
             if (paramaters.EstablishedBetween == null)
             {

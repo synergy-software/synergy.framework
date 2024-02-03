@@ -14,7 +14,8 @@ namespace Synergy.Contracts
         /// <typeparam name="T">Type of the value to check against nullability.</typeparam>
         /// <param name="value">Value to check against nullability.</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
-        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull] 
+        [NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
         [AssertionMethod]
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static T FailIfNull<T>(
@@ -25,7 +26,7 @@ namespace Synergy.Contracts
 #else
             string name
 #endif
-            )
+        )
         {
             Fail.RequiresArgumentName(name);
             return value.FailIfNull(Violation.WhenVariableIsNull(name));
@@ -37,13 +38,15 @@ namespace Synergy.Contracts
         /// <typeparam name="T">Type of the value to check against nullability.</typeparam>
         /// <param name="value">Value to check against nullability.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
-        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull]
+        [NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
         [AssertionMethod]
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static T FailIfNull<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration]
             this T value,
-            Violation message)
+            Violation message
+        )
         {
             if (value == null)
                 throw Fail.Because(message);
@@ -90,16 +93,23 @@ namespace Synergy.Contracts
         /// <returns>Value (not null) of the passed argument / parameter</returns>
         /// <exception cref="DesignByContractViolationException"></exception>
         [ContractAnnotation("value: null => halt")]
-        public static T OrFail<T>(this T? value, [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name) where T : struct
+        public static T OrFail<T>(
+            this T? value,
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")] string? name = null
+#else
+            string name
+#endif
+        ) where T : struct
         {
             Fail.RequiresArgumentName(name);
-            
+
             if (value == null)
                 throw Fail.Because(Violation.WhenVariableIsNull(name));
 
             return value.Value;
         }
-        
+
         /// <summary>
         /// Throws exception when provided value is <see langword="null"/>.
         /// </summary>
