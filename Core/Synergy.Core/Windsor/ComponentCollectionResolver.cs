@@ -34,7 +34,7 @@ namespace Synergy.Core.Windsor
             [NotNull] DependencyModel dependency)
         {
             var array = base.Resolve(context, contextHandlerResolver, model, dependency)
-                            .CastOrFail<Array>();
+                            .CastOrFail<Array>("array");
 
             return this.RemoveBaseComponents(array, dependency);
         }

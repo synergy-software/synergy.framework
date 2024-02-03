@@ -62,7 +62,7 @@ namespace Synergy.Contracts.Test.Failures
             );
 
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("Expected object of type 'System.String' but was '1'"));
+            Assert.That(exception.Message, Is.EqualTo("Expected somethingNotCastable of type 'System.String' but was '1'"));
         }
 
         [Test]
@@ -78,7 +78,7 @@ namespace Synergy.Contracts.Test.Failures
             );
 
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("Expected object of type 'System.String' but was 'null'"));
+            Assert.That(exception.Message, Is.EqualTo("Expected somethingNotCastable of type 'System.String' but was 'null'"));
         }
 
         [Test]

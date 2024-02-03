@@ -19,17 +19,17 @@ namespace Synergy.Contracts
         [AssertionMethod]
         [ContractAnnotation("value: null => null; value: notnull => notnull")]
         public static T AsOrFail<T>(
-            [CanBeNull] [NoEnumeration] this object value, 
+            [CanBeNull] [NoEnumeration] this object value,
 #if NET6_0_OR_GREATER
             [System.Runtime.CompilerServices.CallerArgumentExpression("value")] string? name = null
 #else
             string name
 #endif
-            )
+        )
         {
             Fail.IfNotCastable<T>(value, Violation.WhenCannotCast<T>(name ?? "object", value));
 
-            return (T) value;
+            return (T)value;
         }
 
         /// <summary>
@@ -40,10 +40,18 @@ namespace Synergy.Contracts
         /// <param name="value">Value to check if it can be cast to specified type.</param>
         /// <param name="name">Name of the object to cast.</param>
         /// <returns>The cast object. This method will NEVER return <see langword="null"/>.</returns>
-        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull] 
+        [NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
         [AssertionMethod]
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
-        public static T CastOrFail<T>([CanBeNull] [NoEnumeration] this object value, [CanBeNull] string name = null)
+        public static T CastOrFail<T>(
+            [CanBeNull] [NoEnumeration] this object value,
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")] string? name = null
+#else
+            string name
+#endif
+        )
         {
             Type castType = typeof(T);
             Fail.IfNull(value, Violation.WhenCannotCast<T>(name ?? "object", value));
@@ -51,11 +59,11 @@ namespace Synergy.Contracts
             if (castType.IsEnum)
             {
                 Fail.IfEnumNotDefined<T>(value);
-                return (T) Enum.ToObject(castType, value);
+                return (T)Enum.ToObject(castType, value);
             }
 
             Fail.IfNotCastable<T>(value, Violation.WhenCannotCast<T>(name ?? "object", value));
-            return (T) value;
+            return (T)value;
         }
 
         /// <summary>
@@ -66,7 +74,12 @@ namespace Synergy.Contracts
         /// <param name="expectedType">The expected type.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
         [AssertionMethod]
-        public static void IfNotCastable([CanBeNull] [NoEnumeration] object value, [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] Type expectedType, Violation message)
+        public static void IfNotCastable(
+            [CanBeNull] [NoEnumeration] object value,
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull]
+            Type expectedType,
+            Violation message
+        )
         {
             Fail.RequiresType(expectedType);
 
@@ -85,7 +98,10 @@ namespace Synergy.Contracts
         /// <param name="value">Value to check if it can be cast to specified type.</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
         [AssertionMethod]
-        public static void IfNotCastable<T>([CanBeNull] [NoEnumeration] object value, Violation message)
+        public static void IfNotCastable<T>(
+            [CanBeNull] [NoEnumeration] object value,
+            Violation message
+        )
         {
             Fail.IfNotCastable(value, typeof(T), message);
         }
@@ -115,7 +131,8 @@ namespace Synergy.Contracts
         [ContractAnnotation("value: null => halt")]
         public static void IfNullOrNotCastable<T>(
             [CanBeNull] [NoEnumeration] object value,
-            Violation message)
+            Violation message
+        )
         {
             Fail.IfNull(value, message);
             Fail.IfNotCastable(value, typeof(T), message);

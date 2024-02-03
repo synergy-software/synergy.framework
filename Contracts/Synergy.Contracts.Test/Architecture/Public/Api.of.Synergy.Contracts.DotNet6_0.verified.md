@@ -9,7 +9,7 @@
 ## Fail (abstract class)
  - Fail.AsOrFail<T>(
      value: object [CanBeNull, NoEnumeration],
-     name: string [CanBeNull, Optional]
+     name: string? [Nullable, CallerArgumentExpression, Optional]
    ) : T? [Extension, CanBeNull, AssertionMethod, ContractAnnotation]
  - Fail.Because(
      message: string [NotNull, NotNull]
@@ -48,7 +48,7 @@
    ) : T? [Extension, NotNull]
  - Fail.CastOrFail<T>(
      value: object [CanBeNull, NoEnumeration],
-     name: string [CanBeNull, Optional]
+     name: string? [Nullable, CallerArgumentExpression, Optional]
    ) : T? [Extension, NotNull, AssertionMethod, ContractAnnotation]
  - Fail.FailIfEmpty(
      value: DateTime,
