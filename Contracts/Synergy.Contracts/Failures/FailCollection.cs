@@ -66,9 +66,12 @@ namespace Synergy.Contracts
         public static T OrFailIfCollectionEmpty<T>(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
             this T collection,
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string collectionName
-        )
-            where T : IEnumerable
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("collection")] string? collectionName = null
+#else
+            string collectionName
+#endif
+        ) where T : IEnumerable
         {
             Fail.RequiresCollectionName(collectionName);
 
