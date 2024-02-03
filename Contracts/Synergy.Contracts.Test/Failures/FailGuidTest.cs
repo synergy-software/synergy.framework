@@ -87,6 +87,32 @@ namespace Synergy.Contracts.Test.Failures
 
         #endregion
 
+        #region variable.FailIfEmpty()
+
+        [Test]
+        public void FailIfEmptyWithMessage()
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => Guid.Empty.FailIfEmpty(Violation.Of("guid is empty and it shouldn't be"))
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("guid is empty and it shouldn't be"));
+        }
+
+        [Test]
+        public void FailIfEmptyWithMessageSuccess()
+        {
+            // ARRANGE
+            Guid notEmptyGuid = Guid.NewGuid();
+
+            // ACT
+            notEmptyGuid.FailIfEmpty(Violation.Of("guid is empty and it shouldn't be"));
+        }
+
+        #endregion
+        
         [ItemNotNull, NotNull]
         private static IEnumerable GetEmptyGuid()
         {

@@ -54,6 +54,10 @@
      value: DateTime,
      name: string? [CallerArgumentExpression, Optional]
    ) : DateTime [NullableContext, Extension, AssertionMethod]
+ - Fail.FailIfEmpty(
+     value: Guid,
+     message: Violation
+   ) : void [Extension, AssertionMethod]
  - Fail.FailIfEnumOutOfRange<T>(
      value: Enum,
      name: string? [Nullable, CallerArgumentExpression, Optional]

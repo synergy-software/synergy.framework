@@ -5,8 +5,6 @@ namespace Synergy.Contracts
 {
     static partial class Fail
     {
-        // TODO:mace (from:mace @ 22-10-2016): guid.FailIfEmpty
-
         /// <summary>
         /// Throws exception when checked <see cref="Guid" /> is empty ({00000000-0000-0000-0000-000000000000}).
         /// <para>REMARKS: When you create a <see cref="Guid" /> using default constructor it is empty.
@@ -16,6 +14,19 @@ namespace Synergy.Contracts
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
         [AssertionMethod]
         public static void IfEmpty(Guid value, Violation message)
+        {
+            Fail.IfEqual(Guid.Empty, value, message);
+        }
+
+        /// <summary>
+        /// Throws exception when checked <see cref="Guid" /> is empty ({00000000-0000-0000-0000-000000000000}).
+        /// <para>REMARKS: When you create a <see cref="Guid" /> using default constructor it is empty.
+        /// You can check the emptiness using this Fail.</para>
+        /// </summary>
+        /// <param name="value">The <see cref="Guid" /> checked for emptiness</param>
+        /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
+        [AssertionMethod]
+        public static void FailIfEmpty(this Guid value, Violation message)
         {
             Fail.IfEqual(Guid.Empty, value, message);
         }
