@@ -131,7 +131,7 @@
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfEmpty(
      value: string [CanBeNull, AssertionCondition],
-     name: string [NotNull, NotNull]
+     name: string? [Nullable, CallerArgumentExpression, Optional]
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfEnumNotDefined<T>(
      value: object [NotNull, NotNull]

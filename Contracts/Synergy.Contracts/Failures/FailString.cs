@@ -43,8 +43,15 @@ namespace Synergy.Contracts
         [AssertionMethod]
         [ContractAnnotation("value: null => halt")]
         public static void IfEmpty(
-            [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string value,
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
+            [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
+            string value,
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")]
+            string? name = null
+#else
+            string name
+#endif
+        )
         {
             Fail.RequiresArgumentName(name);
             Fail.IfEmpty(value, Violation.WhenEmpty(name));
