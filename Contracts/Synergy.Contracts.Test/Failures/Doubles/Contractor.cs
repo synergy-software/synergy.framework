@@ -19,10 +19,10 @@ namespace Synergy.Contracts.Samples.Domain
         }
 
         [NotNull, Pure]
-        public static Contractor CreatePerson([NotNull] string firstName, [NotNull] string lastName)
+        public static Contractor CreatePerson(string firstName, string lastName)
         {
             Fail.IfArgumentEmpty(firstName);
-            Fail.IfArgumentWhiteSpace(lastName, nameof(lastName));
+            Fail.IfArgumentWhiteSpace(lastName);
 
             return new Contractor()
             {

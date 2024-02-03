@@ -93,7 +93,7 @@
    ) : void [NullableContext, AssertionMethod, ContractAnnotation]
  - Fail.IfArgumentWhiteSpace(
      argumentValue: string [CanBeNull, AssertionCondition],
-     argumentName: string [NotNull, NotNull]
+     argumentName: string? [Nullable, CallerArgumentExpression, Optional]
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfCollectionContains<T>(
      collection: IEnumerable<T> [CanBeNull, AssertionCondition],
