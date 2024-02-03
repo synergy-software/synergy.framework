@@ -1,6 +1,6 @@
 ﻿# Technical Debt for Synergy.Contracts
 
-Total: 13
+Total: 12
 
 ## [BusinessDocumentation.cs](../../Requirements/BusinessDocumentation.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: check that and probably convert docs int tt
@@ -25,6 +25,3 @@ Total: 13
 - TODO:mace (from:mace @ 22-10-2016): a.FailIfEqual(b)
 - TODO:mace (from:mace @ 22-10-2016): IfArgumentNotEqual
 - TODO:mace (from:mace @ 22-10-2016): a.FailIfNotEqual(b)
-
-## [FailNullability.cs](../../../Synergy.Contracts/Failures/FailNullability.cs)
-- TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: Use [CallerExpression] here - check https://andrewlock.net/exploring-dotnet-6-part-11-callerargumentexpression-and-throw-helpers/
