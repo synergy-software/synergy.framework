@@ -37,6 +37,20 @@ namespace Synergy.Contracts.Test.Failures
             Assert.That(exception, Is.Not.Null);
             //Assert.That(exception.Message, Is.EqualTo("date should have no hour nor second"));
         }
+        
+        [Test]
+        [TestCaseSource(nameof(FailDateTimeTest.GetDatesWithTime))]
+        public void IfNotMidnightWithNameCallerArgumentExpression(DateTime dateTime)
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfNotDate(dateTime)
+            );
+
+            // ASSERT
+            Assert.That(exception, Is.Not.Null);
+            //Assert.That(exception.Message, Is.EqualTo("date should have no hour nor second"));
+        }
 
         [Test]
         [TestCaseSource(nameof(FailDateTimeTest.GetDates))]
@@ -52,6 +66,7 @@ namespace Synergy.Contracts.Test.Failures
         {
             // ACT
             Fail.IfNotDate(date, nameof(date));
+            Fail.IfNotDate(date);
         }
 
         [Test]

@@ -28,7 +28,14 @@ namespace Synergy.Contracts
         /// </code>
         /// </example>
         [AssertionMethod]
-        public static void IfNotDate([CanBeNull] DateTime? date, string name)
+        public static void IfNotDate(
+            DateTime? date,
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")] string? name = null
+#else
+            string name
+#endif
+        )
         {
             if (date == null)
                 return;
