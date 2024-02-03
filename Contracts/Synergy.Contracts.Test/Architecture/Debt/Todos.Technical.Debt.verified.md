@@ -1,6 +1,9 @@
 ﻿# Technical Debt for Synergy.Contracts
 
-Total: 12
+Total: 13
+
+## [README.Generate.cs](../../Docs/README.Generate.cs)
+- TODO: Marcin Celej [from: Marcin Celej on: 03-02-2024]: Prepare full description of Contract checks
 
 ## [BusinessDocumentation.cs](../../Requirements/BusinessDocumentation.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: check that and probably convert docs int tt

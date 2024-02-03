@@ -46,5 +46,17 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>BusinessUsage.cs</LastGenOutput>
     </None>
+    <None Update="Docs\README.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>README.cs</LastGenOutput>
+    </None>
+    <Compile Update="Docs\README.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>README.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Docs\README.Generate.cs">
+      <DependentUpon>README.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

@@ -8,7 +8,7 @@
     <Title>Synergy.Contracts - design by contract programming support</Title>
     <Authors>Synergy Marcin Celej</Authors>
     <PackageLicenseFile>license.txt</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/wiki/Contracts</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/blob/3.0.5/Contracts/README.md</PackageProjectUrl>
     <PackageIcon>synergy.png</PackageIcon>
     <Description>Design by contract programming support</Description>
     <Copyright>Copyright © Synergy Marcin Celej 2023</Copyright>
