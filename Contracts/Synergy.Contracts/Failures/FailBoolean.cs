@@ -9,7 +9,6 @@ namespace Synergy.Contracts
 
         #region Fail.IfFalse
 
-
         /// <summary>
         /// Throws exception when checked value is <see langword="false" />.
         /// </summary>
@@ -29,7 +28,6 @@ namespace Synergy.Contracts
         #endregion
 
         #region Fail.IfTrue
-
 
         /// <summary>
         /// Throws exception when checked value is <see langword="true" />.

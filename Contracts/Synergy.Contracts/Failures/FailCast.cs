@@ -3,7 +3,6 @@ using JetBrains.Annotations;
 
 namespace Synergy.Contracts
 {
-    // TODO:mace (from:mace @ 22-10-2016): Add [AssertionCondition] below
     static partial class Fail
     {
         // TODO:mace (from:mace @ 22-10-2016): public static void Fail.IfArgumentNotCastable<T>([CanBeNull, AssertionCondition(conditionType: AssertionConditionType.IS_NOT_NULL)] string argumentValue)
@@ -19,7 +18,14 @@ namespace Synergy.Contracts
         [CanBeNull]
         [AssertionMethod]
         [ContractAnnotation("value: null => null; value: notnull => notnull")]
-        public static T AsOrFail<T>([CanBeNull] [NoEnumeration] this object value, [CanBeNull] string name = null)
+        public static T AsOrFail<T>(
+            [CanBeNull] [NoEnumeration] this object value, 
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")] string? name = null
+#else
+            string name
+#endif
+            )
         {
             Fail.IfNotCastable<T>(value, Violation.WhenCannotCast<T>(name ?? "object", value));
 

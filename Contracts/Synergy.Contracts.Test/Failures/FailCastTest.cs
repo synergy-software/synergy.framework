@@ -21,7 +21,7 @@ namespace Synergy.Contracts.Test.Failures
             );
 
             // ASSERT
-            Assert.That(exception.Message, Is.EqualTo("Expected object of type 'System.String' but was 'System.Object'"));
+            Assert.That(exception.Message, Is.EqualTo("Expected someObjectButSurelyNotString of type 'System.String' but was 'System.Object'"));
         }
 
         [Test]
