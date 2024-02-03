@@ -6,7 +6,7 @@
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <RunCodeAnalysis>false</RunCodeAnalysis>
         <IsPackable>true</IsPackable>
-        <PackageVersion>$(Version)</PackageVersion>
+        <PackageVersion>3.0.4</PackageVersion>
         <Title>Synergy.Documentation - support for various docs generation</Title>
         <Authors>Synergy Marcin Celej</Authors>
         <PackageLicenseFile>license.txt</PackageLicenseFile>

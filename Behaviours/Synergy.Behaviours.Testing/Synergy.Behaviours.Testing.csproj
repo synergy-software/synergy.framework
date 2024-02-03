@@ -6,7 +6,7 @@
         <LangVersion>10</LangVersion>
         <Nullable>enable</Nullable>
         <IsPackable>true</IsPackable>
-        <PackageVersion>$(Version)</PackageVersion>
+        <PackageVersion>3.0.4</PackageVersion>
         <Title>Synergy Behaviour Driven Development</Title>
         <Authors>Synergy Marcin Celej</Authors>
         <PackageLicenseFile>license.txt</PackageLicenseFile>

@@ -4,7 +4,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <IsPackable>false</IsPackable>
-    <PackageVersion>$(Version)</PackageVersion>
+    <PackageVersion>3.0.4</PackageVersion>
     <Title>Synergy.Reflection - make it easy</Title>
     <Authors>Synergy Marcin Celej</Authors>
     <PackageLicenseFile>license.txt</PackageLicenseFile>

@@ -31,6 +31,3 @@ Total: 14
 
 ## [FailNullability.cs](../../../Synergy.Contracts/Failures/FailNullability.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: Use [CallerExpression] here - check https://andrewlock.net/exploring-dotnet-6-part-11-callerargumentexpression-and-throw-helpers/
-
-## [Synergy.Contracts.csproj](../../../Synergy.Contracts/Synergy.Contracts.csproj)
-- TODO: Add explicit versioning
