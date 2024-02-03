@@ -186,7 +186,7 @@ namespace Synergy.Contracts
 #else
             string name
 #endif
-            )
+        )
         {
             Fail.RequiresArgumentName(name);
 
@@ -211,7 +211,12 @@ namespace Synergy.Contracts
         public static string OrFailIfTooLong(
             [CanBeNull] this string value,
             int maxLength,
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")] string? name = null
+#else
+            string name
+#endif
+        )
         {
             Fail.IfTooLong(value, maxLength, name);
             return value;

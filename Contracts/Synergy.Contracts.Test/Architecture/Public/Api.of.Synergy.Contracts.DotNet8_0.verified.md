@@ -248,7 +248,7 @@
  - Fail.OrFailIfTooLong(
      value: string [CanBeNull],
      maxLength: int,
-     name: string [NotNull, NotNull]
+     name: string? [Nullable, CallerArgumentExpression, Optional]
    ) : string [Extension, CanBeNull, AssertionMethod, ContractAnnotation]
  - Fail.OrFailIfWhiteSpace(
      value: string? [AssertionCondition, NoEnumeration],
