@@ -28,6 +28,20 @@ namespace Synergy.Contracts.Test.Failures
 
         [Test]
         [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
+        public void FailIfNullCallerArgumentExpression(object someNullObject)
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                // ReSharper disable once ExpressionIsAlwaysNull
+                () => someNullObject.FailIfNull()
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("'someNullObject' is null; and it shouldn't be;"));
+        }
+        
+        [Test]
+        [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
         public void FailIfNullWithViolationMessage(object someNullObject)
         {
             // ACT
@@ -46,6 +60,7 @@ namespace Synergy.Contracts.Test.Failures
         {
             // ACT
             thisIsNotNull.FailIfNull(nameof(thisIsNotNull));
+            thisIsNotNull.FailIfNull();
         }
 
         [Test]
@@ -92,7 +107,7 @@ namespace Synergy.Contracts.Test.Failures
 
         [Test]
         [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
-        public void OrFailNetCore(object thisMustBeNull)
+        public void OrFailCallerArgumentExpression(object thisMustBeNull)
         {
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(

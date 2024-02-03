@@ -72,7 +72,7 @@
    ) : T? [Extension, NotNull, AssertionMethod, ContractAnnotation]
  - Fail.FailIfNull<T>(
      value: T? [CanBeNull, AssertionCondition, NoEnumeration],
-     name: string [NotNull, NotNull]
+     name: string? [Nullable, CallerArgumentExpression, Optional]
    ) : T? [Extension, NotNull, AssertionMethod, ContractAnnotation]
  - Fail.IfArgumentEmpty(
      argumentValue: string [CanBeNull, AssertionCondition],
