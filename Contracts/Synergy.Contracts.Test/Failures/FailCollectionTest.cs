@@ -118,12 +118,22 @@ namespace Synergy.Contracts.Test.Failures
                 () => Fail.IfCollectionContainsNull(collection, nameof(collection))
             );
         }
+        
+        [Test]
+        [TestCaseSource(nameof(FailCollectionTest.GetCollectionsWithNull))]
+        public void IfCollectionContainsNullCallerArgumentExpression([CanBeNull] IEnumerable<object> collection)
+        {
+            Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfCollectionContainsNull(collection)
+            );
+        }
 
         [Test]
         [TestCaseSource(nameof(FailCollectionTest.GetCollectionsWithoutNull))]
         public void IfCollectionContainsNullSuccess([CanBeNull] IEnumerable<object> collection)
         {
             Fail.IfCollectionContainsNull(collection, nameof(collection));
+            Fail.IfCollectionContainsNull(collection);
         }
 
         #endregion

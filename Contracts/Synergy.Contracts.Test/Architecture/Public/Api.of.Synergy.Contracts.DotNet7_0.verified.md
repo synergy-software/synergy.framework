@@ -102,7 +102,7 @@
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfCollectionContainsNull<T>(
      collection: IEnumerable<T> [CanBeNull, AssertionCondition],
-     collectionName: string [NotNull, NotNull]
+     collectionName: string? [Nullable, CallerArgumentExpression, Optional]
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfCollectionEmpty(
      collection: IEnumerable [CanBeNull, AssertionCondition],

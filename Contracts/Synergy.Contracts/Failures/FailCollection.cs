@@ -138,7 +138,11 @@ namespace Synergy.Contracts
         public static void IfCollectionContainsNull<T>(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
             IEnumerable<T> collection,
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string collectionName
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("collection")] string? collectionName = null
+#else
+            string collectionName
+#endif
         )
             where T : class
         {
@@ -221,7 +225,7 @@ namespace Synergy.Contracts
         /// Checks if collection name was provided.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        private static void RequiresCollectionName([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string collectionName)
+        private static void RequiresCollectionName(string collectionName)
         {
             if (string.IsNullOrWhiteSpace(collectionName))
                 throw new ArgumentNullException(nameof(collectionName));
