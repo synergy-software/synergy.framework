@@ -44,7 +44,7 @@
    ) : T? [Extension, CanBeNull, AssertionMethod, ContractAnnotation]
  - Fail.CastEnumOrFail<T>(
      value: Enum [CanBeNull, NoEnumeration],
-     name: string [NotNull, NotNull]
+     name: string? [Nullable, CallerArgumentExpression, Optional]
    ) : T? [Extension, NotNull]
  - Fail.CastOrFail<T>(
      value: object [CanBeNull, NoEnumeration],
@@ -55,8 +55,8 @@
      name: string? [CallerArgumentExpression, Optional]
    ) : DateTime [NullableContext, Extension, AssertionMethod]
  - Fail.FailIfEnumOutOfRange<T>(
-     value: Enum [NotNull, NotNull],
-     name: string [NotNull, NotNull]
+     value: Enum,
+     name: string? [Nullable, CallerArgumentExpression, Optional]
    ) : T? [Extension, NotNull]
  - Fail.FailIfNotDate(
      date: DateTime,

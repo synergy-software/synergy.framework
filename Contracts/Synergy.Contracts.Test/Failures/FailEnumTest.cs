@@ -112,7 +112,6 @@ namespace Synergy.Contracts.Test.Failures
             Assert.That(enumValue, Is.EqualTo(ContractorType.Person));
         }
 
-
         [Test]
         public void CastEnumOrFail2()
         {
@@ -127,8 +126,22 @@ namespace Synergy.Contracts.Test.Failures
             // ASSERT
             Assert.That(exception, Is.Not.Null);
             Assert.That(exception.Message, Is.EqualTo("Unsupported enumValue value: 0 (ContractorType)"));
+        }
+        
+        [Test]
+        public void CastEnumOrFail2CallerArgumentExpression()
+        {
+            // ARRANGE
+            ContractorType enumValue = 0;
+            
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => enumValue.CastEnumOrFail<ContractorType>()
+            );
 
-            //Assert.That(enumValue, Is.EqualTo(ContractorType.Company));
+            // ASSERT
+            Assert.That(exception, Is.Not.Null);
+            Assert.That(exception.Message, Is.EqualTo("Unsupported enumValue value: 0 (ContractorType)"));
         }
 
         [Test]
@@ -136,6 +149,7 @@ namespace Synergy.Contracts.Test.Failures
         public void CastEnumOrFailWithNull()
         {
             Fail.CastEnumOrFail<ContractorType>(null, "null");
+            Fail.CastEnumOrFail<ContractorType>(null);
         }
 
         #endregion

@@ -78,8 +78,17 @@ namespace Synergy.Contracts
         /// <param name="value"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        [NotNull][return: System.Diagnostics.CodeAnalysis.NotNull] 
-        public static T FailIfEnumOutOfRange<T>([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] this Enum value, [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
+        [NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static T FailIfEnumOutOfRange<T>(
+            this Enum value,
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")]
+            string? name = null
+#else
+            string name
+#endif
+        )
         {
             return value.CastEnumOrFail<T>(name);
         }
@@ -91,8 +100,17 @@ namespace Synergy.Contracts
         /// <param name="value"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull] 
-        public static T CastEnumOrFail<T>([CanBeNull] [NoEnumeration] this Enum value, [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
+        [NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
+        public static T CastEnumOrFail<T>(
+            [CanBeNull] [NoEnumeration] this Enum value,
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")]
+            string? name = null
+#else
+            string name
+#endif
+        )
         {
             Fail.RequiresArgumentName(name);
 
