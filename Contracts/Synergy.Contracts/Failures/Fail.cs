@@ -161,7 +161,7 @@ namespace Synergy.Contracts
         /// Checks if argument name was provided.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        private static void RequiresArgumentName([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string argumentName)
+        private static void RequiresArgumentName(string? argumentName)
         {
             if (string.IsNullOrWhiteSpace(argumentName))
                 throw new ArgumentNullException(nameof(argumentName));

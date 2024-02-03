@@ -46,6 +46,19 @@ namespace Synergy.Contracts.Test.Failures
             // ASSERT
             Assert.That(exception.Message, Is.EqualTo("Argument 'obj' is equal to " + obj.GetValue2() + " and it should NOT be."));
         }
+        
+        [Test]
+        [TestCaseSource(nameof(FailEqualityTest.GetEquals))]
+        public void IfArgumentEqualCallerArgumentExpression(Pair obj)
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfArgumentEqual(obj.Value1, obj.Value2)
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("Argument 'obj.Value2' is equal to " + obj.GetValue2() + " and it should NOT be."));
+        }
 
         [Test]
         [TestCaseSource(nameof(FailEqualityTest.GetNotEquals))]
@@ -53,6 +66,7 @@ namespace Synergy.Contracts.Test.Failures
         {
             // ACT
             Fail.IfArgumentEqual(obj.Value1, obj.Value2, nameof(obj));
+            Fail.IfArgumentEqual(obj.Value1, obj.Value2);
         }
 
         #endregion

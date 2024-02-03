@@ -22,7 +22,12 @@ namespace Synergy.Contracts
         public static void IfEqual<TExpected, TActual>(
             [CanBeNull] TExpected unexpected,
             [CanBeNull] TActual actual,
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("actual")]
+            string? name = null
+#else
+            string name
+#endif
         )
         {
             Fail.RequiresArgumentName(name);
@@ -60,7 +65,12 @@ namespace Synergy.Contracts
         public static void IfArgumentEqual<TExpected, TActual>(
             [CanBeNull] TExpected unexpected,
             [CanBeNull] TActual argumentValue,
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string argumentName
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("argumentValue")]
+            string? argumentName = null
+#else
+            string argumentName
+#endif
         )
         {
             Fail.RequiresArgumentName(argumentName);

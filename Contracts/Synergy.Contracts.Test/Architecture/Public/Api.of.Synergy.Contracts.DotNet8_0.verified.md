@@ -83,10 +83,10 @@
      argumentName: string [NotNull]
    ) : void [AssertionMethod]
  - Fail.IfArgumentEqual<TExpected, TActual>(
-     unexpected: TExpected? [CanBeNull],
-     argumentValue: TActual? [CanBeNull],
-     argumentName: string [NotNull, NotNull]
-   ) : void [AssertionMethod]
+     unexpected: TExpected [Nullable, CanBeNull],
+     argumentValue: TActual [Nullable, CanBeNull],
+     argumentName: string? [CallerArgumentExpression, Optional]
+   ) : void [NullableContext, AssertionMethod]
  - Fail.IfArgumentNull<T>(
      argumentValue: T [Nullable, CanBeNull, AssertionCondition, NoEnumeration],
      argumentName: string? [CallerArgumentExpression, Optional]
@@ -140,14 +140,14 @@
      value: T
    ) : void [NullableContext]
  - Fail.IfEqual<TExpected, TActual>(
-     unexpected: TExpected? [CanBeNull],
-     actual: TActual? [CanBeNull],
-     message: Violation
-   ) : void [AssertionMethod]
+     unexpected: TExpected [Nullable, CanBeNull],
+     actual: TActual [Nullable, CanBeNull],
+     name: string? [CallerArgumentExpression, Optional]
+   ) : void [NullableContext, AssertionMethod]
  - Fail.IfEqual<TExpected, TActual>(
      unexpected: TExpected? [CanBeNull],
      actual: TActual? [CanBeNull],
-     name: string [NotNull, NotNull]
+     message: Violation
    ) : void [AssertionMethod]
  - Fail.IfFalse(
      value: bool [AssertionCondition],

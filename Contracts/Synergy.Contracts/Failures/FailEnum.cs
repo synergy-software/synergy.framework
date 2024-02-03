@@ -122,12 +122,5 @@ namespace Synergy.Contracts
 
             return value.CastOrFail<T>(name);
         }
-
-        //[ExcludeFromCodeCoverage]
-        //private static void RequiresEnumValue([NotNull] Enum value)
-        //{
-        //    if (value == null)
-        //        throw new ArgumentNullException(nameof(value));
-        //}
     }
 }
