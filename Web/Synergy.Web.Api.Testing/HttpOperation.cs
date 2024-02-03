@@ -41,7 +41,7 @@ namespace Synergy.Web.Api.Testing
 
         internal void SetDescription([NotNull] string details)
         {
-            Description = details.OrFailIfWhiteSpace(nameof(details));
+            Description = details.OrFailIfWhiteSpace();
         }
     }
 }

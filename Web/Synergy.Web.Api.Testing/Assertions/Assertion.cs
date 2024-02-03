@@ -12,7 +12,7 @@ namespace Synergy.Web.Api.Testing.Assertions
 
         public IAssertion Expected(string expected)
         {
-            ExpectedResult = expected.OrFailIfWhiteSpace(nameof(expected));
+            ExpectedResult = expected.OrFailIfWhiteSpace();
             return this;
         }
 
@@ -27,7 +27,7 @@ namespace Synergy.Web.Api.Testing.Assertions
 
             public Result([NotNull] string message)
             {
-                Message = message.OrFailIfWhiteSpace(nameof(message)).Trim();
+                Message = message.OrFailIfWhiteSpace().Trim();
             }
 
             public static Result Ok => new Result(OkMessage);

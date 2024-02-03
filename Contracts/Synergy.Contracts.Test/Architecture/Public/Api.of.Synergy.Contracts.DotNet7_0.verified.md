@@ -251,9 +251,9 @@
      name: string [NotNull, NotNull]
    ) : string [Extension, CanBeNull, AssertionMethod, ContractAnnotation]
  - Fail.OrFailIfWhiteSpace(
-     value: string? [Nullable, AssertionCondition, NoEnumeration],
-     name: string [NotNull, NotNull]
-   ) : string [Extension, NotNull, AssertionMethod, ContractAnnotation]
+     value: string? [AssertionCondition, NoEnumeration],
+     name: string? [CallerArgumentExpression, Optional]
+   ) : string [NullableContext, Extension, NotNull, AssertionMethod, ContractAnnotation]
 
 ## Requirements.Business (abstract class)
  - Business.Requires(

@@ -106,17 +106,19 @@ namespace Synergy.Contracts
         /// <param name="value">Value to check against nullability and white space.</param>
         /// <param name="name">Name of the checked argument / parameter to check.</param>
         /// <returns>Exactly the same value as provided to this method.</returns>
-        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull]
+        [NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
         [AssertionMethod]
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static string OrFailIfWhiteSpace(
-            [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration] this string? value,
-#if NET6_0
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull][System.Runtime.CompilerServices.CallerArgumentExpression("value")] string name = ""
+            [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration]
+            this string? value,
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")] string? name = null
 #else
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name
+            string name
 #endif
-            )
+        )
         {
             Fail.RequiresArgumentName(name);
 
@@ -136,7 +138,8 @@ namespace Synergy.Contracts
         [ContractAnnotation("value: null => halt")]
         public static void IfWhitespace(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string value,
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name
+            )
         {
             Fail.RequiresArgumentName(name);
             Fail.IfWhitespace(value, Violation.WhenWhitespace(name));

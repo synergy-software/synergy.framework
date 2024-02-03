@@ -9,7 +9,7 @@ namespace Synergy.Web.Api.Testing
         public static TOperation Details<TOperation>(this TOperation operation, string details)
             where TOperation : HttpOperation
         {
-            operation.SetDescription(details.OrFailIfWhiteSpace(nameof(details)));
+            operation.SetDescription(details.OrFailIfWhiteSpace());
             return operation;
         }
 
