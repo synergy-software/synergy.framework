@@ -52,8 +52,8 @@
    ) : T? [Extension, NotNull, AssertionMethod, ContractAnnotation]
  - Fail.FailIfEmpty(
      value: DateTime,
-     name: string [NotNull, NotNull]
-   ) : DateTime [Extension, AssertionMethod]
+     name: string? [CallerArgumentExpression, Optional]
+   ) : DateTime [NullableContext, Extension, AssertionMethod]
  - Fail.FailIfEnumOutOfRange<T>(
      value: Enum [NotNull, NotNull],
      name: string [NotNull, NotNull]

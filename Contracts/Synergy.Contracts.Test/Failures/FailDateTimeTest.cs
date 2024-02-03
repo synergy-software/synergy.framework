@@ -251,13 +251,30 @@ namespace Synergy.Contracts.Test.Failures
             // ASSERT
             Assert.That(exception.Message, Is.EqualTo("'minDate' is empty = 01/01/0001 00:00:00"));
         }
+        
+        [Test]
+        public void FailIfDateEmptyCallerArgumentExpression()
+        {
+            // ARRANGE
+            DateTime minDate = DateTime.MinValue;
+
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => minDate.FailIfEmpty()
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("'minDate' is empty = 01/01/0001 00:00:00"));
+        }
 
         [Test]
         public void FailIfDateEmptySuccess()
         {
             // ACT
             // ReSharper disable once UnusedVariable
-            var date = DateTime.Today.FailIfEmpty(nameof(DateTime.Today));
+            var date1 = DateTime.Today.FailIfEmpty(nameof(DateTime.Today));
+            // ReSharper disable once UnusedVariable
+            var date2 = DateTime.Today.FailIfEmpty();
         }
 
         #endregion

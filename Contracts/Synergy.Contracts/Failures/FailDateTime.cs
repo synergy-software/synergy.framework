@@ -161,7 +161,15 @@ namespace Synergy.Contracts
         /// <param name="value">DateTime to check</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
         [AssertionMethod]
-        public static DateTime FailIfEmpty(this DateTime value, [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
+        public static DateTime FailIfEmpty(
+            this DateTime value, 
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")]
+            string? name = null
+#else
+            string name
+#endif
+            )
         {
             Fail.IfEmpty(value, name);
             return value;
