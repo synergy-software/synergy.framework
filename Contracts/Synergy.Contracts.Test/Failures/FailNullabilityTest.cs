@@ -311,6 +311,20 @@ namespace Synergy.Contracts.Test.Failures
 
         [Test]
         [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
+        public void IfNullWithNameCallerArgumentExpression(object thisIsNull)
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                // ReSharper disable once ExpressionIsAlwaysNull
+                () => Fail.IfNull(thisIsNull)
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("'thisIsNull' is null; and it shouldn't be;"));
+        }
+        
+        [Test]
+        [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
         public void IfNullWithMessage(object thisIsNull)
         {
             // ACT
@@ -330,6 +344,7 @@ namespace Synergy.Contracts.Test.Failures
         {
             // ACT
             Fail.IfNull(argumentValue, nameof(argumentValue));
+            Fail.IfNull(argumentValue);
         }
 
         #endregion

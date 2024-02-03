@@ -150,7 +150,7 @@ namespace Synergy.Web.Api.Testing.Assertions
 
         HttpRequestMessage IHttpRequestStorage.GetSavedRequest()
         {
-            Fail.IfNull(_savedPattern, nameof(_savedPattern));
+            Fail.IfNull(_savedPattern);
 
             var fullMethod = _savedPattern!.SelectToken("$.request.method").Value<string>();
             var method = fullMethod.Substring(0, fullMethod.IndexOf(" "));
@@ -169,7 +169,7 @@ namespace Synergy.Web.Api.Testing.Assertions
 
         HttpResponseMessage IHttpResponseStorage.GetSavedResponse()
         {
-            Fail.IfNull(_savedPattern, nameof(_savedPattern));
+            Fail.IfNull(_savedPattern);
 
             var fullStatus = _savedPattern!.SelectToken("$.response.status").Value<string>();
             var status = fullStatus.Substring(0, fullStatus.IndexOf(" "));

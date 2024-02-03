@@ -16,7 +16,7 @@ namespace Synergy.Web.Api.Testing
 
         private static string BuildQuery([NotNull] object contract, string? parentName, bool commaArraySeparator = false)
         {
-            Fail.IfNull(contract, nameof(contract));
+            Fail.IfNull(contract);
             var objectType = contract.GetType();
             Fail.IfTrue(IsPrimitiveType(objectType), Violation.Of("You can't build query from primitive"));
             Fail.IfTrue(objectType.IsArray, Violation.Of("You can't build query from array"));

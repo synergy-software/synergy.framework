@@ -193,7 +193,12 @@ namespace Synergy.Contracts
         public static void IfNull<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
             T value,
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")] string? name = null
+#else
+            string name
+#endif
+        )
         {
             Fail.RequiresArgumentName(name);
             Fail.IfNull(value, Violation.WhenVariableIsNull(name));

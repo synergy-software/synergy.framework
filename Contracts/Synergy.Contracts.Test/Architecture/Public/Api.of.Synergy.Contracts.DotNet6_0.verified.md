@@ -189,12 +189,12 @@
      name: string [NotNull, NotNull]
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfNull<T>(
-     value: T? [CanBeNull, AssertionCondition],
-     message: Violation
-   ) : void [AssertionMethod, ContractAnnotation]
+     value: T [Nullable, CanBeNull, AssertionCondition],
+     name: string? [CallerArgumentExpression, Optional]
+   ) : void [NullableContext, AssertionMethod, ContractAnnotation]
  - Fail.IfNull<T>(
      value: T? [CanBeNull, AssertionCondition],
-     name: string [NotNull, NotNull]
+     message: Violation
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfNullOrNotCastable<T>(
      value: object [CanBeNull, NoEnumeration]

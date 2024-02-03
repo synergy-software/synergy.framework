@@ -48,7 +48,7 @@ namespace Synergy.Web.Api.Testing
         [MustUseReturnValue]
         public static T Read<T>([NotNull] this HttpContent? content, string jsonPath)
         {
-            Fail.IfNull(content, nameof(content));
+            Fail.IfNull(content);
             JToken? json = content.ReadJson();
             var node = json!.SelectToken(jsonPath).FailIfNull(Violation.Of($"Cannot find JSON node '{jsonPath}'"));
             if (node is JObject)

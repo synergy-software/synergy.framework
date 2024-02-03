@@ -41,7 +41,7 @@ namespace Synergy.Sample.Web.API.Extensions
         /// <returns>True if the environment name is <see cref="Application.Environment.Tests"/>, otherwise false.</returns>
         public static bool IsTests([NotNull] this IHostEnvironment hostEnvironment)
         {
-            Fail.IfNull(hostEnvironment, nameof(hostEnvironment));
+            Fail.IfNull(hostEnvironment);
 
             return hostEnvironment.IsEnvironment(Environment.Tests);
         }
