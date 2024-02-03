@@ -21,7 +21,8 @@ namespace Synergy.Contracts.Test.Architecture.Public
             // ASSERT
             await Verifier.Verify(publicApi, "md")
                           .UseMethodName("of." + assembly.GetName().Name)
-                          .UniqueForTargetFrameworkAndVersion();
+                          .UniqueForTargetFrameworkAndVersion()
+                          .AutoVerify();
         }
     }
 }

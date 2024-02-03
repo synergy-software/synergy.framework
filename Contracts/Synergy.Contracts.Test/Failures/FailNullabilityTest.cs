@@ -284,11 +284,25 @@ namespace Synergy.Contracts.Test.Failures
         }
 
         [Test]
+        [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
+        public void IfNotNullCallerArgumentExpression(object argumentValue)
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfNotNull(argumentValue)
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("'argumentValue' is NOT null; and it should be;"));
+        }
+        
+        [Test]
         [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
         public void IfNotNullSuccess([CanBeNull] object argumentValue)
         {
             // ACT
             Fail.IfNotNull(argumentValue, nameof(argumentValue));
+            Fail.IfNotNull(argumentValue);
         }
 
         #endregion

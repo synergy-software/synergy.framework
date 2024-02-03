@@ -230,7 +230,14 @@ namespace Synergy.Contracts
         /// <param name="name">Name of the checked argument / parameter.</param>
         [AssertionMethod]
         [ContractAnnotation("value: notnull => halt")]
-        public static void IfNotNull<T>([CanBeNull] [NoEnumeration] T value, [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
+        public static void IfNotNull<T>(
+            [CanBeNull] [NoEnumeration] T value,
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")] string? name = null
+#else
+            string name
+#endif
+        )
         {
             Fail.RequiresArgumentName(name);
             Fail.IfNotNull(value, Violation.WhenVariableIsNotNull(name));

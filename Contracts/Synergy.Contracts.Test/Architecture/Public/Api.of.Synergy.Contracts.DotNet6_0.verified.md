@@ -181,12 +181,12 @@
      name: string [NotNull, NotNull]
    ) : void [AssertionMethod]
  - Fail.IfNotNull<T>(
-     value: T? [CanBeNull, NoEnumeration],
-     message: Violation
-   ) : void [AssertionMethod, ContractAnnotation]
+     value: T [Nullable, CanBeNull, NoEnumeration],
+     name: string? [CallerArgumentExpression, Optional]
+   ) : void [NullableContext, AssertionMethod, ContractAnnotation]
  - Fail.IfNotNull<T>(
      value: T? [CanBeNull, NoEnumeration],
-     name: string [NotNull, NotNull]
+     message: Violation
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfNull<T>(
      value: T [Nullable, CanBeNull, AssertionCondition],
