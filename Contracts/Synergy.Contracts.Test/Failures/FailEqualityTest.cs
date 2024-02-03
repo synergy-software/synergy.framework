@@ -27,11 +27,51 @@ namespace Synergy.Contracts.Test.Failures
         public void IfEqualSuccess(Pair obj)
         {
             // ACT
-            Fail.IfEqual(obj.Value1, obj.Value2, "values are equal and shouldn't be");
+            Fail.IfEqual(obj.Value1, obj.Value2, nameof(obj.Value2));
+            Fail.IfEqual(obj.Value1, obj.Value2);
         }
 
         #endregion
 
+        #region a.FailIfEqual(b)
+
+        [Test]
+        [TestCaseSource(nameof(FailEqualityTest.GetEquals))]
+        public void FailIfEqualWithMessage(Pair obj)
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => obj.Value1.FailIfEqual(obj.Value2, nameof(obj.Value1))
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo($"'Value1' is equal to {obj.GetValue2()} and it should NOT be."));
+        }
+        
+        [Test]
+        [TestCaseSource(nameof(FailEqualityTest.GetEquals))]
+        public void FailIfEqualWithMessageCallerArgumentExpression(Pair obj)
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => obj.Value1.FailIfEqual(obj.Value2)
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo($"'obj.Value1' is equal to {obj.GetValue2()} and it should NOT be."));
+        }
+
+        [Test]
+        [TestCaseSource(nameof(FailEqualityTest.GetNotEquals))]
+        public void FailIfEqualSuccess(Pair obj)
+        {
+            // ACT
+            obj.Value1.FailIfEqual(obj.Value2, nameof(obj.Value1));
+            obj.Value1.FailIfEqual(obj.Value2);
+        }
+
+        #endregion
+        
         #region Fail.IfArgumentEqual()
 
         [Test]

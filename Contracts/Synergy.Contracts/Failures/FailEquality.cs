@@ -4,9 +4,6 @@ namespace Synergy.Contracts
 {
     static partial class Fail
     {
-        // TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: Add variable.OrFailIfEqual(sth)
-        // TODO:mace (from:mace @ 22-10-2016): a.FailIfEqual(b)
-        // TODO:mace (from:mace @ 22-10-2016): IfArgumentNotEqual
         // TODO:mace (from:mace @ 22-10-2016): a.FailIfNotEqual(b)
 
         #region Fail.IfEqual()
@@ -54,6 +51,33 @@ namespace Synergy.Contracts
 
         #endregion
 
+        #region a.FailIfEqual(b)
+
+        /// <summary>
+        /// Throws exception when two values are equal. 
+        /// <para>REMARKS: If one of the values is <see langword="null" /> the other one CANNOT be <see langword="null" />.</para>
+        /// </summary>
+        /// <param name="unexpected">The unexpected value.</param>
+        /// <param name="actual">The actual value to be checked.</param>
+        /// <param name="name">Name of the checked argument / parameter to check.</param>
+        [AssertionMethod]
+        public static void FailIfEqual<TExpected, TActual>(
+            this TActual actual,
+            TExpected unexpected,
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("actual")]
+            string? name = null
+#else
+            string name
+#endif
+        )
+        {
+            Fail.RequiresArgumentName(name);
+            Fail.IfEqual(unexpected, actual, Violation.WhenEqual(name, unexpected));
+        }
+        
+        #endregion
+        
         /// <summary>
         /// Throws exception when argument value is equal to the <paramref name="unexpected"/> value.
         /// <para>REMARKS: If one of the values is <see langword="null" /> the other one CANNOT be <see langword="null" />.</para>

@@ -5,8 +5,6 @@ namespace Synergy.Contracts
 {
     static partial class Fail
     {
-        // TODO:mace (from:mace @ 22-10-2016): public static void Fail.IfArgumentNotCastable<T>([CanBeNull, AssertionCondition(conditionType: AssertionConditionType.IS_NOT_NULL)] string argumentValue)
-
         /// <summary>
         /// Throws exception when specified value is not cast to the specified type. It also returns the cast object or <see langword="null"/>.
         /// <para>REMARKS: You can pass <see langword="null"/> to this method and it will NOT throw the exception.</para>

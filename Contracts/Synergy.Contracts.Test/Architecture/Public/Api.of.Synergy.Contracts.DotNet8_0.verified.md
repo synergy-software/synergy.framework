@@ -62,6 +62,11 @@
      value: Enum,
      name: string? [Nullable, CallerArgumentExpression, Optional]
    ) : T? [Extension, NotNull]
+ - Fail.FailIfEqual<TExpected, TActual>(
+     actual: TActual [Nullable],
+     unexpected: TExpected [Nullable],
+     name: string? [CallerArgumentExpression, Optional]
+   ) : void [NullableContext, Extension, AssertionMethod]
  - Fail.FailIfNotDate(
      date: DateTime,
      name: string? [CallerArgumentExpression, Optional]
