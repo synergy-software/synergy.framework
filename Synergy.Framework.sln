@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28010.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{146E5D84-D923-4731-BAB4-8D46E30A1433}"
+	ProjectSection(SolutionItems) = preProject
+		Contracts\README.md = Contracts\README.md
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synergy.Contracts", "Contracts\Synergy.Contracts\Synergy.Contracts.csproj", "{653FF172-0DC5-4D81-91AE-3CE09D8CF7C1}"
 EndProject
