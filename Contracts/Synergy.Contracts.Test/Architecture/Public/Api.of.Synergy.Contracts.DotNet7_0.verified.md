@@ -171,14 +171,14 @@
      name: string? [CallerArgumentExpression, Optional]
    ) : void [NullableContext, AssertionMethod]
  - Fail.IfNotEqual<TExpected, TActual>(
-     expected: TExpected? [CanBeNull],
-     actual: TActual? [CanBeNull],
-     message: Violation
-   ) : void [AssertionMethod]
+     expected: TExpected [Nullable, CanBeNull],
+     actual: TActual [Nullable, CanBeNull],
+     name: string? [CallerArgumentExpression, Optional]
+   ) : void [NullableContext, AssertionMethod]
  - Fail.IfNotEqual<TExpected, TActual>(
      expected: TExpected? [CanBeNull],
      actual: TActual? [CanBeNull],
-     name: string [NotNull, NotNull]
+     message: Violation
    ) : void [AssertionMethod]
  - Fail.IfNotNull<T>(
      value: T [Nullable, CanBeNull, NoEnumeration],

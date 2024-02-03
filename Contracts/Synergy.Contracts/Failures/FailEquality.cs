@@ -88,7 +88,12 @@ namespace Synergy.Contracts
         public static void IfNotEqual<TExpected, TActual>(
             [CanBeNull] TExpected expected,
             [CanBeNull] TActual actual,
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("actual")]
+            string? name = null
+#else
+            string name
+#endif
         )
         {
             Fail.RequiresArgumentName(name);

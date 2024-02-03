@@ -108,11 +108,25 @@ namespace Synergy.Contracts.Test.Failures
         }
 
         [Test]
+        [TestCaseSource(nameof(FailEqualityTest.GetNotEquals))]
+        public void IfNotEqualWithNameCallerArgumentExpression(Pair obj)
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfNotEqual(obj.Value2, obj.Value1)
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("'obj.Value1' (" + obj.GetValue1() + ") is NOT equal to " + obj.GetValue2() + " and it should be."));
+        }
+        
+        [Test]
         [TestCaseSource(nameof(FailEqualityTest.GetEquals))]
         public void IfNotEqualWithNameSuccess(Pair obj)
         {
             // ACT
             Fail.IfNotEqual(obj.Value1, obj.Value2, nameof(obj));
+            Fail.IfNotEqual(obj.Value1, obj.Value2);
         }
 
         #endregion
