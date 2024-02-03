@@ -14,8 +14,15 @@ namespace Synergy.Contracts
         [AssertionMethod]
         [ContractAnnotation("argumentValue: null => halt")]
         public static void IfArgumentEmpty(
-            [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] string argumentValue,
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string argumentName)
+            [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
+            string argumentValue,
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("argumentValue")]
+            string? argumentName = null
+#else
+            string argumentName
+#endif
+        )
         {
             Fail.RequiresArgumentName(argumentName);
             Fail.IfArgumentNull(argumentValue, argumentName);

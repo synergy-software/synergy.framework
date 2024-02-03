@@ -76,7 +76,7 @@
    ) : T? [Extension, NotNull, AssertionMethod, ContractAnnotation]
  - Fail.IfArgumentEmpty(
      argumentValue: string [CanBeNull, AssertionCondition],
-     argumentName: string [NotNull, NotNull]
+     argumentName: string? [Nullable, CallerArgumentExpression, Optional]
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfArgumentEmpty(
      value: Guid,

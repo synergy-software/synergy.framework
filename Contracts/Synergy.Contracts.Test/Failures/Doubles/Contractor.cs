@@ -8,7 +8,7 @@ namespace Synergy.Contracts.Samples.Domain
         [NotNull, Pure]
         public static Contractor CreateCompany([NotNull] string name)
         {
-            Fail.IfArgumentEmpty(name, nameof(name));
+            Fail.IfArgumentEmpty(name);
 
             return new Contractor
             {
@@ -21,7 +21,7 @@ namespace Synergy.Contracts.Samples.Domain
         [NotNull, Pure]
         public static Contractor CreatePerson([NotNull] string firstName, [NotNull] string lastName)
         {
-            Fail.IfArgumentEmpty(firstName, nameof(firstName));
+            Fail.IfArgumentEmpty(firstName);
             Fail.IfArgumentWhiteSpace(lastName, nameof(lastName));
 
             return new Contractor()
@@ -70,8 +70,8 @@ namespace Synergy.Contracts.Samples.Domain
 
         public void SetPersonName([NotNull] string firstName, [NotNull] string lastName)
         {
-            Fail.IfArgumentEmpty(firstName, nameof(firstName));
-            Fail.IfArgumentEmpty(lastName, nameof(lastName));
+            Fail.IfArgumentEmpty(firstName);
+            Fail.IfArgumentEmpty(lastName);
 
             throw Fail.Because("Not implemented yet");
         }
