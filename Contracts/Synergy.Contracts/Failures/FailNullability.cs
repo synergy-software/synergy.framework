@@ -166,7 +166,12 @@ namespace Synergy.Contracts
         public static void IfArgumentNull<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration]
             T argumentValue,
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string argumentName)
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("argumentValue")] string? argumentName = null
+#else
+            string argumentName
+#endif
+        )
         {
             Fail.RequiresArgumentName(argumentName);
 

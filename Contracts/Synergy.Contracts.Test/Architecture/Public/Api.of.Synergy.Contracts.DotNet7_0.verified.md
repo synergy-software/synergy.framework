@@ -88,9 +88,9 @@
      argumentName: string [NotNull, NotNull]
    ) : void [AssertionMethod]
  - Fail.IfArgumentNull<T>(
-     argumentValue: T? [CanBeNull, AssertionCondition, NoEnumeration],
-     argumentName: string [NotNull, NotNull]
-   ) : void [AssertionMethod, ContractAnnotation]
+     argumentValue: T [Nullable, CanBeNull, AssertionCondition, NoEnumeration],
+     argumentName: string? [CallerArgumentExpression, Optional]
+   ) : void [NullableContext, AssertionMethod, ContractAnnotation]
  - Fail.IfArgumentWhiteSpace(
      argumentValue: string [CanBeNull, AssertionCondition],
      argumentName: string [NotNull, NotNull]

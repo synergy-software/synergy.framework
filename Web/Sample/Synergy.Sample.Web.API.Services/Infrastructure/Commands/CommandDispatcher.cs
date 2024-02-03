@@ -21,7 +21,7 @@ namespace Synergy.Sample.Web.API.Services.Infrastructure.Commands
             where TCommandResult : class
             where TCommandHandler : ICommandHandler<TCommand, TCommandResult>
         {
-            Fail.IfArgumentNull(command, nameof(command));
+            Fail.IfArgumentNull(command);
             var commandHandler = this.commandHandlerFactory.Create<TCommand, TCommandResult>(command);
             this._logger.LogTrace("Command {Command} dispatch started by {CommandHandler}", command.GetType().Name, commandHandler.GetType().Name);
 

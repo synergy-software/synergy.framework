@@ -21,7 +21,7 @@ namespace Synergy.Sample.Web.API.Services.Infrastructure.Queries
             where TQueryResult : class
             where TQueryHandler : IQueryHandler<TQuery, TQueryResult>
         {
-            Fail.IfArgumentNull(query, nameof(query));
+            Fail.IfArgumentNull(query);
             var queryHandler = this.queryHandlerFactory.Create<TQuery, TQueryResult>(query);
             this._logger.LogTrace("Query {Query} dispatch started by {QueryHandler}", query.GetType().Name, queryHandler.GetType().Name);
 
