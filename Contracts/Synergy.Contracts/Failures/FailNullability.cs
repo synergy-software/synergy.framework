@@ -117,14 +117,19 @@ namespace Synergy.Contracts
         /// <param name="value">Value to check against nullability.</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
         /// <returns>Exactly the same value as provided to this method.</returns>
-        [NotNull] [return: System.Diagnostics.CodeAnalysis.NotNull]
+        [NotNull]
+        [return: System.Diagnostics.CodeAnalysis.NotNull]
         [AssertionMethod]
         [ContractAnnotation("value: null => halt; value: notnull => notnull")]
         public static T NotNull<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration]
             this T value,
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name
-            )
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")] string? name = null
+#else
+            string name
+#endif
+        )
         {
             return value.OrFail(name);
         }

@@ -190,11 +190,25 @@ namespace Synergy.Contracts.Test.Failures
         }
 
         [Test]
+        [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
+        public void NotNullCallerArgumentExpression(object thisMustBeNull)
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                // ReSharper disable once ExpressionIsAlwaysNull
+                () => thisMustBeNull.NotNull());
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("'thisMustBeNull' is null; and it shouldn't be;"));
+        }
+        
+        [Test]
         [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
         public void NotNullSuccess(object thisCannotBeNull)
         {
             // ACT
             thisCannotBeNull.NotNull(nameof(thisCannotBeNull));
+            thisCannotBeNull.NotNull();
         }
 
         #endregion

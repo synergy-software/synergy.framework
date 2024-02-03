@@ -227,7 +227,7 @@
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.NotNull<T>(
      value: T? [CanBeNull, AssertionCondition, NoEnumeration],
-     name: string [NotNull, NotNull]
+     name: string? [Nullable, CallerArgumentExpression, Optional]
    ) : T? [Extension, NotNull, AssertionMethod, ContractAnnotation]
  - Fail.OrFail<T>(
      value: T? [CanBeNull, AssertionCondition, NoEnumeration],
