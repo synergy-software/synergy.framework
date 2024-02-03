@@ -31,7 +31,7 @@ namespace Synergy.Contracts
         public static void IfNotDate(
             DateTime? date,
 #if NET6_0_OR_GREATER
-            [System.Runtime.CompilerServices.CallerArgumentExpression("value")] string? name = null
+            [System.Runtime.CompilerServices.CallerArgumentExpression("date")] string? name = null
 #else
             string name
 #endif
@@ -94,7 +94,7 @@ namespace Synergy.Contracts
         public static DateTime? FailIfNotDate(
             [CanBeNull] this DateTime? date,
 #if NET6_0_OR_GREATER
-            [System.Runtime.CompilerServices.CallerArgumentExpression("value")]
+            [System.Runtime.CompilerServices.CallerArgumentExpression("date")]
             string? name = null
 #else
             string name
@@ -118,13 +118,20 @@ namespace Synergy.Contracts
         /// <param name="name">Name of the checked argument / parameter.</param>
         /// <returns></returns>
         [AssertionMethod]
-        public static DateTime FailIfNotDate(this DateTime date, string name)
+        public static DateTime FailIfNotDate(
+            this DateTime date,
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("date")]
+            string? name = null
+#else
+            string name
+#endif
+        )
         {
             Fail.IfNotDate(date, name);
 
             return date;
         }
-
 
         /// <summary>
         /// Checks whether specified DateTime is empty - is equal to DateTime.MinValue.

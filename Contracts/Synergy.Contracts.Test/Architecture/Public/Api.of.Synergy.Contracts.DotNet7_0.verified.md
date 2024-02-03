@@ -60,8 +60,8 @@
    ) : T? [Extension, NotNull]
  - Fail.FailIfNotDate(
      date: DateTime,
-     name: string
-   ) : DateTime [Extension, AssertionMethod]
+     name: string? [CallerArgumentExpression, Optional]
+   ) : DateTime [NullableContext, Extension, AssertionMethod]
  - Fail.FailIfNotDate(
      date: DateTime? [CanBeNull],
      name: string? [CallerArgumentExpression, Optional]
