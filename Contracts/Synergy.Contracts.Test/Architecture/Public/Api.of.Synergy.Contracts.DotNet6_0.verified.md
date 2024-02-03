@@ -75,6 +75,11 @@
      date: DateTime? [CanBeNull],
      name: string? [CallerArgumentExpression, Optional]
    ) : DateTime? [NullableContext, Extension, CanBeNull, AssertionMethod]
+ - Fail.FailIfNotEqual<TExpected, TActual>(
+     actual: TActual [Nullable],
+     expected: TExpected [Nullable],
+     name: string? [CallerArgumentExpression, Optional]
+   ) : void [NullableContext, Extension, AssertionMethod]
  - Fail.FailIfNull<T>(
      value: T? [CanBeNull, AssertionCondition, NoEnumeration],
      message: Violation
