@@ -64,8 +64,8 @@
    ) : DateTime [Extension, AssertionMethod]
  - Fail.FailIfNotDate(
      date: DateTime? [CanBeNull],
-     name: string
-   ) : DateTime? [Extension, CanBeNull, AssertionMethod]
+     name: string? [CallerArgumentExpression, Optional]
+   ) : DateTime? [NullableContext, Extension, CanBeNull, AssertionMethod]
  - Fail.FailIfNull<T>(
      value: T? [CanBeNull, AssertionCondition, NoEnumeration],
      message: Violation
@@ -167,9 +167,9 @@
      message: Violation
    ) : void [AssertionMethod]
  - Fail.IfNotDate(
-     date: DateTime? [CanBeNull],
-     name: string
-   ) : void [AssertionMethod]
+     date: DateTime?,
+     name: string? [CallerArgumentExpression, Optional]
+   ) : void [NullableContext, AssertionMethod]
  - Fail.IfNotEqual<TExpected, TActual>(
      expected: TExpected? [CanBeNull],
      actual: TActual? [CanBeNull],

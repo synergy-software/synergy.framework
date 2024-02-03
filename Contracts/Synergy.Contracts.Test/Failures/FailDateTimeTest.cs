@@ -105,11 +105,36 @@ namespace Synergy.Contracts.Test.Failures
         }
 
         [Test]
+        [TestCaseSource(nameof(FailDateTimeTest.GetDatesWithTime))]
+        public void FailIfNotNullableDateCallerArgumentExpression(DateTime? dateTime)
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => dateTime.FailIfNotDate()
+            );
+
+            // ASSERT
+            Assert.That(exception, Is.Not.Null);
+            //Assert.That(exception.Message, Is.EqualTo("date should have no hour nor second"));
+        }
+        
+        [Test]
         [TestCaseSource(nameof(FailDateTimeTest.GetDates))]
         public void FailIfNotNullableDateSuccess(DateTime? date)
         {
             // ACT
             var returned = date.FailIfNotDate(nameof(date));
+
+            // ASSERT
+            Assert.That(returned, Is.EqualTo(date));
+        }
+        
+        [Test]
+        [TestCaseSource(nameof(FailDateTimeTest.GetDates))]
+        public void FailIfNotNullableDateSuccessCallerArgumentExpression(DateTime? date)
+        {
+            // ACT
+            var returned = date.FailIfNotDate();
 
             // ASSERT
             Assert.That(returned, Is.EqualTo(date));

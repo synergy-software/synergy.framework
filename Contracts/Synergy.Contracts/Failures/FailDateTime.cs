@@ -89,9 +89,17 @@ namespace Synergy.Contracts
         /// <param name="date">Nullable DateTime to check.</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
         /// <returns></returns>
-        [CanBeNull] 
+        [CanBeNull]
         [AssertionMethod]
-        public static DateTime? FailIfNotDate([CanBeNull] this DateTime? date, string name)
+        public static DateTime? FailIfNotDate(
+            [CanBeNull] this DateTime? date,
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")]
+            string? name = null
+#else
+            string name
+#endif
+        )
         {
             Fail.IfNotDate(date, name);
 
