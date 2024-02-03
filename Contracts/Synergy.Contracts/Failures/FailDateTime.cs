@@ -140,7 +140,15 @@ namespace Synergy.Contracts
         /// <param name="value">DateTime to check</param>
         /// <param name="name">Name of the checked argument / parameter.</param>
         [AssertionMethod]
-        public static void IfEmpty(DateTime value, [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
+        public static void IfEmpty(
+            DateTime value,
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")]
+            string? name = null
+#else
+            string name
+#endif
+        )
         {
             if (value == DateTime.MinValue)
                 throw Fail.Because(Violation.WhenDateTimeIsEmpty(name, value));

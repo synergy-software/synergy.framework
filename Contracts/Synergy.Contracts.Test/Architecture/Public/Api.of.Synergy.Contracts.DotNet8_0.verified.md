@@ -119,8 +119,8 @@
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfEmpty(
      value: DateTime,
-     name: string [NotNull, NotNull]
-   ) : void [AssertionMethod]
+     name: string? [CallerArgumentExpression, Optional]
+   ) : void [NullableContext, AssertionMethod]
  - Fail.IfEmpty(
      value: Guid,
      message: Violation

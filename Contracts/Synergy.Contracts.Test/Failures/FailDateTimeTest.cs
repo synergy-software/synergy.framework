@@ -211,10 +211,26 @@ namespace Synergy.Contracts.Test.Failures
         }
 
         [Test]
+        public void IfDateEmptyCallerArgumentExpression()
+        {
+            // ARRANGE
+            DateTime minDate = DateTime.MinValue;
+
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfEmpty(minDate)
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("'minDate' is empty = 01/01/0001 00:00:00"));
+        }
+        
+        [Test]
         public void IfDateEmptySuccess()
         {
             // ACT
             Fail.IfEmpty(DateTime.Today, nameof(DateTime.Today));
+            Fail.IfEmpty(DateTime.Today);
         }
 
         #endregion
