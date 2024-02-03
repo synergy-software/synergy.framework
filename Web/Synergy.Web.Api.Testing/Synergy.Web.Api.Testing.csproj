@@ -9,6 +9,7 @@
     <Title>Synergy.Web.Api.Testing - Web API Testing helper</Title>
     <Authors>Synergy Marcin Celej</Authors>
     <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <!-- TODO: Prepare docs  -->
     <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/wiki/Contracts</PackageProjectUrl>
     <PackageIcon>synergy.png</PackageIcon>
     <Description>Web API Testing support</Description>

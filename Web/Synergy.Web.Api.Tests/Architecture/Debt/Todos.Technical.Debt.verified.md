@@ -1,6 +1,6 @@
 ﻿# Technical Debt for Synergy.Web.Api.Testing
 
-Total: 19
+Total: 20
 
 ## [CreateUserCommandHandler.cs](../../../Sample/Synergy.Sample.Web.API.Services/Users/Commands/CreateUser/CreateUserCommandHandler.cs)
 - TODO: Add validation (bad-request) mechanism - maybe use data annotations?
@@ -44,3 +44,6 @@ Total: 19
 
 ## [Markdown.cs](../../../Synergy.Web.Api.Testing/Features/Markdown.cs)
 - TODO:Marcin Celej: Do not regenerate report if every operation was 'unchanged' (check somehow HttpOperation.Assertions) - to achieve this add Status to HttpOperation
+
+## [Synergy.Web.Api.Testing.csproj](../../../Synergy.Web.Api.Testing/Synergy.Web.Api.Testing.csproj)
+- TODO: Prepare docs
