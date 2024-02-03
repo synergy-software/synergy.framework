@@ -22,12 +22,25 @@ namespace Synergy.Contracts.Test.Failures
             // ASSERT
             Assert.That(exception.Message, Is.EqualTo("Argument 'someEmptyGuid' is an empty Guid."));
         }
+        
+        [TestCaseSource(nameof(FailGuidTest.GetEmptyGuid))]
+        public void IfArgumentEmptyCallerArgumentExpression(Guid someEmptyGuid)
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfArgumentEmpty(someEmptyGuid)
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("Argument 'someEmptyGuid' is an empty Guid."));
+        }
 
         [TestCaseSource(nameof(FailGuidTest.GetNewGuid))]
         public void IfArgumentEmptySuccess(Guid someGuid)
         {
             // ACT
             Fail.IfArgumentEmpty(someGuid, nameof(someGuid));
+            Fail.IfArgumentEmpty(someGuid);
         }
 
         [TestCaseSource(nameof(FailGuidTest.GetEmptyGuid))]

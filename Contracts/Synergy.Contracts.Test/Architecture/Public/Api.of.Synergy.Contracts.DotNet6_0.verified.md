@@ -80,8 +80,8 @@
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfArgumentEmpty(
      value: Guid,
-     argumentName: string [NotNull]
-   ) : void [AssertionMethod]
+     argumentName: string? [CallerArgumentExpression, Optional]
+   ) : void [NullableContext, AssertionMethod]
  - Fail.IfArgumentEqual<TExpected, TActual>(
      unexpected: TExpected [Nullable, CanBeNull],
      argumentValue: TActual [Nullable, CanBeNull],

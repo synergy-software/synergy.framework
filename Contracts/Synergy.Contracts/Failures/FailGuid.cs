@@ -38,7 +38,15 @@ namespace Synergy.Contracts
         /// </code>
         /// </example>
         [AssertionMethod]
-        public static void IfArgumentEmpty(Guid value, [NotNull] string argumentName)
+        public static void IfArgumentEmpty(
+            Guid value,
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")]
+            string? argumentName = null
+#else
+            string argumentName
+#endif
+        )
         {
             Fail.RequiresArgumentName(argumentName);
             Fail.IfEmpty(value, Violation.WhenGuidArgumentIsEmpty(argumentName));

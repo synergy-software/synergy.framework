@@ -10,7 +10,7 @@ namespace Synergy.Contracts.Samples
     {
         public Contractor FindContractorByGuid(Guid id)
         {
-            Fail.IfArgumentEmpty(id, nameof(id));
+            Fail.IfArgumentEmpty(id);
 
             // WARN: Below is sample code with no sense at all
             return new Contractor();
