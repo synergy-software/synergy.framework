@@ -223,7 +223,7 @@
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfWhitespace(
      value: string [CanBeNull, AssertionCondition],
-     name: string [NotNull, NotNull]
+     name: string? [Nullable, CallerArgumentExpression, Optional]
    ) : void [AssertionMethod, ContractAnnotation]
  - Fail.NotNull<T>(
      value: T? [CanBeNull, AssertionCondition, NoEnumeration],

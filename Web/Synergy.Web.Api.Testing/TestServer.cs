@@ -117,7 +117,7 @@ namespace Synergy.Web.Api.Testing
 
         private Uri PrepareRequestUri(string path, object? parameterToGet = null)
         {
-            Fail.IfWhitespace(path, nameof(path));
+            Fail.IfWhitespace(path);
 
             var uriBuilder = new UriBuilder
                              {
