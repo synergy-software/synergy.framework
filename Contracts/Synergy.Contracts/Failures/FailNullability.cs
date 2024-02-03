@@ -61,7 +61,12 @@ namespace Synergy.Contracts
         public static T OrFail<T>(
             [CanBeNull] [AssertionCondition(AssertionConditionType.IS_NOT_NULL)] [NoEnumeration]
             this T value,
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string name)
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")] string? name = null
+#else
+            string name
+#endif
+            )
         {
             Fail.RequiresArgumentName(name);
 

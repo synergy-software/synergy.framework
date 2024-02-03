@@ -28,7 +28,7 @@ namespace Synergy.Web.Api.Testing.Assertions
         public override Result Assert(HttpOperation operation)
         {
             // TODO: Add non-nullable annotations to OrFail() - and other contract methods
-            var current = operation.Response.Content.ReadJson().OrFail("response")!;
+            var current = operation.Response.Content.ReadJson().OrFail("response");
             if (_savedPattern == null)
             {
                 SaveNewPattern(current);

@@ -11,14 +11,14 @@ namespace Synergy.Convention.Testing.Rules
         public MemberInfo Member { get; }
         public string Description { get; }
 
-        private Type DeclaringType => Member.DeclaringType.OrFail(nameof(Member.DeclaringType))!;
+        private Type DeclaringType => Member.DeclaringType.OrFail();
         public Assembly Assembly => DeclaringType.Assembly;
         public string MemberName => FullNameOfMember();
         
         public Deficit(MemberInfo member, string description)
         {
-            this.Member = member.OrFail(nameof(member));
-            this.Description = description.OrFail(nameof(description));
+            this.Member = member.OrFail();
+            this.Description = description.OrFail();
         }
 
         public override string ToString()

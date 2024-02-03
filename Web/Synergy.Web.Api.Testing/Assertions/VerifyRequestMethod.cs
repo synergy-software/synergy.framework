@@ -11,7 +11,7 @@ namespace Synergy.Web.Api.Testing.Assertions
 
         public VerifyRequestMethod(params HttpMethod[] expectedMethod)
         {
-            _expectedMethod = expectedMethod.OrFail(nameof(expectedMethod));
+            _expectedMethod = expectedMethod.OrFail();
             ExpectedResult = $"HTTP request method is {_expectedMethod}";
         }
 

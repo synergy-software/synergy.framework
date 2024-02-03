@@ -21,9 +21,9 @@ namespace Synergy.Web.Api.Testing
         internal void Init(TestServer testServer, HttpRequestMessage request, HttpResponseMessage response, Stopwatch timer)
         {
             Duration = timer.Elapsed;
-            TestServer = testServer.OrFail(nameof(testServer));
-            Request = request.OrFail(nameof(request));
-            Response = response.OrFail(nameof(response));
+            TestServer = testServer.OrFail();
+            Request = request.OrFail();
+            Response = response.OrFail();
         }
 
         internal void Assert(IEnumerable<IAssertion> assertions)

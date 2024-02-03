@@ -84,7 +84,6 @@ namespace Synergy.Contracts.Test.Failures
         {
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
-                // ReSharper disable once ExpressionIsAlwaysNull
                 () => thisMustBeNull.OrFail(nameof(thisMustBeNull)));
 
             // ASSERT
@@ -92,12 +91,25 @@ namespace Synergy.Contracts.Test.Failures
         }
 
         [Test]
+        [TestCaseSource(nameof(FailNullabilityTest.GetNulls))]
+        public void OrFailNetCore(object thisMustBeNull)
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => thisMustBeNull.OrFail());
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("'thisMustBeNull' is null; and it shouldn't be;"));
+        }
+        
+        [Test]
         [TestCaseSource(nameof(FailNullabilityTest.GetNotNulls))]
         [SuppressMessage("ReSharper", "UnusedVariable")]
         public void OrFailSuccess(object thisCannotBeNull)
         {
             // ACT
-            Type type = thisCannotBeNull.OrFail(nameof(thisCannotBeNull)).GetType();
+            thisCannotBeNull.OrFail(nameof(thisCannotBeNull));
+            thisCannotBeNull.OrFail();
         }
 
         #endregion
