@@ -164,6 +164,32 @@ namespace Synergy.Contracts.Test.Failures
 
         #endregion
 
+        #region Fail.IfCollectionDoesNotContain()
+
+        [Test]
+        [TestCaseSource(nameof(FailCollectionTest.GetCollectionsWithoutSuchElement))]
+        public void IfCollectionDoesNotContain(Tuple<IEnumerable<object>, object> pair)
+        {
+            var collection = pair.Item1;
+            var element = pair.Item2;
+
+            Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfCollectionDoesNotContain(collection, e => object.Equals(e, element), Violation.Of("this collection contains '{0}'", element))
+            );
+        }
+
+        [Test]
+        [TestCaseSource(nameof(FailCollectionTest.GetCollectionsWithSuchElement))]
+        public void IfCollectionDoesNotContainSuccess(Tuple<IEnumerable<object>, object> pair)
+        {
+            var collection = pair.Item1;
+            var element = pair.Item2;
+
+            Fail.IfCollectionDoesNotContain(collection, e => object.Equals(e,element), Violation.Of("this collection contains '{0}'", element));
+        }
+
+        #endregion
+        
         #region Fail.IfCollectionsAreNotEquivalent()
 
         [Test]

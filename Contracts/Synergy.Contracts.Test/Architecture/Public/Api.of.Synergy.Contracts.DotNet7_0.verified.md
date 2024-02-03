@@ -118,6 +118,11 @@
      collection: IEnumerable<T> [CanBeNull, AssertionCondition],
      collectionName: string? [Nullable, CallerArgumentExpression, Optional]
    ) : void [AssertionMethod, ContractAnnotation]
+ - Fail.IfCollectionDoesNotContain<T>(
+     collection: IEnumerable<T> [CanBeNull, AssertionCondition],
+     func: Func<T, bool> [NotNull, NotNull],
+     message: Violation
+   ) : void [AssertionMethod, ContractAnnotation]
  - Fail.IfCollectionEmpty(
      collection: IEnumerable [CanBeNull, AssertionCondition],
      collectionName: string? [Nullable, CallerArgumentExpression, Optional]

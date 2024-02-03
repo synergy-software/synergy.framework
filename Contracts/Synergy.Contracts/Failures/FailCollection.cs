@@ -8,7 +8,6 @@ namespace Synergy.Contracts
 {
     static partial class Fail
     {
-        // TODO:mace (from:mace @ 22-10-2016) public static void IfCollectionDoesNotContain<T>([CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] IEnumerable<T> collection,) 
         // TODO: Marcin Celej [from: Marcin Celej on: 29-05-2023]: Fail.IfCollectionContainsDuplicates
 
         #region Fail.IfCollectionEmpty()
@@ -113,7 +112,7 @@ namespace Synergy.Contracts
 
 
         [MustUseReturnValue]
-        private static bool IsEmpty([NotNull] [System.Diagnostics.CodeAnalysis.NotNull] this IEnumerable source)
+        private static bool IsEmpty(this IEnumerable source)
         {
             if (source is ICollection collection)
                 return collection.Count == 0;
@@ -161,7 +160,7 @@ namespace Synergy.Contracts
 
         /// <summary>
         /// Throws the exception when collection contains element meeting specified criteria.
-        /// <para>REMARKS: The provided collection CANNOT by <see langword="null"/> as it will throw the exception.</para>
+        /// <para>REMARKS: The provided collection CANNOT be <see langword="null"/> as it will throw the exception.</para>
         /// </summary>
         /// <typeparam name="T">Type of the collection element.</typeparam>
         /// <param name="collection">Collection to investigate whether contains specific element.</param>
@@ -177,8 +176,34 @@ namespace Synergy.Contracts
         )
         {
             Fail.IfArgumentNull(collection, nameof(collection));
-            T element = collection.FirstOrDefault(func);
-            Fail.IfNotNull(element, message);
+            var found = collection.Any(func);
+            Fail.IfTrue(found, message);
+        }
+
+        #endregion
+        
+        #region Fail.IfCollectionDoesNotContain()
+
+        /// <summary>
+        /// Throws the exception when collection does not contain element meeting specified criteria.
+        /// <para>REMARKS: The provided collection CANNOT be <see langword="null"/> as it will throw the exception.</para>
+        /// </summary>
+        /// <typeparam name="T">Type of the collection element.</typeparam>
+        /// <param name="collection">Collection to investigate whether contains specific element.</param>
+        /// <param name="func">Function with criteria that at least one element must meet.</param>
+        /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
+        [AssertionMethod]
+        [ContractAnnotation("collection: null => halt")]
+        public static void IfCollectionDoesNotContain<T>(
+            [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
+            IEnumerable<T> collection,
+            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] Func<T, bool> func,
+            Violation message
+        )
+        {
+            Fail.IfArgumentNull(collection, nameof(collection));
+            var found = collection.Any(func);
+            Fail.IfFalse(found, message);
         }
 
         #endregion

@@ -1,6 +1,6 @@
 ﻿# Technical Debt for Synergy.Contracts
 
-Total: 8
+Total: 7
 
 ## [README.Generate.cs](../../Docs/README.Generate.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 03-02-2024]: Prepare full description of Contract checks
@@ -17,5 +17,4 @@ Total: 8
 - TODO:mace (from:mace @ 22-10-2016): variable.FailIfTrue(message)
 
 ## [FailCollection.cs](../../../Synergy.Contracts/Failures/FailCollection.cs)
-- TODO:mace (from:mace @ 22-10-2016) public static void IfCollectionDoesNotContain<T>([CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)] IEnumerable<T> collection,)
 - TODO: Marcin Celej [from: Marcin Celej on: 29-05-2023]: Fail.IfCollectionContainsDuplicates
