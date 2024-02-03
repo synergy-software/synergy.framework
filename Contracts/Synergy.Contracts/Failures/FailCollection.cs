@@ -23,7 +23,11 @@ namespace Synergy.Contracts
         public static void IfCollectionEmpty(
             [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
             IEnumerable collection,
-            [NotNull] [System.Diagnostics.CodeAnalysis.NotNull] string collectionName
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("collection")] string? collectionName = null
+#else
+            string collectionName
+#endif
         )
         {
             collection.OrFailIfCollectionEmpty(collectionName);

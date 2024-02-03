@@ -20,12 +20,22 @@ namespace Synergy.Contracts.Test.Failures
                 () => Fail.IfCollectionEmpty(collection, nameof(collection))
             );
         }
+        
+        [Test]
+        [TestCaseSource(nameof(FailCollectionTest.GetEmpty))]
+        public void IfCollectionEmptyWithNameCallerArgumentExpression([CanBeNull] IEnumerable collection)
+        {
+            Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfCollectionEmpty(collection)
+            );
+        }
 
         [Test]
         [TestCaseSource(nameof(FailCollectionTest.GetNotEmpty))]
-        public void IfCollectionEmptySuccessWithName([NotNull] IEnumerable collection)
+        public void IfCollectionEmptySuccessWithName(IEnumerable collection)
         {
-            Fail.IfCollectionEmpty(collection, "collection");
+            Fail.IfCollectionEmpty(collection, nameof(collection));
+            Fail.IfCollectionEmpty(collection);
         }
 
         [Test]
