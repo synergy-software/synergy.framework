@@ -12,7 +12,7 @@
         <PackageLicenseFile>license.txt</PackageLicenseFile>
         <Description>Behaviour Driven Development support</Description>
         <Copyright>Copyright © Synergy Marcin Celej 2024</Copyright>
-        <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/tree/master/Behaviours/README.md</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/blob/3.0.4/Behaviours/README.md</PackageProjectUrl>
         <PackageIcon>synergy.png</PackageIcon>
         <PackageTags>BDD Behaviour Driven Development</PackageTags>
         <AssemblyVersion>$(Version)</AssemblyVersion>
