@@ -22,6 +22,7 @@ namespace Synergy.Contracts.Test.Architecture.Public
             await Verifier.Verify(publicApi, "md")
                           .UseMethodName("of." + assembly.GetName().Name)
                           .UniqueForTargetFrameworkAndVersion()
+                          // TODO: Marcin Celej [from: Marcin Celej on: 03-02-2024]: remove that when job fiished
                           .AutoVerify();
         }
     }

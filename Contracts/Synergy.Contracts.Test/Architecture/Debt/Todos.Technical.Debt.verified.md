@@ -1,6 +1,9 @@
 ﻿# Technical Debt for Synergy.Contracts
 
-Total: 15
+Total: 16
+
+## [Api.cs](../Public/Api.cs)
+- TODO: Marcin Celej [from: Marcin Celej on: 03-02-2024]: remove that when job fiished
 
 ## [BusinessDocumentation.cs](../../Requirements/BusinessDocumentation.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 08-04-2023]: check that and probably convert docs int tt
