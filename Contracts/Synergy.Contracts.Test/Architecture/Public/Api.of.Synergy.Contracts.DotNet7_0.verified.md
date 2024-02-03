@@ -206,7 +206,7 @@
  - Fail.IfTooLong(
      value: string [CanBeNull],
      maxLength: int,
-     name: string [NotNull, NotNull]
+     name: string? [Nullable, CallerArgumentExpression, Optional]
    ) : void [AssertionMethod]
  - Fail.IfTooLongOrWhitespace(
      value: string [CanBeNull],
