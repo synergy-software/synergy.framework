@@ -114,6 +114,11 @@
      func: Func<T, bool> [NotNull, NotNull],
      message: Violation
    ) : void [AssertionMethod, ContractAnnotation]
+ - Fail.IfCollectionContainsDuplicate<T>(
+     collection: IEnumerable<T> [Nullable, CanBeNull, AssertionCondition],
+     message: Violation? [Optional],
+     collectionName: string? [CallerArgumentExpression, Optional]
+   ) : void [NullableContext, AssertionMethod, ContractAnnotation]
  - Fail.IfCollectionContainsNull<T>(
      collection: IEnumerable<T> [CanBeNull, AssertionCondition],
      collectionName: string? [Nullable, CallerArgumentExpression, Optional]

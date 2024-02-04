@@ -1,6 +1,6 @@
 ﻿# Technical Debt for Synergy.Contracts
 
-Total: 7
+Total: 6
 
 ## [README.Generate.cs](../../Docs/README.Generate.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 03-02-2024]: Prepare full description of Contract checks
@@ -15,6 +15,3 @@ Total: 7
 ## [FailBoolean.cs](../../../Synergy.Contracts/Failures/FailBoolean.cs)
 - TODO:mace (from:mace @ 22-10-2016): variable.FailIfFalse(message)
 - TODO:mace (from:mace @ 22-10-2016): variable.FailIfTrue(message)
-
-## [FailCollection.cs](../../../Synergy.Contracts/Failures/FailCollection.cs)
-- TODO: Marcin Celej [from: Marcin Celej on: 29-05-2023]: Fail.IfCollectionContainsDuplicates

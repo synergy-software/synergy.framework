@@ -8,8 +8,6 @@ namespace Synergy.Contracts
 {
     static partial class Fail
     {
-        // TODO: Marcin Celej [from: Marcin Celej on: 29-05-2023]: Fail.IfCollectionContainsDuplicates
-
         #region Fail.IfCollectionEmpty()
 
         /// <summary>
@@ -246,6 +244,42 @@ namespace Synergy.Contracts
 
         #endregion
 
+        #region Fail.IfCollectionContainsDuplicate()
+
+        /// <summary>
+        /// Throws the exception when collection contains element meeting specified criteria.
+        /// <para>REMARKS: The provided collection CANNOT be <see langword="null"/> as it will throw the exception.</para>
+        /// </summary>
+        /// <typeparam name="T">Type of the collection element.</typeparam>
+        /// <param name="collection">Collection to investigate whether contains specific element.</param>
+        /// <param name="func">Function with criteria that at least one element must meet.</param>
+        /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
+        [AssertionMethod]
+        [ContractAnnotation("collection: null => halt")]
+        public static void IfCollectionContainsDuplicate<T>(
+            [CanBeNull, AssertionCondition(AssertionConditionType.IS_NOT_NULL)]
+            IEnumerable<T> collection,
+            Violation? message = null,
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("collection")] string? collectionName = null
+#else
+            string? collectionName = null
+#endif
+        )
+        {
+            Fail.IfArgumentNull(collection, nameof(collection));
+            var unique = new HashSet<T>();
+            foreach (T element in collection)
+            {
+                if (unique.Contains(element))
+                    throw Fail.Because(message ?? Violation.WhenCollectionContainsDuplicate(collectionName ?? "collection", element));
+                        
+                unique.Add(element);
+            }
+        }
+
+        #endregion
+        
         /// <summary>
         /// Checks if collection name was provided.
         /// </summary>

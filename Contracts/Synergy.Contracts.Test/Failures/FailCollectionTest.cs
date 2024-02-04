@@ -210,6 +210,33 @@ namespace Synergy.Contracts.Test.Failures
 
         #endregion
 
+        #region Fail.IfCollectionContains()
+
+        [Test]
+        public void IfCollectionContainsDuplicate()
+        {
+            var collection = new List<int> { 1, 2, 3, 1 };
+
+            Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfCollectionContainsDuplicate(collection, Violation.Of("this collection contains duplicate"))
+            );
+
+            Assert.Throws<DesignByContractViolationException>(
+                () => Fail.IfCollectionContainsDuplicate(collection)
+            );
+        }
+
+        [Test]
+        public void IfCollectionContainsDuplicateSuccess()
+        {
+            var collection = new List<int> { 1, 2, 3 };
+
+            Fail.IfCollectionContainsDuplicate(collection, Violation.Of("this collection contains duplicate"));
+            Fail.IfCollectionContainsDuplicate(collection);
+        }
+
+        #endregion
+        
         [NotNull, ItemCanBeNull]
         private static IEnumerable<IEnumerable> GetEmpty()
         {

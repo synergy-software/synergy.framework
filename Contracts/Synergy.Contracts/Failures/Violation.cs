@@ -226,6 +226,15 @@ namespace Synergy.Contracts
             Violation.Of("Collection '{0}' contains null", collectionName);
 
         /// <summary>
+        /// "Collection '{0}' contains duplicate: {1}"
+        /// </summary>
+        /// <param name="collectionName">collection name</param>
+        /// <param name="duplicate">duplicated object</param>
+        /// <returns>Violation message</returns>
+        internal static Violation WhenCollectionContainsDuplicate(string collectionName, object? duplicate) => 
+            Violation.Of("Collection '{0}' contains duplicate: {1}", collectionName, duplicate ?? "null");
+        
+        /// <summary>
         /// "Expected {0} of type '{1}' but was '{2}'"
         /// </summary>
         /// <typeparam name="T"></typeparam>
