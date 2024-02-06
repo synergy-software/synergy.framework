@@ -5,7 +5,6 @@ namespace Synergy.Contracts.Test.Failures.Dates;
 
 public class FailIfNotDateTest
 {
-
     [Theory]
     [MemberData(nameof(DateTimeTestData.GetDatesWithTime), MemberType = typeof(DateTimeTestData))]
     public void FailIfNotDate(DateTime dateTime)
@@ -44,5 +43,4 @@ public class FailIfNotDateTest
         // ASSERT
         Assert.Equal(date, returned);
     }
-
 }
