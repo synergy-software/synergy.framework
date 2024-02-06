@@ -5,12 +5,14 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsPackable>true</IsPackable>
-        <PackageVersion>3.0.4</PackageVersion>
+        <PackageVersion>3.0.5</PackageVersion>
         <Title>Synergy Architecture Diagrams</Title>
         <Authors>Synergy Marcin Celej</Authors>
         <PackageLicenseFile>license.txt</PackageLicenseFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageLicenseUrl>https://licenses.nuget.org/MIT</PackageLicenseUrl>
         <Description>Behaviour Driven Development support</Description>
-        <Copyright>Copyright © Synergy Marcin Celej 2023</Copyright>
+        <Copyright>Copyright © Synergy Marcin Celej 2024</Copyright>
         <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/blob/3.0.4/Architecture/README.md</PackageProjectUrl>
         <PackageIcon>synergy.png</PackageIcon>
         <PackageTags>BDD Behaviour Driven Development</PackageTags>

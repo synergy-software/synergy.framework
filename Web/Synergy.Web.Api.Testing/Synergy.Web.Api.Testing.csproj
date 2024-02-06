@@ -5,15 +5,17 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <IsPackable>true</IsPackable>
-    <PackageVersion>3.0.4</PackageVersion>
+    <PackageVersion>3.0.5</PackageVersion>
     <Title>Synergy.Web.Api.Testing - Web API Testing helper</Title>
     <Authors>Synergy Marcin Celej</Authors>
     <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicenseUrl>https://licenses.nuget.org/MIT</PackageLicenseUrl>
     <!-- TODO: Prepare docs  -->
     <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/wiki/Contracts</PackageProjectUrl>
     <PackageIcon>synergy.png</PackageIcon>
     <Description>Web API Testing support</Description>
-    <Copyright>Copyright © Synergy Marcin Celej 2019</Copyright>
+    <Copyright>Copyright © Synergy Marcin Celej 2024</Copyright>
     <PackageTags>Web API Testing</PackageTags>
     <Nullable>enable</Nullable>
     <LangVersion>8</LangVersion>
