@@ -1,5 +1,4 @@
 ﻿using Xunit;
-using Assert = Xunit.Assert;
 
 namespace Synergy.Contracts.Test.Failures.Boolean;
 
