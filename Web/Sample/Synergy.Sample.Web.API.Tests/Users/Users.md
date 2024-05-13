@@ -95,11 +95,11 @@ Content-Length: 129
 
 ### 2.2. Get created user pointed by "Location" header (1 request)
 
-### 2.2.2. Request to [Get user located at http://localhost/api/v1/users/2fdc2f9a03534536b1b5532a383b7cc0]
+### 2.2.2. Request to [Get created user]
 
 - Request
 ```
-GET  /api/v1/users/102a023150d94b1b99dbfbd5d6a695d8
+GET  /api/v1/users/0dd576b44c7a40a4884cc7512272e751
 test: header
 ```
 
@@ -108,13 +108,14 @@ test: header
 HTTP/1.1 200 OK
 api-supported-versions: 1.0
 Content-Type: application/json; charset=utf-8
-Content-Length: 129
+Content-Length: 182
 {
   "user": {
-    "id": "102a023150d94b1b99dbfbd5d6a695d8",
+    "id": "0dd576b44c7a40a4884cc7512272e751",
     "login": {
       "value": "marcin@synergy.com"
-    }
+    },
+    "created": "2024-05-13T13:19:15.8420304+02:00"
   }
 }
 ```
@@ -137,11 +138,11 @@ Content-Length: 129
 
 ### 3.1. Get user by id (1 request)
 
-### 3.1.1. Request to [Get user with id "2fdc2f9a03534536b1b5532a383b7cc0"]
+### 3.1.1. Request to [Get user by id]
 
 - Request
 ```
-GET  /api/v1/users/102a023150d94b1b99dbfbd5d6a695d8
+GET  /api/v1/users/0dd576b44c7a40a4884cc7512272e751
 test: header
 ```
 
@@ -150,13 +151,14 @@ test: header
 HTTP/1.1 200 OK
 api-supported-versions: 1.0
 Content-Type: application/json; charset=utf-8
-Content-Length: 129
+Content-Length: 182
 {
   "user": {
-    "id": "102a023150d94b1b99dbfbd5d6a695d8",
+    "id": "0dd576b44c7a40a4884cc7512272e751",
     "login": {
       "value": "marcin@synergy.com"
-    }
+    },
+    "created": "2024-05-13T13:19:15.8420304+02:00"
   }
 }
 ```
@@ -171,7 +173,7 @@ Content-Length: 129
 
 ### 3.2. Negative test: Try to get user that do not exist (1 request)
 
-### 3.2.2. Request to [Get user with id "user-id-that-do-not-exist"]
+### 3.2.2. Request to [Get user by id]
 
 - Request
 ```
@@ -222,14 +224,15 @@ test: header
 HTTP/1.1 200 OK
 api-supported-versions: 1.0
 Content-Type: application/json; charset=utf-8
-Content-Length: 152
+Content-Length: 207
 {
   "users": [
     {
-      "id": "102a023150d94b1b99dbfbd5d6a695d8",
+      "id": "0dd576b44c7a40a4884cc7512272e751",
       "login": {
         "value": "marcin@synergy.com"
-      }
+      },
+      "created": "2024-05-13T13:19:15.8420304+02:00"
     }
   ]
 }
@@ -391,7 +394,7 @@ Content-Length: 351
 
 ### 6.1. Delete user by id (1 request)
 
-### 6.1.1. Request to [Delete user with id "2fdc2f9a03534536b1b5532a383b7cc0"]
+### 6.1.1. Request to [Delete user by id]
 
 - Request
 ```
@@ -418,7 +421,7 @@ Content-Length: 2
 
 ### 6.2. Try to get the deleted user (1 request)
 
-### 6.2.2. Request to [Get user with id "2fdc2f9a03534536b1b5532a383b7cc0"]
+### 6.2.2. Request to [Get user by id]
 
 - Request
 ```

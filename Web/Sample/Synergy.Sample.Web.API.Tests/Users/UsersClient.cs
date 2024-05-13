@@ -23,11 +23,11 @@ namespace Synergy.Sample.Web.API.Tests.Users
         
         public HttpOperation GetUserBy(Uri location)
             => this._testServer.Get(location.ToString())
-                   .Details($"Get user located at {location}");
+                   .Details($"Get created user");
 
         public HttpOperation GetUser(string userId)
             => this._testServer.Get($"{UsersClient.Path}/{userId}")
-                   .Details($"Get user with id {userId.QuoteOrNull()}");
+                   .Details($"Get user by id");
         
         public CreateUserOperation Create(string login)
             => this._testServer.Post<CreateUserOperation>(UsersClient.Path, body: JObject.Parse($"{{login:{login.QuoteOrNull()}}}"))
@@ -39,7 +39,7 @@ namespace Synergy.Sample.Web.API.Tests.Users
 
         public HttpOperation DeleteUser(string userId)
             => this._testServer.Delete($"{UsersClient.Path}/{userId}")
-                   .Details($"Delete user with id {userId.QuoteOrNull()}");
+                   .Details($"Delete user by id");
 
         public class CreateUserOperation : HttpOperation
         {

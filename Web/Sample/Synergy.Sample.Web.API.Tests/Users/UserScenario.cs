@@ -70,7 +70,7 @@ namespace Synergy.Sample.Web.API.Tests.Users
                     this.EqualToPattern("/Patterns/S02_E01_CreateUser.json")
                         .Ignore(Ignore.RequestBody("Login"))
                         .Ignore(Ignore.ResponseLocationHeader())
-                        .Ignore(Ignore.ResponseBody("user.id"))
+                        .Ignore(Ignore.ResponseBody("user.id", "user.created"))
                         .Expected("Manual: User is created and its details are returned"))
                 .ReadUserId(out var id)
                 .ReadCreatedUserLocationUrl(out var location);
@@ -81,7 +81,7 @@ namespace Synergy.Sample.Web.API.Tests.Users
                 .ShouldBe(
                     this.EqualToPattern("/Patterns/S02_E02_GetCreatedUserByLocation.json")
                         .Ignore(Ignore.RequestMethod())
-                        .Ignore(Ignore.ResponseBody("user.id"))
+                        .Ignore(Ignore.ResponseBody("user.id", "user.created"))
                         .Expected("Manual: User details are returned"));
 
             return id;
@@ -97,7 +97,7 @@ namespace Synergy.Sample.Web.API.Tests.Users
                 .ShouldBe(
                     this.EqualToPattern("/Patterns/S03_E01_GetUser.json")
                         .Ignore(Ignore.RequestMethod())
-                        .Ignore(Ignore.ResponseBody("user.id"))
+                        .Ignore(Ignore.ResponseBody("user.id", "user.created"))
                         .Expected("Manual: User details are returned"));
 
             this.users.GetUser("user-id-that-do-not-exist")
@@ -119,7 +119,7 @@ namespace Synergy.Sample.Web.API.Tests.Users
                 .ShouldBe(ApiConventionFor.GetListOfResources())
                 .ShouldBe(
                     this.EqualToPattern("/Patterns/S04_E01_GetListOfUsers.json")
-                        .Ignore(Ignore.ResponseBody("users[*].id"))
+                        .Ignore(Ignore.ResponseBody("users[*].id", "users[*].created"))
                         .Expected("Manual: Users list is returned")
                 );
         }

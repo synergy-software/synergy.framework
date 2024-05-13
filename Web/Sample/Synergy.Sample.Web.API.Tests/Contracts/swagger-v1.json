@@ -16,23 +16,6 @@
   },
   "paths": {
     "/api/v1/users": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetUsersQueryResult"
-                }
-              }
-            }
-          }
-        }
-      },
       "post": {
         "tags": [
           "Users"
@@ -78,6 +61,23 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUsersQueryResult"
                 }
               }
             }
@@ -238,6 +238,11 @@
           },
           "login": {
             "$ref": "#/components/schemas/Login"
+          },
+          "createdOn": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
           }
         },
         "additionalProperties": false
