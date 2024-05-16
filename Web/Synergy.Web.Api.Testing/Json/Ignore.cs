@@ -40,6 +40,15 @@ namespace Synergy.Web.Api.Testing.Json
             return new Ignore("$.request.method");
         }
 
+        public static Ignore RequestHeaders(params string[] headers)
+        {
+            var ignore = new Ignore();
+            if (headers.Any() == false)
+                ignore.Append(new[] {"$.request.headers"});
+            ignore.Append(headers.Select(node=> $"$.request.headers.{node}"));
+            return ignore;
+        }
+        
         public static Ignore RequestDescription()
         {
             return new Ignore("$.request.description");
