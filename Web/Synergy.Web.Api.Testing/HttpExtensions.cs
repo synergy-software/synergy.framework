@@ -84,6 +84,15 @@ namespace Synergy.Web.Api.Testing
             return headers.ToList();
         }
 
+        public static List<KeyValuePair<string, IEnumerable<string>>> GetAllHeaders(this HttpRequestMessage response)
+        {
+            var headers = response.Headers.ToList();
+            if (response.Content != null)
+                headers.AddRange(response.Content.Headers);
+
+            return headers;
+        }
+        
         public static List<KeyValuePair<string, IEnumerable<string>>> GetAllHeaders(this HttpResponseMessage response)
         {
             var headers = response.Headers.ToList();
@@ -100,7 +109,7 @@ namespace Synergy.Web.Api.Testing
         {
             var report = new StringBuilder();
             report.AppendLine(request.GetRequestFullMethod());
-            InsertHeaders(report, operation.GetAllRequestHeaders());
+            InsertHeaders(report, request.GetAllHeaders());
             var requestBody = request.Content.ReadJson();
             if (requestBody != null)
             {

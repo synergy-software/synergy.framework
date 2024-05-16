@@ -152,9 +152,9 @@ namespace Synergy.Web.Api.Testing.Assertions
         {
             Fail.IfNull(_savedPattern);
 
-            var fullMethod = _savedPattern!.SelectToken("$.request.method").Value<string>();
-            var method = fullMethod.Substring(0, fullMethod.IndexOf(" "));
-            var url = fullMethod.Substring(fullMethod.IndexOf(" "));
+            var fullMethod = _savedPattern!.SelectToken("$.request.method").OrFail().Value<string>();
+            var method = fullMethod.OrFail().Substring(0, fullMethod.IndexOf(" ", StringComparison.InvariantCulture));
+            var url = fullMethod.Substring(fullMethod.IndexOf(" ", StringComparison.InvariantCulture));
             var request = new HttpRequestMessage(new HttpMethod(method), url);
 
             var body = _savedPattern!.SelectToken("$.request.body");
@@ -162,6 +162,26 @@ namespace Synergy.Web.Api.Testing.Assertions
             {
                 var payload = body.ToString();
                 request.Content = new StringContent(payload, Encoding.UTF8, MediaTypeNames.Application.Json);
+            }
+            
+            var headers = _savedPattern!.SelectTokens("$.request.headers.*");
+            foreach (var header in headers)
+            {
+                var headerName = header.Path.Replace("request.headers.", "");
+                var headerValue = header.Value<string>();
+
+                if (headerName.StartsWith("Content") && request.Content != null)
+                {
+                    if (request.Content.Headers.Contains(headerName))
+                    {
+                        request.Content.Headers.Remove(headerName);
+                    }
+
+                    request.Content.Headers.Add(headerName, headerValue);
+                    continue;
+                }
+
+                request.Headers.Add(headerName, headerValue);
             }
 
             return request;
@@ -172,7 +192,7 @@ namespace Synergy.Web.Api.Testing.Assertions
             Fail.IfNull(_savedPattern);
 
             var fullStatus = _savedPattern!.SelectToken("$.response.status").Value<string>();
-            var status = fullStatus.Substring(0, fullStatus.IndexOf(" "));
+            var status = fullStatus.Substring(0, fullStatus.IndexOf(" ", StringComparison.InvariantCulture));
             var statusCode = Enum.Parse<HttpStatusCode>(status);
             var response = new HttpResponseMessage(statusCode);
             var body = _savedPattern!.SelectToken("$.response.body")?.ToString();

@@ -219,6 +219,9 @@
 
 ## HttpExtensions (abstract class)
  - HttpExtensions.GetAllHeaders(
+     response: HttpRequestMessage
+   ) : List<KeyValuePair<string, IEnumerable<string>>> [Extension]
+ - HttpExtensions.GetAllHeaders(
      response: HttpResponseMessage
    ) : List<KeyValuePair<string, IEnumerable<string>>> [Extension]
  - HttpExtensions.GetAllRequestHeaders(
@@ -286,6 +289,9 @@
      nodes: params String[] [ParamArray]
    ) : Ignore
  - Ignore.RequestDescription() : Ignore
+ - Ignore.RequestHeaders(
+     headers: params String[] [ParamArray]
+   ) : Ignore
  - Ignore.RequestMethod() : Ignore
  - Ignore.ResponseBody(
      nodes: params String[] [ParamArray]
