@@ -67,12 +67,12 @@ partial class CalculatorFeature // Feature: Calculator
     {
        CurrentScenario(
            $"    Scenario Outline: Add many numbers",
-           $"      Given the first number is <{{firstNo}}>",
-           $"      And the second number is <{{second}}>",
+           $"      Given the first number is <{firstNo}>",
+           $"      And the second number is <{second}>",
            $"      When the two {{numbers}} are added",
-           $"      Then the result should be <{{result}}>",
+           $"      Then the result should be <{result}>",
            $"      Examples:",
-           $"        | {{firstNo}} | {{second}} | {{result}} |"
+           $"        | {firstNo} | {second} | {result} |"
        );
 
        Background().CalculatorBackground();

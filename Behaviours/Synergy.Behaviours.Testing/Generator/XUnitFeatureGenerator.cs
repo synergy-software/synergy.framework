@@ -159,13 +159,46 @@ internal class XUnitFeatureGenerator
 
     private static void GenerateCurrentScenario(StringBuilder code, Scenario scenario)
     {
-        var currentScenario = string.Join($"\",{Environment.NewLine}           $\"", scenario.Lines.Select(line => Quote(line)));
+        var currentScenario = string.Join($"\",{Environment.NewLine}           $\"", LinesOf(scenario));
 
         code.AppendLine($"       CurrentScenario(");
         code.AppendLine($"           $\"{currentScenario}\"");
         code.AppendLine($"       );");
         code.AppendLine();
+    }
 
+    private static List<string> LinesOf(Scenario scenario)
+    {
+        var lines = new List<string>(1 + scenario.Steps.Count);
+        lines.Add(Quote(scenario.Line.Text));
+        if (scenario is ScenarioOutline)
+        {
+            var examples = ((ScenarioOutline)scenario).Examples;
+            var arguments = examples.Header.Values;
+            
+            foreach (var line in scenario.Steps.Select(step=> step.Line.Text))
+            {
+                var tweakedLine = Quote(line);
+                
+                foreach (var argument in arguments)
+                {
+                    var argumentName = Sentence.ToArgument(argument);
+                    tweakedLine = tweakedLine.Replace($"<{argument}>", "<{" + argumentName + "}>");
+                }
+
+                lines.Add(tweakedLine);
+            }
+
+            lines.Add(examples.Line.Text);
+            lines.Add("        | {" + string.Join("} | {", arguments.Select(argument => Sentence.ToArgument(argument))) + "} |");
+        }
+        else
+        {
+            lines.AddRange(scenario.Steps.Select(step => Quote(step.Line.Text)));
+        }
+
+        return lines;
+        
         string Quote(string line)
             => line
                .Replace("\"", "\\\"")
