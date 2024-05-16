@@ -4,7 +4,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <IsPackable>true</IsPackable>
-    <PackageVersion>3.0.5</PackageVersion>
+    <PackageVersion>$(Version)</PackageVersion>
     <Title>Synergy.Contracts - design by contract programming support</Title>
     <Authors>Synergy Marcin Celej</Authors>
     <PackageLicenseFile>license.txt</PackageLicenseFile>

@@ -5,7 +5,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <IsPackable>true</IsPackable>
-    <PackageVersion>3.0.5</PackageVersion>
+    <PackageVersion>$(Version)</PackageVersion>
     <Title>Synergy.Web.Api.Testing - Web API Testing helper</Title>
     <Authors>Synergy Marcin Celej</Authors>
     <PackageLicenseFile>license.txt</PackageLicenseFile>
