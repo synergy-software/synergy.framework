@@ -19,10 +19,10 @@
     <ProjectGuid>{6FFB403F-FFDE-44A5-B3DA-C16F008CA8FE}</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Architecture\Synergy.Convention.Testing\Synergy.Convention.Testing.csproj" />
     <ProjectReference Include="..\..\Documentation\Synergy.Documentation\Synergy.Documentation.csproj" />
     <ProjectReference Include="..\..\Synergy.Catalogue\Synergy.Catalogue.csproj" />
     <ProjectReference Include="..\Synergy.Contracts\Synergy.Contracts.csproj" />
-    <ProjectReference Include="..\Synergy.Convention.Testing\Synergy.Convention.Testing.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SynergyAssemblyInfo.cs" Link="Properties\SynergyAssemblyInfo.cs" />

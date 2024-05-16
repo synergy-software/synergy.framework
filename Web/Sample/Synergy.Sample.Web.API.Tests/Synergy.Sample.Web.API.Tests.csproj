@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Architecture\Synergy.Architecture.Diagrams\Synergy.Architecture.Diagrams.csproj" />
-    <ProjectReference Include="..\..\..\Contracts\Synergy.Convention.Testing\Synergy.Convention.Testing.csproj" />
     <ProjectReference Include="..\..\..\Documentation\Synergy.Documentation\Synergy.Documentation.csproj" />
     <ProjectReference Include="..\..\Synergy.Web.Api.Testing\Synergy.Web.Api.Testing.csproj" />
     <ProjectReference Include="..\Synergy.Sample.Web.API.Services\Synergy.Sample.Web.API.Services.csproj" />
