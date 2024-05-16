@@ -9,7 +9,7 @@
     "description": "Get list of users",
     "method": "GET /api/v1/users",
     "headers": {
-      "test": "header"
+      "test": "header1"
     }
   },
   "response": {

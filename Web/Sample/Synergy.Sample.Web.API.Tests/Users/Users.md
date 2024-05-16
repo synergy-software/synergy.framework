@@ -20,7 +20,7 @@
 - Request
 ```
 GET  /api/v1/users
-test: header
+test: header1
 ```
 
 - Response
@@ -57,9 +57,8 @@ Content-Length: 19
 - Request
 ```
 POST  /api/v1/users
-Content-Type: application/json; charset=utf-8
-Content-Length: 40
 test: header
+Content-Type: application/json; charset=utf-8
 {
   "Login": {
     "Value": "marcin@synergy.com"
@@ -70,16 +69,17 @@ test: header
 - Response
 ```
 HTTP/1.1 201 Created
-Location: http://localhost/api/v1/users/102a023150d94b1b99dbfbd5d6a695d8
+Location: http://localhost/api/v1/users/0dd576b44c7a40a4884cc7512272e751
 api-supported-versions: 1.0
 Content-Type: application/json; charset=utf-8
-Content-Length: 129
+Content-Length: 182
 {
   "user": {
-    "id": "102a023150d94b1b99dbfbd5d6a695d8",
+    "id": "0dd576b44c7a40a4884cc7512272e751",
     "login": {
       "value": "marcin@synergy.com"
-    }
+    },
+    "created": "2024-05-13T13:19:15.8420304+02:00"
   }
 }
 ```
@@ -262,9 +262,8 @@ Content-Length: 207
 - Request
 ```
 POST  /api/v1/users
-Content-Type: application/json; charset=utf-8
-Content-Length: 14
 test: header
+Content-Type: application/json; charset=utf-8
 {
   "login": null
 }
@@ -305,9 +304,8 @@ Content-Length: 351
 - Request
 ```
 POST  /api/v1/users
-Content-Type: application/json; charset=utf-8
-Content-Length: 12
 test: header
+Content-Type: application/json; charset=utf-8
 {
   "login": ""
 }
@@ -348,9 +346,8 @@ Content-Length: 349
 - Request
 ```
 POST  /api/v1/users
-Content-Type: application/json; charset=utf-8
-Content-Length: 14
 test: header
+Content-Type: application/json; charset=utf-8
 {
   "login": "  "
 }

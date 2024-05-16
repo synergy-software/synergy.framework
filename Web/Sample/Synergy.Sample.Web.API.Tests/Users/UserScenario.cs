@@ -55,6 +55,7 @@ namespace Synergy.Sample.Web.API.Tests.Users
                 .ShouldBe(ApiConventionFor.GetListOfResources())
                 .ShouldBe(
                     this.EqualToPattern("/Patterns/S01_E01_GetEmptyListOfUsers.json")
+                        .Ignore(Ignore.RequestHeaders("test"))
                         .Expected("Manual: Empty users list is returned")
                 );
         }
