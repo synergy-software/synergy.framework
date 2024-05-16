@@ -104,10 +104,8 @@ namespace Synergy.Web.Api.Testing
             var requestBody = request.Content.ReadJson();
             if (requestBody != null)
             {
-                report.Append(requestBody.ToString(
-                        Formatting.Indented,
-                        operation.TestServer.Converters()
-                    )
+                report.Append(
+                    Serialize(requestBody, operation.TestServer.SerializationSettings)
                 );
             }
             return report.ToString().Trim();
@@ -121,15 +119,20 @@ namespace Synergy.Web.Api.Testing
             InsertHeaders(report, response.GetAllHeaders());
             var responseBody = response.Content.ReadJson();
             if (responseBody != null)
-                report.Append(responseBody.ToString(
-                        Formatting.Indented,
-                        operation.TestServer.Converters()
-                    )
+                report.Append(
+                    Serialize(responseBody, operation.TestServer.SerializationSettings)
                 );
 
             return report.ToString().Trim();
         }
 
+        private static string Serialize(JToken json, JsonSerializerSettings settings)
+            => JsonConvert.SerializeObject(
+                json,
+                Formatting.Indented,
+                settings
+            );
+        
         private static void InsertHeaders(StringBuilder report, IEnumerable<KeyValuePair<string, IEnumerable<string>>> headers)
         {
             foreach (var header in headers)
