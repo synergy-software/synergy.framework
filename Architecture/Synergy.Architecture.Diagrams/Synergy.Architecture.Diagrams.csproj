@@ -8,7 +8,6 @@
         <PackageVersion>$(Version)</PackageVersion>
         <Title>Synergy Architecture Diagrams</Title>
         <Authors>Synergy Marcin Celej</Authors>
-        <PackageLicenseFile>license.txt</PackageLicenseFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <Description>Behaviour Driven Development support</Description>
         <Copyright>Copyright © Synergy Marcin Celej 2024</Copyright>

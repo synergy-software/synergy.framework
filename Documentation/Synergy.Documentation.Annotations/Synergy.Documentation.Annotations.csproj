@@ -8,7 +8,6 @@
         <PackageVersion>$(Version)</PackageVersion>
         <Title>Synergy.Documentation.Annotations - support for various docs generation</Title>
         <Authors>Synergy Marcin Celej</Authors>
-        <PackageLicenseFile>license.txt</PackageLicenseFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/blob/3.0.4/Documentation/README.md</PackageProjectUrl>
         <PackageIcon>synergy.png</PackageIcon>

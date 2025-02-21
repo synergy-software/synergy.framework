@@ -8,7 +8,6 @@
         <PackageVersion>$(Version)</PackageVersion>
         <Title>Synergy Annotations</Title>
         <Authors>Synergy Marcin Celej</Authors>
-        <PackageLicenseFile>license.txt</PackageLicenseFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <Description>Architecture testing annotations</Description>
         <Copyright>Copyright © Synergy Marcin Celej 2023</Copyright>

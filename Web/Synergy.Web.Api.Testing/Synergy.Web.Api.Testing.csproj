@@ -8,7 +8,6 @@
     <PackageVersion>$(Version)</PackageVersion>
     <Title>Synergy.Web.Api.Testing - Web API Testing helper</Title>
     <Authors>Synergy Marcin Celej</Authors>
-    <PackageLicenseFile>license.txt</PackageLicenseFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <!-- TODO: Prepare docs  -->
     <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/wiki/Contracts</PackageProjectUrl>
