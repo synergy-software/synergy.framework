@@ -328,6 +328,9 @@ namespace Synergy.Architecture.Diagrams.Api
             if (type == typeof(decimal))
                 return "decimal";
 
+            if (type == typeof(byte))
+                return "byte";
+            
             if (type.FullName == null)
                 return type.Name;
 

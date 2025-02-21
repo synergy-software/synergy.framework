@@ -1,6 +1,9 @@
 ﻿# Technical Debt for Synergy.Documentation
 
-Total: 4
+Total: 5
+
+## [CodeFilePathAttribute.cs](../../../Synergy.Documentation.Annotations/CodeFilePathAttribute.cs)
+- TODO: Marcin Celej [from: Marcin Celej on: 16-02-2024]: Consider renaming to SourceFileLocationAttribute
 
 ## [README.Generate.cs](../../Docs/README.Generate.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 09-01-2024]: Extract this to a separate project Synergy.Documentation.Docs with all needed samples inside

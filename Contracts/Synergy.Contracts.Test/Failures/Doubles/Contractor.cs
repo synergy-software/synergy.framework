@@ -18,7 +18,6 @@ namespace Synergy.Contracts.Samples.Domain
             };
         }
 
-        [NotNull, Pure]
         public static Contractor CreatePerson(string firstName, string lastName)
         {
             Fail.IfArgumentEmpty(firstName);

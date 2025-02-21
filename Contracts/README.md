@@ -12,7 +12,10 @@ Find package on nuget:
 
 ## development phase
 
-DbC help us develop more reliable software. It is one of the basic principles of clean code programming. During the development phase when we integrate components (simply: when we call method of another class) we may violate the contract and receive the exception, but this is what it is for. If you encounter such case, you simply need to conform the contract of the 'supplier' class.
+DbC help us develop more reliable software. It is one of the basic principles of clean code programming.
+During the development phase when we integrate components (simply: when we call method of another class) 
+we may violate the contract and receive the exception, but this is what it is for. 
+If you encounter such case, you simply need to conform the contract of the 'supplier' class.
 
 Now, let's quit yapping and show some code:
 

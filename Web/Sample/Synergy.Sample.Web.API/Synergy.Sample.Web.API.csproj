@@ -28,11 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Log" />
-    <Folder Include="Log\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\Architecture\Synergy.Architecture.Annotations\Synergy.Architecture.Annotations.csproj" />
     <ProjectReference Include="..\..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
     <ProjectReference Include="..\..\..\Reflection\Synergy.Reflection\Synergy.Reflection.csproj" />
