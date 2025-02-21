@@ -10,7 +10,6 @@
     <Authors>Synergy Marcin Celej</Authors>
     <PackageLicenseFile>license.txt</PackageLicenseFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageLicenseUrl>https://licenses.nuget.org/MIT</PackageLicenseUrl>
     <!-- TODO: Prepare docs  -->
     <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/wiki/Contracts</PackageProjectUrl>
     <PackageIcon>synergy.png</PackageIcon>

@@ -9,7 +9,6 @@
     <Authors>Synergy Marcin Celej</Authors>
     <PackageLicenseFile>license.txt</PackageLicenseFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageLicenseUrl>https://licenses.nuget.org/MIT</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/blob/3.0.5/Contracts/README.md</PackageProjectUrl>
     <PackageIcon>synergy.png</PackageIcon>
     <Description>Design by contract programming support</Description>
