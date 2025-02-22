@@ -19,7 +19,8 @@ namespace Synergy.Contracts
         public static void IfFalse(
             [AssertionCondition(AssertionConditionType.IS_TRUE)]
             bool value,
-            Violation message)
+            Violation message
+        )
         {
             if (value == false)
                 throw Fail.Because(message);
@@ -39,7 +40,8 @@ namespace Synergy.Contracts
         public static void IfTrue(
             [AssertionCondition(AssertionConditionType.IS_FALSE)]
             bool value,
-            Violation message)
+            Violation message
+        )
         {
             if (value)
                 throw Fail.Because(message);
