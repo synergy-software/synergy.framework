@@ -69,9 +69,10 @@ namespace Synergy.Contracts
         /// <param name="value">The <see cref="Guid" /> checked for emptiness</param>
         /// <param name="message">Message that will be passed to <see cref="DesignByContractViolationException"/> when the check fails.</param>
         [AssertionMethod]
-        public static void FailIfEmpty(this Guid value, Violation message)
+        public static Guid FailIfEmpty(this Guid value, Violation message)
         {
             Fail.IfEqual(Guid.Empty, value, message);
+            return value;
         }
 
         /// <summary>

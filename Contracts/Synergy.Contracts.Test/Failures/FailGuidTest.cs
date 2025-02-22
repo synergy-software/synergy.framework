@@ -22,7 +22,7 @@ namespace Synergy.Contracts.Test.Failures
             // ASSERT
             Assert.That(exception.Message, Is.EqualTo("Argument 'someEmptyGuid' is an empty Guid."));
         }
-        
+
         [TestCaseSource(nameof(FailGuidTest.GetEmptyGuid))]
         public void IfArgumentEmptyCallerArgumentExpression(Guid someEmptyGuid)
         {
@@ -74,13 +74,13 @@ namespace Synergy.Contracts.Test.Failures
             // ASSERT
             Assert.That(exception.Message, Is.EqualTo("'guid' is empty."));
         }
-        
+
         [Test]
         public void IfEmptyWithCallerArgumentExpression()
         {
             // ARRANGE
             var guid = Guid.Empty;
-            
+
             // ACT
             var exception = Assert.Throws<DesignByContractViolationException>(
                 () => Fail.IfEmpty(guid)
@@ -89,7 +89,17 @@ namespace Synergy.Contracts.Test.Failures
             // ASSERT
             Assert.That(exception.Message, Is.EqualTo("'guid' is empty."));
         }
-        
+
+        [Test]
+        public void IfEmptySuccess()
+        {
+            // ARRANGE
+            Guid notEmptyGuid = Guid.NewGuid();
+            
+            // ACT
+            Fail.IfEmpty(notEmptyGuid);
+        }
+
         [Test]
         public void IfEmptyWithMessage()
         {
@@ -127,7 +137,7 @@ namespace Synergy.Contracts.Test.Failures
             // ASSERT
             Assert.That(exception.Message, Is.EqualTo("'guid' is empty."));
         }
-        
+
         [Test]
         public void FailIfEmptyWithCallerArgumentExpression()
         {
@@ -138,6 +148,16 @@ namespace Synergy.Contracts.Test.Failures
 
             // ASSERT
             Assert.That(exception.Message, Is.EqualTo("'Guid.Empty' is empty."));
+        }
+
+        [Test]
+        public void FailIfEmptySuccess()
+        {
+            // ARRANGE
+            Guid notEmptyGuid = Guid.NewGuid();
+
+            // ACT
+            notEmptyGuid.FailIfEmpty();
         }
         
         [Test]
@@ -163,7 +183,7 @@ namespace Synergy.Contracts.Test.Failures
         }
 
         #endregion
-        
+
         [ItemNotNull, NotNull]
         private static IEnumerable GetEmptyGuid()
         {
