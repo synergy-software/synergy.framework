@@ -20,12 +20,12 @@ namespace Synergy.Contracts
 #else
             string name
 #endif
-            )
+        )
         {
             Fail.RequiresArgumentName(name);
             Fail.IfEmpty(value, Violation.WhenEmpty(name));
         }
-        
+
         /// <summary>
         /// Throws exception when checked <see cref="Guid" /> is empty ({00000000-0000-0000-0000-000000000000}).
         /// <para>REMARKS: When you create a <see cref="Guid" /> using default constructor it is empty.
@@ -37,6 +37,28 @@ namespace Synergy.Contracts
         public static void IfEmpty(Guid value, Violation message)
         {
             Fail.IfEqual(Guid.Empty, value, message);
+        }
+
+        /// <summary>
+        /// Throws exception when checked <see cref="Guid" /> is empty ({00000000-0000-0000-0000-000000000000}).
+        /// <para>REMARKS: When you create a <see cref="Guid" /> using default constructor it is empty.
+        /// You can check the emptiness using this Fail.</para>
+        /// </summary>
+        /// <param name="value">The <see cref="Guid" /> checked for emptiness</param>
+        /// <param name="name">Name of the checked argument / parameter.</param>
+        [AssertionMethod]
+        public static Guid FailIfEmpty(
+            this Guid value,
+#if NET6_0_OR_GREATER
+            [System.Runtime.CompilerServices.CallerArgumentExpression("value")] string? name = null
+#else
+            string name
+#endif
+        )
+        {
+            Fail.RequiresArgumentName(name);
+            value.FailIfEmpty(Violation.WhenEmpty(name));
+            return value;
         }
 
         /// <summary>

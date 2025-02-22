@@ -58,6 +58,10 @@
      value: Guid,
      message: Violation
    ) : void [Extension, AssertionMethod]
+ - Fail.FailIfEmpty(
+     value: Guid,
+     name: string? [CallerArgumentExpression, Optional]
+   ) : void [NullableContext, Extension, AssertionMethod]
  - Fail.FailIfEnumOutOfRange<T>(
      value: Enum,
      name: string? [Nullable, CallerArgumentExpression, Optional]

@@ -117,6 +117,30 @@ namespace Synergy.Contracts.Test.Failures
         #region variable.FailIfEmpty()
 
         [Test]
+        public void FailIfEmptyWithName()
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => Guid.Empty.FailIfEmpty("guid")
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("'guid' is empty."));
+        }
+        
+        [Test]
+        public void FailIfEmptyWithCallerArgumentExpression()
+        {
+            // ACT
+            var exception = Assert.Throws<DesignByContractViolationException>(
+                () => Guid.Empty.FailIfEmpty()
+            );
+
+            // ASSERT
+            Assert.That(exception.Message, Is.EqualTo("'Guid.Empty' is empty."));
+        }
+        
+        [Test]
         public void FailIfEmptyWithMessage()
         {
             // ACT
