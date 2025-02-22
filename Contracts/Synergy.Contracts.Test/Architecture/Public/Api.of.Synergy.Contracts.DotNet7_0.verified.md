@@ -150,6 +150,10 @@
      message: Violation
    ) : void [AssertionMethod]
  - Fail.IfEmpty(
+     value: Guid,
+     name: string? [CallerArgumentExpression, Optional]
+   ) : void [NullableContext, AssertionMethod]
+ - Fail.IfEmpty(
      value: string [CanBeNull, AssertionCondition],
      message: Violation
    ) : void [AssertionMethod, ContractAnnotation]
