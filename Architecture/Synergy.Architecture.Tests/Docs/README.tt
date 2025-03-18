@@ -3,6 +3,8 @@
 <#@ import namespace="Synergy.Sample.Web.API.Services.Users.Domain" #>
 <#@ import namespace="Synergy.Documentation.Markup" #>
 <#@ import namespace="Synergy.Sample.Web.API.Services.Users.Queries.GetUser" #>
+<!-- WARNING: Generated file. Do NOT modify it manually -->
+
 # Synergy.Architecture nuget packages
 
 Here is the documentation of the `Synergy.Architecture.Diagrams` and `Synergy.Architecture.Annotations` nuget packages.

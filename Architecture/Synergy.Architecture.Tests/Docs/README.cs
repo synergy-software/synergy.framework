@@ -28,65 +28,65 @@ namespace Synergy.Architecture.Tests.Docs
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("# Synergy.Architecture nuget packages\r\n\r\nHere is the documentation of the `Synergy.Architecture.Diagrams` and `Synergy.Architecture.Annotations` nuget packages.\r\nThey were created to help developers to add sequence diagrams from code.\r\nIt is based on the idea of *Diagrams as Code*\r\n \r\nFind packages on nuget: \r\n- [Synergy.Architecture.Diagrams](https://www.nuget.org/packages/Synergy.Architecture.Diagrams/)\r\n- [Synergy.Architecture.Annotations](https://www.nuget.org/packages/Synergy.Architecture.Annotations/)\r\n\r\n## Generating Sequence Diagrams from code\r\n\r\nTo generate sequence diagrams from code, we use the following tool:\r\n\r\n```csharp\r\n");
+            this.Write("<!-- WARNING: Generated file. Do NOT modify it manually -->\r\n\r\n# Synergy.Architecture nuget packages\r\n\r\nHere is the documentation of the `Synergy.Architecture.Diagrams` and `Synergy.Architecture.Annotations` nuget packages.\r\nThey were created to help developers to add sequence diagrams from code.\r\nIt is based on the idea of *Diagrams as Code*\r\n \r\nFind packages on nuget: \r\n- [Synergy.Architecture.Diagrams](https://www.nuget.org/packages/Synergy.Architecture.Diagrams/)\r\n- [Synergy.Architecture.Annotations](https://www.nuget.org/packages/Synergy.Architecture.Annotations/)\r\n\r\n## Generating Sequence Diagrams from code\r\n\r\nTo generate sequence diagrams from code, we use the following tool:\r\n\r\n```csharp\r\n");
             
-            #line 21 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
+            #line 23 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.RealSequenceDiagramsFile.ReadAllText()));
             
             #line default
             #line hidden
             this.Write("\r\n```\r\n\r\nFor sample code, please check: ");
             
-            #line 24 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
+            #line 26 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.RealSequenceDiagramsLink));
             
             #line default
             #line hidden
             this.Write("\r\n\r\nTo see the results, please check: ");
             
-            #line 26 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
+            #line 28 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.RealDiagramsLink));
             
             #line default
             #line hidden
             this.Write("\r\n\r\n**Note:**\r\n\r\nTo make it working in your project, you need to decorate your code with the following attributes:\r\n\r\n");
             
-            #line 32 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
+            #line 34 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.AttributesList));
             
             #line default
             #line hidden
             this.Write("\r\n\r\nFor sample code, please check:\r\n\r\n- ");
             
-            #line 36 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
+            #line 38 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Markdown.Link.To(GetUserQueryHandler.CodeFile).RelativeFrom(readmeFile)));
             
             #line default
             #line hidden
             this.Write("\r\n- ");
             
-            #line 37 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
+            #line 39 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Markdown.Link.To(UserRepository.CodeFile).RelativeFrom(readmeFile)));
             
             #line default
             #line hidden
             this.Write("\r\n\r\n### Sample\r\n\r\nCheck also the following sample (");
             
-            #line 41 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
+            #line 43 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.SampleSequenceDiagramsLink));
             
             #line default
             #line hidden
             this.Write("):\r\n\r\n```csharp\r\n");
             
-            #line 44 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
+            #line 46 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.SampleSequenceDiagramsFile.ReadAllText()));
             
             #line default
             #line hidden
             this.Write("\r\n```\r\n\r\nThis above test produces: ");
             
-            #line 47 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
+            #line 49 "C:\Projects\Synergy\framework\src\Architecture\Synergy.Architecture.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.SequenceDiagramsLink));
             
             #line default

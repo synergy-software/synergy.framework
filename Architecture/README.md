@@ -1,3 +1,5 @@
+<!-- WARNING: Generated file. Do NOT modify it manually -->
+
 # Synergy.Architecture nuget packages
 
 Here is the documentation of the `Synergy.Architecture.Diagrams` and `Synergy.Architecture.Annotations` nuget packages.
