@@ -25,93 +25,93 @@ namespace Synergy.Documentation.Tests.Docs
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("# Synergy.Documentation nuget packages\r\n\r\nHere is the documentation of the `Synergy.Documentation` and `Synergy.Documentation.Annotations` nuget packages.\r\nThey were created to help developers to document their code in a simple way.\r\nIt is based on the idea of [Docs as Code](https://www.writethedocs.org/guide/docs-as-code/).\r\nBut it goes a bit above it.\r\n\r\nFind packages on nuget: \r\n- [Synergy.Documentation](https://www.nuget.org/packages/Synergy.Documentation/)\r\n- [Synergy.Documentation.Annotations](https://www.nuget.org/packages/Synergy.Documentation.Annotations/)\r\n\r\n## Enlisting Public API\r\n\r\nTo enlist public API, we use the following tool:\r\n\r\n```csharp\r\n");
+            this.Write("<!-- WARNING: Generated file. Do NOT modify it manually -->\r\n\r\n# Synergy.Documentation nuget packages\r\n\r\nHere is the documentation of the `Synergy.Documentation` and `Synergy.Documentation.Annotations` nuget packages.\r\nThey were created to help developers to document their code in a simple way.\r\nIt is based on the idea of [Docs as Code](https://www.writethedocs.org/guide/docs-as-code/).\r\nBut it goes a bit above it.\r\n\r\nFind packages on nuget: \r\n- [Synergy.Documentation](https://www.nuget.org/packages/Synergy.Documentation/)\r\n- [Synergy.Documentation.Annotations](https://www.nuget.org/packages/Synergy.Documentation.Annotations/)\r\n\r\n## Enlisting Public API\r\n\r\nTo enlist public API, we use the following tool:\r\n\r\n```csharp\r\n");
             
-            #line 19 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 21 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.ApiFile.ReadAllText()));
             
             #line default
             #line hidden
             this.Write("\r\n```\r\n\r\nFor sample code, please check: ");
             
-            #line 22 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 24 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.ApiLink));
             
             #line default
             #line hidden
             this.Write("\r\n\r\nTo see the results, please check: ");
             
-            #line 24 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 26 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.ApiForSynergyDocsLink));
             
             #line default
             #line hidden
             this.Write("\r\n\r\n**Note:**\r\n\r\nWhen you expose your public API, you should be aware how it looks like from the outside - ");
             
-            #line 28 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 30 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.ApiLink));
             
             #line default
             #line hidden
             this.Write(".\r\n\r\nWhen you consume some external library - you can enlist its public API and see how it looks like - ");
             
-            #line 30 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 32 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.PackageLink));
             
             #line default
             #line hidden
             this.Write(".\r\n\r\n## Enlisting dependencies of a class\r\n\r\nTo document dependencies of a specific class, we use the following tool:\r\n\r\n```csharp\r\n");
             
-            #line 37 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 39 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.RelationsFile.ReadAllText()));
             
             #line default
             #line hidden
             this.Write("\r\n```\r\n\r\nFor sample code, please check: ");
             
-            #line 40 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 42 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.RelationsLink));
             
             #line default
             #line hidden
             this.Write("\r\n\r\nTo see the results, please check: ");
             
-            #line 42 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 44 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.RelationsOfMarkdownLink));
             
             #line default
             #line hidden
             this.Write("\r\n\r\n## Managing technical debt\r\n\r\nTo manage technical debt, we use the following tool:\r\n\r\n```csharp\r\n");
             
-            #line 49 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 51 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TodosFile.ReadAllText()));
             
             #line default
             #line hidden
             this.Write("\r\n```\r\n\r\nFor sample code, please check: ");
             
-            #line 52 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 54 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TodosLink));
             
             #line default
             #line hidden
             this.Write("\r\n\r\nTo see the results, please check: ");
             
-            #line 54 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 56 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.TodosDebtLink));
             
             #line default
             #line hidden
             this.Write("\r\n\r\n**Note:** \r\n\r\nBasic idea of using this test is to have a list of all technical debt in the project.\r\nEach time developer adds a new technical debt, he should re-run this test otherwise it will fail on the CI.\r\nWhen all tech debt for the project is materialized in single file - we can start working on it.\r\nIt also helps to keep track of all tech debt in the project.\r\nMoreover, it is much easier to spot new technical debt during the code review.\r\n\r\n## Comments as code\r\n\r\nYou probably wonder why we use this approach instead of using standard comments.\r\nFor sure you heard that comments in code are bad because nobody reads them.\r\nActually they are invisible for developer.\r\n\r\nTo make them visible, we need to convert them into code.\r\nTo use comments as code approach, we use the following tool:\r\n\r\n```csharp\r\n");
             
-            #line 74 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 76 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.NoteTestsFile.ReadAllText()));
             
             #line default
             #line hidden
             this.Write("\r\n```\r\n\r\nFor sample code, please check: ");
             
-            #line 77 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
+            #line 79 "C:\Projects\Synergy\framework\src\Documentation\Synergy.Documentation.Tests\Docs\README.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(this.NoteTestsLink));
             
             #line default

@@ -1,3 +1,5 @@
+<!-- WARNING: Generated file. Do NOT modify it manually -->
+
 # Synergy.Documentation nuget packages
 
 Here is the documentation of the `Synergy.Documentation` and `Synergy.Documentation.Annotations` nuget packages.
