@@ -9,11 +9,11 @@
         <Title>Synergy Architecture Diagrams</Title>
         <Authors>Synergy Marcin Celej</Authors>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Description>Behaviour Driven Development support</Description>
+        <Description>Support for automated generation of diagrams from code.</Description>
         <Copyright>Copyright © Synergy Marcin Celej 2024</Copyright>
         <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/blob/3.0.4/Architecture/README.md</PackageProjectUrl>
         <PackageIcon>synergy.png</PackageIcon>
-        <PackageTags>BDD Behaviour Driven Development</PackageTags>
+        <PackageTags>Diagrams as Code, Docs as Code</PackageTags>
         <AssemblyVersion>$(Version)</AssemblyVersion>
     </PropertyGroup>
 

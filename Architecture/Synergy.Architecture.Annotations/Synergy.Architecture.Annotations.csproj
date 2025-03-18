@@ -13,7 +13,7 @@
         <Copyright>Copyright © Synergy Marcin Celej 2023</Copyright>
         <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/blob/3.0.4/Architecture/README.md</PackageProjectUrl>
         <PackageIcon>synergy.png</PackageIcon>
-        <PackageTags>Diagrams as Code</PackageTags>
+        <PackageTags>Diagrams as Code, Docs as Code</PackageTags>
         <AssemblyVersion>$(Version)</AssemblyVersion>
     </PropertyGroup>
 
