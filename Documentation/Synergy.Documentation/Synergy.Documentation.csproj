@@ -52,8 +52,4 @@
       <ProjectReference Include="..\Synergy.Documentation.Annotations\Synergy.Documentation.Annotations.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Synergy.Documentation.Annotations\Synergy.Documentation.Annotations.csproj" />
-    </ItemGroup>
-
 </Project>
