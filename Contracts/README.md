@@ -1,3 +1,5 @@
+<!-- WARNING: Generated file. Do NOT modify it manually -->
+
 # Synergy.Contracts nuget packages
 
 Here is the documentation of the `Synergy.Contracts` nuget package.
