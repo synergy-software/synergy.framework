@@ -55,6 +55,9 @@
         <DesignTime>True</DesignTime>
         <DependentUpon>README.tt</DependentUpon>
       </Compile>
+      <Compile Include="..\..\Root.cs">
+        <Link>Docs\Root.cs</Link>
+      </Compile>
     </ItemGroup>
 
 </Project>

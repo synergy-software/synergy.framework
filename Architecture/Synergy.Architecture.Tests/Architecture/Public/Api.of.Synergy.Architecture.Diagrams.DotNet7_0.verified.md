@@ -37,6 +37,11 @@
      origin: Type
    ) : Type
 
+## Markdown.PlantUmlDiagrams (abstract class)
+ - PlantUmlDiagrams.Process(
+     root: string
+   ) : void
+
 ## Sequence.SequenceDiagram (record) : IEquatable<SequenceDiagram>
  - Actor: SequenceDiagramActor [Nullable] { get; set; }
  - Components: TechnicalBlueprint+DiagramComponents? { get; set; }
