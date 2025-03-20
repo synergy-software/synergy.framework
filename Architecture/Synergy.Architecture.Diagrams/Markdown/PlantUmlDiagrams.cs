@@ -17,8 +17,9 @@ public static class PlantUmlDiagrams
 
         string GenerateDiagrams(string content)
         {
+            const string disclaimer = "<!-- ← Generated image link. Do NOT modify it manually. -->";
             var r = new Regex(
-                "<!--\\s*```plantuml\\s*(.*?)```\\s*-->(\\s*!\\[(.*?)\\]\\(http\\:\\/\\/www\\.plantuml\\.com\\/plantuml\\/png\\/.*?\\))?",
+                $"<!--\\s*```plantuml\\s*(.*?)```\\s*-->(\\s*!\\[(.*?)\\]\\(http[s]?\\:\\/\\/www\\.plantuml\\.com\\/plantuml\\/png\\/.*?\\) {disclaimer})?",
                 RegexOptions.Singleline
             );
 
@@ -28,7 +29,7 @@ public static class PlantUmlDiagrams
                     var rawPlantUml = match.Groups[1].Value;
                     var name = GetDiagramName(match);
                     var uri = GetDiagramUri(rawPlantUml);
-                    var newOne = $"<!--\n```plantuml\n{rawPlantUml}```\n-->\n![{name}]({uri}) <!-- ← Generated image link. Do NOT modify it manually. -->";
+                    var newOne = $"<!--\n```plantuml\n{rawPlantUml}```\n-->\n![{name}]({uri}) {disclaimer}";
 
                     return newOne;
                 }
@@ -36,12 +37,12 @@ public static class PlantUmlDiagrams
             return s;
         }
 
-        Uri GetDiagramUri(string rawPlantUml)
+        string GetDiagramUri(string rawPlantUml)
         {
             var factory = new RendererFactory();
             var renderer = factory.CreateRenderer(new PlantUmlSettings());
             var uri = renderer.RenderAsUri(rawPlantUml, OutputFormat.Png);
-            return uri;
+            return uri.ToString().Replace("http://", "https://");
         }
 
         string GetDiagramName(Match match)
