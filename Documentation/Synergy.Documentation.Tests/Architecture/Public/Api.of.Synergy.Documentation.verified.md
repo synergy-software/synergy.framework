@@ -221,6 +221,12 @@
  - Regex: Regex { get; set; }
  - TodoExtractor: Func<Match, string> { get; set; }
 
+## Todos.Patterns.TypescriptTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<TypescriptTodoPattern>
+ - FileExtension: string { get; set; }
+ - Regex: Regex { get; set; }
+ - TodoExtractor: Func<Match, string> { get; set; }
+ - ctor()
+
 ## Todos.TodoExplorer (abstract class)
  - TodoExplorer.DebtFor(
      name: string,
