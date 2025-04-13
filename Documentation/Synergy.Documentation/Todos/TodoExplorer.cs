@@ -14,8 +14,8 @@ public static class TodoExplorer
         new GherkinTodoPattern(),
         new TextTodoPattern(),
         new CsprojTodoPattern(),
-        new TypescriptTodoPattern()
-        // TODO: Marcin Celej [from: Marcin Celej on: 26-12-2023]: Introduce md todo pattern: [//]: # (TODO Convert this markdown to docs as code)
+        new TypescriptTodoPattern(),
+        new MarkdownTodoPattern()
     };
 
     public static string DebtFor(
