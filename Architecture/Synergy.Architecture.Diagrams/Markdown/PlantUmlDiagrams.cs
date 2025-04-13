@@ -1,10 +1,15 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.RegularExpressions;
 using PlantUml.Net;
 
 namespace Synergy.Architecture.Diagrams.Markdown;
 
 public static class PlantUmlDiagrams
 {
+    private static string NL = Environment.NewLine;
+    
     public static void Process(string root)
     {
         foreach (var filePath in PlantUmlDiagrams.GetFilesWithCodeDeep(root))
@@ -29,7 +34,7 @@ public static class PlantUmlDiagrams
                     var rawPlantUml = match.Groups[1].Value;
                     var name = GetDiagramName(match);
                     var uri = GetDiagramUri(rawPlantUml);
-                    var newOne = $"<!--\n```plantuml\n{rawPlantUml}```\n-->\n![{name}]({uri}) {disclaimer}";
+                    var newOne = $"<!--{NL}```plantuml{NL}{rawPlantUml}```{NL}-->{NL}![{name}]({uri}) {disclaimer}";
 
                     return newOne;
                 }
