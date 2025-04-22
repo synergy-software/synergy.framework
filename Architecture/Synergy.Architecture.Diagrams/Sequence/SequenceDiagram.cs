@@ -1,4 +1,6 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Synergy.Architecture.Annotations.Diagrams.Sequence;
@@ -8,15 +10,23 @@ using Synergy.Reflection;
 
 namespace Synergy.Architecture.Diagrams.Sequence;
 
-public record SequenceDiagram(
-    SequenceDiagramActor Actor,
-    MethodInfo? Method = null,
-    Type[]? FinishOn = null,
-    string? FooterText = null,
-    TechnicalBlueprint.DiagramComponents? Components = null,
-    string? TitleText = null
-)
+public record SequenceDiagram
 {
+    public SequenceDiagram(SequenceDiagramActor Actor,
+        MethodInfo? Method = null,
+        Type[]? FinishOn = null,
+        string? FooterText = null,
+        TechnicalBlueprint.DiagramComponents? Components = null,
+        string? TitleText = null)
+    {
+        this.Actor = Actor;
+        this.Method = Method;
+        this.FinishOn = FinishOn;
+        this.FooterText = FooterText;
+        this.Components = Components;
+        this.TitleText = TitleText;
+    }
+
     public static SequenceDiagram From<T>()
     {
         var attribute = typeof(T).GetCustomAttributesBasedOn<SequenceDiagramElementAttribute>()
@@ -48,7 +58,7 @@ public record SequenceDiagram(
         const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.NonPublic;
 
         if (arguments.Any())
-            method = type.GetMethod(methodName, flags, arguments);
+            method = type.GetMethod(methodName, flags, null, arguments, Array.Empty<ParameterModifier>());
         else
             method = type.GetMethod(methodName, flags);
 
@@ -74,7 +84,7 @@ public record SequenceDiagram(
         var diagrams = new StringBuilder();
         var method = Method;
         var type = Components.Resolve(method.DeclaringType ?? throw new ArgumentNullException(nameof(method.DeclaringType)));
-        var finish = FinishOn.ToList();
+        var finish = FinishOn!.ToList();
         var arguments = String.Join(", ",
             method.GetParameters()
                   .Select(a => ApiDescription.GetTypeName(a)));
@@ -107,4 +117,26 @@ public record SequenceDiagram(
 
     public override string ToString()
         => this.Render();
+
+    public SequenceDiagramActor Actor { get; }
+    public MethodInfo? Method { get; private set; }
+    public Type[]? FinishOn { get; private set; }
+    public string? FooterText { get; private set; }
+    public TechnicalBlueprint.DiagramComponents? Components { get; set; }
+    public string? TitleText { get; private set; }
+
+    public void Deconstruct(out SequenceDiagramActor Actor,
+        out MethodInfo? Method,
+        out Type[]? FinishOn,
+        out string? FooterText,
+        out TechnicalBlueprint.DiagramComponents? Components,
+        out string? TitleText)
+    {
+        Actor = this.Actor;
+        Method = this.Method;
+        FinishOn = this.FinishOn;
+        FooterText = this.FooterText;
+        Components = this.Components;
+        TitleText = this.TitleText;
+    }
 }

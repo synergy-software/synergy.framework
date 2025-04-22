@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Synergy.Architecture.Diagrams.Sequence;
 
 namespace Synergy.Architecture.Diagrams.Documentation;
@@ -69,7 +72,7 @@ public class TechnicalBlueprint
 
         foreach (var diagram in this.diagrams)
         {
-            var d = diagram with { Components = this._components };
+            var d = diagram.Components = this._components;
             docs.AppendLine(d.ToString());
         }
 
@@ -89,7 +92,17 @@ public class TechnicalBlueprint
         public void Register(Type @interface, Type implementation)
             => this._components.Add(new Component(@interface, implementation));
     
-        private record Component(Type Interface, Type Implementation);
+        private class Component
+        {
+            public Component(Type Interface, Type Implementation)
+            {
+                this.Interface = Interface;
+                this.Implementation = Implementation;
+            }
+
+            public Type Interface { get; }
+            public Type Implementation { get; }
+        }
 
         public Type Resolve(Type origin)
         {

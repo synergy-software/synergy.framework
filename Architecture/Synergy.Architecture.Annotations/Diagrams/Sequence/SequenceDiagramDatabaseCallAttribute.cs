@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 
 namespace Synergy.Architecture.Annotations.Diagrams.Sequence;

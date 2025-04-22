@@ -1,5 +1,5 @@
-﻿using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics;
 
 namespace Synergy.Architecture.Annotations.Diagrams.Sequence;
 

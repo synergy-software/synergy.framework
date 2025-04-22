@@ -2,6 +2,6 @@
 
 public interface SequenceDiagramGroup
 {
-    public SequenceDiagramGroupType Group { get; }
-    public string? GroupHeader { get; }
+    SequenceDiagramGroupType Group { get; }
+    string? GroupHeader { get; }
 }

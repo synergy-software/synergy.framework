@@ -1,4 +1,7 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using PlantUml.Net;
 using Synergy.Architecture.Annotations.Diagrams.Sequence;
@@ -9,17 +12,31 @@ using Synergy.Reflection;
 
 namespace Synergy.Architecture.Diagrams.Sequence;
 
-public record SequenceDiagramUrl(
-    SequenceDiagramActor _actor,
-    MethodInfo _root,
-    List<Type> _finishOn,
-    string? _footer,
-    TechnicalBlueprint.DiagramComponents Components
-    )
+public class SequenceDiagramUrl
 {
     private Type _type => _root.DeclaringType ?? throw new ArgumentNullException(nameof(_root.DeclaringType));
+    public SequenceDiagramActor _actor { get; }
+    public MethodInfo _root { get; }
+    public List<Type> _finishOn { get; }
+    public string? _footer { get; }
+    public TechnicalBlueprint.DiagramComponents Components { get; }
 
-    private readonly List<SequenceDiagramNode> _nodes = new() { new(_actor.CodeName, _actor.Name, _actor.Archetype, _actor.Note, _actor.Colour) };
+    private readonly List<SequenceDiagramNode> _nodes;
+
+    public SequenceDiagramUrl(SequenceDiagramActor Actor,
+        MethodInfo Root,
+        List<Type> FinishOn,
+        string? Footer,
+        TechnicalBlueprint.DiagramComponents Components)
+    {
+        this._actor = Actor;
+        this._root = Root;
+        this._finishOn = FinishOn;
+        this._footer = Footer;
+        this.Components = Components;
+        this._nodes = new List<SequenceDiagramNode> { new(Actor.CodeName, Actor.Name, Actor.Archetype, Actor.Note, Actor.Colour) };
+    }
+
     private const Type? unknownType = null;
 
     public override string ToString()
@@ -279,7 +296,7 @@ public record SequenceDiagramUrl(
         var arguments = ctor == null ? "" : SequenceDiagramUrl.GetArguments(ctor.GetParameters());
 
         var @throw = "";
-        if (currentType.IsAssignableTo(typeof(Exception)))
+        if (currentType.IsAssignableTo(typeof(Exception).FullName!))
             @throw = "throw "; 
         if (currentTypeName != sourceTypeName)
         {
@@ -374,13 +391,40 @@ public record SequenceDiagramUrl(
         this._nodes.Add(new SequenceDiagramNode(codeName, fullName, archetype, note, colour));
 
         return codeName;
-    } 
+    }
+
+    public void Deconstruct(out SequenceDiagramActor _actor,
+        out MethodInfo _root,
+        out List<Type> _finishOn,
+        out string? _footer,
+        out TechnicalBlueprint.DiagramComponents Components)
+    {
+        _actor = this._actor;
+        _root = this._root;
+        _finishOn = this._finishOn;
+        _footer = this._footer;
+        Components = this.Components;
+    }
 }
 
-internal record SequenceDiagramNode(
-    string CodeName,
-    string FullName,
-    SequenceDiagramArchetype Archetype,
-    string? Note,
-    string? Colour
-    );
+internal class SequenceDiagramNode
+{
+    public SequenceDiagramNode(string CodeName,
+        string FullName,
+        SequenceDiagramArchetype Archetype,
+        string? Note,
+        string? Colour)
+    {
+        this.CodeName = CodeName;
+        this.FullName = FullName;
+        this.Archetype = Archetype;
+        this.Note = Note;
+        this.Colour = Colour;
+    }
+
+    public string CodeName { get; }
+    public string FullName { get; }
+    public SequenceDiagramArchetype Archetype { get; }
+    public string? Note { get; }
+    public string? Colour { get; }
+}
