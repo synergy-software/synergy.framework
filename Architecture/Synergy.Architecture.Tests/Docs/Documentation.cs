@@ -8,6 +8,6 @@ public class Documentation
     public void inject_plantuml_diagrams()
     {
         var root = Root.Folder.Path;
-        PlantUmlDiagrams.Process(root);
+        PlantUmlDiagrams.Process(root, links: false, images: "images\\generated");
     }
 }

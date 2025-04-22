@@ -21,7 +21,7 @@
 @endmindmap
 ```
 -->
-![Synergy Framework](https://www.plantuml.com/plantuml/png/R951QiD034NtWTn1ovQ0pn2tfj1T8OKkosIiE4CxewcaSV7PkkYHUeNAPHn8yVRh_wSlzFFrlHTrh36aFhgytUpWC2NaOO87TX4_YTzClAZDFILbvrLcTVSA7KeO4XmdM2QGcGRB6d80AJaJwnNY1OzDcqFpZABcgI1JeNrwXAgk9k_mxCP0XULV-3A0ZiE8oMgD-4uvOj9LKil-71Iz5iQc2sukl9pK5gNeD7Wuu4V1v16g0qvCqGxjSHNQaI_pHijIgh3gWnCnZ8wjeq1FNc102_qvuSQ20awkoBVRpHxjASjZVW400F__0m00) <!-- ← Generated image link. Do NOT modify it manually. -->
+![Synergy Framework Structure Mind Map](images/generated/Synergy%20Framework%20Structure%20Mind%20Map.png) <!-- ← Generated image link. Do NOT modify it manually. -->
 
 [Design by contract programming](https://github.com/synergy-software/synergy.framework/wiki/Contracts)
 
