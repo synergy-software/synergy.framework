@@ -210,6 +210,12 @@
  - TodoExtractor: Func<Match, string> { get; set; }
  - ctor()
 
+## Todos.Patterns.MarkdownTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<MarkdownTodoPattern>
+ - FileExtension: string { get; set; }
+ - Regex: Regex { get; set; }
+ - TodoExtractor: Func<Match, string> { get; set; }
+ - ctor()
+
 ## Todos.Patterns.TextTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<TextTodoPattern>
  - FileExtension: string { get; set; }
  - Regex: Regex { get; set; }
