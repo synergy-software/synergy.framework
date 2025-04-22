@@ -33,22 +33,25 @@ public static class PlantUmlDiagrams
                 match =>
                 {
                     var rawPlantUml = match.Groups[1].Value;
-                    var name = GetDiagramName(match, diagramNo++);
+                    var name = GetDiagramName(match);
+                    var title = GetDiagramTitle(rawPlantUml);
+                    var diagramName = name ?? title ?? "diagram " + diagramNo;
+                    
                     if (links)
                     {
-                        return GenerateDiagramImageAsLink(rawPlantUml, name);
+                        return GenerateDiagramImageAsLink(rawPlantUml, diagramName);
                     }
 
-                    return GenerateDiagramImageAsFile(rawPlantUml, name, markdownFilePath);
+                    return GenerateDiagramImageAsFile(rawPlantUml, diagramName, markdownFilePath);
                 }
             );
             return s;
         }
 
-        string GenerateDiagramImageAsLink(string rawPlantUml, string name)
+        string GenerateDiagramImageAsLink(string rawPlantUml, string diagramName)
         {
             var uri = GetDiagramUri(rawPlantUml);
-            var newOne = $"<!--{PlantUmlDiagrams.NL}```plantuml{PlantUmlDiagrams.NL}{rawPlantUml}```{PlantUmlDiagrams.NL}-->{PlantUmlDiagrams.NL}![{name}]({uri}) {PlantUmlDiagrams.disclaimer}";
+            var newOne = $"<!--{PlantUmlDiagrams.NL}```plantuml{PlantUmlDiagrams.NL}{rawPlantUml}```{PlantUmlDiagrams.NL}-->{PlantUmlDiagrams.NL}![{diagramName}]({uri}) {PlantUmlDiagrams.disclaimer}";
             return newOne;
         }
         
@@ -68,18 +71,22 @@ public static class PlantUmlDiagrams
             return image;
         }
 
-        string GetDiagramName(Match match, int diagramNo)
+        string? GetDiagramName(Match match)
         {
             if (string.IsNullOrWhiteSpace(match.Groups[3].Value) == false)
                 return match.Groups[3].Value;
 
-            return "diagram " + diagramNo;
+            return null;
         }
 
-        string GenerateDiagramImageAsFile(string rawPlantUml, string name, string markdownFilePath)
+        string GenerateDiagramImageAsFile(string rawPlantUml, string diagramName, string markdownFilePath)
         {
-            var diagramFileName = GetDiagramTitle(rawPlantUml) ?? name;
-                    
+            var diagramFileName = diagramName;
+            foreach (var invalidChar in Path.GetInvalidFileNameChars())
+            {
+                diagramFileName = diagramFileName.Replace(invalidChar.ToString(), "");
+            }
+            
             byte[] image = GetDiagramImage(rawPlantUml);
             string? markdownFileFolder = Path.GetDirectoryName(markdownFilePath);
             string diagramPath = FindOrCreateDiagramFolder(markdownFileFolder);
@@ -90,18 +97,18 @@ public static class PlantUmlDiagrams
                                .Replace("\\", "/")
                                .Replace(" ", "%20");
                     
-            var tweaked = $"<!--{PlantUmlDiagrams.NL}```plantuml{PlantUmlDiagrams.NL}{rawPlantUml}```{PlantUmlDiagrams.NL}-->{PlantUmlDiagrams.NL}![{name}]({relative}) {PlantUmlDiagrams.disclaimer}";
+            var tweaked = $"<!--{PlantUmlDiagrams.NL}```plantuml{PlantUmlDiagrams.NL}{rawPlantUml}```{PlantUmlDiagrams.NL}-->{PlantUmlDiagrams.NL}![{diagramName}]({relative}) {PlantUmlDiagrams.disclaimer}";
 
             return tweaked;
         }
         
         string? GetDiagramTitle(string rawPlantUml)
         {
-            var title = Regex.Match(rawPlantUml, @"title\s+(.+?)\s+").Groups[1].Value;
+            var title = Regex.Match(rawPlantUml, @"title(.*)").Groups[1].Value;
             if (String.IsNullOrWhiteSpace(title))
                 return null;
             
-            return title;
+            return title.Trim();
         }
 
         string FindOrCreateDiagramFolder(string? markdownFileFolder)
