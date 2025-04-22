@@ -39,7 +39,9 @@
 
 ## Markdown.PlantUmlDiagrams (abstract class)
  - PlantUmlDiagrams.Process(
-     root: string
+     root: string,
+     links: bool [Optional],
+     images: string [Optional]
    ) : void
 
 ## Sequence.SequenceDiagram (record) : IEquatable<SequenceDiagram>
