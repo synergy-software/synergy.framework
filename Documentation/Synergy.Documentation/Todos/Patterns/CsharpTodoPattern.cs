@@ -7,6 +7,6 @@ namespace Synergy.Documentation.Todos.Patterns;
 /// </summary>
 public record CsharpTodoPattern() : TodoPattern(
     "cs",
-    new Regex("\\/\\/\\s*(TODO.*)"),
+    new Regex("\\/\\/\\s*(TODO.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase),
     match => match.Groups[1].Value
 );
