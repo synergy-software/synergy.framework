@@ -124,13 +124,26 @@ namespace Synergy.Web.Api.Testing
         public static string ToHttpLook(this HttpResponseMessage response, HttpOperation operation)
         {
             var report = new StringBuilder();
-            report.AppendLine($"HTTP/{response.Version} {(int) response.StatusCode} {response.StatusCode}");
+            report.AppendLine($"HTTP/{response.Version} {(int)response.StatusCode} {response.StatusCode}");
             InsertHeaders(report, response.GetAllHeaders());
-            var responseBody = response.Content.ReadJson();
-            if (responseBody != null)
-                report.Append(
-                    Serialize(responseBody, operation.TestServer.SerializationSettings)
-                );
+            var contentType = response.Content.Headers.ContentType?.MediaType;
+
+            if (contentType == "application/json" || contentType == "text/json" || contentType == "application/problem+json")
+            {
+                var responseBody = response.Content.ReadJson();
+                if (responseBody != null)
+                    report.Append(
+                        Serialize(responseBody, operation.TestServer.SerializationSettings)
+                    );
+            }
+            else if (contentType == "text/plain" || contentType == "text/html")
+            {
+                var responseBody = response.Content.ReadAsStringAsync().Result;
+                if (responseBody != null)
+                    report.Append(
+                        responseBody
+                    );
+            }
 
             return report.ToString().Trim();
         }

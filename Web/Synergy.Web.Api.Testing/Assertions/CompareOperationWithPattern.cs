@@ -115,7 +115,7 @@ namespace Synergy.Web.Api.Testing.Assertions
         {
             var response = operation.Response;
 
-            yield return new JProperty("status", $"{(int) response.StatusCode} {response.ReasonPhrase}");
+            yield return new JProperty("status", $"{(int)response.StatusCode} {response.ReasonPhrase}");
 
             var headers = response.GetAllHeaders();
             if (headers.Count > 0)
@@ -123,10 +123,23 @@ namespace Synergy.Web.Api.Testing.Assertions
                 yield return new JProperty("headers", new JObject(headers.Select(GetHeader)));
             }
 
-            var responseJson = response.Content.ReadJson();
-            if (responseJson != null)
+            var contentType = response.Content.Headers.ContentType?.MediaType;
+
+            if (contentType == "application/json" || contentType == "text/json" || contentType == "application/problem+json")
             {
-                yield return new JProperty("body", responseJson);
+                var responseJson = response.Content.ReadJson();
+                if (responseJson != null)
+                {
+                    yield return new JProperty("body", responseJson);
+                }
+            }
+            else if (contentType == "text/plain" || contentType == "text/html")
+            {
+                var responseText = response.Content.ReadAsStringAsync().Result;
+                if (responseText != null)
+                {
+                    yield return new JProperty("body", responseText);
+                }
             }
         }
 
