@@ -21,6 +21,7 @@ public static class TodoExplorer
     public static string DebtFor(
         string name,
         CodeFolder from,
+        Func<string, bool>? excludePath = null,
         [CallerFilePath] string currentPath = "",
         params TodoPattern[] patterns
     )
@@ -30,7 +31,8 @@ public static class TodoExplorer
 
         int count = 0;
         var todos = new StringBuilder();
-        var files = TodoExplorer.GetFilesWithCode(from, patterns)
+        excludePath ??= x => false;
+        var files = TodoExplorer.GetFilesWithCode(from, excludePath, patterns)
                                 .OrderBy(f => f.Path)
                                 .ToList();
 
@@ -72,17 +74,34 @@ public static class TodoExplorer
         }
     }
 
-    private static IEnumerable<(string Path, TodoPattern Pattern)> GetFilesWithCode(CodeFolder from, TodoPattern[] patterns)
-        => TodoExplorer.GetFilesWithCodeDeep(from.Path, patterns);
+    private static IEnumerable<(string Path, TodoPattern Pattern)> GetFilesWithCode(
+        CodeFolder from,
+        Func<string, bool> excludePath,
+        TodoPattern[] patterns
+    ) => TodoExplorer.GetFilesWithCodeDeep(from.Path, excludePath, patterns);
 
-    private static IEnumerable<(string Path, TodoPattern Pattern)> GetFilesWithCodeDeep(string from, TodoPattern[] patterns)
+    private static IEnumerable<(string Path, TodoPattern Pattern)> GetFilesWithCodeDeep(
+        string from,
+        Func<string, bool> excludePath,
+        TodoPattern[] patterns
+    )
     {
         foreach (TodoPattern pattern in patterns)
         foreach (var filePath in Directory.GetFiles(from, $"*.{pattern.FileExtension}"))
+        {
+            if (excludePath(filePath))
+                continue;
+            
             yield return (Path.GetFullPath(filePath), pattern);
+        }
 
         foreach (var directory in Directory.GetDirectories(from))
-        foreach (var filePath in TodoExplorer.GetFilesWithCodeDeep(directory, patterns))
-            yield return filePath;
+        {
+            if (excludePath(directory))
+                continue;
+            
+            foreach (var filePath in TodoExplorer.GetFilesWithCodeDeep(directory, excludePath, patterns))
+               yield return filePath;
+        }
     }
 }

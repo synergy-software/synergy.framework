@@ -237,6 +237,7 @@
  - TodoExplorer.DebtFor(
      name: string,
      from: CodeFolder,
+     excludePath: Func<string, bool>? [Nullable, Optional],
      currentPath: string [CallerFilePath, Optional],
      patterns: params TodoPattern[] [ParamArray]
    ) : string
