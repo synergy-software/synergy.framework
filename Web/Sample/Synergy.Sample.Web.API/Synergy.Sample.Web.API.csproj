@@ -30,7 +30,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Architecture\Synergy.Architecture.Annotations\Synergy.Architecture.Annotations.csproj" />
     <ProjectReference Include="..\..\..\Contracts\Synergy.Contracts\Synergy.Contracts.csproj" />
-    <ProjectReference Include="..\..\..\Reflection\Synergy.Reflection\Synergy.Reflection.csproj" />
     <ProjectReference Include="..\Synergy.Sample.Web.API.Services\Synergy.Sample.Web.API.Services.csproj" />
   </ItemGroup>
 
