@@ -58,19 +58,37 @@ namespace Synergy.Web.Api.Testing.Json
         {
             var ignore = new Ignore();
             if (nodes.Any() == false)
-                ignore.Append(new[] {"$.response.body"});
-            ignore.Append(nodes.Select(node=> $"$.response.body.{node}"));
+                ignore.Append(new[] {"$.response.content.body"});
+            ignore.Append(nodes.Select(node=> $"$.response.content.body.{node}"));
+            return ignore;
+        }
+        
+        public static Ignore ResponseHeaders(params string[] headers)
+        {
+            var ignore = new Ignore();
+            if (headers.Any() == false)
+                ignore.Append(new[] {"$.response.headers"});
+            ignore.Append(headers.Select(node=> $"$.response.headers.{node}"));
             return ignore;
         }
         
         public static Ignore ResponseLocationHeader()
         {
-            return new Ignore("$.response.headers.Location");
+            return ResponseHeaders("Location");
         }
 
+        public static Ignore ResponseContentHeaders(params string[] headers)
+        {
+            var ignore = new Ignore();
+            if (headers.Any() == false)
+                ignore.Append(new[] {"$.response.content.headers"});
+            ignore.Append(headers.Select(node=> $"$.response.content.headers.{node}"));
+            return ignore;
+        }
+        
         public static Ignore ResponseContentLength()
         {
-            return new Ignore("$.response.headers.Content-Length");
+            return ResponseContentHeaders("Content-Length");
         }
     }
 }

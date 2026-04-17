@@ -20,7 +20,7 @@
 - Request
 ```
 GET  /api/v1/users
-test: header1
+test: header
 ```
 
 - Response
@@ -69,17 +69,17 @@ Content-Type: application/json; charset=utf-8
 - Response
 ```
 HTTP/1.1 201 Created
-Location: http://localhost/api/v1/users/0dd576b44c7a40a4884cc7512272e751
+Location: http://localhost/api/v1/users/a5e4a7f51d9b429e8e54eddbd9699389
 api-supported-versions: 1.0
 Content-Type: application/json; charset=utf-8
 Content-Length: 182
 {
   "user": {
-    "id": "0dd576b44c7a40a4884cc7512272e751",
+    "id": "a5e4a7f51d9b429e8e54eddbd9699389",
     "login": {
       "value": "marcin@synergy.com"
     },
-    "created": "2024-05-13T13:19:15.8420304+02:00"
+    "created": "2026-04-17T10:41:54.8248436+02:00"
   }
 }
 ```
@@ -99,7 +99,7 @@ Content-Length: 182
 
 - Request
 ```
-GET  /api/v1/users/0dd576b44c7a40a4884cc7512272e751
+GET  /api/v1/users/a5e4a7f51d9b429e8e54eddbd9699389
 test: header
 ```
 
@@ -111,11 +111,11 @@ Content-Type: application/json; charset=utf-8
 Content-Length: 182
 {
   "user": {
-    "id": "0dd576b44c7a40a4884cc7512272e751",
+    "id": "a5e4a7f51d9b429e8e54eddbd9699389",
     "login": {
       "value": "marcin@synergy.com"
     },
-    "created": "2022-12-15T14:39:56+01:00"
+    "created": "2026-04-17T10:41:54.8248436+02:00"
   }
 }
 ```
@@ -142,7 +142,7 @@ Content-Length: 182
 
 - Request
 ```
-GET  /api/v1/users/0dd576b44c7a40a4884cc7512272e751
+GET  /api/v1/users/a5e4a7f51d9b429e8e54eddbd9699389
 test: header
 ```
 
@@ -154,11 +154,11 @@ Content-Type: application/json; charset=utf-8
 Content-Length: 182
 {
   "user": {
-    "id": "0dd576b44c7a40a4884cc7512272e751",
+    "id": "a5e4a7f51d9b429e8e54eddbd9699389",
     "login": {
       "value": "marcin@synergy.com"
     },
-    "created": "2024-05-13T13:19:15.8420304+02:00"
+    "created": "2026-04-17T10:41:54.8248436+02:00"
   }
 }
 ```
@@ -190,7 +190,7 @@ Content-Type: application/problem+json
   "type": "https://httpstatuses.com/404",
   "title": "User with id user-id-that-do-not-exist does not exist",
   "status": 404,
-  "traceId": "0HM41E3T9D4BB"
+  "traceId": "0HNKSBKMTUUKV"
 }
 ```
 
@@ -228,11 +228,11 @@ Content-Length: 207
 {
   "users": [
     {
-      "id": "0dd576b44c7a40a4884cc7512272e751",
+      "id": "a5e4a7f51d9b429e8e54eddbd9699389",
       "login": {
         "value": "marcin@synergy.com"
       },
-      "created": "2024-05-13T13:19:15.8420304+02:00"
+      "created": "2026-04-17T10:41:54.8248436+02:00"
     }
   ]
 }
@@ -283,7 +283,7 @@ Content-Length: 351
   "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
   "title": "One or more validation errors occurred.",
   "status": 400,
-  "traceId": "0HM41E3T9D4BC"
+  "traceId": "0HNKSBKMTUUL0"
 }
 ```
 
@@ -325,7 +325,7 @@ Content-Length: 349
   "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
   "title": "One or more validation errors occurred.",
   "status": 400,
-  "traceId": "0HM41E3T9D4BD"
+  "traceId": "0HNKSBKMTUUL1"
 }
 ```
 
@@ -367,7 +367,7 @@ Content-Length: 351
   "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
   "title": "One or more validation errors occurred.",
   "status": 400,
-  "traceId": "0HM41E3T9D4BE"
+  "traceId": "0HNKSBKMTUUL2"
 }
 ```
 
@@ -395,7 +395,7 @@ Content-Length: 351
 
 - Request
 ```
-DELETE  /api/v1/users/102a023150d94b1b99dbfbd5d6a695d8
+DELETE  /api/v1/users/a5e4a7f51d9b429e8e54eddbd9699389
 test: header
 ```
 
@@ -422,7 +422,7 @@ Content-Length: 2
 
 - Request
 ```
-GET  /api/v1/users/102a023150d94b1b99dbfbd5d6a695d8
+GET  /api/v1/users/a5e4a7f51d9b429e8e54eddbd9699389
 test: header
 ```
 
@@ -433,9 +433,9 @@ api-supported-versions: 1.0
 Content-Type: application/problem+json
 {
   "type": "https://httpstatuses.com/404",
-  "title": "User with id 102a023150d94b1b99dbfbd5d6a695d8 does not exist",
+  "title": "User with id a5e4a7f51d9b429e8e54eddbd9699389 does not exist",
   "status": 404,
-  "traceId": "0HM41E3T9D4BF"
+  "traceId": "0HNKSBKMTUUL3"
 }
 ```
 

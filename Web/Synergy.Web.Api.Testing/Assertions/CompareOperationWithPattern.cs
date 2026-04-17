@@ -117,20 +117,23 @@ namespace Synergy.Web.Api.Testing.Assertions
 
             yield return new JProperty("status", $"{(int)response.StatusCode} {response.ReasonPhrase}");
 
-            var headers = response.GetAllHeaders();
-            if (headers.Count > 0)
+            if (response.Headers.Any())
             {
-                yield return new JProperty("headers", new JObject(headers.Select(GetHeader)));
+                yield return new JProperty("headers", new JObject(response.Headers.Select(GetHeader)));
             }
 
+            var contentObject = new JObject();
+            var content = new JProperty("content", contentObject);
             var contentType = response.Content.Headers.ContentType?.MediaType;
+            if (response.Content.Headers.Any())
+                contentObject.Add("headers", new JObject(response.Content.Headers.Select(GetHeader)));
 
             if (contentType == "application/json" || contentType == "text/json" || contentType == "application/problem+json")
             {
                 var responseJson = response.Content.ReadJson();
                 if (responseJson != null)
                 {
-                    yield return new JProperty("body", responseJson);
+                    contentObject.Add("body", responseJson);
                 }
             }
             else if (contentType == "text/plain" || contentType == "text/html")
@@ -138,9 +141,11 @@ namespace Synergy.Web.Api.Testing.Assertions
                 var responseText = response.Content.ReadAsStringAsync().Result;
                 if (responseText != null)
                 {
-                    yield return new JProperty("body", responseText);
+                    contentObject.Add("body", responseText);
                 }
             }
+            
+            yield return content;
         }
 
         private static JProperty GetHeader(KeyValuePair<string, IEnumerable<string>> header)
@@ -208,7 +213,7 @@ namespace Synergy.Web.Api.Testing.Assertions
             var status = fullStatus.Substring(0, fullStatus.IndexOf(" ", StringComparison.InvariantCulture));
             var statusCode = Enum.Parse<HttpStatusCode>(status);
             var response = new HttpResponseMessage(statusCode);
-            var body = _savedPattern!.SelectToken("$.response.body")?.ToString();
+            var body = _savedPattern!.SelectToken("$.response.content.body")?.ToString();
             if (body != null)
             {
                 response.Content = new StringContent(body);
@@ -219,19 +224,20 @@ namespace Synergy.Web.Api.Testing.Assertions
             {
                 var headerName = header.Path.Replace("response.headers.", "");
                 var headerValue = header.Value<string>();
-
-                if (headerName.StartsWith("Content"))
+                response.Headers.Add(headerName, headerValue);
+            }
+            
+            var contentHeaders = _savedPattern!.SelectTokens("$.response.content.headers.*");
+            foreach (var header in contentHeaders)
+            {
+                var headerName = header.Path.Replace("response.content.headers.", "");
+                var headerValue = header.Value<string>();
+                if (response.Content.Headers.Contains(headerName))
                 {
-                    if (response.Content.Headers.Contains(headerName))
-                    {
-                        response.Content.Headers.Remove(headerName);
-                    }
-
-                    response.Content.Headers.Add(headerName, headerValue);
-                    continue;
+                    response.Content.Headers.Remove(headerName);
                 }
 
-                response.Headers.Add(headerName, headerValue);
+                response.Content.Headers.Add(headerName, headerValue);
             }
 
             return response;

@@ -296,7 +296,13 @@
  - Ignore.ResponseBody(
      nodes: params String[] [ParamArray]
    ) : Ignore
+ - Ignore.ResponseContentHeaders(
+     headers: params String[] [ParamArray]
+   ) : Ignore
  - Ignore.ResponseContentLength() : Ignore
+ - Ignore.ResponseHeaders(
+     headers: params String[] [ParamArray]
+   ) : Ignore
  - Ignore.ResponseLocationHeader() : Ignore
 
 ## Json.JsonComparer (class)

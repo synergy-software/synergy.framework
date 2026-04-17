@@ -12,6 +12,7 @@
     }
   },
   "response": {
-    "status": "404 Not Found"
+    "status": "404 Not Found",
+    "content": {}
   }
 }

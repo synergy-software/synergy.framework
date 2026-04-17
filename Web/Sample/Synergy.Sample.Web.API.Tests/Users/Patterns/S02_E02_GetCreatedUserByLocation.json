@@ -6,8 +6,8 @@
     "Manual: User details are returned"
   ],
   "request": {
-    "description": "Get user located at http://localhost/api/v1/users/0dd576b44c7a40a4884cc7512272e751",
-    "method": "GET /api/v1/users/0dd576b44c7a40a4884cc7512272e751",
+    "description": "Get created user",
+    "method": "GET /api/v1/users/a5e4a7f51d9b429e8e54eddbd9699389",
     "headers": {
       "test": "header"
     }
@@ -15,17 +15,21 @@
   "response": {
     "status": "200 OK",
     "headers": {
-      "api-supported-versions": "1.0",
-      "Content-Type": "application/json; charset=utf-8",
-      "Content-Length": "182"
+      "api-supported-versions": "1.0"
     },
-    "body": {
-      "user": {
-        "id": "0dd576b44c7a40a4884cc7512272e751",
-        "login": {
-          "value": "marcin@synergy.com"
-        },
-        "created": "2022-12-15T19:09:56+05:30"
+    "content": {
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "182"
+      },
+      "body": {
+        "user": {
+          "id": "a5e4a7f51d9b429e8e54eddbd9699389",
+          "login": {
+            "value": "marcin@synergy.com"
+          },
+          "created": "2026-04-17T10:41:54.8248436+02:00"
+        }
       }
     }
   }

@@ -9,18 +9,22 @@
     "description": "Get list of users",
     "method": "GET /api/v1/users",
     "headers": {
-      "test": "header1"
+      "test": "header"
     }
   },
   "response": {
     "status": "200 OK",
     "headers": {
-      "api-supported-versions": "1.0",
-      "Content-Type": "application/json; charset=utf-8",
-      "Content-Length": "19"
+      "api-supported-versions": "1.0"
     },
-    "body": {
-      "users": []
+    "content": {
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "19"
+      },
+      "body": {
+        "users": []
+      }
     }
   }
 }

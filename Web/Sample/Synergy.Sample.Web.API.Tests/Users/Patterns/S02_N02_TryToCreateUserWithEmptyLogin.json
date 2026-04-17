@@ -20,20 +20,22 @@
   },
   "response": {
     "status": "400 Bad Request",
-    "headers": {
-      "Content-Type": "application/json; charset=utf-8",
-      "Content-Length": "349"
-    },
-    "body": {
-      "errors": {
-        "login": [
-          "Error converting value \"\" to type 'Synergy.Sample.Web.API.Services.Users.Domain.Login'. Path 'login', line 1, position 11."
-        ]
+    "content": {
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "349"
       },
-      "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
-      "title": "One or more validation errors occurred.",
-      "status": 400,
-      "traceId": "0HM41E3T9D4BD"
+      "body": {
+        "errors": {
+          "login": [
+            "Error converting value \"\" to type 'Synergy.Sample.Web.API.Services.Users.Domain.Login'. Path 'login', line 1, position 11."
+          ]
+        },
+        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+        "title": "One or more validation errors occurred.",
+        "status": 400,
+        "traceId": "0HNKSBKMTUUL1"
+      }
     }
   }
 }

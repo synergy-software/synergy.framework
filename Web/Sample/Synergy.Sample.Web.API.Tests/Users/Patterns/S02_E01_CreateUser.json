@@ -22,18 +22,22 @@
   "response": {
     "status": "201 Created",
     "headers": {
-      "Location": "http://localhost/api/v1/users/0dd576b44c7a40a4884cc7512272e751",
-      "api-supported-versions": "1.0",
-      "Content-Type": "application/json; charset=utf-8",
-      "Content-Length": "182"
+      "Location": "http://localhost/api/v1/users/a5e4a7f51d9b429e8e54eddbd9699389",
+      "api-supported-versions": "1.0"
     },
-    "body": {
-      "user": {
-        "id": "0dd576b44c7a40a4884cc7512272e751",
-        "login": {
-          "value": "marcin@synergy.com"
-        },
-        "created": "2024-05-13T13:19:15.8420304+02:00"
+    "content": {
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "182"
+      },
+      "body": {
+        "user": {
+          "id": "a5e4a7f51d9b429e8e54eddbd9699389",
+          "login": {
+            "value": "marcin@synergy.com"
+          },
+          "created": "2026-04-17T10:41:54.8248436+02:00"
+        }
       }
     }
   }
