@@ -6,6 +6,7 @@
  - GroupHeader: string? { get; set; }
  - Note: string? { get; set; }
  - Type: Type [Nullable] { get; }
+ - UseEmptyConstructor: bool { get; set; }
  - ctor(
      type: Type
    )

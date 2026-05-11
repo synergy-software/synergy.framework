@@ -8,6 +8,7 @@ namespace Synergy.Architecture.Annotations.Diagrams.Sequence;
 public class SequenceDiagramActivationAttribute : Attribute, SequenceDiagramElement, SequenceDiagramGroup
 {
     public Type Type { get; }
+    public bool UseEmptyConstructor { get; set; }
     public string? Note { get; set; }
     public SequenceDiagramArchetype Archetype { get; set; }
     public SequenceDiagramGroupType Group { get; set; }

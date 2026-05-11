@@ -269,12 +269,17 @@ public record SequenceDiagramUrl(
     {
         var currentType = Components.Resolve(nextStep.Type);
         var currentTypeName = this.AppendNode(currentType, nextStep.Archetype);
-        
-        var constructors = currentType.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-        var ctor =
-            constructors.FirstOrDefault(c => c.IsPublic) ??
-            constructors.FirstOrDefault(c => c.IsAssembly) ?? 
-            constructors.FirstOrDefault();
+
+        ConstructorInfo? ctor = null;
+
+        if (nextStep.UseEmptyConstructor == false)
+        {
+            var constructors = currentType.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            ctor =
+                constructors.FirstOrDefault(c => c.IsPublic) ??
+                constructors.FirstOrDefault(c => c.IsAssembly) ??
+                constructors.FirstOrDefault();
+        }
 
         var arguments = ctor == null ? "" : SequenceDiagramUrl.GetArguments(ctor.GetParameters());
 
