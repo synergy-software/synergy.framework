@@ -97,11 +97,30 @@ internal class XUnitFeatureGenerator
     {
         code.AppendLine($"    private void {backgroundMethod}() // {background.Line.Text.Trim()}");
         code.AppendLine("    {");
+        GenerateCurrentBackground(code, background);
         this.GenerateSteps(code, background.Steps);
         code.AppendLine("    }");
         code.AppendLine();
     }
+    
+    private static void GenerateCurrentBackground(StringBuilder code, Background background)
+    {
+        var currentBackground = string.Join($"\",{Environment.NewLine}           $\"", LinesOf(background));
 
+        code.AppendLine($"       CurrentScenario(");
+        code.AppendLine($"           $\"{currentBackground}\"");
+        code.AppendLine($"       );");
+        code.AppendLine();
+    }
+
+    private static List<string> LinesOf(Background background)
+    {
+        var lines = new List<string>(1 + background.Steps.Count);
+        lines.Add(Quote(background.Line.Text));
+        lines.AddRange(background.Steps.Select(step => Quote(step.Line.Text)));
+        return lines;
+    }
+    
     private void Generate(StringBuilder code, Scenario scenario, string? backgroundMethod)
     {
         this.GenerateTraits(code, scenario.Tags, "    ");
@@ -119,18 +138,19 @@ internal class XUnitFeatureGenerator
         }
         code.AppendLine($"    public void {methodName}({arguments}) // {scenarioOriginalTitle}");
         code.AppendLine("    {");
-
-        if (this.currentScenario)
-        {
-            XUnitFeatureGenerator.GenerateCurrentScenario(code, scenario);
-        }
-
+        
         if (backgroundMethod != null)
             code.AppendLine($"       Background().{backgroundMethod}();");
         else
             code.AppendLine($"       Background();");
         
         code.AppendLine();
+        
+        if (this.currentScenario)
+        {
+            XUnitFeatureGenerator.GenerateCurrentScenario(code, scenario);
+        }
+        
         this.GenerateSteps(code, scenario.Steps);
 
         if (this.generateAfter(scenario))
@@ -198,13 +218,13 @@ internal class XUnitFeatureGenerator
         }
 
         return lines;
-        
-        string Quote(string line)
-            => line
-               .Replace("\"", "\\\"")
-               .Replace("{", "{{")
-               .Replace("}", "}}");
     }
+    
+    private static string Quote(string line)
+        => line
+           .Replace("\"", "\\\"")
+           .Replace("{", "{{")
+           .Replace("}", "}}");
 
     private void GenerateSteps(StringBuilder code, List<Step> steps)
     {

@@ -9,6 +9,11 @@ partial class CalculatorFeature // Feature: Calculator
 {
     private void CalculatorBackground() // Background:
     {
+       CurrentScenario(
+           $"  Background:",
+           $"    Given User opened calculator"
+       );
+
        Given().UserOpenedCalculator();  // Given User opened calculator
     }
 
@@ -19,6 +24,8 @@ partial class CalculatorFeature // Feature: Calculator
     [Xunit.Fact(DisplayName = "Scenario: Add two numbers")]
     public void AddTwoNumbers() // Scenario: Add two numbers
     {
+       Background().CalculatorBackground();
+
        CurrentScenario(
            $"    Scenario: Add two numbers",
            $"      Given the first number is 50",
@@ -26,8 +33,6 @@ partial class CalculatorFeature // Feature: Calculator
            $"      When the two numbers are added",
            $"      Then the result should be 120"
        );
-
-       Background().CalculatorBackground();
 
        Given().TheFirstNumberIs50();     // Given the first number is 50
          And().TheSecondNumberIs70();    // And the second number is 70
@@ -41,6 +46,8 @@ partial class CalculatorFeature // Feature: Calculator
     [Xunit.Fact(DisplayName = "Example: Add two numbers in \"different\" way")]
     public void AddTwoNumbersInDifferentWay() // Example: Add two numbers in "different" way
     {
+       Background().CalculatorBackground();
+
        CurrentScenario(
            $"    Example: Add two numbers in \"different\" way",
            $"      Given Two numbers:",
@@ -49,8 +56,6 @@ partial class CalculatorFeature // Feature: Calculator
            $"      When the two numbers are added",
            $"      Then the result should be 120"
        );
-
-       Background().CalculatorBackground();
 
        Given().TwoNumbers();             // Given Two numbers:
          And().TheFirstNumberIs50();     // * the first number is 50
@@ -65,6 +70,8 @@ partial class CalculatorFeature // Feature: Calculator
     [Xunit.InlineData("50", "70", "120")]
     public void AddManyNumbers(string firstNo, string second, string result) // Scenario Outline: Add many numbers
     {
+       Background().CalculatorBackground();
+
        CurrentScenario(
            $"    Scenario Outline: Add many numbers",
            $"      Given the first number is <{firstNo}>",
@@ -74,8 +81,6 @@ partial class CalculatorFeature // Feature: Calculator
            $"      Examples:",
            $"        | {firstNo} | {second} | {result} |"
        );
-
-       Background().CalculatorBackground();
 
        Given().TheFirstNumberIs(firstNo);  // Given the first number is <first no>
          And().TheSecondNumberIs(second);  // And the second number is <second>
