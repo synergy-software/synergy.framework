@@ -17,6 +17,6 @@ public static class Init
         if (Repair.Mode)
             VerifierSettings.AutoVerify();
 
-        DiffTools.UseOrder(DiffTool.Rider, DiffTool.VisualStudioCode, DiffTool.VisualStudio, DiffTool.WinMerge);
+        DiffTools.UseOrder(DiffTool.WinMerge);
     }
 }
