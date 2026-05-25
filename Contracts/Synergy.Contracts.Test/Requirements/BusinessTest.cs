@@ -14,6 +14,7 @@ namespace Synergy.Contracts.Test.Requirements
         {
             this.Act(() =>
                     Business.Rule("For online payment, transaction amount cannot exceed online payment limit")
+                            .Details("This rule ensures that online payments do not exceed the set limit")
                             .Throws(new NotImplementedException("NOT IMPLEMENTED"))
                 )
                 .AssertException("NOT IMPLEMENTED");

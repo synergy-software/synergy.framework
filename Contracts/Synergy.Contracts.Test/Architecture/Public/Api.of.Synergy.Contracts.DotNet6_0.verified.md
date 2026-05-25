@@ -316,7 +316,7 @@
      condition: bool
    ) : Business+Requirement [MustUseReturnValue]
  - Business.Rule(
-     description: string
+     title: string
    ) : Business+Principle [MustUseReturnValue]
  - Business.When(
      preCondition: bool,
@@ -346,10 +346,15 @@
    ) : Business+Requirement [MustUseReturnValue]
 
 ## Requirements.Business+Principle (struct)
- - Description: string { get; }
+ - Description: string [Nullable] { get; }
+ - Title: string { get; }
  - ctor(
-     description: string
+     title: string,
+     description: string? [Nullable, Optional]
    )
+ - Details(
+     description: string
+   ) : Business+Principle
  - Requires(
      condition: bool
    ) : Business+Requirement [MustUseReturnValue]

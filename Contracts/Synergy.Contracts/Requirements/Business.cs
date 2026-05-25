@@ -12,8 +12,8 @@ namespace Synergy.Contracts.Requirements
         /// Gets rule with description only.
         /// </summary>
         [MustUseReturnValue]
-        public static Principle Rule(string description)
-            => new Principle(description);
+        public static Principle Rule(string title)
+            => new Principle(title);
         
         [MustUseReturnValue]
         public static Precondition When(bool preCondition, [System.Runtime.CompilerServices.CallerArgumentExpression("preCondition")] string? expression = null) 
@@ -140,16 +140,21 @@ namespace Synergy.Contracts.Requirements
         
         public readonly struct Principle
         {
-            public string Description { get; }
+            public string Title { get; }
+            public string? Description { get; }
 
-            public Principle(string description)
+            public Principle(string title, string? description = null)
             {
+                this.Title = title;
                 this.Description = description;
             }
 
             /// <inheritdoc />
             public override string ToString() 
-                => this.Description;
+                => this.Title;
+
+            public Principle Details(string description)
+                => new Principle(Title, description.OrFailIfWhiteSpace(nameof(description)));
 
             [MustUseReturnValue]
             public Precondition When(bool preCondition) 

@@ -191,7 +191,8 @@ namespace Synergy.Contracts.Test.Requirements
         
         private void QuickSample2(TransactionType transactionType, double? onlinePaymentLimit, double paymentAmount)
         {
-            Business.Rule("For online payment transaction: when online payment limit is set than payment amount cannot exceed the limit")
+            Business.Rule("Online payment amount cannot exceed the limit")
+                    .Details("For online payment transaction: when online payment limit is set than payment amount cannot exceed the limit")
                     .When(transactionType == TransactionType.OnlinePayment)
                     .And(onlinePaymentLimit != null)
                     .Requires(paymentAmount <= onlinePaymentLimit)
