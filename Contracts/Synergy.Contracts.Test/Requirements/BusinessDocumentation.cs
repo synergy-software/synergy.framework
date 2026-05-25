@@ -129,7 +129,8 @@ namespace Synergy.Contracts.Test.Requirements
 
         private void Step4Sample(int withdrawLimit, int withdrawAmount)
         {
-            Business.Rule("When withdraw limit is set, withdrawn amount cannot exceed the limit")
+            Business.Rule("Withdrawn amount cannot exceed the limit")
+                    .Details("When withdraw limit is set, withdrawn amount must be <= to the limit")
                     .When(withdrawLimit != null)["Withdraw Limit is set"]
                     .Requires(withdrawAmount <= withdrawLimit)["Withdraw Amount must be <= to Withdraw Limit"]
                     .Throws(new WithdrawAmountExceedsLimitException(withdrawLimit, withdrawAmount));
