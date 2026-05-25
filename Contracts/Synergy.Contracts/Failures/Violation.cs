@@ -187,6 +187,24 @@ namespace Synergy.Contracts
             Violation.Of("'{0}' is empty = {1}", name, value.ToString(CultureInfo.InvariantCulture));
 
         /// <summary>
+        /// "'{0}' is not date = {1}"
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <returns>Violation message</returns>
+        internal static Violation WhenDateTimeOffsetIsNotDate(string name, DateTimeOffset value) =>
+            Violation.Of("'{0}' is not date = {1}", name, value.ToString(CultureInfo.InvariantCulture));
+
+        /// <summary>
+        /// "'{0}' is empty = {1}"
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <returns>Violation message</returns>
+        internal static Violation WhenDateTimeOffsetIsEmpty(string name, DateTimeOffset value) =>
+            Violation.Of("'{0}' is empty = {1}", name, value.ToString(CultureInfo.InvariantCulture));
+
+        /// <summary>
         ///
         /// </summary>
         /// <param name="name"></param>

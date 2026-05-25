@@ -55,6 +55,10 @@
      name: string? [CallerArgumentExpression, Optional]
    ) : DateTime [NullableContext, Extension, AssertionMethod]
  - Fail.FailIfEmpty(
+     value: DateTimeOffset,
+     name: string? [CallerArgumentExpression, Optional]
+   ) : DateTimeOffset [NullableContext, Extension, AssertionMethod]
+ - Fail.FailIfEmpty(
      value: Guid,
      message: Violation
    ) : Guid [Extension, AssertionMethod]
@@ -79,6 +83,14 @@
      date: DateTime? [CanBeNull],
      name: string? [CallerArgumentExpression, Optional]
    ) : DateTime? [NullableContext, Extension, CanBeNull, AssertionMethod]
+ - Fail.FailIfNotDate(
+     date: DateTimeOffset,
+     name: string? [CallerArgumentExpression, Optional]
+   ) : DateTimeOffset [NullableContext, Extension, AssertionMethod]
+ - Fail.FailIfNotDate(
+     date: DateTimeOffset? [CanBeNull],
+     name: string? [CallerArgumentExpression, Optional]
+   ) : DateTimeOffset? [NullableContext, Extension, CanBeNull, AssertionMethod]
  - Fail.FailIfNotEqual<TExpected, TActual>(
      actual: TActual [Nullable],
      expected: TExpected [Nullable],
@@ -150,6 +162,10 @@
      name: string? [CallerArgumentExpression, Optional]
    ) : void [NullableContext, AssertionMethod]
  - Fail.IfEmpty(
+     value: DateTimeOffset,
+     name: string? [CallerArgumentExpression, Optional]
+   ) : void [NullableContext, AssertionMethod]
+ - Fail.IfEmpty(
      value: Guid,
      message: Violation
    ) : void [AssertionMethod]
@@ -200,6 +216,14 @@
    ) : void [AssertionMethod]
  - Fail.IfNotDate(
      date: DateTime?,
+     name: string? [CallerArgumentExpression, Optional]
+   ) : void [NullableContext, AssertionMethod]
+ - Fail.IfNotDate(
+     date: DateTimeOffset? [CanBeNull],
+     message: Violation
+   ) : void [AssertionMethod]
+ - Fail.IfNotDate(
+     date: DateTimeOffset?,
      name: string? [CallerArgumentExpression, Optional]
    ) : void [NullableContext, AssertionMethod]
  - Fail.IfNotEqual<TExpected, TActual>(
