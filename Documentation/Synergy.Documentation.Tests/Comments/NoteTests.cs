@@ -1,4 +1,5 @@
 ﻿using Synergy.Catalogue;
+using Synergy.Contracts.Requirements;
 using Synergy.Documentation.Annotations;
 
 namespace Synergy.Documentation.Tests.Comments;
@@ -20,7 +21,8 @@ public class NoteTests
             .Therefore("I want to show you how to use them")
             .Otherwise("I want to show you how to use them")
             .Moreover("I want to show you how to use them")
-            .Reference("https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/");
+            .Reference("https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/")
+            .Satisfies(Business.Rule("Do NOT add comments in code as ///").Description);
     }
     
     [Fact]

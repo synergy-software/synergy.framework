@@ -34,4 +34,7 @@ public static class Note
     
     public static T Reference<T>(this T source, string link)
         => source;
+    
+    public static T Satisfies<T>(this T source, object principle) 
+        => source;
 }

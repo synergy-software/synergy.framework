@@ -39,6 +39,10 @@
      source: T?,
      link: string
    ) : T? [Extension]
+ - Note.Satisfies<T>(
+     source: T?,
+     principle: object
+   ) : T? [Extension]
  - Note.Then<T>(
      source: T?,
      reason: string
