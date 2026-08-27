@@ -25,6 +25,8 @@ public static class FeatureGenerator
             callerFilePath
         );
 
+        // TODO: Marcin Celej [from: Marcin Celej on: 26-05-2026]: Add empty methods that are not implemented yet 
+        
         GherkinWriter.Write(callerFilePath, to, code);
     }
 

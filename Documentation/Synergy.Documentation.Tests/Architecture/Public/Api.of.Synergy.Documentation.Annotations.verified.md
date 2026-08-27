@@ -7,6 +7,10 @@
    )
 
 ## Note (abstract class)
+ - Note.And<T>(
+     source: T?,
+     reason: string? [Nullable, Optional]
+   ) : T? [Extension]
  - Note.Because<T>(
      source: T?,
      reason: string

@@ -37,4 +37,12 @@ public static class Note
     
     public static T Satisfies<T>(this T source, object principle) 
         => source;
+    
+    /// <summary>
+    /// Identity function used purely for readability,
+    /// allowing fluent chaining of unrelated statements
+    /// (e.g. after `.Because()`/`.Therefore()` reasoning calls).
+    /// </summary>
+    public static T And<T>(this T source, string? reason = null) 
+        => source;
 }

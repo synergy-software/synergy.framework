@@ -54,7 +54,7 @@ namespace Synergy.Contracts
         )
         {
             Fail.RequiresArgumentName(name);
-            Fail.IfEmpty(value, Violation.WhenEmpty(name));
+            Fail.IfEmpty(value, Violation.WhenEmpty(name!));
         }
 
         /// <summary>

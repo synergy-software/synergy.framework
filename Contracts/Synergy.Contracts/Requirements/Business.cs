@@ -27,6 +27,8 @@ namespace Synergy.Contracts.Requirements
         public static Precondition When(bool preCondition, [System.Runtime.CompilerServices.CallerArgumentExpression("preCondition")] string? expression = null) 
             => new Precondition(preCondition);
 
+        // TODO: Marcin Celej [from: Marcin Celej on: 27-05-2026]: add here [CallerArgumentExpression]
+        
         /// <summary>
         /// Creates requirement without precondition.
         /// </summary>
@@ -85,6 +87,8 @@ namespace Synergy.Contracts.Requirements
             public Precondition this[[NotNull] string when] 
                 => new Precondition(this.Met, this.previous, when.OrFailIfWhiteSpace(nameof(when)));
 
+            // TODO: Marcin Celej [from: Marcin Celej on: 27-05-2026]: add here [CallerArgumentExpression]
+            
             /// <summary>
             /// Creates requirement under this precondition.
             /// </summary>
@@ -259,6 +263,7 @@ namespace Synergy.Contracts.Requirements
             public override string ToString() 
                 => this.Title;
 
+            // TODO: Make it accessible via indexer - instead of calling Details() method
             /// <summary>
             /// Adds rule details.
             /// </summary>
@@ -276,6 +281,7 @@ namespace Synergy.Contracts.Requirements
             public Precondition When(bool preCondition) 
                 => new Precondition(preCondition);
 
+            // TODO: Marcin Celej [from: Marcin Celej on: 27-05-2026]: add here [CallerArgumentExpression]
             /// <summary>
             /// Creates requirement without precondition.
             /// </summary>
@@ -291,6 +297,8 @@ namespace Synergy.Contracts.Requirements
             /// <param name="exception">Exception to throw.</param>
             public void Throws(Exception exception) 
                 => throw exception;
+
+            // TODO: Marcin Celej [from: Marcin Celej on: 28-05-2026]: Add Throws<TException>() method
         }
     }
 }

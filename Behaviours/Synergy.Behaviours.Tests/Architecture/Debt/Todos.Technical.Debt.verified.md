@@ -1,6 +1,9 @@
 ﻿# Technical Debt for Synergy.Contracts
 
-Total: 2
+Total: 3
+
+## [FeatureGenerator.cs](../../../Synergy.Behaviours.Testing/FeatureGenerator.cs)
+- TODO: Marcin Celej [from: Marcin Celej on: 26-05-2026]: Add empty methods that are not implemented yet
 
 ## [XUnitFeatureGenerator.cs](../../../Synergy.Behaviours.Testing/Generator/XUnitFeatureGenerator.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 18-01-2024]: Consider Introducing inherited Step wit arguments (in outline only)
