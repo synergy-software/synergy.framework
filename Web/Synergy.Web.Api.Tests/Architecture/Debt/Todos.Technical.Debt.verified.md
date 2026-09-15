@@ -1,6 +1,6 @@
 ﻿# Technical Debt for Synergy.Web.Api.Testing
 
-Total: 20
+Total: 21
 
 ## [CreateUserCommandHandler.cs](../../../Sample/Synergy.Sample.Web.API.Services/Users/Commands/CreateUser/CreateUserCommandHandler.cs)
 - TODO: Add validation (bad-request) mechanism - maybe use data annotations?
@@ -47,3 +47,6 @@ Total: 20
 
 ## [Synergy.Web.Api.Testing.csproj](../../../Synergy.Web.Api.Testing/Synergy.Web.Api.Testing.csproj)
 - TODO: Prepare docs
+
+## [TestServer.cs](../../../Synergy.Web.Api.Testing/TestServer.cs)
+- TODO: Marcin Celej [from: Marcin Celej on: 28-08-2026]: Introduc other serialization mechanism - not only  Newtonsoft.Json

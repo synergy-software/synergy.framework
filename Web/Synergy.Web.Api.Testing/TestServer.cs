@@ -19,6 +19,8 @@ namespace Synergy.Web.Api.Testing
 
         public bool Repair { get; set; }
 
+        // TODO: Marcin Celej [from: Marcin Celej on: 28-08-2026]: Introduc other serialization mechanism - not only  Newtonsoft.Json
+
         public virtual JsonSerializerSettings SerializationSettings { get; }
 
         public virtual void FailIfLeftInRepairMode()
