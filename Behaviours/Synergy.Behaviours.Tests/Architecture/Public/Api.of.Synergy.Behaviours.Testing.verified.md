@@ -16,6 +16,7 @@
      to: string,
      include: Func<Scenario, bool>? [Nullable, Optional],
      generateAfter: Func<Scenario, bool>? [Nullable, Optional],
+     placeholder: string? [Nullable, Optional],
      callerFilePath: string [CallerFilePath, Optional]
    ) : void [Extension]
  - FeatureGenerator.Generate<TBehaviour>(
@@ -23,6 +24,7 @@
      from: string,
      include: Func<Scenario, bool>? [Nullable, Optional],
      generateAfter: Func<Scenario, bool>? [Nullable, Optional],
+     placeholder: string? [Nullable, Optional],
      callerFilePath: string [CallerFilePath, Optional]
    ) : string [Extension]
 

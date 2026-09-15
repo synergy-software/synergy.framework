@@ -10,6 +10,7 @@ internal class XUnitFeatureGenerator
     private readonly Func<Scenario, bool> include;
     private readonly Func<Scenario, bool> generateAfter;
     private readonly bool currentScenario = true;
+    internal readonly List<string> Methods = new List<string>(100);
 
     public XUnitFeatureGenerator(
         Func<Scenario, bool>? include,
@@ -245,6 +246,7 @@ internal class XUnitFeatureGenerator
             string stepType = GetStepType(theStep);
             string stepText = theStep.Text;
             string methodName = Sentence.ToMethod(argumentsRegex.Replace(stepText, ""));
+            this.Methods.Add(methodName);
             var arguments = argumentsRegex.Matches(stepText).Select(match => Sentence.ToArgument(match.Groups[1].Value)).ToArray();
             return $"{stepType}().{methodName}({string.Join(", ", arguments)})";
         }

@@ -1,4 +1,4 @@
-﻿using Synergy.Behaviours.Testing;
+using Synergy.Behaviours.Testing;
 
 namespace Synergy.Behaviours.Tests.Samples;
 
@@ -11,7 +11,8 @@ public partial class CalculatorFeature : Feature<CalculatorFeature>
         var code = this.Generate(
             from: "Calculator.feature",
             include: scenario => scenario.IsTagged("Add"),
-            generateAfter: scenario => scenario.IsTagged("verify")
+            generateAfter: scenario => scenario.IsTagged("verify"),
+            placeholder: "    // PLACEHOLDER\r\n"
         );
 
         await Verifier
@@ -80,4 +81,6 @@ public partial class CalculatorFeature : Feature<CalculatorFeature>
     {
         Assert.Equal(Convert.ToInt32(result), this._result);
     }
+
+    // PLACEHOLDER
 }
