@@ -233,6 +233,12 @@
  - TodoExtractor: Func<Match, string> { get; set; }
  - ctor()
 
+## Todos.Patterns.YamlTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<YamlTodoPattern>
+ - FileExtension: string { get; set; }
+ - Regex: Regex { get; set; }
+ - TodoExtractor: Func<Match, string> { get; set; }
+ - ctor()
+
 ## Todos.TodoExplorer (abstract class)
  - TodoExplorer.DebtFor(
      name: string,
