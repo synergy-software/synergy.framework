@@ -15,7 +15,8 @@ public static class TodoExplorer
         new TextTodoPattern(),
         new CsprojTodoPattern(),
         new TypescriptTodoPattern(),
-        new MarkdownTodoPattern()
+        new MarkdownTodoPattern(),
+        new YamlTodoPattern()
     };
 
     public static string DebtFor(
