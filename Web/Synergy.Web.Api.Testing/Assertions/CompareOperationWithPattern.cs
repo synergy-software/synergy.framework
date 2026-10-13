@@ -150,7 +150,8 @@ namespace Synergy.Web.Api.Testing.Assertions
 
         private static JProperty GetHeader(KeyValuePair<string, IEnumerable<string>> header)
         {
-            return new JProperty(header.Key, string.Join("; ", header.Value));
+            var separator = string.Equals(header.Key, "Allow", StringComparison.OrdinalIgnoreCase) ? ", " : "; ";
+            return new JProperty(header.Key, string.Join(separator, header.Value));
         }
 
         public CompareOperationWithPattern Ignore(string ignore, params string[] ignores)
