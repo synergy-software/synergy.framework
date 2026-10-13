@@ -66,12 +66,29 @@ public static class TodoExplorer
             if (alreadyAdded == false)
             {
                 todos.AppendLine();
-                var relativePath = Path.GetRelativePath(Path.GetDirectoryName(currentPath), filePath)
-                                       .Replace("\\", "/");
-                todos.AppendLine($"## [{Path.GetFileName(filePath)}]({relativePath})");
+                string markdownPath = FilePath(filePath);
+                string fileName = FileName(filePath);
+                todos.AppendLine($"## [{fileName}]({markdownPath})");
             }
 
             return true;
+        }
+
+        string FilePath(string filePath)
+        {
+            var relativePath = Path.GetRelativePath(Path.GetDirectoryName(currentPath), filePath)
+                                   .Replace("\\", "/");
+            var markdownPath = string.Join("/", relativePath.Split('/').Select(Uri.EscapeDataString));
+            return markdownPath;
+        }
+
+        string FileName(string filePath)
+        {
+            var fileName = Path.GetFileName(filePath)
+                               .Replace("\\", "\\\\")
+                               .Replace("[", "\\[")
+                               .Replace("]", "\\]");
+            return fileName;
         }
     }
 

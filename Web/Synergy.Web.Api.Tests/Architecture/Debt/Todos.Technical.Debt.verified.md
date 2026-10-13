@@ -32,7 +32,7 @@ Total: 21
 - TODO: Additionally log (trace/debug level) full request and response - with dedicated middleware/filter
 - TODO: Move the EnvironmentName to Serilog global config - after you move it deeper from Main()
 
-## [!Init.cs](../../../Synergy.Web.Api.Testing/!Init.cs)
+## [!Init.cs](../../../Synergy.Web.Api.Testing/%21Init.cs)
 - TODO: Marcin Celej [from: Marcin Celej on: 14-05-2023]: Move this library to net6.0 and stop supporting netcoreapp3.1
 - TODO: Marcin Celej [from: Marcin Celej on: 14-05-2023]: Update dependencies to latest version
 
