@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Mime;
 using System.Text;
 using Newtonsoft.Json;
@@ -225,7 +226,7 @@ namespace Synergy.Web.Api.Testing.Assertions
             {
                 var headerName = header.Path.Replace("response.headers.", "");
                 var headerValue = header.Value<string>();
-                response.Headers.Add(headerName, headerValue);
+                RestoreHeader(response.Headers, headerName, headerValue);
             }
             
             var contentHeaders = _savedPattern!.SelectTokens("$.response.content.headers.*");
@@ -238,10 +239,19 @@ namespace Synergy.Web.Api.Testing.Assertions
                     response.Content.Headers.Remove(headerName);
                 }
 
-                response.Content.Headers.Add(headerName, headerValue);
+                RestoreHeader(response.Content.Headers, headerName, headerValue);
             }
 
             return response;
+        }
+
+        private static void RestoreHeader(HttpHeaders headers, string name, string? value)
+        {
+            // Snapshots may contain raw values accepted on receipt but rejected by typed parsers.
+            if (!headers.TryAddWithoutValidation(name, value))
+            {
+                throw new InvalidOperationException($"Cannot restore response header '{name}' from the snapshot.");
+            }
         }
     }
 }

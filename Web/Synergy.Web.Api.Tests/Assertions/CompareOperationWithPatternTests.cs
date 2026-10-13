@@ -15,22 +15,34 @@ public class CompareOperationWithPatternTests
     [InlineData("Allow", new[] { "GET, POST" }, "GET, POST")]
     [InlineData("Allow", new[] { "GET" }, "GET")]
     [InlineData("allow", new[] { "GET", "POST" }, "GET, POST")]
-    public void Allow_round_trips_through_snapshot_and_markdown(
-        string headerName, string[] methods, string expectedValue)
+    [InlineData("Expires", new[] { "0" }, "0")]
+    [InlineData("Expires", new[] { "-1" }, "-1")]
+    [InlineData("Expires", new[] { "not-a-date" }, "not-a-date")]
+    [InlineData("Expires", new[] { "Wed, 21 Oct 2015 07:28:00 GMT" }, "Wed, 21 Oct 2015 07:28:00 GMT")]
+    [InlineData("Expires", new[] { "Wednesday, 21-Oct-15 07:28:00 GMT" }, "Wed, 21 Oct 2015 07:28:00 GMT")]
+    [InlineData("Date", new[] { "not-a-date" }, "not-a-date", false)]
+    [InlineData("Date", new[] { "Wed, 21 Oct 2015 07:28:00 GMT" }, "Wed, 21 Oct 2015 07:28:00 GMT", false)]
+    public void Response_header_round_trips_through_snapshot_and_markdown(
+        string headerName, string[] values, string expectedValue, bool contentHeader = true)
     {
         var patternPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
         var reportPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
 
         try
         {
-            using var server = new StubTestServer(headerName, methods);
+            using var server = new StubTestServer(headerName, values, contentHeader);
             var operation = server.Delete("/forms");
             using var request = operation.Request;
             using var response = operation.Response;
             operation.ShouldBe(new CompareOperationWithPattern(patternPath));
 
             var snapshot = JObject.Parse(File.ReadAllText(patternPath));
-            Assert.Equal(expectedValue, snapshot["response"]!["content"]!["headers"]!["Allow"]!.Value<string>());
+            var headers = (JObject)(contentHeader
+                ? snapshot["response"]!["content"]!["headers"]!
+                : snapshot["response"]!["headers"]!);
+            Assert.Equal(
+                expectedValue,
+                headers.GetValue(headerName, StringComparison.OrdinalIgnoreCase)!.Value<string>());
             Assert.Equal(
                 "application/problem+json; charset=utf-8",
                 snapshot["response"]!["content"]!["headers"]!["Content-Type"]!.Value<string>());
@@ -40,7 +52,8 @@ public class CompareOperationWithPatternTests
             operation.ShouldBe(savedPattern);
 
             using var savedResponse = ((IHttpResponseStorage)savedPattern).GetSavedResponse();
-            Assert.Equal(operation.Response.Content.Headers.Allow, savedResponse.Content.Headers.Allow);
+            var savedHeaders = contentHeader ? savedResponse.Content.Headers.NonValidated : savedResponse.Headers.NonValidated;
+            Assert.Equal(new[] { expectedValue }, savedHeaders[headerName].ToArray());
             Assert.Equal(
                 operation.Response.Content.Headers.ContentType!.ToString(),
                 savedResponse.Content.Headers.ContentType!.ToString());
@@ -60,14 +73,43 @@ public class CompareOperationWithPatternTests
         }
     }
 
+    [Fact]
+    public void Restoring_header_in_wrong_collection_reports_failure()
+    {
+        var patternPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+
+        try
+        {
+            File.WriteAllText(patternPath, @"{
+                  ""response"": {
+                    ""status"": ""200 OK"",
+                    ""content"": {
+                      ""body"": {},
+                      ""headers"": { ""Host"": ""localhost"" }
+                    }
+                  }
+                }");
+            var pattern = new CompareOperationWithPattern(patternPath);
+
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => ((IHttpResponseStorage)pattern).GetSavedResponse());
+
+            Assert.Contains("Host", exception.Message);
+        }
+        finally
+        {
+            File.Delete(patternPath);
+        }
+    }
+
     private sealed class StubTestServer : TestServer
     {
         public override HttpClient HttpClient { get; }
         public override JsonSerializerSettings SerializationSettings { get; } = new();
 
-        public StubTestServer(string headerName, string[] methods)
+        public StubTestServer(string headerName, string[] values, bool contentHeader)
         {
-            HttpClient = new HttpClient(new ResponseHandler(headerName, methods))
+            HttpClient = new HttpClient(new ResponseHandler(headerName, values, contentHeader))
             {
                 BaseAddress = new Uri("http://localhost")
             };
@@ -77,12 +119,14 @@ public class CompareOperationWithPatternTests
     private sealed class ResponseHandler : HttpMessageHandler
     {
         private readonly string _headerName;
-        private readonly string[] _methods;
+        private readonly string[] _values;
+        private readonly bool _contentHeader;
 
-        public ResponseHandler(string headerName, string[] methods)
+        public ResponseHandler(string headerName, string[] values, bool contentHeader)
         {
             _headerName = headerName;
-            _methods = methods;
+            _values = values;
+            _contentHeader = contentHeader;
         }
 
         protected override Task<HttpResponseMessage> SendAsync(
@@ -95,7 +139,11 @@ public class CompareOperationWithPatternTests
                     Encoding.UTF8,
                     "application/problem+json")
             };
-            response.Content.Headers.Add(_headerName, _methods);
+            System.Net.Http.Headers.HttpHeaders headers = _contentHeader ? response.Content.Headers : response.Headers;
+            if (!headers.TryAddWithoutValidation(_headerName, _values))
+            {
+                throw new InvalidOperationException($"Cannot add test header '{_headerName}'.");
+            }
             return Task.FromResult(response);
         }
     }
