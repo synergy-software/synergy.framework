@@ -23,6 +23,9 @@
  - Delegate.Combine(
      delegates: params Delegate[]? [ParamArray]
    ) : Delegate? [NullableContext]
+ - Delegate.Combine(
+     delegates: ReadOnlySpan<Delegate> [ParamCollection, ScopedRef, Nullable]
+   ) : Delegate? [NullableContext]
  - Delegate.CreateDelegate(
      type: Type,
      firstArgument: object? [Nullable],
@@ -79,6 +82,9 @@
      ignoreCase: bool,
      throwOnBindFailure: bool
    ) : Delegate?
+ - Delegate.EnumerateInvocationList<TDelegate>(
+     d: TDelegate? [Nullable]
+   ) : InvocationListEnumerator<TDelegate> [NullableContext]
  - Delegate.Remove(
      source: Delegate?,
      value: Delegate?
@@ -101,7 +107,7 @@
  - GetObjectData(
      info: SerializationInfo,
      context: StreamingContext
-   ) : void
+   ) : void [Obsolete, EditorBrowsable]
  - Invoke(
      sourceFile: string,
      projectDirectory: string,

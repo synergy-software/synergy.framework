@@ -6,7 +6,7 @@
 
 **License:** MIT
 
-**Target frameworks:** .NET 6, .NET 7, .NET 8, and .NET 10
+**Target frameworks:** .NET 8 and .NET 10
 
 ## Install
 

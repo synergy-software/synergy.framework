@@ -11,7 +11,7 @@
      type: Type
    )
 
-## Diagrams.Sequence.SequenceDiagramArchetype (enum) : IComparable, IFormattable, IConvertible
+## Diagrams.Sequence.SequenceDiagramArchetype (enum) : IComparable, ISpanFormattable, IFormattable, IConvertible
  - Participant = 0
  - Actor = 1
  - Boundary = 2
@@ -92,7 +92,7 @@
  - Group: SequenceDiagramGroupType { get; }
  - GroupHeader: string { get; }
 
-## Diagrams.Sequence.SequenceDiagramGroupType (enum) : IComparable, IFormattable, IConvertible
+## Diagrams.Sequence.SequenceDiagramGroupType (enum) : IComparable, ISpanFormattable, IFormattable, IConvertible
  - None = 0
  - Alt = 1
  - Else = 2

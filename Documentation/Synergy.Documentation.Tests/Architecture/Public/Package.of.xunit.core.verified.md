@@ -21,7 +21,7 @@
      name: string
    )
 
-## Xunit.CollectionBehavior (enum) : IComparable, IFormattable, IConvertible
+## Xunit.CollectionBehavior (enum) : IComparable, ISpanFormattable, IFormattable, IConvertible
  - CollectionPerAssembly = 0
  - CollectionPerClass = 1
 
@@ -277,11 +277,11 @@
      assemblyName: string
    )
 
-## Xunit.Sdk.TestMethodDisplay (enum) : IComparable, IFormattable, IConvertible
+## Xunit.Sdk.TestMethodDisplay (enum) : IComparable, ISpanFormattable, IFormattable, IConvertible
  - ClassAndMethod = 1
  - Method = 2
 
-## Xunit.Sdk.TestMethodDisplayOptions (enum) : IComparable, IFormattable, IConvertible
+## Xunit.Sdk.TestMethodDisplayOptions (enum) : IComparable, ISpanFormattable, IFormattable, IConvertible
  - None = 0
  - ReplaceUnderscoreWithSpace = 1
  - UseOperatorMonikers = 2

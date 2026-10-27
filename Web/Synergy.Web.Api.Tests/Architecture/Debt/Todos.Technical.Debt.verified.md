@@ -1,6 +1,6 @@
 ﻿# Technical Debt for Synergy.Web.Api.Testing
 
-Total: 21
+Total: 20
 
 ## [CreateUserCommandHandler.cs](../../../Sample/Synergy.Sample.Web.API.Services/Users/Commands/CreateUser/CreateUserCommandHandler.cs)
 - TODO: Add validation (bad-request) mechanism - maybe use data annotations?
@@ -33,7 +33,6 @@ Total: 21
 - TODO: Move the EnvironmentName to Serilog global config - after you move it deeper from Main()
 
 ## [!Init.cs](../../../Synergy.Web.Api.Testing/%21Init.cs)
-- TODO: Marcin Celej [from: Marcin Celej on: 14-05-2023]: Move this library to net6.0 and stop supporting netcoreapp3.1
 - TODO: Marcin Celej [from: Marcin Celej on: 14-05-2023]: Update dependencies to latest version
 
 ## [CompareOperationWithPattern.cs](../../../Synergy.Web.Api.Testing/Assertions/CompareOperationWithPattern.cs)

@@ -63,7 +63,7 @@
      expected: string
    ) : IAssertion
 
-## Assertions.CompareResponseWithPattern+Mode (enum) : IComparable, IFormattable, IConvertible
+## Assertions.CompareResponseWithPattern+Mode (enum) : IComparable, ISpanFormattable, IFormattable, IConvertible
  - ContractCheck = 1
  - Default = 2
 

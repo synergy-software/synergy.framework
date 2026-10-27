@@ -31,7 +31,7 @@
             "Error converting value \"\" to type 'Synergy.Sample.Web.API.Services.Users.Domain.Login'. Path 'login', line 1, position 11."
           ]
         },
-        "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+        "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
         "title": "One or more validation errors occurred.",
         "status": 400,
         "traceId": "0HNKSBKMTUUL1"
