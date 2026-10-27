@@ -5,6 +5,7 @@ using Synergy.Architecture.Annotations.Diagrams.Sequence;
 using Synergy.Architecture.Diagrams.Api;
 using Synergy.Architecture.Diagrams.Documentation;
 using Synergy.Architecture.Diagrams.Extensions;
+using Synergy.Architecture.Diagrams.Markdown;
 using Synergy.Reflection;
 
 namespace Synergy.Architecture.Diagrams.Sequence;
@@ -30,7 +31,7 @@ public record SequenceDiagramUrl(
         var diagram = this.GenerateDiagramContent();
         var factory = new RendererFactory();
         var renderer = factory.CreateRenderer(new PlantUmlSettings());
-        var uri = renderer.RenderAsUri(diagram.ToString(), OutputFormat.Png);
+        var uri = renderer.RenderAsUri(PlantUmlUri.NormalizeSource(diagram.ToString()), OutputFormat.Png);
 
         return uri.ToString();
     }

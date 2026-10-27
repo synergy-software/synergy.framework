@@ -24,7 +24,7 @@ public static class PlantUmlDiagrams
         string GenerateDiagrams(string content, string markdownFilePath)
         {
             var r = new Regex(
-                $"<!--\\s*```plantuml\\s*(.*?)```\\s*-->(\\s*!\\[(.*?)\\]\\(.*?\\) {disclaimer})?",
+                $"<!--\\s*```plantuml\\s*(.*?)```\\s*-->(\\s*!\\[(.*?)\\]\\((.*?)\\) {disclaimer})?",
                 RegexOptions.Singleline
             );
 
@@ -39,7 +39,7 @@ public static class PlantUmlDiagrams
                     
                     if (links)
                     {
-                        return GenerateDiagramImageAsLink(rawPlantUml, diagramName);
+                        return GenerateDiagramImageAsLink(rawPlantUml, diagramName, match.Groups[4].Value);
                     }
 
                     return GenerateDiagramImageAsFile(rawPlantUml, diagramName, markdownFilePath);
@@ -48,9 +48,12 @@ public static class PlantUmlDiagrams
             return s;
         }
 
-        string GenerateDiagramImageAsLink(string rawPlantUml, string diagramName)
+        string GenerateDiagramImageAsLink(string rawPlantUml, string diagramName, string currentUri)
         {
             var uri = GetDiagramUri(rawPlantUml);
+            if (PlantUmlUri.AreEquivalent(currentUri, uri))
+                uri = currentUri;
+
             var newOne = $"<!--{PlantUmlDiagrams.NL}```plantuml{PlantUmlDiagrams.NL}{rawPlantUml}```{PlantUmlDiagrams.NL}-->{PlantUmlDiagrams.NL}![{diagramName}]({uri}) {PlantUmlDiagrams.disclaimer}";
             return newOne;
         }
@@ -59,7 +62,7 @@ public static class PlantUmlDiagrams
         {
             var factory = new RendererFactory();
             var renderer = factory.CreateRenderer(new PlantUmlSettings());
-            var uri = renderer.RenderAsUri(rawPlantUml, OutputFormat.Png);
+            var uri = renderer.RenderAsUri(PlantUmlUri.NormalizeSource(rawPlantUml), OutputFormat.Png);
             return uri.ToString().Replace("http://", "https://");
         }
         
