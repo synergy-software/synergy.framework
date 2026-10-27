@@ -3,6 +3,9 @@
 ## Git workflow
 
 - Create commits only when the user explicitly requests them.
+- Before committing, wait for the user to review the changes locally and
+  explicitly confirm that the review is complete and the changes may be
+  committed. A prior request to commit does not bypass this review gate.
 - Push only when the user explicitly requests a push. Permission to commit does
   not imply permission to push.
 - Split work into atomic, coherent commits, ordered in dependency layers. Each
