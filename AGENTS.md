@@ -22,6 +22,14 @@
 - Preserve unrelated user changes. Ask before including changes whose scope is
   unclear.
 - Do not amend commits or rewrite history without explicit user authorization.
+- Never add `Co-authored-by` trailers (including the Copilot trailer) to commit
+  messages, pull requests, issues, or comments.
+
+## GitHub issues
+
+- When closing an issue, always add a closing comment summarizing the work
+  done: what was changed and why, the related commits, and how the change was
+  verified.
 
 ## Implementation and communication
 
