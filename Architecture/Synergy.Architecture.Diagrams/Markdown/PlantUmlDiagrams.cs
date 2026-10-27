@@ -91,7 +91,11 @@ public static class PlantUmlDiagrams
             string? markdownFileFolder = Path.GetDirectoryName(markdownFilePath);
             string diagramPath = FindOrCreateDiagramFolder(markdownFileFolder);
             string diagramFilePath = Path.Combine(diagramPath,  diagramFileName + ".png");
-            File.WriteAllBytes(diagramFilePath, image);
+            if (File.Exists(diagramFilePath) == false ||
+                PngImageComparer.AreEquivalent(File.ReadAllBytes(diagramFilePath), image) == false)
+            {
+                File.WriteAllBytes(diagramFilePath, image);
+            }
 
             var relative = Path.GetRelativePath(markdownFileFolder, diagramFilePath)
                                .Replace("\\", "/")

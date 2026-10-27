@@ -34,6 +34,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <InternalsVisibleTo Include="Synergy.Architecture.Tests" />
+    </ItemGroup>
+
+    <ItemGroup>
         <None Include="synergy.png" Pack="true" PackagePath="" />
         <None Include="license.txt" Pack="true" PackagePath="" />
     </ItemGroup>
