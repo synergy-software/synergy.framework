@@ -197,47 +197,94 @@
  - Regex: Regex { get; set; }
  - TodoExtractor: Func<Match, string> { get; set; }
  - ctor()
+ - Matches(
+     content: string
+   ) : IEnumerable<Match> [IteratorStateMachine]
 
-## Todos.Patterns.CsprojTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<CsprojTodoPattern>
+## Todos.Patterns.CsprojTodoPattern (record) : XmlTodoPattern, IEquatable<TodoPattern>, IEquatable<XmlTodoPattern>, IEquatable<CsprojTodoPattern>
+ - Extension: string { get; set; }
  - FileExtension: string { get; set; }
  - Regex: Regex { get; set; }
  - TodoExtractor: Func<Match, string> { get; set; }
  - ctor()
+ - Matches(
+     content: string
+   ) : IEnumerable<Match> [IteratorStateMachine]
 
 ## Todos.Patterns.GherkinTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<GherkinTodoPattern>
  - FileExtension: string { get; set; }
  - Regex: Regex { get; set; }
  - TodoExtractor: Func<Match, string> { get; set; }
  - ctor()
+ - Matches(
+     content: string
+   ) : IEnumerable<Match> [IteratorStateMachine]
 
 ## Todos.Patterns.MarkdownTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<MarkdownTodoPattern>
  - FileExtension: string { get; set; }
  - Regex: Regex { get; set; }
  - TodoExtractor: Func<Match, string> { get; set; }
  - ctor()
+ - Matches(
+     content: string
+   ) : IEnumerable<Match> [IteratorStateMachine]
+
+## Todos.Patterns.PropsTodoPattern (record) : XmlTodoPattern, IEquatable<TodoPattern>, IEquatable<XmlTodoPattern>, IEquatable<PropsTodoPattern>
+ - Extension: string { get; set; }
+ - FileExtension: string { get; set; }
+ - Regex: Regex { get; set; }
+ - TodoExtractor: Func<Match, string> { get; set; }
+ - ctor()
+ - Matches(
+     content: string
+   ) : IEnumerable<Match> [IteratorStateMachine]
 
 ## Todos.Patterns.TextTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<TextTodoPattern>
  - FileExtension: string { get; set; }
  - Regex: Regex { get; set; }
  - TodoExtractor: Func<Match, string> { get; set; }
  - ctor()
+ - Matches(
+     content: string
+   ) : IEnumerable<Match> [IteratorStateMachine]
 
 ## Todos.Patterns.TodoPattern (abstract class) : IEquatable<TodoPattern>
  - FileExtension: string { get; set; }
  - Regex: Regex { get; set; }
  - TodoExtractor: Func<Match, string> { get; set; }
+ - Matches(
+     content: string
+   ) : IEnumerable<Match> [IteratorStateMachine]
 
 ## Todos.Patterns.TypescriptTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<TypescriptTodoPattern>
  - FileExtension: string { get; set; }
  - Regex: Regex { get; set; }
  - TodoExtractor: Func<Match, string> { get; set; }
  - ctor()
+ - Matches(
+     content: string
+   ) : IEnumerable<Match> [IteratorStateMachine]
+
+## Todos.Patterns.XmlTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<XmlTodoPattern>
+ - Extension: string { get; set; }
+ - FileExtension: string { get; set; }
+ - Regex: Regex { get; set; }
+ - TodoExtractor: Func<Match, string> { get; set; }
+ - ctor(
+     Extension: string
+   )
+ - Matches(
+     content: string
+   ) : IEnumerable<Match> [IteratorStateMachine]
 
 ## Todos.Patterns.YamlTodoPattern (record) : TodoPattern, IEquatable<TodoPattern>, IEquatable<YamlTodoPattern>
  - FileExtension: string { get; set; }
  - Regex: Regex { get; set; }
  - TodoExtractor: Func<Match, string> { get; set; }
  - ctor()
+ - Matches(
+     content: string
+   ) : IEnumerable<Match> [IteratorStateMachine]
 
 ## Todos.TodoExplorer (abstract class)
  - TodoExplorer.DebtFor(

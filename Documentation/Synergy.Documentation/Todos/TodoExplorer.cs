@@ -14,6 +14,7 @@ public static class TodoExplorer
         new GherkinTodoPattern(),
         new TextTodoPattern(),
         new CsprojTodoPattern(),
+        new PropsTodoPattern(),
         new TypescriptTodoPattern(),
         new MarkdownTodoPattern(),
         new YamlTodoPattern()
@@ -40,13 +41,9 @@ public static class TodoExplorer
         foreach (var file in files)
         {
             var fileAdded = false;
-            var lines = File.ReadAllLines(file.Path);
-            foreach (var line in lines)
+            string content = File.ReadAllText(file.Path);
+            foreach (Match match in file.Pattern.Matches(content))
             {
-                Match match = file.Pattern.Regex.Match(line);
-                if (match.Success == false)
-                    continue;
-
                 fileAdded = AddFileHeader(fileAdded, file.Path);
                 var todo = file.Pattern.TodoExtractor(match);
                 todos.AppendLine($"- {todo.Trim()}");
