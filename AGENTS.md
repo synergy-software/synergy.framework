@@ -27,6 +27,12 @@
 
 - Ask when requirements, scope, or consequential design decisions are unclear.
 - Follow existing project conventions and keep changes focused on the task.
+- When a code change affects public APIs, observable behavior, configuration,
+  supported frameworks, or user workflows, update the relevant user-facing
+  documentation in the same change. For generated documentation, edit its
+  source template and regenerate the checked-in output; keep package README
+  files and public API snapshots in sync. Documentation updates are not needed
+  for changes with no user-facing impact.
 - Keep directly related documentation, tests, and public API snapshots in sync.
 - Use the smallest relevant existing build and test commands for validation.
   Distinguish a successful build from successful test execution; zero discovered

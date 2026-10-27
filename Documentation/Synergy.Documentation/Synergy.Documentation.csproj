@@ -7,14 +7,15 @@
         <RunCodeAnalysis>false</RunCodeAnalysis>
         <IsPackable>true</IsPackable>
         <PackageVersion>$(Version)</PackageVersion>
-        <Title>Synergy.Documentation - support for various docs generation</Title>
+        <Title>Synergy.Documentation</Title>
         <Authors>Synergy Marcin Celej</Authors>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/blob/3.0.4/Documentation/README.md</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/tree/master/Documentation/Synergy.Documentation</PackageProjectUrl>
         <PackageIcon>synergy.png</PackageIcon>
-        <Description>support for various docs generation</Description>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <Description>Generate Markdown documentation from .NET code, including public API listings, type dependency reports, TODO inventories, and composable Markdown documents.</Description>
         <Copyright>Copyright © Synergy Marcin Celej 2024</Copyright>
-        <PackageTags>Docs As Code</PackageTags>
+        <PackageTags>documentation docs-as-code markdown api todo technical-debt</PackageTags>
         <LangVersion>10</LangVersion>
         <Nullable>enable</Nullable>
         <AssemblyVersion>$(Version)</AssemblyVersion>
@@ -34,6 +35,7 @@
     <ItemGroup>
         <None Include="synergy.png" Pack="true" PackagePath="" />
         <None Include="license.txt" Pack="true" PackagePath="" />
+        <None Include="README.md" Pack="true" PackagePath="" />
     </ItemGroup>
 
     <ItemGroup>

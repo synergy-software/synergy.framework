@@ -6,14 +6,15 @@
         <RunCodeAnalysis>false</RunCodeAnalysis>
         <IsPackable>true</IsPackable>
         <PackageVersion>$(Version)</PackageVersion>
-        <Title>Synergy.Documentation.Annotations - support for various docs generation</Title>
+        <Title>Synergy.Documentation.Annotations</Title>
         <Authors>Synergy Marcin Celej</Authors>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/blob/3.0.4/Documentation/README.md</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/synergy-software/synergy.framework/tree/master/Documentation/Synergy.Documentation.Annotations</PackageProjectUrl>
         <PackageIcon>synergy.png</PackageIcon>
-        <Description>support for various docs generation</Description>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <Description>Lightweight source annotations and fluent comment helpers for documenting code rationale and associating types with their source files.</Description>
         <Copyright>Copyright © Synergy Marcin Celej 2024</Copyright>
-        <PackageTags>Docs As Code</PackageTags>
+        <PackageTags>documentation docs-as-code annotations comments</PackageTags>
         <LangVersion>10</LangVersion>
         <Nullable>enable</Nullable>
         <AssemblyVersion>$(Version)</AssemblyVersion>
@@ -33,6 +34,7 @@
     <ItemGroup>
         <None Include="synergy.png" Pack="true" PackagePath="" />
         <None Include="license.txt" Pack="true" PackagePath="" />
+        <None Include="README.md" Pack="true" PackagePath="" />
     </ItemGroup>
 
 </Project>

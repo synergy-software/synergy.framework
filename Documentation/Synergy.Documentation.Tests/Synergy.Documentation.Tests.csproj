@@ -36,10 +36,6 @@
         <ParentFile>Package</ParentFile>
         <DependentUpon>Package.cs</DependentUpon>
       </None>
-      <None Update="Docs\README.tt">
-        <Generator>TextTemplatingFilePreprocessor</Generator>
-        <LastGenOutput>README.cs</LastGenOutput>
-      </None>
     </ItemGroup>
 
     <ItemGroup>
@@ -55,14 +51,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Docs\README.cs">
-        <AutoGen>True</AutoGen>
-        <DesignTime>True</DesignTime>
-        <DependentUpon>README.tt</DependentUpon>
-      </Compile>
-      <Compile Update="Docs\README.Generate.cs">
-        <DependentUpon>README.tt</DependentUpon>
-      </Compile>
       <Compile Include="..\..\Synergy.Catalogue\Extensions\EnumerableExtensions.cs">
         <Link>Extensions\EnumerableExtensions.cs</Link>
       </Compile>

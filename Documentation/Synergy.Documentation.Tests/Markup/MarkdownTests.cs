@@ -1,6 +1,5 @@
 ﻿using Synergy.Documentation.Code;
 using Synergy.Documentation.Markup;
-using Synergy.Documentation.Tests.Docs;
 
 namespace Synergy.Documentation.Tests.Markup;
 
@@ -8,7 +7,7 @@ namespace Synergy.Documentation.Tests.Markup;
 public class MarkdownTests
 {
     private static readonly CodeFile currentFile = CodeFile.Current();
-    private static readonly CodeFile readmeFile = CodeFolder.Current().Up(2).File($"{nameof(README)}.md");
+    private static readonly CodeFile readmeFile = CodeFolder.Current().Up(2).File("README.md");
     private static readonly CodeFile synergyPng = CodeFolder.Current().File("synergy.png");
     
     [Fact]
