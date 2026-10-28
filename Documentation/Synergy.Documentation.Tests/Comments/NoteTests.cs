@@ -21,10 +21,11 @@ public class NoteTests
             .Therefore("I want to show you how to use them")
             .Otherwise("I want to show you how to use them")
             .Moreover("I want to show you how to use them")
+            .And("I want to show you how to continue the annotation chain")
             .Reference("https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/")
-            .Satisfies(Business.Rule("Do NOT add comments in code as ///").Description);
+            .Satisfies(Business.Rule("Do NOT add comments in code as ///"));
     }
-    
+
     [Fact]
     public void CommentsTests()
     {

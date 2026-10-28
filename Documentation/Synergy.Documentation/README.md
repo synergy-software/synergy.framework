@@ -79,6 +79,12 @@ File.WriteAllText("release-notes.md", document.ToString());
 
 Other elements include code blocks, quotes, tables, links, and images. See the [Markdown example](https://github.com/synergy-software/synergy.framework/blob/master/Documentation/Synergy.Documentation.Tests/Markup/MarkdownTests.cs) for a complete sample.
 
+`new Markdown.Quote(null)` creates an empty quote that can be populated with
+`Line`. API and property-dependency listings also support types in the global
+namespace. When using `ClassDocumentation`, missing XML summaries are omitted
+from the type description or rendered as empty method-summary cells; errors
+reading or parsing the XML documentation file are still propagated.
+
 ## Examples and tests
 
 The [test project](https://github.com/synergy-software/synergy.framework/tree/master/Documentation/Synergy.Documentation.Tests) contains executable examples of [API listings](https://github.com/synergy-software/synergy.framework/blob/master/Documentation/Synergy.Documentation.Tests/Architecture/Public/Api.cs), [dependency listings](https://github.com/synergy-software/synergy.framework/blob/master/Documentation/Synergy.Documentation.Tests/Architecture/Dependencies/Relations.cs), and [TODO reports](https://github.com/synergy-software/synergy.framework/blob/master/Documentation/Synergy.Documentation.Tests/Architecture/Debt/Todos.cs). Run the tests from the repository root:

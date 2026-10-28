@@ -17,6 +17,7 @@
         <PackageTags>documentation docs-as-code markdown api todo technical-debt</PackageTags>
         <LangVersion>10</LangVersion>
         <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <AssemblyVersion>$(Version)</AssemblyVersion>
         <ImplicitUsings>true</ImplicitUsings>
     </PropertyGroup>

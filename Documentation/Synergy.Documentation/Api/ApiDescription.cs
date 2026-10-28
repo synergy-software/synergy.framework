@@ -8,10 +8,17 @@ using Synergy.Catalogue.Reflection;
 
 namespace Synergy.Documentation.Api
 {
+    /// <summary>
+    /// Generates Markdown descriptions of types and their public members using reflection.
+    /// </summary>
     public static class ApiDescription
     {
         static readonly BindingFlags bindingFlags = BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public;
 
+        /// <summary>Generates a Markdown API listing for the public types in an assembly.</summary>
+        /// <param name="assembly">The assembly whose types are listed.</param>
+        /// <param name="includeAssemblyVersion">Whether to include the assembly version in the document heading.</param>
+        /// <returns>A Markdown document containing the assembly heading and public API descriptions.</returns>
         public static string GenerateFor(Assembly assembly, bool includeAssemblyVersion = false)
         {
             var description = new StringBuilder();
@@ -31,6 +38,11 @@ namespace Synergy.Documentation.Api
             return GenerateFor(publicTypes, description, assemblyName);
         }
 
+        /// <summary>Generates Markdown API descriptions for the supplied types in enumeration order.</summary>
+        /// <param name="types">The types whose public members are listed.</param>
+        /// <param name="description">An optional builder to append to; a new builder is used when omitted.</param>
+        /// <param name="assemblyName">An optional assembly name to remove from displayed namespaces.</param>
+        /// <returns>The complete contents of the builder after appending the type descriptions.</returns>
         public static string GenerateFor(
             IEnumerable<Type> types, 
             StringBuilder? description = null, 
@@ -109,6 +121,10 @@ namespace Synergy.Documentation.Api
             }
         }
         
+        /// <summary>Formats a method signature, including its parameters and return type.</summary>
+        /// <param name="method">The method to describe.</param>
+        /// <param name="withAttributes">Whether to include method and parameter attribute names.</param>
+        /// <returns>A readable signature suitable for inclusion in a Markdown API listing.</returns>
         public static string For(MethodInfo method, bool withAttributes = true)
         {
             var generics = method.GetGenericArguments();
@@ -120,10 +136,12 @@ namespace Synergy.Documentation.Api
 
         private static string GetShortenNamespace(Type type, string? assemblyName)
         {
+            if (type.Namespace is not { } typeNamespace)
+                return "";
             if (assemblyName == null)
-                return type.Namespace + ".";
+                return typeNamespace + ".";
             
-            var shortNamespace = type.Namespace.Replace(assemblyName, "").TrimStart('.');
+            var shortNamespace = typeNamespace.Replace(assemblyName, "").TrimStart('.');
             if (shortNamespace.IsNullOrEmpty() == false)
                 shortNamespace += ".";
             return shortNamespace;
@@ -164,16 +182,16 @@ namespace Synergy.Documentation.Api
 
         private static string GetFieldName(FieldInfo field)
         {
-            if (field.IsStatic)
-                return $"{field.DeclaringType.Name}.{field.Name}";
+            if (field.IsStatic && field.DeclaringType is { } declaringType)
+                return $"{declaringType.Name}.{field.Name}";
 
             return field.Name;
         }
 
         private static string GetPropertyName(PropertyInfo property)
         {
-            if (property.IsStatic())
-                return $"{property.DeclaringType.Name}.{property.Name}";
+            if (property.IsStatic() && property.DeclaringType is { } declaringType)
+                return $"{declaringType.Name}.{property.Name}";
 
             return property.Name;
         }
@@ -189,8 +207,8 @@ namespace Synergy.Documentation.Api
 
         private static string GetMethodName(MethodInfo method)
         {
-            if (method.IsStatic)
-                return $"{method.DeclaringType.Name}.{method.Name}";
+            if (method.IsStatic && method.DeclaringType is { } declaringType)
+                return $"{declaringType.Name}.{method.Name}";
 
             return method.Name;
         }
@@ -279,6 +297,9 @@ namespace Synergy.Documentation.Api
         private static bool IsMarkedAsNullable(FieldInfo p)
             => new NullabilityInfoContext().Create(p).WriteState is NullabilityState.Nullable;
 
+        /// <summary>Formats a method's return type, including its nullable annotation.</summary>
+        /// <param name="method">The method whose return type is formatted.</param>
+        /// <returns>The display name of the return type.</returns>
         public static string GetTypeName(MethodInfo method)
         {
             var type = GetTypeName(method.ReturnType);
@@ -292,6 +313,9 @@ namespace Synergy.Documentation.Api
         private static bool IsMarkedAsNullable(ParameterInfo p)
             => new NullabilityInfoContext().Create(p).WriteState is NullabilityState.Nullable;
 
+        /// <summary>Formats a parameter type, including nullable annotations and params or out modifiers.</summary>
+        /// <param name="parameter">The parameter to describe.</param>
+        /// <returns>The display name of the parameter type with applicable modifiers.</returns>
         public static string GetTypeName(ParameterInfo parameter)
         {
             var type = GetTypeName(parameter.ParameterType);
@@ -312,6 +336,9 @@ namespace Synergy.Documentation.Api
             return type;
         }
 
+        /// <summary>Formats a type name using supported C# aliases, generic arguments and nullable value types.</summary>
+        /// <param name="type">The type to describe.</param>
+        /// <returns>A display name without the namespace prefix.</returns>
         public static string GetTypeName(Type type)
         {
             var underlyingType = Nullable.GetUnderlyingType(type);

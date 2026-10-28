@@ -5,7 +5,7 @@ namespace Synergy.Documentation.Todos.Patterns;
 /// <summary>
 /// Represents a pattern for extracting TODOs from XML comments in project files.
 /// </summary>
-/// <param name="Extension">The file extension to scan.</param>
+/// <param name="Extension">The file extension to scan, without a leading dot.</param>
 public record XmlTodoPattern(string Extension) : TodoPattern(
     Extension,
     new Regex("\\b(TODO[^\\r\\n]*?)(?=\\s*-->|\\r?$)", RegexOptions.Multiline),
@@ -17,6 +17,8 @@ public record XmlTodoPattern(string Extension) : TodoPattern(
     /// <summary>
     /// Finds TODOs only within XML comments, including comments that span multiple lines.
     /// </summary>
+    /// <param name="content">The XML file contents to search.</param>
+    /// <returns>Case-sensitive TODO matches within XML comments, in source order.</returns>
     public override IEnumerable<Match> Matches(string content)
     {
         foreach (Match comment in commentRegex.Matches(content))

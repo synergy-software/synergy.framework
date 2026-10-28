@@ -6,24 +6,35 @@ using Synergy.Documentation.Markup;
 
 namespace Synergy.Documentation.Api
 {
+    /// <summary>
+    /// Composes a Markdown document from a type's definition and adjacent XML documentation file.
+    /// </summary>
     public class ClassDocumentation : Markdown.Document
     {
+        /// <summary>Loads XML documentation and builds sections describing a type and its public methods.</summary>
+        /// <param name="type">The type to document.</param>
+        /// <remarks>
+        /// Reads an XML file with the same base name and directory as the type's assembly.
+        /// File access and XML parsing errors are propagated to the caller.
+        /// </remarks>
         public ClassDocumentation(Type type)
         {
             var docTypeName = $"{type.Namespace}.{type.Name}";
             var docsFile = Path.ChangeExtension(type.Assembly.Location, "xml");
             var xml = new XmlDocument();
             xml.Load(docsFile);
-            var summary = xml.DocumentElement.SelectSingleNode($"//*[@name='T:{docTypeName}']/summary")
+            var summary = xml.SelectSingleNode($"//*[@name='T:{docTypeName}']/summary")
                              ?.InnerText.Trim();
 
             this.Append(new Markdown.Header1(type + " class"))
                 .Append(new Markdown.Header2("Definition"))
                 .Append(new Markdown.Paragraph($"Namespace: {type.Namespace}<br/>")
-                    .Line($"Assembly: {type.Assembly.GetName().Name}.dll"))
-                .Append(new Markdown.Paragraph(summary));
+                    .Line($"Assembly: {type.Assembly.GetName().Name}.dll"));
 
-            var remarks = xml.DocumentElement.SelectSingleNode($"//*[@name='T:{docTypeName}']/remarks")
+            if (summary != null)
+                this.Append(new Markdown.Paragraph(summary));
+
+            var remarks = xml.SelectSingleNode($"//*[@name='T:{docTypeName}']/remarks")
                              ?.InnerText.Trim();
             if (String.IsNullOrWhiteSpace(remarks) == false)
             {
@@ -47,11 +58,12 @@ namespace Synergy.Documentation.Api
                 var table = new Markdown.Table("Name", "Summary");
                 foreach (MethodInfo method in methods)
                 {
-                    var methodNameInDocumentation = method.ToString();
+                    var methodNameInDocumentation = method.ToString()
+                                                    ?? throw new InvalidOperationException($"Cannot describe method {method.Name}.");
                     methodNameInDocumentation = methodNameInDocumentation.Substring(methodNameInDocumentation.IndexOf(" ") + 1);
-                    var methodSummary = xml.DocumentElement.SelectSingleNode($"//*[@name='M:{docTypeName}.{methodNameInDocumentation}']/summary")
+                    var methodSummary = xml.SelectSingleNode($"//*[@name='M:{docTypeName}.{methodNameInDocumentation}']/summary")
                                             ?.InnerText.Trim();
-                    table.Append(method.GetFriendlyMethodName(), methodSummary);
+                    table.Append(method.GetFriendlyMethodName(), methodSummary ?? "");
                 }
 
                 this.Append(table);

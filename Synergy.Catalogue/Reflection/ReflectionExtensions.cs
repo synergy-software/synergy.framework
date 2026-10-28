@@ -24,7 +24,10 @@ namespace Synergy.Catalogue.Reflection
             if (attribute != null)
                 return attribute;
 
-            foreach (var @interface in property.DeclaringType.GetInterfaces())
+            if (property.DeclaringType is not { } declaringType)
+                return null;
+
+            foreach (var @interface in declaringType.GetInterfaces())
             {
                 var interfaceProperty = @interface.GetProperty(property.Name);
                 var interfaceAttribute = interfaceProperty?.GetCustomAttribute<TAttribute>(true);
@@ -81,7 +84,8 @@ namespace Synergy.Catalogue.Reflection
                 var ranks = new Queue<int>();
                 do {
                     ranks.Enqueue(type.GetArrayRank() - 1);
-                    type = type.GetElementType();
+                    type = type.GetElementType()
+                           ?? throw new InvalidOperationException($"Array type {type} has no element type.");
                 } while (type.IsArray);
 
                 sb.Append(type.GetFriendlyTypeName());

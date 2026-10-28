@@ -9,6 +9,16 @@ public class MarkdownTests
     private static readonly CodeFile currentFile = CodeFile.Current();
     private static readonly CodeFile readmeFile = CodeFolder.Current().Up(2).File("README.md");
     private static readonly CodeFile synergyPng = CodeFolder.Current().File("synergy.png");
+
+    [Fact]
+    public void NullQuoteCanBeExtended()
+    {
+        var quote = new Markdown.Quote(null);
+
+        Assert.Equal("> " + Environment.NewLine, quote.ToString());
+        Assert.Same(quote, quote.Line(" text "));
+        Assert.Equal("> text" + Environment.NewLine, quote.ToString());
+    }
     
     [Fact]
     public async Task CreateMarkdownDocument()

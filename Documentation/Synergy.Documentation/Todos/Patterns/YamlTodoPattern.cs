@@ -4,7 +4,7 @@ namespace Synergy.Documentation.Todos.Patterns;
 
 /// <summary>
 /// Represents a pattern for extracting TODOs from YAML files.
-/// It looks for lines that start with a '#' followed by optional whitespace and then the word 'TODO'.
+/// Matches a '#' followed by optional whitespace and 'TODO', ignoring case, anywhere on a line.
 /// </summary>
 public record YamlTodoPattern() : TodoPattern(
     "yaml",

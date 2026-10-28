@@ -29,6 +29,10 @@ Each package guide includes feature-specific examples, configuration notes, and 
 
 ## Examples and tests
 
+All three Documentation projects treat compiler and NuGet warnings as errors in
+Debug and Release builds. Resolve warnings rather than suppressing them when
+changing these projects, including source files linked from Synergy.Catalogue.
+
 The [`Synergy.Documentation.Tests`](Synergy.Documentation.Tests/Synergy.Documentation.Tests.csproj) project contains executable examples and snapshot tests. Run them from the repository root with:
 
 ```shell

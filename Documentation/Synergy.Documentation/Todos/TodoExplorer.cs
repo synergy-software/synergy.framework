@@ -6,6 +6,7 @@ using Synergy.Documentation.Todos.Patterns;
 
 namespace Synergy.Documentation.Todos;
 
+/// <summary>Scans source folders for TODO comments and generates Markdown technical debt inventories.</summary>
 public static class TodoExplorer
 {
     private static readonly TodoPattern[] defaultPatterns =
@@ -20,6 +21,17 @@ public static class TodoExplorer
         new YamlTodoPattern()
     };
 
+    /// <summary>Recursively scans a folder and groups matching TODO comments by file.</summary>
+    /// <param name="name">The project or component name displayed in the report heading.</param>
+    /// <param name="from">The root folder to scan.</param>
+    /// <param name="excludePath">
+    /// An optional predicate that excludes a file or directory when it returns true.
+    /// Excluding a directory also excludes its descendants.
+    /// </param>
+    /// <param name="currentPath">The caller's source file path, used as the base for relative report links.</param>
+    /// <param name="patterns">Patterns to use, or an empty array to select the built-in patterns.</param>
+    /// <returns>A Markdown report containing the total match count and TODOs grouped by file path.</returns>
+    /// <remarks>File system and file reading errors are propagated to the caller.</remarks>
     public static string DebtFor(
         string name,
         CodeFolder from,
@@ -73,7 +85,9 @@ public static class TodoExplorer
 
         string FilePath(string filePath)
         {
-            var relativePath = Path.GetRelativePath(Path.GetDirectoryName(currentPath), filePath)
+            var baseDirectory = Path.GetDirectoryName(currentPath)
+                                ?? throw new ArgumentException("The caller file path has no containing directory.", nameof(currentPath));
+            var relativePath = Path.GetRelativePath(baseDirectory, filePath)
                                    .Replace("\\", "/");
             var markdownPath = string.Join("/", relativePath.Split('/').Select(Uri.EscapeDataString));
             return markdownPath;

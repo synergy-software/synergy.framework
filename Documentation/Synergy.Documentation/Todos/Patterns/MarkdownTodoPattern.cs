@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 namespace Synergy.Documentation.Todos.Patterns;
 
 /// <summary>
-/// Represents a pattern for extracting TODOs from Typescript files.
+/// Extracts TODOs from Markdown files using the comment form <c>[//]: # (TODO ...)</c>.
 /// </summary>
 public record MarkdownTodoPattern() : TodoPattern(
     "md",

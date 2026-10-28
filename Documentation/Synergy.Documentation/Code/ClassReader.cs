@@ -3,8 +3,14 @@ using System.Text.RegularExpressions;
 
 namespace Synergy.Documentation.Code
 {
+    /// <summary>Extracts method bodies from source files using a regular-expression-based search.</summary>
     public class ClassReader
     {
+        /// <summary>Reads the first matching block-bodied method and removes its surrounding line breaks and indentation.</summary>
+        /// <param name="methodName">The method name to search for in the source file.</param>
+        /// <param name="sourceFilePath">The source file path, supplied by the compiler when omitted.</param>
+        /// <returns>The extracted method body, or null if no matching declaration is found.</returns>
+        /// <remarks>This is a text-based extractor, not a complete C# parser.</remarks>
         public static string? ReadMethodBody(string methodName, [CallerFilePath] string sourceFilePath = "")
         {
             var fileContent = File.ReadAllText(sourceFilePath);
