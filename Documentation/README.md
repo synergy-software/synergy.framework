@@ -25,7 +25,7 @@ Or install only the annotations:
 dotnet add package Synergy.Documentation.Annotations
 ```
 
-Each package guide includes feature-specific examples, configuration notes, and links to the corresponding source samples.
+Each package guide includes feature-specific examples, configuration notes, and links to the corresponding tests and their results where a file is produced.
 
 ## Examples and tests
 
@@ -39,4 +39,14 @@ The [`Synergy.Documentation.Tests`](Synergy.Documentation.Tests/Synergy.Document
 dotnet test Documentation/Synergy.Documentation.Tests/Synergy.Documentation.Tests.csproj
 ```
 
-The tests demonstrate [public API listings](Synergy.Documentation.Tests/Architecture/Public/Api.cs), [type dependency listings](Synergy.Documentation.Tests/Architecture/Dependencies/Relations.cs), [TODO reports](Synergy.Documentation.Tests/Architecture/Debt/Todos.cs), [comments as code](Synergy.Documentation.Tests/Comments/NoteTests.cs), and [Markdown generation](Synergy.Documentation.Tests/Markup/MarkdownTests.cs).
+| Feature | Example test | Result |
+| --- | --- | --- |
+| Public API listings | [Api.Generate](Synergy.Documentation.Tests/Architecture/Public/Api.cs) | [Documentation API](Synergy.Documentation.Tests/Architecture/Public/Api.of.Synergy.Documentation.verified.md), [Annotations API](Synergy.Documentation.Tests/Architecture/Public/Api.of.Synergy.Documentation.Annotations.verified.md) |
+| API listings with assembly versions | [Package.Generate](Synergy.Documentation.Tests/Architecture/Public/Package.cs) | [Verify.Xunit API](Synergy.Documentation.Tests/Architecture/Public/Package.of.Verify.Xunit.verified.md), [xunit.core API](Synergy.Documentation.Tests/Architecture/Public/Package.of.xunit.core.verified.md) |
+| Type dependencies | [Relations.Generate](Synergy.Documentation.Tests/Architecture/Dependencies/Relations.cs) | [Markdown dependency listing](Synergy.Documentation.Tests/Architecture/Dependencies/Relations.of.Markdown.verified.md) |
+| TODO inventories | [Todos.Generate](Synergy.Documentation.Tests/Architecture/Debt/Todos.cs) | [Technical debt report](Synergy.Documentation.Tests/Architecture/Debt/Todos.Technical.Debt.verified.md) |
+| Markdown composition | [MarkdownTests.CreateMarkdownDocument](Synergy.Documentation.Tests/Markup/MarkdownTests.cs) | [Rendered document](Synergy.Documentation.Tests/Markup/MarkdownTests.CreateMarkdownDocument.verified.md) |
+| Comments as code | [NoteTests](Synergy.Documentation.Tests/Comments/NoteTests.cs) | No output file; expressions keep their original values. |
+| Source file annotations | [README.Generate](../Architecture/Synergy.Architecture.Tests/Docs/README.Generate.cs), using the [annotated sample](../Architecture/Synergy.Architecture.Tests/Samples/SequenceDiagramSamples.cs) | [Architecture README with embedded sample source](../Architecture/README.md) |
+
+The `.verified.md` files are checked-in expected results used by Verify snapshot tests.

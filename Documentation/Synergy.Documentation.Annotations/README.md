@@ -31,6 +31,9 @@ if (items.Count == 0)
 
 These helpers are intended for readability, not logging or runtime validation: they return the source value unchanged. Keep explanations focused on the reason or constraint that is not obvious from the code. Available helpers include `Comment`, `Because`, `Then`, `But`, `Therefore`, `Otherwise`, `Moreover`, `Reference`, `Satisfies`, `DoNothing`, `DoNotThrowException`, and `And`.
 
+**Example tests:** [NoteTests.ShowOff and CommentsTests](../Synergy.Documentation.Tests/Comments/NoteTests.cs).
+These examples do not generate a separate output file; the annotations explain the code without changing its result.
+
 ## Associate a type with its source file
 
 `CodeFilePathAttribute` captures a source file path at compile time. The main `Synergy.Documentation` package can use it with `CodeFile.For<T>()` to locate the file containing a type:
@@ -54,6 +57,9 @@ The attribute is conditional on the `DOCUMENTATION` compilation symbol. Define t
 
 Without that symbol, the compiler omits the attribute application, and `CodeFile.For<T>()` cannot find a source path for the type.
 
+**Example test:** [README.Generate](../../Architecture/Synergy.Architecture.Tests/Docs/README.Generate.cs) uses `CodeFile.For<SequenceDiagramSamples>()` to locate the [annotated sample type](../../Architecture/Synergy.Architecture.Tests/Samples/SequenceDiagramSamples.cs).
+**Result:** [Architecture README](../../Architecture/README.md), which embeds the located source code. The attribute itself does not generate a file.
+
 ## Examples
 
-The repository's [comments example](https://github.com/synergy-software/synergy.framework/blob/master/Documentation/Synergy.Documentation.Tests/Comments/NoteTests.cs) demonstrates the fluent helpers. The [Documentation package guide](https://github.com/synergy-software/synergy.framework/blob/master/Documentation/Synergy.Documentation/README.md) shows how source paths are used by its APIs.
+The feature sections above link to the corresponding tests and any generated results. For tests that produce API listings, dependency reports, TODO inventories and composed documents, see the [Documentation package guide](../Synergy.Documentation/README.md).

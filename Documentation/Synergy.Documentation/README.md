@@ -30,6 +30,10 @@ File.WriteAllText("public-api.md", markdown);
 
 Pass `includeAssemblyVersion: true` to include the assembly version in the heading. The result is a string; choose the file location and whether to compare it with a checked-in snapshot in your own build or test workflow.
 
+**Example test:** [Api.Generate](../Synergy.Documentation.Tests/Architecture/Public/Api.cs).
+**Results:** [Documentation API listing](../Synergy.Documentation.Tests/Architecture/Public/Api.of.Synergy.Documentation.verified.md) and [Annotations API listing](../Synergy.Documentation.Tests/Architecture/Public/Api.of.Synergy.Documentation.Annotations.verified.md).
+The [Package.Generate test](../Synergy.Documentation.Tests/Architecture/Public/Package.cs) demonstrates including assembly versions: [Verify.Xunit result](../Synergy.Documentation.Tests/Architecture/Public/Package.of.Verify.Xunit.verified.md) and [xunit.core result](../Synergy.Documentation.Tests/Architecture/Public/Package.of.xunit.core.verified.md).
+
 ## Explore type dependencies
 
 `Dependencies.Of` starts from a type and returns the types found through its public properties. Set `includeNested: true` to include its public nested types:
@@ -44,6 +48,9 @@ File.WriteAllText("my-service-dependencies.md", markdown);
 ```
 
 This is a reflection-based view of property types, not a complete runtime or project dependency graph.
+
+**Example test:** [Relations.Generate](../Synergy.Documentation.Tests/Architecture/Dependencies/Relations.cs).
+**Result:** [Markdown type dependency listing](../Synergy.Documentation.Tests/Architecture/Dependencies/Relations.of.Markdown.verified.md).
 
 ## Collect TODOs
 
@@ -61,6 +68,9 @@ File.WriteAllText("technical-debt.md", report);
 
 You can provide an `excludePath` predicate to skip matching files or directories, and pass custom `TodoPattern` instances to replace the default patterns. The report links to source files relative to the calling source file.
 
+**Example test:** [Todos.Generate](../Synergy.Documentation.Tests/Architecture/Debt/Todos.cs).
+**Result:** [Technical debt report](../Synergy.Documentation.Tests/Architecture/Debt/Todos.Technical.Debt.verified.md).
+
 ## Compose Markdown
 
 The `Markdown.Document` API lets you append supported Markdown elements and render the document to a string:
@@ -77,7 +87,10 @@ var document = new Markdown.Document()
 File.WriteAllText("release-notes.md", document.ToString());
 ```
 
-Other elements include code blocks, quotes, tables, links, and images. See the [Markdown example](https://github.com/synergy-software/synergy.framework/blob/master/Documentation/Synergy.Documentation.Tests/Markup/MarkdownTests.cs) for a complete sample.
+Other elements include code blocks, quotes, tables, links, and images.
+
+**Example test:** [MarkdownTests.CreateMarkdownDocument](../Synergy.Documentation.Tests/Markup/MarkdownTests.cs).
+**Result:** [Rendered Markdown document](../Synergy.Documentation.Tests/Markup/MarkdownTests.CreateMarkdownDocument.verified.md).
 
 `new Markdown.Quote(null)` creates an empty quote that can be populated with
 `Line`. API and property-dependency listings also support types in the global
@@ -87,10 +100,10 @@ reading or parsing the XML documentation file are still propagated.
 
 ## Examples and tests
 
-The [test project](https://github.com/synergy-software/synergy.framework/tree/master/Documentation/Synergy.Documentation.Tests) contains executable examples of [API listings](https://github.com/synergy-software/synergy.framework/blob/master/Documentation/Synergy.Documentation.Tests/Architecture/Public/Api.cs), [dependency listings](https://github.com/synergy-software/synergy.framework/blob/master/Documentation/Synergy.Documentation.Tests/Architecture/Dependencies/Relations.cs), and [TODO reports](https://github.com/synergy-software/synergy.framework/blob/master/Documentation/Synergy.Documentation.Tests/Architecture/Debt/Todos.cs). Run the tests from the repository root:
+Each feature section above links to an executable test and its checked-in result. The `.verified.md` files are expected outputs compared by Verify, not additional files written by the README snippets. Run the [test project](../Synergy.Documentation.Tests) from the repository root:
 
 ```shell
 dotnet test Documentation/Synergy.Documentation.Tests/Synergy.Documentation.Tests.csproj
 ```
 
-For source annotations and fluent comments, see the [Synergy.Documentation.Annotations guide](https://github.com/synergy-software/synergy.framework/blob/master/Documentation/Synergy.Documentation.Annotations/README.md).
+For source annotations and fluent comments, see the [Synergy.Documentation.Annotations guide](../Synergy.Documentation.Annotations/README.md).
