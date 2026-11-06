@@ -66,6 +66,8 @@ var report = TodoExplorer.DebtFor("MyProject", source);
 File.WriteAllText("technical-debt.md", report);
 ```
 
+In Markdown files, a TODO can be written as a `[//]: #` comment followed by `(TODO ...)`, or as an HTML comment that starts a line, `<!-- TODO ... -->`. Use the HTML comment when the message needs parentheses or Markdown links: the first form ends at the first `)`.
+
 You can provide an `excludePath` predicate to skip matching files or directories, and pass custom `TodoPattern` instances to replace the default patterns. The report links to source files relative to the calling source file.
 
 **Example test:** [Todos.Generate](../Synergy.Documentation.Tests/Architecture/Debt/Todos.cs).
